@@ -1,4 +1,4 @@
-# Travis Configuration for lecture-python-programming code execution tests
+# Travis Configuration for lecture-python-intro code execution tests
 
 sudo: false
 language: python
