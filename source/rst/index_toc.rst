@@ -9,14 +9,6 @@
     Table of Contents
     *****************
 
-.. raw:: html
-
-    <ul class="index-tabs">
-        <li class="active"><a href="/index_toc.html">All</a></li>
-        <li><a href="/index_undergrad.html">Undergraduate course</a></li>
-        <li><a href="/index_postgrad.html">Graduate course</a></li>
-    </ul>
-
 
 .. toctree::
     :maxdepth: 2
