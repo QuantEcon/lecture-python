@@ -38,7 +38,7 @@ Introduction to Quantitative Economics with Python
         <h2>Other ways to access the lectures</h2>
         <ul>
 			<li>
-				<a href="/_downloads/pdf/quantitative_economics_with_python.pdf">
+				<a href="/_downloads/pdf/introduction_to_quantitative_economics_with_python.pdf">
 					<i class="fas fa-file-pdf"></i>
 					<h3>PDF Version</h3>
 					<p>A print-ready version for viewing offline</p>
