@@ -27,4 +27,5 @@ agents as given.  Later we will look at full equilibrium problems.
     mccall_fitted_vfi
     mccall_correlated
     exchangeable
+    likelihood_ratio_process
 
