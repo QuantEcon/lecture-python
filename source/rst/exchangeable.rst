@@ -23,7 +23,8 @@ We touch on foundations of Bayesian statistical inference invented by Bruno DeFi
 The relevance of DeFinetti's work for economists is presented forcefully 
 in chapter 11 of :cite:`Kreps88` by David Kreps.
 
-The example  that we study in this lecture  is a key component of :doc:`this lecture <odu>` that augments the 
+The example that we study in this lecture is a key component in some of the job search models presented in 
+the `advanced quantitative economics with python <https://python-advanced.quantecon.org>`__ lecture series that augments the 
 :doc:`classic  <mccall_model>`  job search model of McCall
 :cite:`McCall1970` by presenting an unemployed worker with a statistical inference problem. 
 
@@ -540,11 +541,8 @@ assumptions about nature's choice of distribution:
 
 -  that nature permanently draws from :math:`F`
 
--  that nature permanently draws from :math:`G`
+-  that nature permanently draws from :math:`G` 
 
-
-Outcomes depend on a peculiar property of likelihood ratio processes that are discussed in
-:doc:`this lecture<additive_functionals>` 
 
 To do this, we create some Python code.
 
