@@ -204,7 +204,7 @@ Scalar multiplication is illustrated in the next figure
   plt.show()
 
 In Python, a vector can be represented as a list or tuple, such as ``x = (2, 4, 6)``, but is more commonly 
-represented as a `NumPy array <http://python-programming.quantecon.org/numpy.html#NumPy-Arrays>`.
+represented as a `NumPy array <http://python-programming.quantecon.org/numpy.html#NumPy-Arrays>`__.
 
 One advantage of NumPy arrays is that scalar multiplication and addition have very natural syntax
 
