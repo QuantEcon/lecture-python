@@ -238,7 +238,8 @@ In reading the code, the following information will be helpful
 * ``Q`` needs to be a three-dimensional array where ``Q[s, a, s']`` is the probability of transitioning to state ``s'`` when the current state is ``s`` and the current action is ``a``.
 
 
-(For a detailed discussion of ``DiscreteDP`` see :doc:`this lecture <discrete_dp>`)
+(A more detailed discussion of ``DiscreteDP`` is available in the `Discrete State Dynamic Programming <https://python-advanced.quantecon.org/discrete_dp.html>`__ lecture in the `Advanced
+Quantitative Economics with Python <https://python-advanced.quantecon.org>`__ lecture series.)
 
 Here we take the state to be :math:`s_t := (a_t, z_t)`, where :math:`a_t` is assets and :math:`z_t` is the shock.
 
