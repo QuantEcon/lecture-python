@@ -6,4 +6,5 @@ if [ -z "$CHANGED_FILES" ]; then
     echo "No RST Files have changed -- nothing to do in this PR"
 else
     make coverage FILES="$CHANGED_FILES"
+    make linkcheck FILES="$CHANGED_FILES"
 fi
