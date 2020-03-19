@@ -143,7 +143,7 @@ Implement and run this simulation for yourself.
 
 Consider the following structure for your program.
 
-Agents can be modeled as :doc:`objects <python_oop>`.
+Agents can be modeled as `objects <https://python-programming.quantecon.org/python_oop.html>`__.
 
 Here's an indication of how they might look
 

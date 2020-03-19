@@ -255,7 +255,7 @@ update automatically.
 
 To achieve this outcome, we're going to use descriptors and decorators such as `@property`.
 
-If you need to refresh your understanding of how these work, consult :doc:`this lecture <python_advanced_features>`.
+If you need to refresh your understanding of how these work, consult `this lecture <https://python-programming.quantecon.org/python_advanced_features.html>`__.
 
 
 

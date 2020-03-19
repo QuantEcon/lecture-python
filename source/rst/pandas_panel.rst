@@ -15,7 +15,7 @@
 Overview
 ========
 
-In an :doc:`earlier lecture on pandas <pandas>`, we looked at working with simple data sets.
+In an `earlier lecture on pandas <https://python-programming.quantecon.org/pandas.html>`__, we looked at working with simple data sets.
 
 Econometricians often need to work with more complex data sets, such as panels.
 
