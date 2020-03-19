@@ -30,7 +30,7 @@ The example  that we study in this lecture  is a key component of :doc:`this lec
 Here we create  graphs that illustrate the role that  a  likelihood ratio  
 plays in  Bayes' Law.
 
-We'll use such graphs to provide insights into the mechanics driving outcomes in :doc:`this lecture<odu>` about learning in an augmented McCall job
+We'll use such graphs to provide insights into the mechanics driving outcomes in `this lecture<https://python-advanced.quantecon.org/odu.html>`__ about learning in an augmented McCall job
 search model.
 
 Among other things, this lecture discusses  connections between the statistical concepts of sequences of random variables
@@ -543,8 +543,8 @@ assumptions about nature's choice of distribution:
 -  that nature permanently draws from :math:`G`
 
 
-Outcomes depend on a peculiar property of likelihood ratio processes that are discussed in
-:doc:`this lecture<additive_functionals>` 
+Outcomes depend on a peculiar property of likelihood ratio processes that are discussed in 
+`this lecture<https://python-advanced.quantecon.org/additive_functionals.html>`__ 
 
 To do this, we create some Python code.
 
