@@ -335,7 +335,7 @@ Here's an illustration using the same `P` as the preceding example
     X = mc.simulate(ts_length=1_000_000)
     np.mean(X == 0)
 
-The `QuantEcon.py <http://quantecon.org/quantecon-py>`__ routine is :ref:`JIT compiled <numba_link>` and much faster.
+The `QuantEcon.py <http://quantecon.org/quantecon-py>`__ routine is `JIT compiled <https://python-programming.quantecon.org/numba.html#numba-link>`__ and much faster.
 
 .. code-block:: ipython
 

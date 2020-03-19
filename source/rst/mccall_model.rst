@@ -390,7 +390,7 @@ Here's a plot of the probabilities of different wage outcomes:
 
 We are going to use Numba to accelerate our code.
 
-* See, in particular, the discussion of ``@jitclass`` in :doc:`our lecture on Numba <numba>`.
+* See, in particular, the discussion of ``@jitclass`` in `our lecture on Numba <https://python-programming.quantecon.org/numba.html>`__.
 
 The following helps Numba by providing some type 
 
