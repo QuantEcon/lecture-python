@@ -1,7 +1,7 @@
 .. _index:
 
 **********************************
-Introduction to Quantitative Economics with Python
+Introductory Quantitative Economics with Python
 **********************************
 
 .. toctree::
@@ -13,7 +13,7 @@ Introduction to Quantitative Economics with Python
 .. raw:: html
 
     <div><style type="text/css">h1,.breadcrumbs{display:none;}</style></div>
-    <h1 class="sr-only" style="display:block;">Introduction to Quantitative Economics with Python</h1>
+    <h1 class="sr-only" style="display:block;">Introductory Quantitative Economics with Python</h1>
     <div class="home-intro">
         <div class="home-detail">
             <div class="home-blurb">
@@ -37,7 +37,7 @@ Introduction to Quantitative Economics with Python
         <h2>Other ways to access the lectures</h2>
         <ul>
 			<li>
-				<a href="/_downloads/pdf/introduction_to_quantitative_economics_with_python.pdf">
+				<a href="/_downloads/pdf/introductory_quantitative_economics_with_python.pdf">
 					<i class="fas fa-file-pdf"></i>
 					<h3>PDF Version</h3>
 					<p>A print-ready version for viewing offline</p>
