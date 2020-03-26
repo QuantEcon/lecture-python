@@ -23,7 +23,7 @@ We touch on foundations of Bayesian statistical inference invented by Bruno DeFi
 The relevance of DeFinetti's work for economists is presented forcefully 
 in chapter 11 of :cite:`Kreps88` by David Kreps.
 
-The example  that we study in this lecture  is a key component of :doc:`this lecture <odu>` that augments the 
+The example  that we study in this lecture  is a key component of `this lecture<https://python-advanced.quantecon.org/odu.html>`__ that augments the 
 :doc:`classic  <mccall_model>`  job search model of McCall
 :cite:`McCall1970` by presenting an unemployed worker with a statistical inference problem. 
 
