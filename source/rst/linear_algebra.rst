@@ -1546,7 +1546,7 @@ Therefore, the solution to the optimization problem
 
 
 .. [#fn_mdt] Although there is a specialized matrix data type defined in NumPy, it's more standard to work with ordinary NumPy arrays.  
-See `this discussion <https://python-programming.quantecon.org/numpy.html#Matrix-Multiplication>`__.
+    See `this discussion <https://python-programming.quantecon.org/numpy.html#Matrix-Multiplication>`__.
 
 
 .. [#cfn] Suppose that :math:`\|S \| < 1`. Take any nonzero vector :math:`x`, and let :math:`r := \|x\|`. We have :math:`\| Sx \| = r \| S (x/r) \| \leq r \| S \| < r = \| x\|`. Hence every point is pulled towards the origin.
