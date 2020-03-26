@@ -483,7 +483,7 @@ We can verify the analytical as well as numerical results using
 Exercises
 -----------
 
-We invite the reader to verify analytically and with the ``sympy'' package the following two equalities:
+We invite the reader to verify analytically and with the ``sympy`` package the following two equalities:
 
 
 .. math::
