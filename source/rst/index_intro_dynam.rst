@@ -29,5 +29,4 @@ agents as given.  Later we will look at full equilibrium problems.
     samuelson
     kesten_processes
     wealth_dynamics
-    cass_koopmans
     kalman
