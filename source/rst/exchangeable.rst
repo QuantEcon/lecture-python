@@ -544,7 +544,7 @@ assumptions about nature's choice of distribution:
 
 
 Outcomes depend on a peculiar property of likelihood ratio processes that are discussed in 
-`this lecture<https://python-advanced.quantecon.org/additive_functionals.html>`__ 
+`this lecture <https://python-advanced.quantecon.org/additive_functionals.html>`__ 
 
 To do this, we create some Python code.
 
