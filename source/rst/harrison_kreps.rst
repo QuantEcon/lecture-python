@@ -5,7 +5,7 @@
 .. highlight:: python3
 
 *************************************
-Asset Pricing III: Incomplete Markets
+Asset Pricing with Incomplete Markets
 *************************************
 
 .. index::

@@ -5,7 +5,7 @@
 .. highlight:: python3
 
 ******************************************************
-:index:`Optimal Savings I: The Permanent Income Model`
+:index:`The Permanent Income Model`
 ******************************************************
 
 .. index::

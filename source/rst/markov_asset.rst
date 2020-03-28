@@ -6,7 +6,7 @@
 
 
 *********************************************
-:index:`Asset Pricing I: Finite State Models`
+:index:`Asset Pricing: Finite State Models`
 *********************************************
 
 .. index::

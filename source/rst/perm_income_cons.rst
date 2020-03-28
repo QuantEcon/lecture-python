@@ -4,9 +4,9 @@
 
 .. highlight:: python3
 
-******************************************
-:index:`Optimal Savings II: LQ Techniques`
-******************************************
+*******************************************
+:index:`Permanent Income II: LQ Techniques`
+*******************************************
 
 .. index::
     single: Models; Permanent Income

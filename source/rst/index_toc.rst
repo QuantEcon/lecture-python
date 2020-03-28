@@ -17,11 +17,13 @@
     about_lectures
     index_tools_and_techniques
     index_intro_dynam
-    index_dynamic_programming
+    index_search
+    index_savings_growth
+    index_information
     index_lq_control
-    index_data_and_empirics
     index_multi_agent_models
     index_asset_pricing
+    index_data_and_empirics
     zreferences
 
 
