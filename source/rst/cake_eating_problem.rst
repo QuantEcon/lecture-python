@@ -19,7 +19,7 @@ In this lecture we introduce a simple "cake eating" problem.
 The intertemporal problem is: how much to enjoy today and how much to leave
 for the future?
 
-All though the topic sounds trivial, this kind of trade-off between current
+Although the topic sounds trivial, this kind of trade-off between current
 and future utility is at the heart of many savings and consumption problems.
 
 Once we master the ideas in this simple environment, we will apply them to
@@ -87,7 +87,7 @@ In Python this is
 
 Future cake consumption utility is discounted according to :math:`\beta\in(0, 1)`.
 
-In particular, consumption of :math:`c` units :math:`t` periods hence has present value :math:`\beta^t u(c)`
+In particular, consumption of :math:`c` units at period :math:`t` hence has present value :math:`\beta^t u(c_t)`
 
 The agent's problem can be written as
 
@@ -140,7 +140,7 @@ The reasoning given above suggests that the discount factor :math:`\beta` and th
 
 Here's an educated guess as to what impact these parameters will have.
 
-First, higher :math:`\beta` implies less discounting, and hence more patience, which should reduce the rate of consumption.
+First, higher :math:`\beta` implies less discounting, and hence the agent is more patient, which should reduce the rate of consumption.
 
 Second, higher :math:`\gamma` implies that marginal utility :math:`u'(c) =
 c^{-\gamma}` falls faster with :math:`c`.
@@ -197,7 +197,7 @@ The intuition here is essentially the same it was for the McCall model.
 
 Suppose that the current size of the cake is :math:`x`.
 
-choosing :math:`c` optimally means trading off current vs future rewards.
+Choosing :math:`c` optimally means trading off current vs future rewards.
 
 Current rewards from choice :math:`c` are just :math:`u(c)`.
 
@@ -272,7 +272,7 @@ The Optimal Policy
 Now that we have the value function, it is straightforward to calculate the
 optimal action at each state.
 
-At state :math:`x`, we should choose :math:`c` as the value the maximizes the
+At state :math:`x`, we should choose :math:`c` as the value that maximizes the
 right hand side of the Bellman equation :eq:`bellman`.
 
 .. math::
@@ -364,14 +364,14 @@ point where no marginal gains remain.
 
 We can also state the Euler equation in terms of the policy function.
 
-A **feasible consumption policy** is a map :math:`y \mapsto \sigma(y)`
-satisfying :math:`0 \leq \sigma(y) \leq (y)`.
+A **feasible consumption policy** is a map :math:`x \mapsto \sigma(x)`
+satisfying :math:`0 \leq \sigma(x) \leq x`.
 
 The last restriction says that we cannot consume more than the remaining
 quantity of cake.
 
 A feasible consumption policy :math:`\sigma` is said to **satisfy the Euler equation** if, for
-all :math:`y > 0`,
+all :math:`x > 0`,
 
 .. math::
     :label: euler_pol
@@ -620,7 +620,7 @@ This confirms our earlier expression for the optimal policy:
     c_t^* = \left(1-\beta^{\frac{1}{\gamma}}\right)x_t
 
 
-Substituting :math:`\theta` into the value function above gives.
+Substituting :math:`\theta` into the value function above gives
 
 .. math::
     v^*(x_t) = \frac{\left(1-\beta^{\frac{1}{\gamma}}\right)^{1-\gamma}}
