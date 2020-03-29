@@ -816,7 +816,7 @@ A Notebook Implementation
 
 
 To facilitate comparative statics, we provide
-a `Jupyter notebook <https://nbviewer.jupyter.org/github/QuantEcon/quantecon-notebooks-python/blob/master/wald_friedman.ipynb>`__ that
+a `Jupyter notebook <https://nbviewer.jupyter.org/github/QuantEcon/lecture-python-advanced.notebooks/blob/master/wald_friedman.ipynb>`__ that
 generates the same plots, but with sliders.
 
 
