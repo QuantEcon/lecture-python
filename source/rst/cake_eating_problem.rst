@@ -573,6 +573,8 @@ Then :math:`x_t = x_{0}(1-\theta)^t` and hence
        & = \frac{\theta^{1-\gamma}}{1-\beta(1-\theta)^{1-\gamma}}u(x_{0})
     \end{aligned}
 
+Here we assume that :math:`-1 < \beta(1-\theta)^{1-\gamma} < 1`.
+
 From the Bellman equation, then,
 
 .. math::
