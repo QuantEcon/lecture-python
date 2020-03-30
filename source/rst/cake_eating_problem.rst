@@ -73,7 +73,7 @@ Consuming quantity :math:`c` of the cake gives current utility :math:`u(c)`.
 We adopt the CRRA utility function
 
 .. math::
-    u(c) = \frac{c^{1-\gamma}}{1-\gamma} \qquad (\gamma \neq 1)
+    u(c) = \frac{c^{1-\gamma}}{1-\gamma} \qquad (\gamma \gt 0, \, \gamma \neq 1)
     :label: crra_utility
 
 In Python this is
@@ -408,7 +408,7 @@ The overall cake-eating maximization problem can be written as
 
 .. math::
     \max_{c \in F} U(c) 
-    \quad \text{where } U(c) := \max_{\{c_t\}} \sum_{t=0}^\infty \beta^t u(c_t)
+    \quad \text{where } U(c) := \sum_{t=0}^\infty \beta^t u(c_t)
 
 and :math:`F` is the set of feasible consumption paths.
 
