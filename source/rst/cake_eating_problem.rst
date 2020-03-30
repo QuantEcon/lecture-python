@@ -319,9 +319,9 @@ plot is
 
     fig, ax = plt.subplots()
     ax.plot(x_grid, c_star(x_grid, β, γ), label='default parameters')
-    ax.plot(x_grid, c_star(x_grid, β + 0.02, γ), label='higher $\\beta$')
-    ax.plot(x_grid, c_star(x_grid, β, γ + 0.2), label='higher $\gamma$')
-    ax.set_ylabel('$\sigma(x)$')
+    ax.plot(x_grid, c_star(x_grid, β + 0.02, γ), label=r'higher $\beta$')
+    ax.plot(x_grid, c_star(x_grid, β, γ + 0.2), label=r'higher $\gamma$')
+    ax.set_ylabel(r'$\sigma(x)$')
     ax.set_xlabel('$x$')
     ax.legend()
 
