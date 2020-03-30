@@ -582,7 +582,7 @@ Summary
 
 We have demonstrated basic OLS and 2SLS regression in ``statsmodels`` and ``linearmodels``.
 
-If you are familiar with R, you may want to use the `formula interface <http://www.statsmodels.org/dev/example_formulas.html>`__ to ``statsmodels``, or consider using `r2py <https://rpy2.bitbucket.io/>`__ to call R from within Python.
+If you are familiar with R, you may want to use the `formula interface <http://www.statsmodels.org/dev/example_formulas.html>`__ to ``statsmodels``, or consider using `r2py <https://rpy2.github.io/>`__ to call R from within Python.
 
 
 
@@ -638,7 +638,7 @@ Exercise 2
 
 The OLS parameter :math:`\beta` can also be estimated using matrix
 algebra and ``numpy`` (you may need to review the
-`numpy <https://lectures.quantecon.org/py/numpy.html>`__ lecture to
+`numpy <https://python-programming.quantecon.org/numpy.html>`__ lecture to
 complete this exercise).
 
 The linear equation we want to estimate is (written in matrix form)
