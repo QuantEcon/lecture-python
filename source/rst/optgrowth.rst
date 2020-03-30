@@ -218,7 +218,7 @@ In other words, a feasible consumption policy is a Markov policy that respects t
 
 The set of all feasible consumption policies will be denoted by :math:`\Sigma`.
 
-Each :math:`\sigma \in \Sigma` determines a :doc:`continuous state Markov process <stationary_densities>` :math:`\{y_t\}` for output via
+Each :math:`\sigma \in \Sigma` determines a `continuous state Markov process <https://python-advanced.quantecon.org/stationary_densities.html>`__ :math:`\{y_t\}` for output via
 
 .. math::
     :label: firstp0_og2
