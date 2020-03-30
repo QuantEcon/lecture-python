@@ -408,7 +408,7 @@ The overall cake-eating maximization problem can be written as
 
 .. math::
     \max_{c \in F} U(c) 
-    \quad \text{where } U(c) := \max_{\{c_t\}} \sum_{t=0}^\infty \beta^t u(c_t)
+    \quad \text{where } U(c) := \sum_{t=0}^\infty \beta^t u(c_t)
 
 and :math:`F` is the set of feasible consumption paths.
 
