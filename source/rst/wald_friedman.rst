@@ -577,14 +577,15 @@ We will be using the default parameterization with distributions like so
 .. code-block:: python3
 
     wf = WaldFriedman()
+    def distro_plot(wf):
+        fig, ax = plt.subplots(figsize=(10, 6))
+        ax.plot(wf.f0(wf.π_grid), label="$f_0$")
+        ax.plot(wf.f1(wf.π_grid), label="$f_1$")
+        ax.set(ylabel="probability of $z_k$", xlabel="$k$", title="Distributions")
+        ax.legend()
 
-    fig, ax = plt.subplots(figsize=(10, 6))
-    ax.plot(wf.f0(wf.π_grid), label="$f_0$")
-    ax.plot(wf.f1(wf.π_grid), label="$f_1$")
-    ax.set(ylabel="probability of $z_k$", xlabel="$k$", title="Distributions")
-    ax.legend()
-
-    plt.show()
+        plt.show()
+    distro_plot(wf)
 
 
 Value Function
@@ -629,30 +630,38 @@ and plot these on our value function plot
 
         return (β, α)
 
-    β, α = find_cutoff_rule(wf, h_star)
-    cost_L0 = (1 - wf.π_grid) * wf.L0
-    cost_L1 = wf.π_grid * wf.L1
+    def value_function_plot(wf):
+    
+        h_star = solve_model(wf, verbose=False)
+        
+        β, α = find_cutoff_rule(wf, h_star)
+        cost_L0 = (1 - wf.π_grid) * wf.L0
+        cost_L1 = wf.π_grid * wf.L1
 
-    fig, ax = plt.subplots(figsize=(10, 6))
+        fig, ax = plt.subplots(figsize=(10, 6))
 
-    ax.plot(wf.π_grid, h_star, label='continuation value')
-    ax.plot(wf.π_grid, cost_L1, label='choose f1')
-    ax.plot(wf.π_grid, cost_L0, label='choose f0')
-    ax.plot(wf.π_grid,
-            np.amin(np.column_stack([h_star, cost_L0, cost_L1]),axis=1),
-            lw=15, alpha=0.1, color='b', label='minimum cost')
+        ax.plot(wf.π_grid, h_star, label='continuation value')
+        ax.plot(wf.π_grid, cost_L1, label='choose f1')
+        ax.plot(wf.π_grid, cost_L0, label='choose f0')
+        ax.plot(wf.π_grid,
+                np.amin(np.column_stack([h_star, cost_L0, cost_L1]),axis=1),
+                lw=15, alpha=0.1, color='b', label='minimum cost')
 
-    ax.annotate(r"$\beta$", xy=(β + 0.01, 0.5), fontsize=14)
-    ax.annotate(r"$\alpha$", xy=(α + 0.01, 0.5), fontsize=14)
+        ax.annotate(r"$\beta$", xy=(β + 0.01, 0.5), fontsize=14)
+        ax.annotate(r"$\alpha$", xy=(α + 0.01, 0.5), fontsize=14)
 
-    plt.vlines(β, 0, β * wf.L0, linestyle="--")
-    plt.vlines(α, 0, (1 - α) * wf.L1, linestyle="--")
+        plt.vlines(β, 0, β * wf.L0, linestyle="--")
+        plt.vlines(α, 0, (1 - α) * wf.L1, linestyle="--")
 
-    ax.set(xlim=(0, 1), ylim=(0, 0.5 * max(wf.L0, wf.L1)), ylabel="cost",
-           xlabel="$\pi$", title="Value function")
+        ax.set(xlim=(0, 1), ylim=(0, 0.5 * max(wf.L0, wf.L1)), ylabel="cost",
+            xlabel="$\pi$", title="Value function")
 
-    plt.legend(borderpad=1.1)
-    plt.show()
+        plt.legend(borderpad=1.1)
+        plt.show()
+
+.. code-block:: python3
+
+    value_function_plot(wf)
 
 
 The value function equals :math:`\pi L_1` for :math:`\pi \leq \beta`, and :math:`(1-\pi )L_0` for :math:`\pi
@@ -761,7 +770,7 @@ In this case, the decision-maker is correct 80% of the time
         return cdist, tdist
 
     def simulation_plot(wf):
-        h_star = solve_model(wf)
+        h_star = solve_model(wf, verbose=False)
         ndraws = 500
         cdist, tdist = stopping_dist(wf, h_star, ndraws)
 
@@ -808,18 +817,7 @@ Because he decides with less, the percentage of time he is correct drops.
 
 This leads to him having a higher expected loss when he puts equal weight on both models.
 
-
-
-A Notebook Implementation
--------------------------
-
-
-
-To facilitate comparative statics, we provide
-a `Jupyter notebook <https://nbviewer.jupyter.org/github/QuantEcon/lecture-python-intro.notebooks/blob/master/wald_friedman.ipynb>`__ that
-generates the same plots, but with sliders.
-
-
+To facilitate comparative statics, we provide same plots, but with sliders.
 
 With these sliders, you can adjust parameters and immediately observe
 
@@ -834,9 +832,61 @@ With these sliders, you can adjust parameters and immediately observe
 
 * associated histograms of correct and incorrect decisions.
 
+.. code-block:: python3
 
+    
+    def plots(c, L0, L1, a0, b0, a1, b1, m):
+        #function which returns our plots for comparative statics
 
+        wf = WaldFriedman(c, a0, b0, a1, b1, L0, L1, mc_size=m)
+        simulation_plot(wf)
+        value_function_plot(wf)
+        distro_plot(wf)
 
+.. code-block:: python3
+
+    # Needed to make sliders
+    def convert_rgb(x):
+
+        return tuple(map(lambda c: int(256*c), x))
+
+    def convert_rgb_hex(rgb):
+
+        if isinstance(rgb[0], int):
+
+            return '#%02x%02x%02x' % rgb
+
+        else:
+
+            rgbint = convert_rgb(rgb)
+
+            return '#%02x%02x%02x' % rgbint
+
+.. code-block:: python3
+
+    from ipywidgets import interact, widgets
+    import seaborn as sb
+    col_slide = list(map(convert_rgb_hex, sb.color_palette("dark", 7)))
+    col_num = list(map(convert_rgb_hex, sb.color_palette("hls", 7)))
+    sliders = map(lambda a,b,c,d,e,f,g: widgets.FloatSlider(min=a, max=b,
+                                                            step=c, value=d,
+                                                            slider_color=e, 
+                                                            color=f,
+                                                            description=g),
+                [0.5, 5.0, 5.0, 1.0, 1.0, 1.0, 1.0],
+                [2.5, 50.0,
+                50.0, 9.0, 9.0, 9.0, 9.0],
+                [0.25, 2.5, 2.5, 0.5, 0.5, 0.5, 0.5],
+                [1.25, 27.5, 27.5, 2.0, 2.5, 2.5, 2.0],
+                col_num, col_num,
+                ["c", "L0", "L1", "a0", "b0", "a1", "b1"])
+    cslide, L0slide, L1slide, a0slide, b0slide, a1slide, b1slide = list(sliders)
+    mslide = widgets.IntSlider(min=15, max=251, step=2, 
+                            value=133, description="m")
+
+    interact(plots, #telling what to plot
+            c=cslide, L0=L0slide, L1=L1slide, a0=a0slide,
+            b0=b0slide, a1=a1slide, b1=b1slide, m=mslide)
 
 Comparison with Neyman-Pearson Formulation
 ==========================================
