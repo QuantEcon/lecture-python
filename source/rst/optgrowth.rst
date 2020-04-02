@@ -580,7 +580,7 @@ right hand side of the Bellman equation :eq:`fpb30`.
            np.random.seed(seed)
            self.shocks = np.exp(μ + s * np.random.randn(shock_size))
            
-       def objective(self, c, y, v_array):
+       def state_action_value(self, c, y, v_array):
            """
            Right hand side of the Bellman equation.
            """
@@ -636,7 +636,7 @@ numerical work.)
            y = grid[i]
            
            # Maximize RHS of Bellman equation at state y
-           c_star, v_max = maximize(og.objective, 1e-10, y, (y, v))
+           c_star, v_max = maximize(og.state_action_value, 1e-10, y, (y, v))
            v_new[i] = v_max
            v_greedy[i] = c_star
            
