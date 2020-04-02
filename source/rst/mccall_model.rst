@@ -419,7 +419,7 @@ Default parameter values are embedded in the class.
             self.c, self.β = c, β
             self.w, self.q = w_default, q_default
 
-        def bellman(self, i, v):
+        def state_action_value(self, i, v):
             """
             The r.h.s. of the Bellman equation at state i.
             """
@@ -457,7 +457,7 @@ Here's a function to implement this:
             ax.plot(mcm.w, v, '-', alpha=0.4, label=f"iterate {i}")
             # Update guess
             for i in range(n):
-                v_next[i] = mcm.bellman(i, v)
+                v_next[i] = mcm.state_action_value(i, v)
             v[:] = v_next  # copy contents into v
 
         ax.legend(loc='lower right')
@@ -503,7 +503,7 @@ We'll be using JIT compilation via Numba to turbocharge our loops.
         while i < max_iter and error > tol:
 
             for i in range(n):
-                v_next[i] = mcm.bellman(i, v)
+                v_next[i] = mcm.state_action_value(i, v)
 
             error = np.max(np.abs(v_next - v))
             i += 1
