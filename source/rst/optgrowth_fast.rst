@@ -159,7 +159,7 @@ Thus, we are losing flexibility, but we will gain substantial speed.
        def u(self, c):
            return (c**(1 - self.γ) - 1) / (1 - self.γ)
 
-       def objective(self, c, y, v_array):
+       def state_action_value(self, c, y, v_array):
            """
            Right hand side of the Bellman equation.
            """
@@ -193,7 +193,7 @@ Here's a function that uses JIT compilation to accelerate the Bellman operator
            y = og.grid[i]
            
            # Maximize RHS of Bellman equation at state y
-           v_max = brent_max(og.objective, 1e-10, y, args=(y, v))[1]
+           v_max = brent_max(og.state_action_value, 1e-10, y, args=(y, v))[1]
            v_new[i] = v_max
            
        return v_new
@@ -219,7 +219,7 @@ policy:
            y = og.grid[i]
            
            # Find maximizer of RHS of Bellman equation at state y
-           c_star = brent_max(og.objective, 1e-10, y, args=(y, v))[0]
+           c_star = brent_max(og.state_action_value, 1e-10, y, args=(y, v))[0]
            v_greedy[i] = c_star
            
        return v_greedy
