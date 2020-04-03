@@ -403,8 +403,9 @@ The following helps Numba by providing some type
         ('q', float64[:])    # array of probabilities
     ]
 
-Here's a class that stores the data and computes the value on the right hand
-side of the Bellman equation :eq:`odu_pv2p`.
+Here's a class that stores the data and computes the values of state-action pairs,
+i.e. the value in the maximum bracket on the right hand side of the Bellman equation :eq:`odu_pv2p`,
+given the current state and an arbitrary feasible action.
 
 Default parameter values are embedded in the class.
 
@@ -419,15 +420,18 @@ Default parameter values are embedded in the class.
             self.c, self.β = c, β
             self.w, self.q = w_default, q_default
 
-        def state_action_value(self, i, v):
+        def state_action_values(self, i, v):
             """
-            The r.h.s. of the Bellman equation at state i.
+            The values of state-action pairs.
             """
             # Simplify names
             c, β, w, q = self.c, self.β, self.w, self.q 
-            # Evaluate right hand side of Bellman equation
-            max_value = max(w[i] / (1 - β), c + β * np.sum(v * q))
-            return(max_value)
+            # Evaluate value for each state-action pair
+            # Consider action = accept or reject the current offer
+            accept = w[i] / (1 - β)
+            reject = c + β * np.sum(v * q)
+
+            return np.array([accept, reject])
 
 
 
@@ -457,7 +461,7 @@ Here's a function to implement this:
             ax.plot(mcm.w, v, '-', alpha=0.4, label=f"iterate {i}")
             # Update guess
             for i in range(n):
-                v_next[i] = mcm.state_action_value(i, v)
+                v_next[i] = np.max(mcm.state_action_values(i, v))
             v[:] = v_next  # copy contents into v
 
         ax.legend(loc='lower right')
@@ -503,7 +507,7 @@ We'll be using JIT compilation via Numba to turbocharge our loops.
         while i < max_iter and error > tol:
 
             for i in range(n):
-                v_next[i] = mcm.state_action_value(i, v)
+                v_next[i] = np.max(mcm.state_action_values(i, v))
 
             error = np.max(np.abs(v_next - v))
             i += 1
