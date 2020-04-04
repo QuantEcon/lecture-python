@@ -432,7 +432,7 @@ Now let's pass the approximate value function and compute optimal consumption:
     fig, ax = plt.subplots()
 
     ax.plot(x_grid, c)
-    ax.set_ylabel('$\sigma(y)$')
+    ax.set_ylabel(r'$\sigma(y)$')
     ax.set_xlabel('$y$')
     ax.set_title('Optimal policy')
     plt.show()
@@ -461,7 +461,7 @@ Let's compare it to the true analytical solution.
 
     ax.plot(ce.x_grid, c_analytical, label='analytical')
     ax.plot(ce.x_grid, c, label='Numerical')
-    ax.set_ylabel('$\sigma(y)$')
+    ax.set_ylabel(r'$\sigma(y)$')
     ax.set_xlabel('$y$')
     ax.legend()
     ax.set_title('Comparison between analytical and numerical optimal policies')
@@ -630,8 +630,8 @@ the standard cake eating case :math:`\alpha=1`.
 
     fig, ax = plt.subplots()
 
-    ax.plot(ce.x_grid, c_analytical, label='$\\alpha=1$ solution')
-    ax.plot(ce.x_grid, c_new, label=f'$\\alpha={og.α}$ solution')
+    ax.plot(ce.x_grid, c_analytical, label=r'$\alpha=1$ solution')
+    ax.plot(ce.x_grid, c_new, label=fr'$\alpha={og.α}$ solution')
 
     ax.set_ylabel('consumption', fontsize=12)
     ax.set_xlabel('$x$', fontsize=12)
