@@ -73,7 +73,7 @@ Consuming quantity :math:`c` of the cake gives current utility :math:`u(c)`.
 We adopt the CRRA utility function
 
 .. math::
-    u(c) = \frac{c^{1-\gamma}}{1-\gamma} \qquad (\gamma \neq 1)
+    u(c) = \frac{c^{1-\gamma}}{1-\gamma} \qquad (\gamma \gt 0, \, \gamma \neq 1)
     :label: crra_utility
 
 In Python this is
@@ -188,7 +188,7 @@ value function will satisfy a version of the *Bellman equation*.
 In the present case, this equation states that :math:`v` satisfies 
 
 .. math::
-    :label: bellman
+    :label: bellman-cep
 
     v(x) = \max_{0\leq c \leq x} \{u(c) + \beta v(x-c)\}
     \quad \text{for any given } x \geq 0.
@@ -203,12 +203,12 @@ Current rewards from choice :math:`c` are just :math:`u(c)`.
 
 Future rewards, measured from next period and assuming optimal behavior, are :math:`v(x-c)`.
 
-These are the two terms on the right hand side of :eq:`bellman`, after suitable discounting.
+These are the two terms on the right hand side of :eq:`bellman-cep`, after suitable discounting.
 
 If :math:`c` is chosen optimally using this trade off strategy, then we obtain maximal
 lifetime rewards from our current state :math:`x`.
 
-Hence, :math:`v(x)` equals the right hand side of :eq:`bellman`, as claimed.
+Hence, :math:`v(x)` equals the right hand side of :eq:`bellman-cep`, as claimed.
 
 
 An Analytical Solution
@@ -273,7 +273,7 @@ Now that we have the value function, it is straightforward to calculate the
 optimal action at each state.
 
 At state :math:`x`, we should choose :math:`c` as the value that maximizes the
-right hand side of the Bellman equation :eq:`bellman`.
+right hand side of the Bellman equation :eq:`bellman-cep`.
 
 .. math::
     c^*_t = \sigma(x_t) = \arg \max_{c_t} \{u(c_t) + \beta v(x_t - c_t)\}
@@ -319,9 +319,9 @@ plot is
 
     fig, ax = plt.subplots()
     ax.plot(x_grid, c_star(x_grid, β, γ), label='default parameters')
-    ax.plot(x_grid, c_star(x_grid, β + 0.02, γ), label='higher $\\beta$')
-    ax.plot(x_grid, c_star(x_grid, β, γ + 0.2), label='higher $\gamma$')
-    ax.set_ylabel('$\sigma(x)$')
+    ax.plot(x_grid, c_star(x_grid, β + 0.02, γ), label=r'higher $\beta$')
+    ax.plot(x_grid, c_star(x_grid, β, γ + 0.2), label=r'higher $\gamma$')
+    ax.set_ylabel(r'$\sigma(x)$')
     ax.set_xlabel('$x$')
     ax.legend()
 
@@ -351,7 +351,7 @@ Statement and Implications
 The Euler equation for the present problem can be stated as 
 
 .. math::
-    :label: euler
+    :label: euler-cep
 
     u^{\prime} (c^*_{t})=\beta u^{\prime}(c^*_{t+1})
 
@@ -379,7 +379,7 @@ all :math:`x > 0`,
     u^{\prime}( \sigma(x) )
     = \beta u^{\prime} (\sigma(x - \sigma(x)))
 
-Evidently :eq:`euler_pol` is just the policy equivalent of :eq:`euler`.
+Evidently :eq:`euler_pol` is just the policy equivalent of :eq:`euler-cep`.
 
 It turns out that a feasible policy is optimal if and
 only if it satisfies the Euler equation.
@@ -408,7 +408,7 @@ The overall cake-eating maximization problem can be written as
 
 .. math::
     \max_{c \in F} U(c) 
-    \quad \text{where } U(c) := \max_{\{c_t\}} \sum_{t=0}^\infty \beta^t u(c_t)
+    \quad \text{where } U(c) := \sum_{t=0}^\infty \beta^t u(c_t)
 
 and :math:`F` is the set of feasible consumption paths.
 
@@ -468,7 +468,7 @@ This is just the Euler equation.
 Derivation II: Using the Bellman Equation
 ------------------------------------------
 
-Another way to derive the Euler equation is to use the Bellman equation :eq:`bellman`. 
+Another way to derive the Euler equation is to use the Bellman equation :eq:`bellman-cep`. 
 
 Taking the derivative on the right hand side of the Bellman equation with
 respect to :math:`c` and setting it to zero, we get

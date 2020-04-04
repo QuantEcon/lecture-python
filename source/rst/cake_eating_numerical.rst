@@ -61,7 +61,7 @@ You might like to :doc:`review the details <cake_eating_problem>` before we star
 Recall in particular that the Bellman equation is
 
 .. math::
-    :label: bellman
+    :label: bellman-cen
 
     v(x) = \max_{0\leq c \leq x} \{u(c) + \beta v(x-c)\}
     \quad \text{for all } x \geq 0.
@@ -490,7 +490,7 @@ Now let's look at a different strategy to compute the optimal policy.
 Recall that the optimal policy satisfies the Euler equation 
 
 .. math::
-    :label: euler
+    :label: euler-cen
 
     u' (\sigma(x)) = \beta u' ( \sigma( (x - \sigma(x)) ))
     \quad \text{for all } x > 0

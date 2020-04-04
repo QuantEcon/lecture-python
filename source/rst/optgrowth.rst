@@ -218,7 +218,7 @@ In other words, a feasible consumption policy is a Markov policy that respects t
 
 The set of all feasible consumption policies will be denoted by :math:`\Sigma`.
 
-Each :math:`\sigma \in \Sigma` determines a :doc:`continuous state Markov process <stationary_densities>` :math:`\{y_t\}` for output via
+Each :math:`\sigma \in \Sigma` determines a `continuous state Markov process <https://python-advanced.quantecon.org/stationary_densities.html>`__ :math:`\{y_t\}` for output via
 
 .. math::
     :label: firstp0_og2
@@ -580,7 +580,7 @@ right hand side of the Bellman equation :eq:`fpb30`.
            np.random.seed(seed)
            self.shocks = np.exp(μ + s * np.random.randn(shock_size))
            
-       def objective(self, c, y, v_array):
+       def state_action_value(self, c, y, v_array):
            """
            Right hand side of the Bellman equation.
            """
@@ -636,7 +636,7 @@ numerical work.)
            y = grid[i]
            
            # Maximize RHS of Bellman equation at state y
-           c_star, v_max = maximize(og.objective, 1e-10, y, (y, v))
+           c_star, v_max = maximize(og.state_action_value, 1e-10, y, (y, v))
            v_new[i] = v_max
            v_greedy[i] = c_star
            
