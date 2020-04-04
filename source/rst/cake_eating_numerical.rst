@@ -251,8 +251,8 @@ Let's start by creating a ``CakeEating`` instance using the default parameteriza
 
     ce = CakeEating()
 
-Now let's see the iteration of the value function in action. We choose an
-intial guess whose value is :math:`0` for every :math:`y` grid point. 
+Now let's see the iteration of the value function in action. We will start
+from guess :math:`v` given by :math:`v(x) = u(x)` for every :math:`x` grid point. 
 
 We should see that the value functions converge to a fixed point as we apply
 Bellman operations.
