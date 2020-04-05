@@ -27,10 +27,7 @@ progressively more challenging---and useful---problems.
 
 The main tool we will use to solve the cake eating problem is dynamic programming.
 
-This topic is an excellent way to build dynamic programming skills.
-
-Although not essential, readers will find it helpful to review the following
-lectures before reading this one:
+Readers might find it helpful to review the following lectures before reading this one:
 
 * The :doc:`shortest paths lecture <short_path>`
 * The :doc:`basic McCall model <mccall_model>`
@@ -126,7 +123,6 @@ The key trade-off in the cake-eating problem is this:
 
 * But delaying some consumption is also attractive because :math:`u` is concave.
 
-
 The concavity of :math:`u` implies that the consumer gains value from
 *consumption smoothing*, which means spreading consumption out over time.
 
@@ -195,18 +191,18 @@ In the present case, this equation states that :math:`v` satisfies
 
 The intuition here is essentially the same it was for the McCall model.
 
-Suppose that the current size of the cake is :math:`x`.
 
 Choosing :math:`c` optimally means trading off current vs future rewards.
 
 Current rewards from choice :math:`c` are just :math:`u(c)`.
 
-Future rewards, measured from next period and assuming optimal behavior, are :math:`v(x-c)`.
+Future rewards given current cake size :math:`x`, measured from next period and
+assuming optimal behavior, are :math:`v(x-c)`.
 
-These are the two terms on the right hand side of :eq:`bellman-cep`, after suitable discounting.
+These are the two terms on the right hand side of :eq:`bellman-cep`, after
+suitable discounting.
 
-If :math:`c` is chosen optimally using this trade off strategy, then we obtain maximal
-lifetime rewards from our current state :math:`x`.
+If :math:`c` is chosen optimally using this trade off strategy, then we obtain maximal lifetime rewards from our current state :math:`x`.
 
 Hence, :math:`v(x)` equals the right hand side of :eq:`bellman-cep`, as claimed.
 
@@ -218,7 +214,7 @@ It has been shown that, with :math:`u` as the CRRA utility function in
 :eq:`crra_utility`, the function
 
 .. math::
-    v^*(x_t) = \left(1-\beta^\frac{1}{\gamma}\right)^{-\gamma}u(x_t)
+    v^*(x_t) = \left( 1-\beta^{1/\gamma} \right)^{-\gamma}u(x_t)
     :label: crra_vstar
 
 solves the Bellman equation and hence is equal to the value function.
@@ -272,30 +268,27 @@ The Optimal Policy
 Now that we have the value function, it is straightforward to calculate the
 optimal action at each state.
 
-At state :math:`x`, we should choose :math:`c` as the value that maximizes the
+We should choose consumption to maximize the
 right hand side of the Bellman equation :eq:`bellman-cep`.
 
 .. math::
-    c^*_t = \sigma(x_t) = \arg \max_{c_t} \{u(c_t) + \beta v(x_t - c_t)\}
+    c^* = \arg \max_{c} \{u(c) + \beta v(x - c)\}
 
 We can think of this optimal choice as a function of the state :math:`x`, in
 which case we call it the **optimal policy**.
 
-We will denote the optimal policy by :math:`\sigma^*`, so that
+We denote the optimal policy by :math:`\sigma^*`, so that
 
 .. math::
-    \sigma^*(x) = \arg \max_{c} \{u(c) + \beta v(x - c)\}
+    \sigma^*(x) := \arg \max_{c} \{u(c) + \beta v(x - c)\}
     \quad \text{for all } x
 
 If we plug the analytical expression :eq:`crra_vstar` for the value function
 into the right hand side and compute the optimum, we find that 
 
 .. math::
-    \sigma^*(x) = \left(1-\beta^\frac{1}{\gamma}\right)x
+    \sigma^*(x) = \left( 1-\beta^{1/\gamma} \right) x
     :label: crra_opt_pol
-
-
-
 
 Now let's recall our intuition on the impact of parameters.
 
@@ -418,11 +411,11 @@ So the optimal path :math:`c^* := \{c^*_t\}_{t=0}^\infty` must satisfy
 :math:`U'(c^*) = 0`.
 
 .. note::
-    If you insist on knowing exactly how the derivative :math:`U'(c^*)` is defined, 
-    given that the argument
-    :math:`c^*` is a vector of infinite length, you can start by learning about 
-    `Gateaux derivatives <https://en.wikipedia.org/wiki/Gateaux_derivative>`__,
-    although such knowledge is not assumed in what follows.
+    If you want to know exactly how the derivative :math:`U'(c^*)` is
+    defined, given that the argument :math:`c^*` is a vector of infinite
+    length, you can start by learning about `Gateaux derivatives
+    <https://en.wikipedia.org/wiki/Gateaux_derivative>`__. However, such
+    knowledge is not assumed in what follows.
 
 In other words, the rate of change in :math:`U` must be zero for any
 infinitesimally small (and feasible) perturbation away from the optimal path.
