@@ -177,7 +177,7 @@ SciPy minimization routine into a maximization routine.
 We'll store the parameters :math:`\beta` and :math:`\gamma` in a 
 class called ``CakeEating``. 
 
-The same class will also provide a method called `state_action_value` that
+The same class will also provide a method called ``state_action_value`` that
 returns the value of a consumption choice given a particular state and guess
 of :math:`v`.
 
@@ -328,8 +328,8 @@ Now we can plot and see what the converged value function looks like.
     fig, ax = plt.subplots()
 
     ax.plot(x_grid, v, label='Approximate value function')
-    ax.set_ylabel('$V(y)$', fontsize=12)
-    ax.set_xlabel('$y$', fontsize=12)
+    ax.set_ylabel('$V(x)$', fontsize=12)
+    ax.set_xlabel('$x$', fontsize=12)
     ax.set_title('Value function')
     ax.legend()
     plt.show()
@@ -362,8 +362,8 @@ The function defined below computes the analytical solution of a given ``CakeEat
 
     ax.plot(x_grid, v_analytical, label='analytical solution')
     ax.plot(x_grid, v, label='numerical solution')
-    ax.set_ylabel('$V(y)$', fontsize=12)
-    ax.set_xlabel('$y$', fontsize=12)
+    ax.set_ylabel('$V(x)$', fontsize=12)
+    ax.set_xlabel('$x$', fontsize=12)
     ax.legend()
     ax.set_title('Comparison between analytical and numerical value functions')
     plt.show()
@@ -415,9 +415,9 @@ Here's the function:
         c = np.empty_like(v)
 
         for i in range(len(ce.x_grid)):
-            y = ce.x_grid[i]
-            # Maximize RHS of Bellman equation at state y
-            c[i] = maximize(ce.state_action_value, 1e-10, y, (y, v))[0]
+            x = ce.x_grid[i]
+            # Maximize RHS of Bellman equation at state x
+            c[i] = maximize(ce.state_action_value, 1e-10, x, (x, v))[0]
 
         return c
 
@@ -432,8 +432,8 @@ Now let's pass the approximate value function and compute optimal consumption:
     fig, ax = plt.subplots()
 
     ax.plot(x_grid, c)
-    ax.set_ylabel(r'$\sigma(y)$')
-    ax.set_xlabel('$y$')
+    ax.set_ylabel(r'$\sigma(x)$')
+    ax.set_xlabel('$x$')
     ax.set_title('Optimal policy')
     plt.show()
 
@@ -461,8 +461,8 @@ Let's compare it to the true analytical solution.
 
     ax.plot(ce.x_grid, c_analytical, label='analytical')
     ax.plot(ce.x_grid, c, label='Numerical')
-    ax.set_ylabel(r'$\sigma(y)$')
-    ax.set_xlabel('$y$')
+    ax.set_ylabel(r'$\sigma(x)$')
+    ax.set_xlabel('$x$')
     ax.legend()
     ax.set_title('Comparison between analytical and numerical optimal policies')
     plt.show()
@@ -492,7 +492,7 @@ Recall that the optimal policy satisfies the Euler equation
 .. math::
     :label: euler-cen
 
-    u' (\sigma(x)) = \beta u' ( \sigma( (x - \sigma(x)) ))
+    u' (\sigma(x)) = \beta u' ( \sigma(x - \sigma(x)))
     \quad \text{for all } x > 0
 
 Computationally, we can start with any initial guess of
@@ -500,9 +500,9 @@ Computationally, we can start with any initial guess of
 
 .. math::
 
-    u^{\prime}( c ) = \beta u^{\prime} (\sigma_0(y - c))
+    u^{\prime}( c ) = \beta u^{\prime} (\sigma_0(x - c))
 
-Chosing :math:`c` that satisfies this equation at all :math:`x > 0` produces a function of :math:`x`.
+Choosing :math:`c` that satisfies this equation at all :math:`x > 0` produces a function of :math:`x`.
 
 Call this new function :math:`\sigma_1`, treat it and the new guess and
 repeat.
