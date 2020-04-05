@@ -35,10 +35,8 @@ modifications, and once we start modifying the problem, numerical methods become
 Hence it makes sense to introduce numerical methods now, and test them on this
 simple problem.
 
-Because we know the analytical solution, we can confirm that the numerical
-methods are sound.
-
-This will give us confidence in the methods before we shift to generalizations.
+Since we know the analytical solution, this will allow us to assess the
+accuracy of alternative numerical methods.
 
 We will use the following imports:
 
@@ -79,8 +77,9 @@ Let's start by trying to obtain this analytical solution numerically.
 Value Function Iteration
 ========================
 
-The approach we will take is called **value function iteration**, which is a
-form of **successive approximation** and was discussed in our :doc:`lecture on job search <mccall_model>`.
+The first approach we will take is **value function iteration**. 
+
+This is a form of **successive approximation**, and was discussed in our :doc:`lecture on job search <mccall_model>`.
 
 The basic idea is:
 
@@ -251,11 +250,11 @@ Let's start by creating a ``CakeEating`` instance using the default parameteriza
 
     ce = CakeEating()
 
-Now let's see the iteration of the value function in action. We will start
-from guess :math:`v` given by :math:`v(x) = u(x)` for every :math:`x` grid point. 
+Now let's see the iteration of the value function in action.
 
-We should see that the value functions converge to a fixed point as we apply
-Bellman operations.
+We start from guess :math:`v` given by :math:`v(x) = u(x)` for every
+:math:`x` grid point. 
+
 
 .. code-block:: python3
 
@@ -279,8 +278,9 @@ Bellman operations.
 
     plt.show()
 
-We can define a wrapper function ``compute_value_function`` which does the value function iterations
-until some convergence conditions are satisfied and then return a converged value function.
+To do this more systematically, we introduce a wrapper function called
+``compute_value_function`` that iterates until some convergence conditions are
+satisfied.
 
 .. code-block:: python3
 
@@ -315,7 +315,7 @@ until some convergence conditions are satisfied and then return a converged valu
         return v_new
 
 
-Now let's call it --- note that it takes a little while to run.
+Now let's call it, noting that it takes a little while to run.
 
 .. code-block:: python3
 
@@ -368,24 +368,25 @@ The function defined below computes the analytical solution of a given ``CakeEat
     ax.set_title('Comparison between analytical and numerical value functions')
     plt.show()
 
-The quality of approximation is reasonably good, although less so near the
-lower boundary.
+The quality of approximation is reasonably good for large :math:`x`, but
+less so near the lower boundary.
 
-The issue here is that the utility function and hence value function is very
-steep in this region and hence hard to approximate with linear interpolation.
+The reason is that the utility function and hence value function is very
+steep near the lower boundary, and hence hard to approximate.
 
-Let's see how this plays out in terms of computing the optimal policy.
 
 
 
 Policy Function
 ---------------
 
+Let's see how this plays out in terms of computing the optimal policy.
+
 In the :doc:`first lecture on cake eating <cake_eating_problem>`, the optimal
 consumption policy was shown to be
 
 .. math::
-    \sigma^*(x) = \left(1-\beta^\frac{1}{\gamma}\right) x
+    \sigma^*(x) = \left(1-\beta^{1/\gamma} \right) x
 
 Let's see if our numerical results lead to something similar.
 
@@ -427,20 +428,9 @@ Now let's pass the approximate value function and compute optimal consumption:
 
     c = σ(ce, v)  
 
-.. code-block:: python3
-
-    fig, ax = plt.subplots()
-
-    ax.plot(x_grid, c)
-    ax.set_ylabel(r'$\sigma(x)$')
-    ax.set_xlabel('$x$')
-    ax.set_title('Optimal policy')
-    plt.show()
-
 .. _pol_an:
 
-
-Let's compare it to the true analytical solution.
+Let's plot this next to the true analytical solution
 
 .. code-block:: python3
 
@@ -451,11 +441,8 @@ Let's compare it to the true analytical solution.
 
         return (1 - β ** (1/γ)) * x_grid
 
-.. code-block:: python3
 
     c_analytical = c_star(ce)
-
-.. code-block:: python3
 
     fig, ax = plt.subplots()
 
@@ -464,22 +451,21 @@ Let's compare it to the true analytical solution.
     ax.set_ylabel(r'$\sigma(x)$')
     ax.set_xlabel('$x$')
     ax.legend()
-    ax.set_title('Comparison between analytical and numerical optimal policies')
+
     plt.show()
 
 
-The fit is not perfect but quite good.
+The fit is reasoable but not perfect.
 
-We can improve it further by increasing the grid size or reducing the
+We can improve it by increasing the grid size or reducing the
 error tolerance in the value function iteration routine.
 
-Of course both changes will lead to a longer compute time.
+However, both changes will lead to a longer compute time.
 
 Another possibility is to use an alternative algorithm, which offers the
 possibility of faster compute time and, at the same time, more accuracy.
 
 We explore this next.
-
 
 
 Time Iteration
@@ -502,9 +488,9 @@ Computationally, we can start with any initial guess of
 
     u^{\prime}( c ) = \beta u^{\prime} (\sigma_0(x - c))
 
-Choosing :math:`c` that satisfies this equation at all :math:`x > 0` produces a function of :math:`x`.
+Choosing :math:`c` to satisfy this equation at all :math:`x > 0` produces a function of :math:`x`.
 
-Call this new function :math:`\sigma_1`, treat it and the new guess and
+Call this new function :math:`\sigma_1`, treat it as the new guess and
 repeat.
 
 This is called **time iteration**.
@@ -515,19 +501,27 @@ operator, this time denoted by :math:`K`.
 * In particular, :math:`K\sigma` is the policy updated from :math:`\sigma`
   using the procedure just described.
 
-The main advantage of time iteration relative to value function iteration is that it operates
-in policy space rather than value function space.
+* We will use this terminology in the exercises below.
 
-This is helpful because policy functions have less curvature, at least for the
-current example, and hence are easier to approximate.
+The main advantage of time iteration relative to value function iteration is
+that it operates in policy space rather than value function space.
+
+This is helpful because the policy function has less curvature,
+ and hence is easier to approximate.
 
 In the exercises you are asked to implement time iteration and compare it to
 value function iteration.
 
 You should find that the method is faster and more accurate.
 
-The intuition behind this is that we are using more information --- in this
-case, the first order conditions.
+This is due to
+
+#. the curvature issue mentioned just above  and
+
+# the fact that we are using more information --- in this case, the first order conditions.
+
+
+
 
 
 Exercises
