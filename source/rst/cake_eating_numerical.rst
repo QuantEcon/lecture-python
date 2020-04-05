@@ -177,7 +177,7 @@ SciPy minimization routine into a maximization routine.
 We'll store the parameters :math:`\beta` and :math:`\gamma` in a 
 class called ``CakeEating``. 
 
-The same class will also provide a method called `state_action_value` that
+The same class will also provide a method called ``state_action_value`` that
 returns the value of a consumption choice given a particular state and guess
 of :math:`v`.
 
@@ -492,7 +492,7 @@ Recall that the optimal policy satisfies the Euler equation
 .. math::
     :label: euler-cen
 
-    u' (\sigma(x)) = \beta u' ( \sigma( (x - \sigma(x)) ))
+    u' (\sigma(x)) = \beta u' ( \sigma(x - \sigma(x)))
     \quad \text{for all } x > 0
 
 Computationally, we can start with any initial guess of
@@ -502,7 +502,7 @@ Computationally, we can start with any initial guess of
 
     u^{\prime}( c ) = \beta u^{\prime} (\sigma_0(x - c))
 
-Chosing :math:`c` that satisfies this equation at all :math:`x > 0` produces a function of :math:`x`.
+Choosing :math:`c` that satisfies this equation at all :math:`x > 0` produces a function of :math:`x`.
 
 Call this new function :math:`\sigma_1`, treat it and the new guess and
 repeat.
