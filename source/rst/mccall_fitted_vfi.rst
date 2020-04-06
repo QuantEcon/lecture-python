@@ -247,7 +247,7 @@ Here's our class.
             self.w_grid = np.linspace(grid_min, grid_max, grid_size)
             self.w_draws = w_draws
 
-        def update(self, v, d):
+        def state_action_values(self, v, d):
 
             # Simplify names
             c, α, β, σ, μ = self.c, self.α, self.β, self.σ, self.μ 
@@ -284,7 +284,7 @@ We then return the current iterate as an approximate solution.
         error = tol + 1
 
         while error > tol and i < max_iter:
-            v_new, d_new = mcm.update(v, d)
+            v_new, d_new = mcm.state_action_values(v, d)
             error_1 = np.max(np.abs(v_new - v))
             error_2 = np.abs(d_new - d)
             error = max(error_1, error_2)
