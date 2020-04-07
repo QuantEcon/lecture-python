@@ -15,9 +15,11 @@
 Overview
 ========
 
-In this lecture, we're going to study a simple optimal growth model with one agent.
+In this lecture, we're going to study a simple optimal growth model with one
+agent.
 
-The model is a version of the standard one sector infinite horizon growth model studied in
+The model is a version of the standard one sector infinite horizon growth
+model studied in
 
 * :cite:`StokeyLucas1989`, chapter 2
 
@@ -27,29 +29,27 @@ The model is a version of the standard one sector infinite horizon growth model 
 
 * :cite:`Sundaram1996`, chapter 12
 
+It is an extension of the simple :doc:`cake eating problem
+<cake_eating_problem>` we looked at earlier.
 
-The technique we use to solve the model is dynamic programming.
+The extension involves
 
-Our treatment of dynamic programming follows on from earlier
-treatments in our lectures on `shortest paths <https://python-intro.quantecon.org/short_path.html>`__ and
-`job search <https://python-intro.quantecon.org/mccall_model.html>`__.
+* nonlinear returns to saving, through a production function, and
 
-We'll discuss some of the technical details of dynamic programming as we
-go along.
+* stochastic returns, due to shocks to production.
 
+Despite this additions, the model is still relatively simple.
 
+We regard it as a stepping stone to more sophisticated models.
 
-Code
-----
+We solve the model using dynamic programming and a range of numerical
+techniques.
 
-Regarding code, our implementation in this lecture will focus on clarity and flexibility.
+In this first lecture on optimal growth, the solution method will be value
+function iteration (VFI).
 
-Both of these things are helpful, particularly for those readers still trying to understand
-the material, but they do cost us some speed --- as you will
-see when you run the code.
-
-In the :doc:`next lecture <optgrowth_fast>` we will sacrifice some of this
-clarity and flexibility in order to accelerate our code with just-in-time (JIT) compilation.
+While the code in this first lecture runs slowly, we will use a variety of
+techniques to drastically improve execution time over the next few lectures.
 
 Let's start with some imports:
 
@@ -487,8 +487,19 @@ Computation
 
 Let's now look at computing the value function and the optimal policy.
 
-We will use fitted value function iteration, which was described in detail in
-a `previous lecture <https://python-intro.quantecon.org/mccall_fitted_vfi.html>`__.
+Our implementation in this lecture will focus on clarity and
+flexibility.
+
+Both of these things are helpful but they do cost us some speed --- as you
+will see when you run the code.
+
+:doc:`Later <optgrowth_fast>` we will sacrifice some of this clarity and
+flexibility in order to accelerate our code with just-in-time (JIT)
+compilation.
+
+The algorithm we will use is fitted value function iteration, which was
+described in earlier lectures on :doc:`the McCall model <mccall_fitted_vfi>` and 
+:doc:`cake eating <cake_eating_numerical>`.
 
 The algorithm will be
 
@@ -620,7 +631,7 @@ numerical work.)
 
 .. code-block:: python3
 
-   def T(og, v):
+   def T(v, og):
        """
        The Bellman operator.  Updates the guess of the value function 
        and also computes a v-greedy policy.
@@ -681,24 +692,7 @@ whether our code works for this particular case.
 
 In Python, the functions above can be expressed as
 
-.. code-block:: python3
-
-    def v_star(y, α, β, μ):
-        """
-        True value function
-        """
-        c1 = np.log(1 - α * β) / (1 - β)
-        c2 = (μ + α * np.log(α * β)) / (1 - α)
-        c3 = 1 / (1 - β)
-        c4 = 1 / (1 - α * β)
-        return c1 + c2 * (c3 - c4) + c4 * np.log(y)
-
-    def σ_star(y, α, β):
-        """
-        True optimal policy
-        """
-        return (1 - α * β) * y
-
+.. literalinclude:: /_static/lecture_specific/optgrowth/cd_analytical.py
 
 Next let's create an instance of the model with the above primitives and assign it to the variable ``og``.
 
@@ -723,7 +717,7 @@ In practice, we expect some small numerical error
     grid = og.grid
 
     v_init = v_star(grid, α, og.β, og.μ)    # Start at the solution
-    v_greedy, v = T(og, v_init)             # Apply T once
+    v_greedy, v = T(v_init, og)             # Apply T once
 
     fig, ax = plt.subplots()
     ax.set_ylim(-35, -24)
@@ -752,7 +746,7 @@ The initial condition we'll start with is, somewhat arbitrarily, :math:`v(y) = 5
             lw=2, alpha=0.6, label='Initial condition')
 
     for i in range(n):
-        v_greedy, v = T(og, v)  # Apply the Bellman operator
+        v_greedy, v = T(v, og)  # Apply the Bellman operator
         ax.plot(grid, v, color=plt.cm.jet(i / n), lw=2, alpha=0.6)
 
     ax.plot(grid, v_star(grid, α, og.β, og.μ), 'k-', lw=2,
@@ -781,38 +775,9 @@ Iterating to Convergence
 We can write a function that iterates until the difference is below a particular
 tolerance level.
 
-.. code-block:: python3
-
-   def solve_model(og,
-                   tol=1e-4,
-                   max_iter=1000,
-                   verbose=True,
-                   print_skip=25):
-
-       # Set up loop
-       v = np.log(og.grid)  # Initial condition
-       i = 0
-       error = tol + 1
-
-       while i < max_iter and error > tol:
-           v_greedy, v_new = T(og, v)
-           error = np.max(np.abs(v - v_new))
-           i += 1
-           if verbose and i % print_skip == 0:
-               print(f"Error at iteration {i} is {error}.")
-           v = v_new
-
-       if i == max_iter:
-           print("Failed to converge!")
-
-       if verbose and i < max_iter:
-           print(f"\nConverged in {i} iterations.")
-
-       return v_greedy, v_new
-
+.. literalinclude:: /_static/lecture_specific/optgrowth/solve_model.py
 
 Let's use this function to compute an approximate solution at the defaults.
-
 
 .. code-block:: python3
 
@@ -851,13 +816,13 @@ above, is :math:`\sigma(y) = (1 - \alpha \beta) y`
 
 .. code-block:: python3
 
-    fig, ax = plt.subplots(figsize=(9, 5))
+    fig, ax = plt.subplots()
 
     ax.plot(grid, v_greedy, lw=2,
-            alpha=0.6, label='Approximate policy function')
+            alpha=0.6, label='approximate policy function')
 
-    ax.plot(grid, σ_star(grid, α, og.β),
-            lw=2, alpha=0.6, label='True policy function')
+    ax.plot(grid, σ_star(grid, α, og.β), '--',
+            lw=2, alpha=0.6, label='true policy function')
 
     ax.legend()
     plt.show()
@@ -872,6 +837,8 @@ Exercises
 
 
 
+.. _ogex1:
+
 Exercise 1
 ----------
 
@@ -885,18 +852,28 @@ Maintaining the other defaults, including the Cobb-Douglas production
 function,  solve the optimal growth model with this
 utility specification.  
 
-In doing so,
+Setting :math:`\gamma = 1.5`, compute and plot an estimate of the optimal policy.
 
-* Set :math:`\gamma = 1.5`.
-* Use the ``solve_model`` function defined above.
-* Time how long this function takes to run, so we can compare it to faster
-  code developed in the :doc:`next lecture <optgrowth_fast>`
+
+Time how long this function takes to run, so you can compare it to faster code developed in the :doc:`next lecture <optgrowth_fast>`
+
+
+.. _og_ex2:
+
+Exercise 2
+----------
+
+Time how long it takes to iterate with the Bellman operator
+20 times, starting from initial condition :math:`v(y) = u(y)`.
+
+Use the model specification in the previous exercise.
+
+(As before, we will compare this number with that for the faster code developed in the :doc:`next lecture <optgrowth_fast>`.)
+
 
 
 Solutions
 =========
-
-.. _ogex1:
 
 Exercise 1
 ----------
@@ -932,3 +909,26 @@ Let's plot the policy function just to see what it looks like:
 
     ax.legend()
     plt.show()
+
+
+Exercise 2
+----------
+
+Let's set up:
+
+.. code-block:: ipython3
+
+    og = OptimalGrowthModel(u=u_crra, f=fcd)
+    v = og.u(og.grid)  
+
+Here's the timing:
+
+.. code-block:: ipython3
+
+    %%time
+
+    for i in range(20):
+        v_greedy, v_new = T(v, og)
+        v = v_new
+
+
