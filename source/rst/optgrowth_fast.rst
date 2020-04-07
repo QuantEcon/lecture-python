@@ -22,7 +22,7 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 Overview
 ========
 
-In a :doc:`previous lecture <optgrowth>`, we studied a stochastic optimal
+:doc:`Previously <optgrowth>`, we studied a stochastic optimal
 growth model with one representative agent.
 
 We solved the model using dynamic programming.
@@ -60,7 +60,7 @@ We are using an interpolation function from
 `interpolation.py <https://github.com/EconForge/interpolation.py>`__ because it
 helps us JIT-compile our code.
 
-The function `brent_max` is also designed for embedding in JIT-compiled code.
+The function ``brent_max`` is also designed for embedding in JIT-compiled code.
 
 These are alternatives to similar functions in SciPy (which, unfortunately, are not JIT-aware).
 
@@ -73,21 +73,28 @@ The Model
     single: Optimal Growth; Model
 
 
-The model is the same as discussed in :doc:`this lecture <optgrowth>`.
+The model is the same as discussed in our :doc:`previous lecture <optgrowth>`
+on optimal growth.
 
-We will use the same algorithm to solve it---the only difference is in the
-implementation itself.
-
-We will use the CRRA utility specification
+We will start with log utility:
 
 .. math::
-    u(c) = \frac{c^{1 - γ} - 1} {1 - γ}
+    u(c) = \ln(c)
 
 We continue to assume that
 
 * :math:`f(k) = k^{\alpha}`
 
 * :math:`\phi` is the distribution of :math:`\exp(\mu + s \zeta)` when :math:`\zeta` is standard normal
+
+We will once again use value function iteration to solve the model.
+
+In particular, the algorithm is unchanged and the only difference is in the implementation itself.
+
+As before, we will be able to compare with the true solutions
+
+.. literalinclude:: /_static/lecture_specific/optgrowth/cd_analytical.py
+
 
 
 Computation
@@ -97,171 +104,88 @@ Computation
     single: Dynamic Programming; Computation
 
 
-As before, we will store the primitives of the optimal growth model in a class.
+We will again store the primitives of the optimal growth model in a class.
 
-But now we are going to use `Numba's <https://python-programming.quantecon.org/numba.html>`__ ``@jitclass`` decorator to
-target our class for JIT compilation.
+But now we are going to use `Numba's <https://python-programming.quantecon.org/numba.html>`__ ``@jitclass`` decorator to target our class for JIT compilation.
 
 Because we are going to use Numba to compile our class, we need to specify the
-types of the data:
+types of the data.
 
-.. code-block:: python3
+You will see this as a list called ``opt_growth_data`` above our class.
 
-   opt_growth_data = [
-       ('α', float64),          # Production parameter
-       ('β', float64),          # Discount factor
-       ('μ', float64),          # Shock location parameter
-       ('γ', float64),          # Preference parameter
-       ('s', float64),          # Shock scale parameter
-       ('grid', float64[:]),    # Grid (array)
-       ('shocks', float64[:])   # Shock draws (array)
-   ]
-
-Note the convention for specifying the types of each argument.
-
-Now we're ready to create our class, which will combine parameters and a
-method that realizes the right hand side of the Bellman equation :eq:`fpb30`.
-
-You will notice that, unlike in the :doc:`previous lecture <optgrowth>`, we
-hardwire the Cobb-Douglas production and CRRA utility specifications into the
+Unlike in the :doc:`previous lecture <optgrowth>`, we
+hardwire the production and utility specifications into the
 class.
 
-Thus, we are losing flexibility, but we will gain substantial speed.
+This is where we sacrifice flexibility in order to gain more speed.
 
-.. code-block:: python3
 
-   @jitclass(opt_growth_data)
-   class OptimalGrowthModel:
+.. literalinclude:: /_static/lecture_specific/optgrowth_fast/ogm.py
 
-       def __init__(self,
-                    α=0.4, 
-                    β=0.96, 
-                    μ=0,
-                    s=0.1,
-                    γ=1.5, 
-                    grid_max=4,
-                    grid_size=120,
-                    shock_size=250,
-                    seed=1234):
 
-           self.α, self.β, self.γ, self.μ, self.s = α, β, γ, μ, s
-
-           # Set up grid
-           self.grid = np.linspace(1e-5, grid_max, grid_size)
-
-           # Store shocks (with a seed, so results are reproducible)
-           np.random.seed(seed)
-           self.shocks = np.exp(μ + s * np.random.randn(shock_size))
-           
-       def f(self, k):
-           return k**self.α
-           
-       def u(self, c):
-           return (c**(1 - self.γ) - 1) / (1 - self.γ)
-
-       def state_action_value(self, c, y, v_array):
-           """
-           Right hand side of the Bellman equation.
-           """
-
-           u, f, β, shocks = self.u, self.f, self.β, self.shocks
-
-           v = lambda x: interp(self.grid, v_array, x)
-
-           return u(c) + β * np.mean(v(f(y - c) * shocks))
-
+The class includes some methods such as ``u_prime`` that we do not need now
+but will use in later lecures.
 
 
 The Bellman Operator
 --------------------
 
-Here's a function that uses JIT compilation to accelerate the Bellman operator
+We will use JIT compilation to accelerate the Bellman operator.
+
+First, here's a function that returns the value of a particular consumption choice ``c``, given state ``y``, as per the Bellman equation :eq:`fpb30`.
 
 .. code-block:: python3
 
-   @jit(nopython=True)
-   def T(og, v):
-       """
-       The Bellman operator.
+    @njit
+    def state_action_value(c, y, v_array, og):
+        """
+        Right hand side of the Bellman equation.
+
+         * c is consumption
+         * y is income
+         * og is an instance of OptimalGrowthModel
+         * v_array represents a guess of the value function on the grid
+
+        """
+
+        u, f, β, shocks = og.u, og.f, og.β, og.shocks
+
+        v = lambda x: interp(og.grid, v_array, x)
+
+        return u(c) + β * np.mean(v(f(y - c) * shocks))
+
+Now we can implement the Bellman operator, which maximizes the right hand side
+of the Bellman equation:
+
+.. code-block:: python3
+
+    @jit(nopython=True)
+    def T(v, og):
+        """
+        The Bellman operator.
 
          * og is an instance of OptimalGrowthModel
          * v is an array representing a guess of the value function
-       """
-       v_new = np.empty_like(v)
-       
-       for i in range(len(og.grid)):
-           y = og.grid[i]
+
+        """
+
+        v_new = np.empty_like(v)
+        v_greedy = np.empty_like(v)
+
+        for i in range(len(og.grid)):
+            y = og.grid[i]
            
-           # Maximize RHS of Bellman equation at state y
-           v_max = brent_max(og.state_action_value, 1e-10, y, args=(y, v))[1]
-           v_new[i] = v_max
+            # Maximize RHS of Bellman equation at state y
+            result = brent_max(state_action_value, 1e-10, y, args=(y, v, og))
+            v_greedy[i], v_new[i] = result[0], result[1]
            
-       return v_new
+        return v_greedy, v_new
 
+We use the ``solve_model`` function to perform iteration until convergence.
 
-Here's another function, very similar to the last, that computes a :math:`v`-greedy
-policy:
-
-
-.. code-block:: python3
-
-   @jit(nopython=True)
-   def get_greedy(og, v):
-       """
-       Compute a v-greedy policy.
-
-         * og is an instance of OptimalGrowthModel
-         * v is an array representing a guess of the value function
-       """
-       v_greedy = np.empty_like(v)
-       
-       for i in range(len(og.grid)):
-           y = og.grid[i]
-           
-           # Find maximizer of RHS of Bellman equation at state y
-           c_star = brent_max(og.state_action_value, 1e-10, y, args=(y, v))[0]
-           v_greedy[i] = c_star
-           
-       return v_greedy
-
-The last two functions could be merged, as they were in our :doc:`previous implementation <optgrowth>`, but we resisted doing so to increase efficiency.
-
-
-Here's a function that iterates from a starting guess of the value function until the difference between successive iterates is below a particular tolerance level.
-
-.. code-block:: python3
-
-   def solve_model(og,
-                   tol=1e-4,
-                   max_iter=1000,
-                   verbose=True,
-                   print_skip=25):
-
-       # Set up loop
-       v = np.log(og.grid)  # Initial condition
-       i = 0
-       error = tol + 1
-
-       while i < max_iter and error > tol:
-           v_new = T(og, v)
-           error = np.max(np.abs(v - v_new))
-           i += 1
-           if verbose and i % print_skip == 0:
-               print(f"Error at iteration {i} is {error}.")
-           v = v_new
-
-       if i == max_iter:
-           print("Failed to converge!")
-
-       if verbose and i < max_iter:
-           print(f"\nConverged in {i} iterations.")
-
-       return v_new
-
-
+.. literalinclude:: /_static/lecture_specific/optgrowth/solve_model.py
 
 Let's compute the approximate solution at the default parameters.
-
 
 First we create an instance:
 
@@ -275,36 +199,78 @@ takes.
 .. code-block:: python3
 
     %%time
-    v_solution = solve_model(og)
+    v_greedy, v_solution = solve_model(og)
 
-You will notice that this is *much* faster than our :ref:`original implementation <ogex1>`.
+You will notice that this is *much* faster than our :doc:`original implementation <optgrowth>`.
 
-Let's plot the resulting policy:
+Here is a plot of the resulting policy, compared with the true policy:
 
 .. code-block:: python3
-
-    v_greedy = get_greedy(og, v_solution)
 
     fig, ax = plt.subplots()
 
     ax.plot(og.grid, v_greedy, lw=2,
-            alpha=0.6, label='Approximate value function')
+            alpha=0.8, label='approximate policy function')
 
-    ax.legend(loc='lower right')
+    ax.plot(og.grid, σ_star(og.grid, og.α, og.β), 'k--',
+            lw=2, alpha=0.8, label='true policy function')
+
+    ax.legend()
     plt.show()
 
-Everything seems in order, so our code acceleration has been successful!
 
+Again, the fit is excellent --- this is as expected since we have not changed
+the algorithm.
 
+The maximal absolute deviation between the two policies is
 
+.. code-block:: python3
+
+    np.max(np.abs(v_greedy - σ_star(og.grid, og.α, og.β)))
 
 
 Exercises
 =========
 
+.. _ogfast_ex1:
+
+
 
 Exercise 1
 ----------
+
+Time how long it takes to iterate with the Bellman operator
+20 times, starting from initial condition :math:`v(y) = u(y)`.
+
+Use the default parameterization.
+
+
+Exercise 2
+----------
+
+Modify the optimal growth model to use the CRRA utility specification.
+
+.. math::
+    u(c) = \frac{c^{1 - γ} - 1} {1 - γ}
+
+Set ``γ = 1.5`` as the default value and maintaining other specifications.
+
+(Note that ``jitclass`` currently does not support inheritance, so you will
+have to copy the class and change the relevant parameters and methods.)
+
+Compute an estimate of the optimal policy, plot it and compare visually with
+the same plot from the :ref:`analogous exercise <ogex1>` in the first optimal
+growth lecture.
+
+Compare execution time as well.
+
+
+.. _ogfast_ex3:
+
+Exercise 3
+----------
+
+In this exercise we return to the original log utility specification.
 
 Once an optimal consumption policy :math:`\sigma` is given, income follows
 
@@ -335,9 +301,76 @@ Replicate the figure modulo randomness.
 Solutions
 =========
 
+
+
 Exercise 1
 ----------
 
+Let's set up the initial condition.
+
+.. code-block:: ipython3
+
+    v = og.u(og.grid)  
+
+Here's the timing:
+
+.. code-block:: ipython3
+
+    %%time
+
+    for i in range(20):
+        v_greedy, v_new = T(v, og)
+        v = v_new
+
+
+Compared with our :ref:`timing <og_ex2>` for the non-compiled version of
+value function iteration, the JIT-compiled code is usually an order of magnitude faster.
+
+
+Exercise 2
+----------
+
+Here's our CRRA version of ``OptimalGrowthModel``
+
+
+.. literalinclude:: /_static/lecture_specific/optgrowth_fast/ogm_crra.py
+
+Let's create an instance:
+
+.. code-block:: python3
+
+    og_crra = OptimalGrowthModel_CRRA()
+
+Now we call ``solve_model``, using the ``%%time`` magic to check how long it
+takes.
+
+.. code-block:: python3
+
+    %%time
+    v_greedy, v_solution = solve_model(og_crra)
+
+Here is a plot the resulting policy:
+
+.. code-block:: python3
+
+    fig, ax = plt.subplots()
+
+    ax.plot(og.grid, v_greedy, lw=2,
+            alpha=0.6, label='Approximate value function')
+
+    ax.legend(loc='lower right')
+    plt.show()
+
+
+This matches the solution that we obtained in our non-jitted code, :ref:`in
+the exercises <ogex1>`.
+
+Execution time is an order of magnitude faster.
+
+
+
+Exercise 3
+----------
 
 Here's one solution 
 
@@ -362,8 +395,7 @@ Here's one solution
 
         og = OptimalGrowthModel(β=β, s=0.05)
 
-        v_solution = solve_model(og)
-        v_greedy = get_greedy(og, v_solution)
+        v_greedy, v_solution = solve_model(og)
 
         # Define an optimal policy function
         σ_func = lambda x: interp(og.grid, v_greedy, x)

@@ -503,11 +503,9 @@ operator, this time denoted by :math:`K`.
 
 * We will use this terminology in the exercises below.
 
-The main advantage of time iteration relative to value function iteration is
-that it operates in policy space rather than value function space.
+The main advantage of time iteration relative to value function iteration is that it operates in policy space rather than value function space.
 
-This is helpful because the policy function has less curvature,
- and hence is easier to approximate.
+This is helpful because the policy function has less curvature, and hence is easier to approximate.
 
 In the exercises you are asked to implement time iteration and compare it to
 value function iteration.
@@ -518,7 +516,7 @@ This is due to
 
 #. the curvature issue mentioned just above  and
 
-# the fact that we are using more information --- in this case, the first order conditions.
+#. the fact that we are using more information --- in this case, the first order conditions.
 
 
 
