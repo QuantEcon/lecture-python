@@ -74,7 +74,7 @@ Consider an agent who owns an amount :math:`y_t \in \mathbb R_+ := [0, \infty)` 
 
 This output can either be consumed or invested.
 
-When the good is invested it is transformed one-for-one into capital.
+When the good is invested, it is transformed one-for-one into capital.
 
 The resulting capital stock, denoted here by :math:`k_{t+1}`, will then be used for production.
 
@@ -490,7 +490,7 @@ Let's now look at computing the value function and the optimal policy.
 Our implementation in this lecture will focus on clarity and
 flexibility.
 
-Both of these things are helpful but they do cost us some speed --- as you
+Both of these things are helpful, but they do cost us some speed --- as you
 will see when you run the code.
 
 :doc:`Later <optgrowth_fast>` we will sacrifice some of this clarity and
@@ -617,7 +617,7 @@ where :math:`\{\xi_i\}_{i=1}^n` are IID draws from :math:`\phi`.
 Monte Carlo is not always the most efficient way to compute integrals numerically
 but it does have some theoretical advantages in the present setting.
 
-(For example, it preserves the contraction mapping property of the Bellman operator --- see, e.g., :cite:`pal2013`)
+(For example, it preserves the contraction mapping property of the Bellman operator --- see, e.g., :cite:`pal2013`.)
 
 
 The Bellman Operator
@@ -690,7 +690,7 @@ and optimal consumption policy
 It is valuable to have these closed-form solutions because it lets us check
 whether our code works for this particular case.
 
-In Python, the functions above can be expressed as
+In Python, the functions above can be expressed as:
 
 .. literalinclude:: /_static/lecture_specific/optgrowth/cd_analytical.py
 
@@ -710,7 +710,7 @@ solution :math:`v^*` in this case.
 
 In theory, since :math:`v^*` is a fixed point, the resulting function should again be :math:`v^*`.
 
-In practice, we expect some small numerical error
+In practice, we expect some small numerical error.
 
 .. code-block:: python3
 
@@ -732,7 +732,7 @@ The two functions are essentially indistinguishable, so we are off to a good sta
 Now let's have a look at iterating with the Bellman operator, starting off
 from an arbitrary initial condition.
 
-The initial condition we'll start with is, somewhat arbitrarily, :math:`v(y) = 5 \ln (y)`
+The initial condition we'll start with is, somewhat arbitrarily, :math:`v(y) = 5 \ln (y)`.
 
 
 .. code-block:: python3
