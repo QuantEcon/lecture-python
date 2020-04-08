@@ -51,7 +51,7 @@ We will use the following imports:
 
 
 
-Reviewing The Model
+Reviewing the Model
 ===================
 
 You might like to :doc:`review the details <cake_eating_problem>` before we start.
@@ -64,14 +64,15 @@ Recall in particular that the Bellman equation is
     v(x) = \max_{0\leq c \leq x} \{u(c) + \beta v(x-c)\}
     \quad \text{for all } x \geq 0.
 
-We found an analytical solution of the form 
-
-.. math::
-    v^*(x) = \left(1-\beta^{\frac{1}{\gamma}}\right)^{-\gamma} u(x)
-
 where :math:`u` is the CRRA utility function.
 
-Let's start by trying to obtain this analytical solution numerically.
+The analytical solutions for the value function and optimal policy were found
+to be as follows.
+
+.. literalinclude:: /_static/lecture_specific/cake_eating_numerical/analytical.py 
+
+
+Our first aim is to obtain these analytical solutions numerically.
 
 
 Value Function Iteration
@@ -335,26 +336,11 @@ Now we can plot and see what the converged value function looks like.
     plt.show()
 
 
-
-The function defined below computes the analytical solution of a given ``CakeEating`` instance.
-
-.. code-block:: python3
-
-    def v_star(ce):
-
-        β, γ = ce.β, ce.γ
-        x_grid = ce.x_grid
-        u = ce.u
-
-        a = β ** (1 / γ)
-        x = 1 - a
-        z = u(x_grid)
-
-        return z / x ** γ
+Next let's compare it to the analytical solution.
 
 .. code-block:: python3
 
-    v_analytical = v_star(ce)
+    v_analytical = v_star(ce.x_grid, ce.β, ce.γ)
 
 .. code-block:: python3
 
@@ -434,15 +420,7 @@ Let's plot this next to the true analytical solution
 
 .. code-block:: python3
 
-    def c_star(ce):
-
-        β, γ = ce.β, ce.γ
-        x_grid = ce.x_grid
-
-        return (1 - β ** (1/γ)) * x_grid
-
-
-    c_analytical = c_star(ce)
+    c_analytical = c_star(ce.x_grid, ce.β, ce.γ)
 
     fig, ax = plt.subplots()
 

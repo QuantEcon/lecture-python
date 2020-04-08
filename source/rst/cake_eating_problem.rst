@@ -234,14 +234,11 @@ We will deal with that situation numerically when the time comes.
 
 Here is a Python representation of the value function:
 
-
-
 .. code-block:: python3
 
     def v_star(x, β, γ):
 
         return (1 - β**(1 / γ))**(-γ) * u(x, γ)
-
 
 And here's a figure showing the function for fixed parameters:
 
