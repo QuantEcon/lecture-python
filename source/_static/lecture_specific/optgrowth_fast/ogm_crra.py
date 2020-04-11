@@ -40,7 +40,7 @@ class OptimalGrowthModel_CRRA:
 
     def u(self, c):
         "The utility function."
-        return (c**(1 - self.γ) - 1) / (1 - self.γ)
+        return c**(1 - self.γ) / (1 - self.γ)
 
     def f_prime(self, k):
         "Derivative of f."

@@ -221,7 +221,8 @@ Let's call it:
 
 .. code-block:: python3
 
-    σ = solve_model_time_iter(og)
+    σ_init = np.copy(grid)
+    σ = solve_model_time_iter(og, σ_init)
 
 Here is a plot of the resulting policy, compared with the true policy:
 
@@ -252,7 +253,7 @@ How long does it take to converge?
 .. code-block:: python3
 
     %%timeit -n 3 -r 1
-    σ = solve_model_time_iter(og, verbose=False)
+    σ = solve_model_time_iter(og, σ_init, verbose=False)
 
 
 Relative to time iteration, which as already found to be highly efficient, EGM

@@ -402,7 +402,8 @@ Let's call it:
 
 .. code-block:: python3
 
-    σ = solve_model_time_iter(og)
+    σ_init = np.copy(og.grid)  
+    σ = solve_model_time_iter(og, σ_init)
 
 Here is a plot of the resulting policy, compared with the true policy:
 
@@ -434,7 +435,7 @@ How long does it take to converge?
 .. code-block:: python3
 
     %%timeit -n 3 -r 1
-    σ = solve_model_time_iter(og, verbose=False)
+    σ = solve_model_time_iter(og, σ_init, verbose=False)
 
 
 Convergence is very fast, even compared to our :doc:`JIT-compiled value function iteration <optgrowth_fast>`.
@@ -457,7 +458,7 @@ Solve the model with CRRA utility
 
 
 .. math::
-    u(c) = \frac{c^{1 - γ} - 1} {1 - γ}
+    u(c) = \frac{c^{1 - \gamma}} {1 - \gamma}
 
 Set ``γ = 1.5``.
 
@@ -488,7 +489,7 @@ Now we solve and plot the policy:
 .. code-block:: python3
 
     %%time
-    σ = solve_model_time_iter(og_crra)
+    σ = solve_model_time_iter(og_crra, σ_init)
 
 
     fig, ax = plt.subplots()
