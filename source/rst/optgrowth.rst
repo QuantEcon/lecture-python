@@ -846,7 +846,7 @@ A common choice for utility function in this kind of work is the CRRA
 specification
 
 .. math::
-    u(c) = \frac{c^{1 - γ} - 1} {1 - γ}
+    u(c) = \frac{c^{1 - \gamma}} {1 - \gamma}
 
 Maintaining the other defaults, including the Cobb-Douglas production
 function,  solve the optimal growth model with this

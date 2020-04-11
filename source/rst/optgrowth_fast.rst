@@ -251,7 +251,7 @@ Exercise 2
 Modify the optimal growth model to use the CRRA utility specification.
 
 .. math::
-    u(c) = \frac{c^{1 - γ} - 1} {1 - γ}
+    u(c) = \frac{c^{1 - \gamma} } {1 - \gamma}
 
 Set ``γ = 1.5`` as the default value and maintaining other specifications.
 

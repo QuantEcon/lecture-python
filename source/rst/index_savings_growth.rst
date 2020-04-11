@@ -26,3 +26,4 @@ agents as given.  Later we will look at full equilibrium problems.
     coleman_policy_iter
     egm_policy_iter
     ifp
+    ifp_advanced

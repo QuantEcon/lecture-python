@@ -458,7 +458,7 @@ Solve the model with CRRA utility
 
 
 .. math::
-    u(c) = \frac{c^{1 - γ} - 1} {1 - γ}
+    u(c) = \frac{c^{1 - \gamma}} {1 - \gamma}
 
 Set ``γ = 1.5``.
 
