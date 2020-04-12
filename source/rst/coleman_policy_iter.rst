@@ -348,7 +348,6 @@ Here's the operator :math:`K`, that implements the root-finding step.
 
         σ_new = np.empty_like(σ)
         for i, y in enumerate(grid):
-            y = grid[i]
             # Solve for optimal c at y
             c_star = brentq(euler_diff, 1e-10, y-1e-10, args=(σ, y, og))[0]
             σ_new[i] = c_star
