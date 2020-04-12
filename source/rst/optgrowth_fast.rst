@@ -85,7 +85,7 @@ We continue to assume that
 
 * :math:`f(k) = k^{\alpha}`
 
-* :math:`\phi` is the distribution of :math:`\exp(\mu + s \zeta)` when :math:`\zeta` is standard normal
+* :math:`\phi` is the distribution of :math:`\xi := \exp(\mu + s \zeta)` when :math:`\zeta` is standard normal
 
 We will once again use value function iteration to solve the model.
 
