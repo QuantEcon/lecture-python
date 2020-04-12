@@ -231,14 +231,14 @@ For any :math:`\sigma \in \mathscr P`, the right side of :eq:`cpi_coledef`
 
 * is continuous and strictly increasing in :math:`c` on :math:`(0, y)`
 
-* diverges to :math:`+\infty` as :math:`c \rightarrow y^-`
+* diverges to :math:`+\infty` as :math:`c \uparrow y`
 
 
 The left side of :eq:`cpi_coledef`
 
 * is continuous and strictly decreasing in :math:`c` on :math:`(0, y)`
 
-* diverges to :math:`+\infty` as :math:`c \leftarrow 0^+`
+* diverges to :math:`+\infty` as :math:`c \downarrow 0`
 
 
 Sketching these curves and using the information above will convince you that they cross exactly once as :math:`c` ranges over :math:`(0, y)`.
