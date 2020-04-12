@@ -560,9 +560,9 @@ Optimal Growth Model
 
 We will assume for now that :math:`\phi` is the distribution of :math:`\xi := \exp(\mu + s \zeta)` where 
 
-* :math:`\zeta` is standard normal and
-* :math:`\mu` is the shock location parameter and
-* :math:`s` is the shock scale parameter.
+* :math:`\zeta` is standard normal,
+* :math:`\mu` is a shock location parameter and
+* :math:`s` is a shock scale parameter.
 
 We will store this and other primitives of the optimal growth model in a class. 
 
