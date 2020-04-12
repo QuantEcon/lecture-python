@@ -124,7 +124,7 @@ This is where we sacrifice flexibility in order to gain more speed.
 
 
 The class includes some methods such as ``u_prime`` that we do not need now
-but will use in later lecures.
+but will use in later lectures.
 
 
 The Bellman Operator
@@ -349,7 +349,7 @@ takes.
     %%time
     v_greedy, v_solution = solve_model(og_crra)
 
-Here is a plot the resulting policy:
+Here is a plot of the resulting policy:
 
 .. code-block:: python3
 
