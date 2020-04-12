@@ -38,7 +38,7 @@ The extension involves
 
 * stochastic returns, due to shocks to production.
 
-Despite this additions, the model is still relatively simple.
+Despite these additions, the model is still relatively simple.
 
 We regard it as a stepping stone to more sophisticated models.
 
@@ -108,7 +108,7 @@ In what follows,
 
 * The sequence :math:`\{\xi_t\}` is assumed to be IID.
 
-* The common distribution of each :math:`\xi_t` will be denoted :math:`\phi`.
+* The common distribution of each :math:`\xi_t` will be denoted by :math:`\phi`.
 
 * The production function :math:`f` is assumed to be increasing and continuous.
 
@@ -287,7 +287,7 @@ A policy :math:`\sigma \in \Sigma` is called **optimal** if it attains the supre
 The Bellman Equation
 --------------------
 
-With our assumptions on utility and production function, the value function as defined in :eq:`vfcsdp0` also satisfies a **Bellman equation**.
+With our assumptions on utility and production functions, the value function as defined in :eq:`vfcsdp0` also satisfies a **Bellman equation**.
 
 For this problem, the Bellman equation takes the form
 
@@ -498,7 +498,7 @@ flexibility in order to accelerate our code with just-in-time (JIT)
 compilation.
 
 The algorithm we will use is fitted value function iteration, which was
-described in earlier lectures on :doc:`the McCall model <mccall_fitted_vfi>` and 
+described in earlier lectures :doc:`the McCall model <mccall_fitted_vfi>` and 
 :doc:`cake eating <cake_eating_numerical>`.
 
 The algorithm will be
@@ -525,7 +525,7 @@ Scalar Maximization
 To maximize the right hand side of the Bellman equation, we are going to use
 the ``minimize_scalar`` routine from SciPy.
 
-Since we are maximizing rather than minmizing, we will use the fact that the
+Since we are maximizing rather than minimizing, we will use the fact that the
 maximizer of :math:`g` on the interval :math:`[a, b]` is the minimizer of
 :math:`-g` on the same interval.
 
@@ -729,7 +729,7 @@ In practice, we expect some small numerical error
 
 The two functions are essentially indistinguishable, so we are off to a good start.
 
-Now let's have a look at iterating with the Bellman operator, starting off
+Now let's have a look at iterating with the Bellman operator, starting
 from an arbitrary initial condition.
 
 The initial condition we'll start with is, somewhat arbitrarily, :math:`v(y) = 5 \ln (y)`
