@@ -557,9 +557,8 @@ in an outer function as follows:
 Optimal Growth Model
 --------------------
 
-Let :math:`\xi=\exp(\mu + s \zeta)`.
 
-We will assume for now that :math:`\phi` is the distribution of :math:`\exp(\mu + s \zeta)` where 
+We will assume for now that :math:`\phi` is the distribution of :math:`\xi := \exp(\mu + s \zeta)` where 
 
 * :math:`\zeta` is standard normal and
 * :math:`\mu` is the shock location parameter and
