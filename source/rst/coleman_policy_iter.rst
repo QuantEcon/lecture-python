@@ -277,7 +277,7 @@ As in our :doc:`previous study <optgrowth_fast>`, we continue to assume that
 
 * :math:`f(k) = k^{\alpha}`
 
-* :math:`\phi` is the distribution of :math:`\exp(\mu + s \zeta)` when :math:`\zeta` is standard normal
+* :math:`\phi` is the distribution of :math:`\xi := \exp(\mu + s \zeta)` when :math:`\zeta` is standard normal
 
 This will allow us to compare our results to the analytical solutions
 
