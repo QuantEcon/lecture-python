@@ -108,8 +108,7 @@ We will again store the primitives of the optimal growth model in a class.
 
 But now we are going to use `Numba's <https://python-programming.quantecon.org/numba.html>`__ ``@jitclass`` decorator to target our class for JIT compilation.
 
-Because we are going to use Numba to compile our class, we need to specify the
-types of the data.
+Because we are going to use Numba to compile our class, we need to specify the data types.
 
 You will see this as a list called ``opt_growth_data`` above our class.
 
