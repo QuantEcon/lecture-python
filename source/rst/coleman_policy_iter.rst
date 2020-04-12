@@ -167,9 +167,9 @@ Recall the Bellman operator
 .. math::
     :label: fcbell20_coleman
 
-    Tw(y) := \max_{0 \leq c \leq y}
+    Tv(y) := \max_{0 \leq c \leq y}
     \left\{
-        u(c) + \beta \int w(f(y - c) z) \phi(dz)
+        u(c) + \beta \int v(f(y - c) z) \phi(dz)
     \right\}
 
 
@@ -257,7 +257,7 @@ It is possible to prove that there is a tight relationship between iterates of
 Mathematically, the two operators are *topologically conjugate*.
 
 Loosely speaking, this means is that if iterates of one operator converge then
-so do the other, and vice versa.
+so does the other, and vice versa.
 
 Moreover, there is a sense in which they converge at the same rate, at least
 in theory.
@@ -315,7 +315,7 @@ Now we implement a method called ``euler_diff``, which returns
         β, shocks, grid = og.β, og.shocks, og.grid
         f, f_prime, u_prime = og.f, og.f_prime, og.u_prime
 
-        # First turn w into a function via interpolation
+        # First turn σ into a function via interpolation
         σ_func = lambda x: interp(grid, σ, x)
 
         # Now set up the function we need to find the root of.
@@ -327,7 +327,7 @@ The function ``euler_diff`` evaluates integrals by Monte Carlo and
 approximates functions using linear interpolation.
 
 We will use a root-finding algorithm to solve :eq:`euler_diff` for :math:`c` given
-state math:`y` and :math:`σ`, the current guess of the policy.
+state :math:`y` and :math:`σ`, the current guess of the policy.
 
 Here's the operator :math:`K`, that implements the root-finding step.
 
