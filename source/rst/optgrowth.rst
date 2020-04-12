@@ -189,7 +189,7 @@ We'll be particularly interested in **Markov policies**, which are maps from the
 
 For dynamic programming problems such as this one (in fact for any `Markov decision process <https://en.wikipedia.org/wiki/Markov_decision_process>`__), the optimal policy is always a Markov policy.
 
-In other words, the current state :math:`y_t` provides a sufficient statistic
+In other words, the current state :math:`y_t` provides a `sufficient statistic <https://en.wikipedia.org/wiki/Sufficient_statistic>`__
 for the history in terms of making an optimal decision today.
 
 This is quite intuitive, but if you wish you can find proofs in texts such as :cite:`StokeyLucas1989` (section 4.1).
@@ -522,7 +522,7 @@ Scalar Maximization
 -------------------
 
 
-To maximize the right hand side of the Bellman equation, we are going to use
+To maximize the right hand side of the Bellman equation :eq:`fpb30`, we are going to use
 the ``minimize_scalar`` routine from SciPy.
 
 Since we are maximizing rather than minimizing, we will use the fact that the
