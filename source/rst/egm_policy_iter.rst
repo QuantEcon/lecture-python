@@ -119,11 +119,13 @@ As pointed out by Carroll :cite:`Carroll2006`, we can avoid this if
 
 The only assumption required is that :math:`u'` is invertible on :math:`(0, \infty)`.
 
+Let :math:`(u')^{-1}` be the inverse function of :math:`u'`.
+
 The idea is this:
 
-First, we fix an *exogenous* grid :math:`\{k_i\}` for capital (:math:`k = y - c`).
+* First, we fix an *exogenous* grid :math:`\{k_i\}` for capital (:math:`k = y - c`).
 
-Then we obtain  :math:`c_i` via
+* Then we obtain  :math:`c_i` via
 
 .. math::
     :label: egm_getc
@@ -134,9 +136,8 @@ Then we obtain  :math:`c_i` via
         \beta \int (u' \circ \sigma) (f(k_i) z ) \, f'(k_i) \, z \, \phi(dz)
     \right\}
 
-where :math:`(u')^{-1}` is the inverse function of :math:`u'`.
 
-Finally, for each :math:`c_i` we set :math:`y_i = c_i + k_i`.
+* Finally, for each :math:`c_i` we set :math:`y_i = c_i + k_i`.
 
 It is clear that each :math:`(y_i, c_i)` pair constructed in this manner satisfies :eq:`egm_coledef`.
 
@@ -149,8 +150,13 @@ Implementation
 ================
 
 As :doc:`before <coleman_policy_iter>`, we will start with a simple setting
-where, :math:`u(c) = \ln c`, production is Cobb-Douglas and the
-shocks are lognormal.
+where 
+
+* :math:`u(c) = \ln c`, 
+
+* production is Cobb-Douglas, and 
+
+* the shocks are lognormal.
 
 This will allow us to make comparisons with the analytical solutions
 
