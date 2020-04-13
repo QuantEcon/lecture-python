@@ -83,13 +83,13 @@ It returns a new function :math:`K \sigma`,  where :math:`(K \sigma)(y)` is the 
 Exogenous Grid
 -------------------
 
-As discussed in :doc:`the lecture on time iteration <coleman_policy_iter>`, to implement the method on a computer we need a numerical approximation.
+As discussed in :doc:`the lecture on time iteration <coleman_policy_iter>`, to implement the method on a computer, we need a numerical approximation.
 
 In particular, we represent a policy function by a set of values on a finite grid.
 
 The function itself is reconstructed from this representation when necessary, using interpolation or some other method.
 
-:doc:`Previously <coleman_policy_iter>`, to obtain a finite representation of an updated consumption policy we
+:doc:`Previously <coleman_policy_iter>`, to obtain a finite representation of an updated consumption policy, we
 
 * fixed a grid of income points :math:`\{y_i\}`
 

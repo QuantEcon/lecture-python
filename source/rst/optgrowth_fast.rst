@@ -89,7 +89,7 @@ We continue to assume that
 
 We will once again use value function iteration to solve the model.
 
-In particular, the algorithm is unchanged and the only difference is in the implementation itself.
+In particular, the algorithm is unchanged, and the only difference is in the implementation itself.
 
 As before, we will be able to compare with the true solutions
 
@@ -329,7 +329,7 @@ value function iteration, the JIT-compiled code is usually an order of magnitude
 Exercise 2
 ----------
 
-Here's our CRRA version of ``OptimalGrowthModel``
+Here's our CRRA version of ``OptimalGrowthModel``:
 
 
 .. literalinclude:: /_static/lecture_specific/optgrowth_fast/ogm_crra.py
@@ -371,7 +371,7 @@ Execution time is an order of magnitude faster.
 Exercise 3
 ----------
 
-Here's one solution 
+Here's one solution:
 
 .. code-block:: python3
 
