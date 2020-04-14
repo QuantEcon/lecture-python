@@ -48,7 +48,7 @@ In what follows, we require the following imports:
 The Model
 ==================
 
-We operating on a infinite time horizon :math:`t=0, 1, 2, 3..`
+We are operating on a infinite time horizon :math:`t=0, 1, 2, 3..`
 
 At :math:`t=0` the agent is given a complete cake with size :math:`\bar x`.
 
@@ -84,7 +84,7 @@ In Python this is
 
 Future cake consumption utility is discounted according to :math:`\beta\in(0, 1)`.
 
-In particular, consumption of :math:`c` units :math:`t` periods hence has present value :math:`\beta^t u(c)`
+In particular, consumption of :math:`c` units :math:`t` periods in the future has present value :math:`\beta^t u(c)`
 
 The agent's problem can be written as
 
@@ -173,7 +173,7 @@ That is,
     :label: value_fun
 
 where the maximization is over all paths :math:`\{ c_t \}` that are feasible
-from :math:`x_0 = x`.
+from :math:`x_0 = \bar x`.
 
 At this point, we do not have an expression for :math:`v`, but we can still
 make inferences about it.
@@ -349,7 +349,7 @@ This is necessary condition for the optimal path.
 
 It says that, along the optimal path, marginal rewards are equalized across time, after appropriate discounting.
 
-This makes sense: optimality is obtained by smoothing consumption up to the
+This makes sense: optimality it is obtained by smoothing consumption up to the
 point where no marginal gains remain.
 
 We can also state the Euler equation in terms of the policy function.
