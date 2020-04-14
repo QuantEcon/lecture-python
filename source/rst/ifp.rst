@@ -564,68 +564,6 @@ Let's see if we match up:
 Success!
 
 
-The Endogenous Grid Method
-==========================
-
-
-.. code-block:: python3
-
-
-Note that we use linear interpolation along the asset grid to approximate the
-policy function.
-
-The next step is to obtain the root of the Euler difference.
-
-.. code-block:: python3
-
-    @njit
-    def K_egm(σ_vals, ifp):
-        """
-        The operator K based on the endogenous grid method.
-
-        """
-
-        # Simplify names
-        R, P, y, β, γ  = ifp.R, ifp.P, ifp.y, ifp.β, ifp.γ
-        asset_grid, u_prime = ifp.asset_grid, ifp.u_prime
-        n = len(P)
-
-        # Find endogenous 
-
-        def c_given_savings(s, z, σ_vals, ifp):
-            """
-            The difference between the left- and right-hand side
-            of the Euler Equation, given current policy σ.
-
-                * c is the consumption choice
-                * (a, z) is the state, with z in {0, 1}
-                * σ_vals is a policy represented as a matrix.
-                * ifp is an instance of IFP
-
-            """
-
-
-            # Convert policy into a function by linear interpolation
-            def σ(a, z):
-                return interp(asset_grid, σ_vals[:, z], a)
-
-            # Calculate the expectation conditional on current z
-            expect = 0.0
-            for z_hat in range(n):
-                expect += u_prime(σ(R * (a - c) + y[z_hat], z_hat)) * P[z, z_hat]
-
-            return u_prime(c) - max(β * R * expect, u_prime(a))
-
-
-        σ_new = np.empty_like(σ)
-        for i, a in enumerate(ifp.asset_grid):
-            for z in (0, 1):
-                result = brentq(euler_diff, 1e-8, a, args=(a, z, σ, ifp))
-                σ_new[i, z] = result.root
-
-        return σ_new
-
-
 Exercises
 =========
 
