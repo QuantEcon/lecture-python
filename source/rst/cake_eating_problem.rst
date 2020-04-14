@@ -48,7 +48,7 @@ In what follows, we require the following imports:
 The Model
 ==================
 
-We operating on a infinite time horizon :math:`t=0, 1, 2, 3..`
+We consider an infinite time horizon :math:`t=0, 1, 2, 3..`
 
 At :math:`t=0` the agent is given a complete cake with size :math:`\bar x`.
 
