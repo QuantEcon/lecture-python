@@ -609,7 +609,7 @@ right hand side of the Bellman equation :eq:`fpb30`.
 In the second last line we are using linear interpolation.
 
 In the last line, the expectation in :eq:`fcbell20_optgrowth` is
-computed via Monte Carlo, using the approximation
+computed via `Monte Carlo <https://en.wikipedia.org/wiki/Monte_Carlo_integration>`__, using the approximation
 
 .. math::
 
