@@ -171,7 +171,7 @@ In the present setting, the Euler equation takes the form
 .. math::
     (u' \circ \sigma) (a, z) = 
     \max \left\{
-              \mathbb E_z \, \hat{\beta} \hat{R} \,
+               \beta \, \mathbb E_z \,\hat{R} \,
                  (u' \circ \sigma)[\hat{R}(a - \sigma(a, z)) + \hat{Y}, \, \hat{Z}], 
               \, u'(a)
            \right\}
@@ -206,7 +206,7 @@ For fixed :math:`\sigma \in \mathscr C` and :math:`(a,z) \in \mathbf S`, the val
 .. math::
     u'(\xi) = 
     \max \left\{
-              \mathbb E_z \, \hat{\beta} \hat{R} \,
+              \beta \, \mathbb E_z \, \hat{R} \,
                  (u' \circ \sigma)[\hat{R}(a - \xi) + \hat{Y}, \, \hat{Z}], 
               \, u'(a)
            \right\}
@@ -350,6 +350,18 @@ We test the condition :math:`\beta \mathbb E R_t < 1` in the code below.
 Implementation
 ==============
 
+We will assume that :math:`R_t = \exp(a_r \zeta_t + b_r)` where :math:`a_r, b_r`
+are constants and :math:`\{ \zeta_t\}` is IID standard normal.
+
+We allow labor income to be correlated, with
+
+.. math::
+    Y_t = \exp(a_y \eta_t + Z_t b_y)
+
+where :math:`\{ \eta_t\}` is also IID standard normal
+and :math:`\{ Z_t\}` is a Markov chain taking values in :math:`\{0, 1\}`.
+
+
 .. code-block:: ipython
 
     ifp_data = [
@@ -380,10 +392,10 @@ Implementation
                      β=0.96,
                      P=np.array([(0.9, 0.1), 
                                  (0.1, 0.9)]),
-                     a_r=0.2,
+                     a_r=0.1,
                      b_r=0.0,
-                     a_y=0.5,
-                     b_y=2,
+                     a_y=0.2,
+                     b_y=0.5,
                      shock_draw_size=50,
                      grid_max=10,
                      grid_size=100,
@@ -546,6 +558,51 @@ Can you explain why consuming all assets ends earlier (for lower values of
 assets) when :math:`z=0`? 
 
 
+Law of Motion
+-------------
+
+Let's try to get some idea of what will happen to assets over the long run
+under this consumption policy.
+
+As with our :doc:`earlier lecture <ifp>` on the income fluctuation problem, we
+begin by producing a 45 degree diagram showing the law of motion for assets 
+
+.. code-block:: python3
+
+
+    # Good and bad state mean labor income
+    Y_mean = [np.mean(ifp.Y(z, ifp.η_draws)) for z in (0, 1)]
+    # Mean returns
+    R_mean = np.mean(ifp.R(z, ifp.ζ_draws)) 
+
+    a = a_star
+    fig, ax = plt.subplots()
+    for z, lb in zip((0, 1), ('bad state', 'good state')):
+        ax.plot(a[:, z], R_mean * (a[:, z] - σ_star[:, z]) + Y_mean[z] , label=lb)
+
+    ax.plot(a[:, 0], a[:, 0], 'k--')
+    ax.set(xlabel='current assets', ylabel='next period assets')
+           
+    ax.legend()
+    plt.show()
+
+
+The blue and orange lines represent the function
+
+.. math::
+
+    a' = h(a, z) := R a + z - \sigma^*(a, z)
+
+
+when income :math:`z` takes its high and low values respectively.
+
+The dashed line is the 45 degree line.
+
+We can see from the figure that the dynamics will be stable --- assets do not
+diverge.
+
+
+
 Exercises
 =========
 
@@ -609,7 +666,7 @@ JIT-compiled.
             z = z_seq[t]
             ζ, η = np.random.randn(), np.random.randn() 
             R = ifp.R(z, ζ)
-            Y = ifp.R(z, η)
+            Y = ifp.Y(z, η)
             a[t+1] = R * (a[t] - σ(a[t], z)) + Y
         return a
 
