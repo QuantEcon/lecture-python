@@ -603,8 +603,8 @@ The following figure is a 45 degree diagram showing the law of motion for assets
     R, y = ifp.R, ifp.y
 
     fig, ax = plt.subplots()
-    for i, lb in zip((0, 1), ('low income', 'high income')):
-        ax.plot(a, R * (a - σ_star[:, i]) + y[i] , label=lb)
+    for z, lb in zip((0, 1), ('low income', 'high income')):
+        ax.plot(a, R * (a - σ_star[:, z]) + y[z] , label=lb)
 
     ax.plot(a, a, 'k--')
     ax.set(xlabel='current assets', ylabel='next period assets')
@@ -613,19 +613,16 @@ The following figure is a 45 degree diagram showing the law of motion for assets
     plt.show()
 
 
-The blue and orange lines represent the function
+The unbroken lines show the update function for assets at each :math:`z`, which is
 
 .. math::
 
-    a' = h(a, z) := R a + z - \sigma^*(a, z)
-
-
-when income :math:`z` takes its high and low values respectively.
+    a \mapsto R (a - \sigma^*(a, z)) + y(z) 
 
 The dashed line is the 45 degree line.
 
 We can see from the figure that the dynamics will be stable --- assets do not
-diverge.
+diverge even in the highest state.
 
 In fact there is a unique stationary distribution of assets that we can calculate by simulation
 

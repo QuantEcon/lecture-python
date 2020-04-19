@@ -587,19 +587,22 @@ begin by producing a 45 degree diagram showing the law of motion for assets
     plt.show()
 
 
-The blue and orange lines represent the function
+The unbroken lines represent, for each :math:`z`, an average update function
+for assets, given by 
 
 .. math::
 
-    a' = h(a, z) := R a + z - \sigma^*(a, z)
+    a \mapsto \bar R (a - \sigma^*(a, z)) + \bar Y(z)
 
+Here
 
-when income :math:`z` takes its high and low values respectively.
+* :math:`\bar R = \mathbb E R_t`, which is mean returns and
+* :math:`\bar Y(z) = \mathbb E_z Y(z, \eta_t)`, which is mean labor income in state :math:`z`.
 
 The dashed line is the 45 degree line.
 
 We can see from the figure that the dynamics will be stable --- assets do not
-diverge.
+diverge even in the highest state.
 
 
 
