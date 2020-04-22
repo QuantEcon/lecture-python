@@ -256,8 +256,8 @@ It is possible to prove that there is a tight relationship between iterates of
 
 Mathematically, the two operators are *topologically conjugate*.
 
-Loosely speaking, this means is that if iterates of one operator converge then
-so does the other, and vice versa.
+Loosely speaking, this means that if iterates of one operator converge then
+so do iterates of the other, and vice versa.
 
 Moreover, there is a sense in which they converge at the same rate, at least
 in theory.
