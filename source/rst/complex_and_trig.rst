@@ -52,7 +52,7 @@ The second equality above is known as **Euler's formula**
 
 The complex conjugate :math:`\bar z` of :math:`z` is defined as
 
-.. math:: \bar z = r e^{-i \theta} = r (\cos{\theta} - i \sin{\theta} )
+.. math:: \bar z = x - iy = r e^{-i \theta} = r (\cos{\theta} - i \sin{\theta} )
 
 The value :math:`x` is the **real** part of :math:`z` and :math:`y` is the
 **imaginary** part of :math:`z`.
