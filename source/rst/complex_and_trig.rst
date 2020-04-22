@@ -57,7 +57,7 @@ The complex conjugate :math:`\bar z` of :math:`z` is defined as
 The value :math:`x` is the **real** part of :math:`z` and :math:`y` is the
 **imaginary** part of :math:`z`.
 
-The symbol :math:`| z |` = :math:`\bar z z = r` represents the **modulus** of :math:`z`.
+The symbol :math:`| z |` = :math:`\sqrt{\bar{z}\cdot z} = r` represents the **modulus** of :math:`z`.
 
 The value :math:`r` is the Euclidean distance of vector :math:`(x,y)` from the
 origin:
@@ -84,7 +84,7 @@ Three elementary trigonometric functions are
 
    \cos{\theta} = \frac{x}{r} = \frac{e^{i\theta} + e^{-i\theta}}{2} , \quad
    \sin{\theta} = \frac{y}{r} = \frac{e^{i\theta} - e^{-i\theta}}{2i} , \quad
-   \tan{\theta} = \frac{x}{y}
+   \tan{\theta} = \frac{y}{x}
 
 
 We'll need the following imports:
