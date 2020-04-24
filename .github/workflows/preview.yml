@@ -33,7 +33,7 @@ jobs:
           bash scripts/build-website.sh "${{ steps.files.outputs.added_modified }}"
           echo "Building Netlify: $BUILD_NETLIFY"
         env:
-          BUILD_NETLIFY: ${{ BUILD_NETLIFY }}
+          BUILD_NETLIFY: ${{ $BUILD_NETLIFY }}
       - name: Preview Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.0
         with:
