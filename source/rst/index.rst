@@ -9,6 +9,7 @@ Introductory Quantitative Economics with Python
 
     index_toc
 
+
 .. raw:: html
 
     <div><style type="text/css">h1,.breadcrumbs{display:none;}</style></div>
