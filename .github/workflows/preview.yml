@@ -24,9 +24,9 @@ jobs:
       - name: Checkout QuantEcon theme
         uses: actions/checkout@v2
         with:
-          repository: QuantEcon/lecture-python-programming.theme
+          repository: QuantEcon/lecture-python-intro.theme
           token: ${{ secrets.ACTIONS_PAT }}
-          path: theme/lecture-python-programming.theme
+          path: theme/lecture-python-intro.theme
       - name: Build website files
         shell: bash -l {0}
         run: bash scripts/build-website.sh "${{ steps.files.outputs.added_modified }}"
