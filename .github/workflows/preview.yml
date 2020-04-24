@@ -29,7 +29,11 @@ jobs:
           path: theme/lecture-python-intro.theme
       - name: Build website files
         shell: bash -l {0}
-        run: bash scripts/build-website.sh "${{ steps.files.outputs.added_modified }}"
+        run: | 
+          bash scripts/build-website.sh "${{ steps.files.outputs.added_modified }}"
+          echo "Building Netlify: $BUILD_NETLIFY"
+        env:
+          BUILD_NETLIFY: ${{ BUILD_NETLIFY }}
       - name: Preview Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.0
         with:
@@ -40,3 +44,4 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        if: BUILD_NETLIFY
