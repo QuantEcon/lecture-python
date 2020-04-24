@@ -15,9 +15,11 @@
 Overview
 ========
 
-In this lecture, we're going to study a simple optimal growth model with one agent.
+In this lecture, we're going to study a simple optimal growth model with one
+agent.
 
-The model is a version of the standard one sector infinite horizon growth model studied in
+The model is a version of the standard one sector infinite horizon growth
+model studied in
 
 * :cite:`StokeyLucas1989`, chapter 2
 
@@ -27,29 +29,27 @@ The model is a version of the standard one sector infinite horizon growth model 
 
 * :cite:`Sundaram1996`, chapter 12
 
+It is an extension of the simple :doc:`cake eating problem
+<cake_eating_problem>` we looked at earlier.
 
-The technique we use to solve the model is dynamic programming.
+The extension involves
 
-Our treatment of dynamic programming follows on from earlier
-treatments in our lectures on `shortest paths <https://python-intro.quantecon.org/short_path.html>`__ and
-`job search <https://python-intro.quantecon.org/mccall_model.html>`__.
+* nonlinear returns to saving, through a production function, and
 
-We'll discuss some of the technical details of dynamic programming as we
-go along.
+* stochastic returns, due to shocks to production.
 
+Despite these additions, the model is still relatively simple.
 
+We regard it as a stepping stone to more sophisticated models.
 
-Code
-----
+We solve the model using dynamic programming and a range of numerical
+techniques.
 
-Regarding code, our implementation in this lecture will focus on clarity and flexibility.
+In this first lecture on optimal growth, the solution method will be value
+function iteration (VFI).
 
-Both of these things are helpful, particularly for those readers still trying to understand
-the material, but they do cost us some speed --- as you will
-see when you run the code.
-
-In the :doc:`next lecture <optgrowth_fast>` we will sacrifice some of this
-clarity and flexibility in order to accelerate our code with just-in-time (JIT) compilation.
+While the code in this first lecture runs slowly, we will use a variety of
+techniques to drastically improve execution time over the next few lectures.
 
 Let's start with some imports:
 
@@ -74,7 +74,7 @@ Consider an agent who owns an amount :math:`y_t \in \mathbb R_+ := [0, \infty)` 
 
 This output can either be consumed or invested.
 
-When the good is invested it is transformed one-for-one into capital.
+When the good is invested, it is transformed one-for-one into capital.
 
 The resulting capital stock, denoted here by :math:`k_{t+1}`, will then be used for production.
 
@@ -108,7 +108,7 @@ In what follows,
 
 * The sequence :math:`\{\xi_t\}` is assumed to be IID.
 
-* The common distribution of each :math:`\xi_t` will be denoted :math:`\phi`.
+* The common distribution of each :math:`\xi_t` will be denoted by :math:`\phi`.
 
 * The production function :math:`f` is assumed to be increasing and continuous.
 
@@ -189,7 +189,7 @@ We'll be particularly interested in **Markov policies**, which are maps from the
 
 For dynamic programming problems such as this one (in fact for any `Markov decision process <https://en.wikipedia.org/wiki/Markov_decision_process>`__), the optimal policy is always a Markov policy.
 
-In other words, the current state :math:`y_t` provides a sufficient statistic
+In other words, the current state :math:`y_t` provides a `sufficient statistic <https://en.wikipedia.org/wiki/Sufficient_statistic>`__
 for the history in terms of making an optimal decision today.
 
 This is quite intuitive, but if you wish you can find proofs in texts such as :cite:`StokeyLucas1989` (section 4.1).
@@ -287,7 +287,7 @@ A policy :math:`\sigma \in \Sigma` is called **optimal** if it attains the supre
 The Bellman Equation
 --------------------
 
-With our assumptions on utility and production function, the value function as defined in :eq:`vfcsdp0` also satisfies a **Bellman equation**.
+With our assumptions on utility and production functions, the value function as defined in :eq:`vfcsdp0` also satisfies a **Bellman equation**.
 
 For this problem, the Bellman equation takes the form
 
@@ -487,8 +487,19 @@ Computation
 
 Let's now look at computing the value function and the optimal policy.
 
-We will use fitted value function iteration, which was described in detail in
-a `previous lecture <https://python-intro.quantecon.org/mccall_fitted_vfi.html>`__.
+Our implementation in this lecture will focus on clarity and
+flexibility.
+
+Both of these things are helpful, but they do cost us some speed --- as you
+will see when you run the code.
+
+:doc:`Later <optgrowth_fast>` we will sacrifice some of this clarity and
+flexibility in order to accelerate our code with just-in-time (JIT)
+compilation.
+
+The algorithm we will use is fitted value function iteration, which was
+described in earlier lectures :doc:`the McCall model <mccall_fitted_vfi>` and 
+:doc:`cake eating <cake_eating_numerical>`.
 
 The algorithm will be
 
@@ -511,10 +522,10 @@ Scalar Maximization
 -------------------
 
 
-To maximize the right hand side of the Bellman equation, we are going to use
+To maximize the right hand side of the Bellman equation :eq:`fpb30`, we are going to use
 the ``minimize_scalar`` routine from SciPy.
 
-Since we are maximizing rather than minmizing, we will use the fact that the
+Since we are maximizing rather than minimizing, we will use the fact that the
 maximizer of :math:`g` on the interval :math:`[a, b]` is the minimizer of
 :math:`-g` on the same interval.
 
@@ -547,7 +558,11 @@ Optimal Growth Model
 --------------------
 
 
-We will assume for now that :math:`\phi` is the distribution of :math:`\exp(\mu + s \zeta)` when :math:`\zeta` is standard normal.
+We will assume for now that :math:`\phi` is the distribution of :math:`\xi := \exp(\mu + s \zeta)` where 
+
+* :math:`\zeta` is standard normal,
+* :math:`\mu` is a shock location parameter and
+* :math:`s` is a shock scale parameter.
 
 We will store this and other primitives of the optimal growth model in a class. 
 
@@ -594,7 +609,7 @@ right hand side of the Bellman equation :eq:`fpb30`.
 In the second last line we are using linear interpolation.
 
 In the last line, the expectation in :eq:`fcbell20_optgrowth` is
-computed via Monte Carlo, using the approximation
+computed via `Monte Carlo <https://en.wikipedia.org/wiki/Monte_Carlo_integration>`__, using the approximation
 
 .. math::
 
@@ -606,7 +621,7 @@ where :math:`\{\xi_i\}_{i=1}^n` are IID draws from :math:`\phi`.
 Monte Carlo is not always the most efficient way to compute integrals numerically
 but it does have some theoretical advantages in the present setting.
 
-(For example, it preserves the contraction mapping property of the Bellman operator --- see, e.g., :cite:`pal2013`)
+(For example, it preserves the contraction mapping property of the Bellman operator --- see, e.g., :cite:`pal2013`.)
 
 
 The Bellman Operator
@@ -620,7 +635,7 @@ numerical work.)
 
 .. code-block:: python3
 
-   def T(og, v):
+   def T(v, og):
        """
        The Bellman operator.  Updates the guess of the value function 
        and also computes a v-greedy policy.
@@ -679,26 +694,9 @@ and optimal consumption policy
 It is valuable to have these closed-form solutions because it lets us check
 whether our code works for this particular case.
 
-In Python, the functions above can be expressed as
+In Python, the functions above can be expressed as:
 
-.. code-block:: python3
-
-    def v_star(y, α, β, μ):
-        """
-        True value function
-        """
-        c1 = np.log(1 - α * β) / (1 - β)
-        c2 = (μ + α * np.log(α * β)) / (1 - α)
-        c3 = 1 / (1 - β)
-        c4 = 1 / (1 - α * β)
-        return c1 + c2 * (c3 - c4) + c4 * np.log(y)
-
-    def σ_star(y, α, β):
-        """
-        True optimal policy
-        """
-        return (1 - α * β) * y
-
+.. literalinclude:: /_static/lecture_specific/optgrowth/cd_analytical.py
 
 Next let's create an instance of the model with the above primitives and assign it to the variable ``og``.
 
@@ -716,14 +714,14 @@ solution :math:`v^*` in this case.
 
 In theory, since :math:`v^*` is a fixed point, the resulting function should again be :math:`v^*`.
 
-In practice, we expect some small numerical error
+In practice, we expect some small numerical error.
 
 .. code-block:: python3
 
     grid = og.grid
 
     v_init = v_star(grid, α, og.β, og.μ)    # Start at the solution
-    v_greedy, v = T(og, v_init)             # Apply T once
+    v_greedy, v = T(v_init, og)             # Apply T once
 
     fig, ax = plt.subplots()
     ax.set_ylim(-35, -24)
@@ -735,10 +733,10 @@ In practice, we expect some small numerical error
 
 The two functions are essentially indistinguishable, so we are off to a good start.
 
-Now let's have a look at iterating with the Bellman operator, starting off
+Now let's have a look at iterating with the Bellman operator, starting
 from an arbitrary initial condition.
 
-The initial condition we'll start with is, somewhat arbitrarily, :math:`v(y) = 5 \ln (y)`
+The initial condition we'll start with is, somewhat arbitrarily, :math:`v(y) = 5 \ln (y)`.
 
 
 .. code-block:: python3
@@ -752,7 +750,7 @@ The initial condition we'll start with is, somewhat arbitrarily, :math:`v(y) = 5
             lw=2, alpha=0.6, label='Initial condition')
 
     for i in range(n):
-        v_greedy, v = T(og, v)  # Apply the Bellman operator
+        v_greedy, v = T(v, og)  # Apply the Bellman operator
         ax.plot(grid, v, color=plt.cm.jet(i / n), lw=2, alpha=0.6)
 
     ax.plot(grid, v_star(grid, α, og.β, og.μ), 'k-', lw=2,
@@ -781,38 +779,9 @@ Iterating to Convergence
 We can write a function that iterates until the difference is below a particular
 tolerance level.
 
-.. code-block:: python3
-
-   def solve_model(og,
-                   tol=1e-4,
-                   max_iter=1000,
-                   verbose=True,
-                   print_skip=25):
-
-       # Set up loop
-       v = np.log(og.grid)  # Initial condition
-       i = 0
-       error = tol + 1
-
-       while i < max_iter and error > tol:
-           v_greedy, v_new = T(og, v)
-           error = np.max(np.abs(v - v_new))
-           i += 1
-           if verbose and i % print_skip == 0:
-               print(f"Error at iteration {i} is {error}.")
-           v = v_new
-
-       if i == max_iter:
-           print("Failed to converge!")
-
-       if verbose and i < max_iter:
-           print(f"\nConverged in {i} iterations.")
-
-       return v_greedy, v_new
-
+.. literalinclude:: /_static/lecture_specific/optgrowth/solve_model.py
 
 Let's use this function to compute an approximate solution at the defaults.
-
 
 .. code-block:: python3
 
@@ -851,13 +820,13 @@ above, is :math:`\sigma(y) = (1 - \alpha \beta) y`
 
 .. code-block:: python3
 
-    fig, ax = plt.subplots(figsize=(9, 5))
+    fig, ax = plt.subplots()
 
     ax.plot(grid, v_greedy, lw=2,
-            alpha=0.6, label='Approximate policy function')
+            alpha=0.6, label='approximate policy function')
 
-    ax.plot(grid, σ_star(grid, α, og.β),
-            lw=2, alpha=0.6, label='True policy function')
+    ax.plot(grid, σ_star(grid, α, og.β), '--',
+            lw=2, alpha=0.6, label='true policy function')
 
     ax.legend()
     plt.show()
@@ -872,6 +841,8 @@ Exercises
 
 
 
+.. _ogex1:
+
 Exercise 1
 ----------
 
@@ -879,24 +850,34 @@ A common choice for utility function in this kind of work is the CRRA
 specification
 
 .. math::
-    u(c) = \frac{c^{1 - γ} - 1} {1 - γ}
+    u(c) = \frac{c^{1 - \gamma}} {1 - \gamma}
 
 Maintaining the other defaults, including the Cobb-Douglas production
 function,  solve the optimal growth model with this
 utility specification.  
 
-In doing so,
+Setting :math:`\gamma = 1.5`, compute and plot an estimate of the optimal policy.
 
-* Set :math:`\gamma = 1.5`.
-* Use the ``solve_model`` function defined above.
-* Time how long this function takes to run, so we can compare it to faster
-  code developed in the :doc:`next lecture <optgrowth_fast>`
+
+Time how long this function takes to run, so you can compare it to faster code developed in the :doc:`next lecture <optgrowth_fast>`
+
+
+.. _og_ex2:
+
+Exercise 2
+----------
+
+Time how long it takes to iterate with the Bellman operator
+20 times, starting from initial condition :math:`v(y) = u(y)`.
+
+Use the model specification in the previous exercise.
+
+(As before, we will compare this number with that for the faster code developed in the :doc:`next lecture <optgrowth_fast>`.)
+
 
 
 Solutions
 =========
-
-.. _ogex1:
 
 Exercise 1
 ----------
@@ -932,3 +913,26 @@ Let's plot the policy function just to see what it looks like:
 
     ax.legend()
     plt.show()
+
+
+Exercise 2
+----------
+
+Let's set up:
+
+.. code-block:: ipython3
+
+    og = OptimalGrowthModel(u=u_crra, f=fcd)
+    v = og.u(og.grid)  
+
+Here's the timing:
+
+.. code-block:: ipython3
+
+    %%time
+
+    for i in range(20):
+        v_greedy, v_new = T(v, og)
+        v = v_new
+
+

@@ -29,3 +29,5 @@ agents as given.  Later we will look at full equilibrium problems.
     wealth_dynamics
     kalman
     short_path
+    cass_koopmans_1
+    cass_koopmans_2

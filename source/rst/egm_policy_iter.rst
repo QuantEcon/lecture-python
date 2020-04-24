@@ -1,5 +1,3 @@
-.. _egm_policy_iter:
-
 .. include:: /_static/includes/header.raw
 
 .. highlight:: python3
@@ -21,20 +19,16 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 Overview
 ============
 
-We solved the stochastic optimal growth model using
+Previously, we solved the stochastic optimal growth model using
 
-#. :doc:`value function iteration <optgrowth>`
+#. :doc:`value function iteration <optgrowth_fast>`
 #. :doc:`Euler equation based time iteration <coleman_policy_iter>`
 
-We found time iteration to be significantly more accurate at each step.
+We found time iteration to be significantly more accurate and efficient.
 
-In this lecture, we'll look at an ingenious twist on the time iteration technique called the **endogenous grid method** (EGM).
+In this lecture, we'll look at a clever twist on time iteration called the **endogenous grid method** (EGM).
 
 EGM is a numerical method for implementing policy iteration invented by `Chris Carroll <http://www.econ2.jhu.edu/people/ccarroll/>`__.
-
-It is a good example of how a clever algorithm can save a massive amount of computer time.
-
-(Massive when we multiply saved CPU cycles on each implementation times the number of implementations worldwide)
 
 The original reference is :cite:`Carroll2006`.
 
@@ -45,14 +39,14 @@ Let's start with some standard imports:
     import numpy as np
     import quantecon as qe
     from interpolation import interp
-    from numba import njit, prange
+    from numba import jitclass, njit, float64
     from quantecon.optimize import brentq
     import matplotlib.pyplot as plt
     %matplotlib inline
 
 
 Key Idea
-==========================
+========
 
 Let's start by reminding ourselves of the theory and then see how the numerics fit in.
 
@@ -86,17 +80,16 @@ It returns a new function :math:`K \sigma`,  where :math:`(K \sigma)(y)` is the 
 
 
 
-
 Exogenous Grid
 -------------------
 
-As discussed in :doc:`the lecture on time iteration <coleman_policy_iter>`, to implement the method on a computer we need a numerical approximation.
+As discussed in :doc:`the lecture on time iteration <coleman_policy_iter>`, to implement the method on a computer, we need a numerical approximation.
 
 In particular, we represent a policy function by a set of values on a finite grid.
 
 The function itself is reconstructed from this representation when necessary, using interpolation or some other method.
 
-:doc:`Previously <coleman_policy_iter>`, to obtain a finite representation of an updated consumption policy we
+:doc:`Previously <coleman_policy_iter>`, to obtain a finite representation of an updated consumption policy, we
 
 * fixed a grid of income points :math:`\{y_i\}`
 
@@ -126,11 +119,13 @@ As pointed out by Carroll :cite:`Carroll2006`, we can avoid this if
 
 The only assumption required is that :math:`u'` is invertible on :math:`(0, \infty)`.
 
+Let :math:`(u')^{-1}` be the inverse function of :math:`u'`.
+
 The idea is this:
 
-First, we fix an *exogenous* grid :math:`\{k_i\}` for capital (:math:`k = y - c`).
+* First, we fix an *exogenous* grid :math:`\{k_i\}` for capital (:math:`k = y - c`).
 
-Then we obtain  :math:`c_i` via
+* Then we obtain  :math:`c_i` via
 
 .. math::
     :label: egm_getc
@@ -141,9 +136,8 @@ Then we obtain  :math:`c_i` via
         \beta \int (u' \circ \sigma) (f(k_i) z ) \, f'(k_i) \, z \, \phi(dz)
     \right\}
 
-where :math:`(u')^{-1}` is the inverse function of :math:`u'`.
 
-Finally, for each :math:`c_i` we set :math:`y_i = c_i + k_i`.
+* Finally, for each :math:`c_i` we set :math:`y_i = c_i + k_i`.
 
 It is clear that each :math:`(y_i, c_i)` pair constructed in this manner satisfies :eq:`egm_coledef`.
 
@@ -155,43 +149,23 @@ The name EGM comes from the fact that the grid :math:`\{y_i\}` is  determined **
 Implementation
 ================
 
-Let's implement this version of the Coleman-Reffett operator and see how it performs.
+As :doc:`before <coleman_policy_iter>`, we will start with a simple setting
+where 
 
-First, we will construct a class ``OptimalGrowthModel`` to hold the parameters of the
-model.
+* :math:`u(c) = \ln c`, 
 
+* production is Cobb-Douglas, and 
 
-.. code-block:: python3
+* the shocks are lognormal.
 
-    class OptimalGrowthModel:
+This will allow us to make comparisons with the analytical solutions
 
-        """
+.. literalinclude:: /_static/lecture_specific/optgrowth/cd_analytical.py
 
-        The class holds parameters and true value and policy functions.
-        """
+We reuse the ``OptimalGrowthModel`` class 
 
-        def __init__(self,
-                     f,                # Production function
-                     f_prime,          # f'(k)
-                     u,                # Utility function
-                     u_prime,          # Marginal utility
-                     u_prime_inv,      # Inverse marginal utility
-                     β=0.96,           # Discount factor
-                     μ=0,
-                     s=0.1,
-                     grid_max=4,
-                     grid_size=200,
-                     shock_size=250):
+.. literalinclude:: /_static/lecture_specific/optgrowth_fast/ogm.py
 
-            self.β, self.μ, self.s = β, μ, s
-            self.f, self.u = f, u
-            self.f_prime, self.u_prime, self.u_prime_inv = f_prime, u_prime, \
-                u_prime_inv
-
-            # Set up grid
-            self.grid = np.linspace(1e-5, grid_max, grid_size)
-            # Store shocks
-            self.shocks = np.exp(μ + s * np.random.randn(shock_size))
 
 
 The Operator
@@ -200,230 +174,97 @@ The Operator
 
 Here's an implementation of :math:`K` using EGM as described above.
 
-Unlike the :doc:`previous lecture <coleman_policy_iter>`, we do not just-in-time
-compile the operator because we want to return the policy function.
-
-Despite this, the EGM method is still faster than the standard Coleman-Reffett operator,
-as we will see later on.
-
 .. code-block:: python3
 
-    def egm_operator_factory(og):
+    @njit
+    def K(σ_array, og):
         """
-        A function factory for building the Coleman-Reffett operator
+        The Coleman-Reffett operator using EGM
 
-        Here og is an instance of OptimalGrowthModel.
         """
 
-        f, u, β = og.f, og.u, og.β
-        f_prime, u_prime, u_prime_inv = og.f_prime, og.u_prime, og.u_prime_inv
+        # Simplify names
+        f, β = og.f, og.β
+        f_prime, u_prime = og.f_prime, og.u_prime
+        u_prime_inv = og.u_prime_inv
         grid, shocks = og.grid, og.shocks
 
-        def K(σ):
-            """
-            The Bellman operator
+        # Determine endogenous grid
+        y = grid + σ_array  # y_i = k_i + c_i
 
-            * σ is a function
-            """
-            # Allocate memory for value of consumption on endogenous grid points
-            c = np.empty_like(grid)
+        # Linear interpolation of policy using endogenous grid
+        σ = lambda x: interp(y, σ_array, x)
 
-            # Solve for updated consumption value
-            for i, k in enumerate(grid):
-                vals = u_prime(σ(f(k) * shocks)) * f_prime(k) * shocks
-                c[i] = u_prime_inv(β * np.mean(vals))
+        # Allocate memory for new consumption array
+        c = np.empty_like(grid)
 
-            # Determine endogenous grid
-            y = grid + c  # y_i = k_i + c_i
+        # Solve for updated consumption value
+        for i, k in enumerate(grid):
+            vals = u_prime(σ(f(k) * shocks)) * f_prime(k) * shocks
+            c[i] = u_prime_inv(β * np.mean(vals))
 
-            # Update policy function and return
-            σ_new = lambda x: interp(y, c, x)
+        return c
 
-            return σ_new
 
-        return K
 
 Note the lack of any root-finding algorithm.
 
-We'll also run our original implementation, which uses an exogenous grid and requires root-finding, so we can perform some comparisons.
+Testing
+-------
 
-.. literalinclude:: /_static/lecture_specific/coleman_policy_iter/coleman_operator.py
-
-
-
-Let's test out the code above on some example parameterizations.
-
-
-Testing on the Log / Cobb--Douglas Case
-------------------------------------------
-
-
-As we :doc:`did for value function iteration <optgrowth>` and :doc:`time iteration <coleman_policy_iter>`,
-let's start by testing our method with the log-linear benchmark.
-
-
-First, we generate an instance
-
+First we create an instance.
 
 .. code-block:: python3
 
-    α = 0.4  # Production function parameter
+    og = OptimalGrowthModel()
+    grid = og.grid
 
-    @njit
-    def f(k):
-        """
-        Cobb-Douglas production function
-        """
-        return k**α
+Here's our solver routine:
 
-    @njit
-    def f_prime(k):
-        """
-        First derivative of the production function
-        """
-        return α * k**(α - 1)
+.. literalinclude:: /_static/lecture_specific/coleman_policy_iter/solve_time_iter.py 
 
-    @njit
-    def u_prime(c):
-        return 1 / c
-
-    og = OptimalGrowthModel(f=f,
-                            f_prime=f_prime,
-                            u=np.log,
-                            u_prime=u_prime,
-                            u_prime_inv=u_prime)
-
-Notice that we're passing ``u_prime`` twice.
-
-The reason is that, in the case of log utility, :math:`u'(c) = (u')^{-1}(c) = 1/c`.
-
-Hence ``u_prime`` and ``u_prime_inv`` are the same.
-
-As a preliminary test, let's see if :math:`K \sigma^* = \sigma^*`, as implied by the theory
-
+Let's call it:
 
 .. code-block:: python3
 
-    β, grid = og.β, og.grid
+    σ_init = np.copy(grid)
+    σ = solve_model_time_iter(og, σ_init)
 
-    def c_star(y):
-        "True optimal policy"
-        return (1 - α * β) * y
+Here is a plot of the resulting policy, compared with the true policy:
 
-    K = egm_operator_factory(og)  # Return the operator K with endogenous grid
+.. code-block:: python3
 
-    fig, ax = plt.subplots(figsize=(9, 6))
+    y = grid + σ  # y_i = k_i + c_i
 
-    ax.plot(grid, c_star(grid), label="optimal policy $\sigma^*$")
-    ax.plot(grid, K(c_star)(grid), label="$K\sigma^*$")
+    fig, ax = plt.subplots()
+
+    ax.plot(y, σ, lw=2,
+            alpha=0.8, label='approximate policy function')
+
+    ax.plot(y, σ_star(y, og.α, og.β), 'k--',
+            lw=2, alpha=0.8, label='true policy function')
 
     ax.legend()
     plt.show()
 
-
-We can't really distinguish the two plots.
-
-In fact it's easy to see that the difference is essentially zero:
+The maximal absolute deviation between the two policies is
 
 .. code-block:: python3
 
-    max(abs(K(c_star)(grid) - c_star(grid)))
+    np.max(np.abs(σ - σ_star(y, og.α, og.β)))
 
 
-Next, let's try iterating from an arbitrary initial condition and see if we
-converge towards :math:`\sigma^*`.
-
-
-Let's start from the consumption policy that eats the whole pie: :math:`\sigma(y) = y`
-
-
+How long does it take to converge?
 
 .. code-block:: python3
 
-    σ = lambda x: x
-    n = 15
-    fig, ax = plt.subplots(figsize=(9, 6))
-
-    ax.plot(grid, σ(grid), color=plt.cm.jet(0),
-            alpha=0.6, label='initial condition $\sigma(y) = y$')
-
-    for i in range(n):
-        σ = K(σ)  # Update policy
-        ax.plot(grid, σ(grid), color=plt.cm.jet(i / n),  alpha=0.6)
-
-    ax.plot(grid, c_star(grid), 'k-',
-            alpha=0.8, label='true policy function $\sigma^*$')
-
-    ax.legend()
-    plt.show()
+    %%timeit -n 3 -r 1
+    σ = solve_model_time_iter(og, σ_init, verbose=False)
 
 
+Relative to time iteration, which as already found to be highly efficient, EGM
+has managed to shave off still more run time without compromising accuracy.
 
-We see that the policy has converged nicely, in only a few steps.
+This is due to the lack of a numerical root-finding step.
 
-
-Speed
-========
-
-Now let's compare the clock times per iteration for the standard Coleman-Reffett
-operator (with exogenous grid) and the EGM version.
-
-We'll do so using the CRRA model adopted in the exercises of the :doc:`Euler equation time iteration lecture <coleman_policy_iter>`.
-
-.. code-block:: python3
-
-    γ = 1.5   # Preference parameter
-
-    @njit
-    def u(c):
-        return (c**(1 - γ) - 1) / (1 - γ)
-
-    @njit
-    def u_prime(c):
-        return c**(-γ)
-
-    @njit
-    def u_prime_inv(c):
-        return c**(-1 / γ)
-
-    og = OptimalGrowthModel(f=f,
-                            f_prime=f_prime,
-                            u=u,
-                            u_prime=u_prime,
-                            u_prime_inv=u_prime_inv)
-
-    # Standard Coleman-Reffett operator
-    K_time = time_operator_factory(og)
-    # Call once to compile jitted version
-    K_time(grid)
-    # Coleman-Reffett operator with endogenous grid
-    K_egm = egm_operator_factory(og)
-
-
-Here's the result
-
-
-.. code-block:: python3
-
-    sim_length = 20
-
-    print("Timing standard Coleman policy function iteration")
-    σ = grid    # Initial policy
-    qe.util.tic()
-    for i in range(sim_length):
-        σ_new = K_time(σ)
-        σ = σ_new
-    qe.util.toc()
-
-    print("Timing policy function iteration with endogenous grid")
-    σ = lambda x: x  # Initial policy
-    qe.util.tic()
-    for i in range(sim_length):
-        σ_new = K_egm(σ)
-        σ = σ_new
-    qe.util.toc()
-
-
-We see that the EGM version is significantly faster, even without jit compilation!
-
-The absence of numerical root-finding means that it is typically more accurate at each step as well.
+We can now solve the optimal growth model at given parameters extremely fast.

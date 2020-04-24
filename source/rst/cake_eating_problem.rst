@@ -48,7 +48,7 @@ In what follows, we require the following imports:
 The Model
 ==================
 
-We operating on a infinite time horizon :math:`t=0, 1, 2, 3..`
+We consider an infinite time horizon :math:`t=0, 1, 2, 3..`
 
 At :math:`t=0` the agent is given a complete cake with size :math:`\bar x`.
 
@@ -234,14 +234,11 @@ We will deal with that situation numerically when the time comes.
 
 Here is a Python representation of the value function:
 
-
-
 .. code-block:: python3
 
     def v_star(x, β, γ):
 
         return (1 - β**(1 / γ))**(-γ) * u(x, γ)
-
 
 And here's a figure showing the function for fixed parameters:
 

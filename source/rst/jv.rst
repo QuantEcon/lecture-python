@@ -273,7 +273,7 @@ at each :math:`x`, given a value function.
         f_rvs, g = jv.f_rvs, jv.g
 
         @njit
-        def objective(z, x, v):
+        def state_action_values(z, x, v):
             s, ϕ = z
             v_func = lambda x: interp(x_grid, v, x)
 
@@ -301,7 +301,7 @@ at each :math:`x`, given a value function.
                 max_val = -1
                 for s in search_grid:
                     for ϕ in search_grid:
-                        current_val = objective((s, ϕ), x, v) if s + ϕ <= 1 else -1
+                        current_val = state_action_values((s, ϕ), x, v) if s + ϕ <= 1 else -1
                         if current_val > max_val:
                             max_val = current_val
                 v_new[i] = max_val
@@ -322,7 +322,7 @@ at each :math:`x`, given a value function.
                 max_val = -1
                 for s in search_grid:
                     for ϕ in search_grid:
-                        current_val = objective((s, ϕ), x, v) if s + ϕ <= 1 else -1
+                        current_val = state_action_values((s, ϕ), x, v) if s + ϕ <= 1 else -1
                         if current_val > max_val:
                             max_val = current_val
                             max_s, max_ϕ = s, ϕ
