@@ -34,6 +34,7 @@ jobs:
           echo "::set-env name=BUILD_NETLIFY::$BUILD_NETLIFY"
       - name: Preview Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.0
+        if: env.BUILD_NETLIFY == 'true'
         with:
           publish-dir: './_build/website/jupyter_html'
           production-branch: master
@@ -42,4 +43,3 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        if: env.BUILD_NETLIFY == 'true'
