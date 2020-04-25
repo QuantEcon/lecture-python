@@ -23,14 +23,14 @@ We touch on foundations of Bayesian statistical inference invented by Bruno DeFi
 The relevance of DeFinetti's work for economists is presented forcefully 
 in chapter 11 of :cite:`Kreps88` by David Kreps.
 
-The example  that we study in this lecture  is a key component of `this lecture <https://python-advanced.quantecon.org/odu.html>`__ that augments the 
+The example  that we study in this lecture  is a key component of `this lecture <https://python-intro.quantecon.org/odu.html>`__ that augments the 
 :doc:`classic  <mccall_model>`  job search model of McCall
 :cite:`McCall1970` by presenting an unemployed worker with a statistical inference problem. 
 
 Here we create  graphs that illustrate the role that  a  likelihood ratio  
 plays in  Bayes' Law.
 
-We'll use such graphs to provide insights into the mechanics driving outcomes in `this lecture <https://python-advanced.quantecon.org/odu.html>`__ about learning in an augmented McCall job
+We'll use such graphs to provide insights into the mechanics driving outcomes in `this lecture <https://python-intro.quantecon.org/odu.html>`__ about learning in an augmented McCall job
 search model.
 
 Among other things, this lecture discusses  connections between the statistical concepts of sequences of random variables
