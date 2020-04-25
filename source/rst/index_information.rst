@@ -23,3 +23,4 @@ agents as given.  Later we will look at full equilibrium problems.
     wald_friedman.rst
     exchangeable
     likelihood_ratio_process.rst
+    navy_captain
