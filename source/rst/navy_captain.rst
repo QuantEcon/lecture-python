@@ -33,11 +33,11 @@ Overview
 
 This lecture follows up on ideas presented in the following lectures: 
 
- * :doc:`A Problem that Stumped Milton Friedman <wald_friedman.html>` 
- * :doc:`Exchangeability and Bayesian Updating <exchangeable.html>`  
- * :doc:`Likelihood Ratio Processes<likelihood_ratio_process.html>`
+ * :doc:`A Problem that Stumped Milton Friedman <wald_friedman>` 
+ * :doc:`Exchangeability and Bayesian Updating <exchangeable>`  
+ * :doc:`Likelihood Ratio Processes <likelihood_ratio_process>`
 
-In :doc:`A Problem that Stumped Milton Friedman <wald_friedman.html>`  we described a problem
+In :doc:`A Problem that Stumped Milton Friedman <wald_friedman>`  we described a problem
 that a Navy Captain presented to Milton Friedman during World War II.  
 
 The Navy had instructed the Captain to use a decision rule for quality control that the Captain suspected
@@ -51,8 +51,8 @@ members of the US Government's Statistical Research Group at Columbia University
 One of the members of the group, the great mathematician Abraham Wald, soon solved the problem.
 
 A good way to formulate the problem is to use some ideas from Bayesian statistics that we describe in
-this lecture :doc:`Exchangeability and Bayesian Updating <exchangeable.html>` and in this lecture
-:doc:`Likelihood Ratio Processes<likelihood_ratio_process.html>`, which describes the link between Bayesian
+this lecture :doc:`Exchangeability and Bayesian Updating <exchangeable>` and in this lecture
+:doc:`Likelihood Ratio Processes <likelihood_ratio_process>`, which describes the link between Bayesian
 updating and likelihood ratio processes.  
 
 The present lecture  uses Python to generate simulations that   evaluate expected losses under  **frequentist** and **Bayesian**
@@ -266,7 +266,7 @@ lie on a “receiver operating characteristic curve” and can be uniquely
 pinned down by choosing :math:`d`.
 
 To see some receiver operating characteristic cures, please see this
-lecture :doc:`Likelihood Ratio Processes<likelihood_ratio_process.html>`.
+lecture :doc:`Likelihood Ratio Processes <likelihood_ratio_process>`.
 
 To solve for :math:`\bar{V}_{fre}\left(t,d\right)` numerically, we first
 simulate sequences of :math:`z` when either :math:`f_0` or :math:`f_1`
@@ -465,7 +465,7 @@ The following shows how do optimal sample size :math:`t` and targeted
 Bayesian Decision Rule
 ========================
 
-In this lecture :doc:`A Problem that Stumped Milton Friedman <wald_friedman.html>`,
+In this lecture :doc:`A Problem that Stumped Milton Friedman <wald_friedman>`,
  we learned how Abraham Wald confirmed the Navy
 Captain’s hunch that there was a better decision rule.
 
@@ -475,7 +475,7 @@ decisions by comparing his current Bayesian posterior probability
 :math:`\beta`.
 
 To proceed, we borrow some Python code from the quantecon 
-lecture :doc:`A Problem that Stumped Milton Friedman <wald_friedman.html>`
+lecture :doc:`A Problem that Stumped Milton Friedman <wald_friedman>`
 that computes :math:`\alpha` and :math:`\beta`.
 
 .. code-block:: python3
@@ -948,7 +948,7 @@ To begin, let’s look at simulations of the Bayesian’s beliefs over time.
 
 We can easily compute the updated beliefs at any time :math:`t` using
 the one-to-one mapping from :math:`L_{t}` to :math:`\pi_{t}` given
-:math:`\pi_0` described in this lecture :doc:`Likelihood Ratio Processes<likelihood_ratio_process.html>`.
+:math:`\pi_0` described in this lecture :doc:`Likelihood Ratio Processes <likelihood_ratio_process>`.
 
 .. code-block:: python3
 
