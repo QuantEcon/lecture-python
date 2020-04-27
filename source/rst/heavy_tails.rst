@@ -74,6 +74,7 @@ Let's start with some imports:
 .. code-block:: ipython
 
     import numpy as np
+    import quantecon as qe
     import matplotlib.pyplot as plt
     %matplotlib inline
 
@@ -416,7 +417,9 @@ Exercise 4
 
 Replicate the rank-size plot figure :ref:`presented above <rank_size_fig1>`.
 
-For each sample that you plot, you will need to reverse sort it, from largest to smallest, in order to generate the plot.
+You can use the function ``qe.rank_size_plot`` from the ``quantecon`` library to generate the rank size plots.
+
+You can find the documentation for this function `here <https://quanteconpy.readthedocs.io/en/latest/tools/inequality.html#quantecon.inequality.rank_size_plot>`__.
 
 Use ``np.random.seed(13)`` to set the seed.
 
@@ -572,26 +575,9 @@ Exercise 3
 Exercise 4
 ----------
 
-First we will create a function and then generate the plot
+First generate the data for the plots.
 
 .. code:: ipython3
-
-    def rank_size_data(data, c=1.0):
-        """
-        Generate rank-size data corresponding to distribution data.
-        
-            * data is array like
-            * c is a float indicating the top (c x 100)% of the 
-              distribution
-        """
-        w = - np.sort(- data)                  # Reverse sort
-        w = w[:int(len(w) * c)]                # extract top c%
-        rank_data = np.log(np.arange(len(w)) + 1)
-        size_data = np.log(w)
-        return rank_data, size_data
-
-    fig, axes = plt.subplots(3, 1, figsize=(6, 8))
-    axes = axes.flatten()
 
     sample_size = 1000
     np.random.seed(13)   
@@ -602,18 +588,19 @@ First we will create a function and then generate the plot
     data_3 = np.exp(np.random.exponential(scale=1.0, size=sample_size))
     
     data_list = [data_1, data_2, data_3]
+
+Now we will plot the data using ``qe.rank_size_plot``.
+
+.. code:: ipython3
+
+    fig, axes = plt.subplots(3, 1, figsize=(6, 8))
+    axes = axes.flatten()
     labels = ['$|z|$', '$\exp(z)$', 'Pareto with tail index $1.0$']
     
-    
     for data, label, ax in zip(data_list, labels, axes):
-        rank_data, size_data = rank_size_data(data)
-        ax.plot(rank_data, size_data, 'o', markersize=3.0, alpha=0.5, label=label)
-    
-        ax.set_xlabel("log rank")
-        ax.set_ylabel("log size")
+
+        qe.rank_size_plot(data, ax, label=label)
         ax.legend()
-    
-    
     
     fig.subplots_adjust(hspace=0.4)
     
