@@ -576,6 +576,9 @@ At the same time, given the similarities, perhaps Pareto tails will arise.
 To test this, run a simulation that generates a cross-section of wealth and
 generate a rank-size plot.
 
+In the ``quantecon`` library there is a function called ``rank_size_plot`` which will generate a rank size plot from inputted data. 
+You can find the documentation for this function `here <https://quanteconpy.readthedocs.io/en/latest/tools/inequality.html#quantecon.inequality.rank_size_plot>`__.       
+
 In viewing the plot, remember that Pareto tails generate a straight line.  Is
 this what you see?
 
@@ -587,7 +590,7 @@ For sample size and initial conditions, use
     T = 500                                      # shift forward T periods 
     ψ_0 = np.ones(num_households) * wdy.y_mean   # initial distribution 
     z_0 = wdy.z_mean   
-        
+
 
 Solutions
 =========
@@ -637,37 +640,12 @@ First let's generate the distribution:
     
     ψ_star = update_cross_section(wdy, ψ_0, shift_length=T)
 
-Here's a function to produce rank-size data for the plot.
+Now let's see the rank-size plot by using the ``rank_size_plot`` function in the ``quantecon`` library.
 
 .. code:: ipython3
-
-    def rank_size_data(data, c=0.001):
-        """
-        Generate rank-size data corresponding to distribution data.
-        
-            * data is array like
-            * c is a float indicating the top (c x 100)% of the 
-              distribution
-        """
-        w = - np.sort(- data)                      # Reverse sort
-        w = w[:int(len(w) * c)]                    # extract top c%
-        rank_data = np.log(np.arange(len(w)) + 1)
-        size_data = np.log(w)
-        return rank_data, size_data
-
-
-Now let's see the rank-size plot.
-
-
-.. code:: ipython3
-
-
-    rank_data, size_data = rank_size_data(ψ_star)
 
     fig, ax = plt.subplots()
-    ax.plot(rank_data, size_data, 'o', markersize=3.0, alpha=0.5)
-    
-    ax.set_xlabel("log rank")
-    ax.set_ylabel("log size")
+
+    qe.rank_size_plot(ψ_star, ax, c=0.001)
     
     plt.show()
