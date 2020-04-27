@@ -417,9 +417,7 @@ Exercise 4
 
 Replicate the rank-size plot figure :ref:`presented above <rank_size_fig1>`.
 
-You can use the function ``qe.rank_size_plot`` from the ``quantecon`` library to generate the rank size plots.
-
-You can find the documentation for this function `here <https://quanteconpy.readthedocs.io/en/latest/tools/inequality.html#quantecon.inequality.rank_size_plot>`__.
+If you like you can use the function ``qe.rank_size_plot`` from the ``quantecon`` library to generate the plots.
 
 Use ``np.random.seed(13)`` to set the seed.
 
@@ -575,7 +573,7 @@ Exercise 3
 Exercise 4
 ----------
 
-First generate the data for the plots.
+First let's generate the data for the plots:
 
 .. code:: ipython3
 
@@ -589,7 +587,7 @@ First generate the data for the plots.
     
     data_list = [data_1, data_2, data_3]
 
-Now we will plot the data using ``qe.rank_size_plot``.
+Now we plot the data:
 
 .. code:: ipython3
 

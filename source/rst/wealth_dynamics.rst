@@ -576,8 +576,7 @@ At the same time, given the similarities, perhaps Pareto tails will arise.
 To test this, run a simulation that generates a cross-section of wealth and
 generate a rank-size plot.
 
-In the ``quantecon`` library there is a function called ``rank_size_plot`` which will generate a rank size plot from inputted data. 
-You can find the documentation for this function `here <https://quanteconpy.readthedocs.io/en/latest/tools/inequality.html#quantecon.inequality.rank_size_plot>`__.       
+If you like, you can use the function ``rank_size_plot`` from the ``quantecon`` library (documentation `here <https://quanteconpy.readthedocs.io/en/latest/tools/inequality.html#quantecon.inequality.rank_size_plot>`__). 
 
 In viewing the plot, remember that Pareto tails generate a straight line.  Is
 this what you see?
@@ -640,7 +639,7 @@ First let's generate the distribution:
     
     ψ_star = update_cross_section(wdy, ψ_0, shift_length=T)
 
-Now let's see the rank-size plot by using the ``rank_size_plot`` function in the ``quantecon`` library.
+Now let's see the rank-size plot:
 
 .. code:: ipython3
 
