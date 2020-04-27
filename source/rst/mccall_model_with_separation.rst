@@ -120,7 +120,7 @@ If he rejects, then he receives unemployment compensation :math:`c`.
 
 The process then repeats.
 
-(Note: we do not allow for job search while employed---this topic is taken up in a `later lecture <https://python-advanced.quantecon.org/jv.html>`__)
+(Note: we do not allow for job search while employed---this topic is taken up in a :doc:`later lecture <jv>`)
 
 
 
