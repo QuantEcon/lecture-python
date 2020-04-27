@@ -45,7 +45,7 @@ In reading what follows, it will be useful to have some familiarity with
 
 * vectors of random variables
 
-* dynamic programming and the Bellman equation (see for example :doc:`this lecture <short_path>` and `this lecture <https://python-advanced.quantecon.org/optgrowth.html>`__)
+* dynamic programming and the Bellman equation (see for example :doc:`this lecture <short_path>` and :doc:`this lecture <optgrowth>`)
 
 For additional reading on LQ control, see, for example,
 
