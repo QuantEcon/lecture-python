@@ -75,7 +75,7 @@ To introduce components of the model, let
    be the present value of the firm’s profits at
    time :math:`0`
 -  :math:`I_{t+1} = I_t + Q_t - S_t` be the law of motion of inventories
--  :math:`z_{t+1} = A_{22} z_t + C_2 \epsilon\_{t+1}` be the law
+-  :math:`z_{t+1} = A_{22} z_t + C_2 \epsilon_{t+1}` be the law
    of motion for an exogenous state vector :math:`z_t` that contains
    time :math:`t` information useful for predicting the demand shock
    :math:`v_t`
@@ -182,12 +182,12 @@ its consequences.
 
 .. code-block:: python3
 
-    class smoothing_example:
+    class SmoothingExample:
         """
         Class for constructing, solving, and plotting results for
         inventories and sales smoothing problem.
         """
-    
+
         def __init__(self,
                      β=0.96,           # Discount factor
                      c1=1,             # Cost-of-production
@@ -200,7 +200,7 @@ its consequences.
                           [1, 0.9]],
                      C2=[[0], [1]],
                      G=[0, 1]):
-    
+
             self.β = β
             self.c1, self.c2 = c1, c2
             self.d1, self.d2 = d1, d2
@@ -208,7 +208,7 @@ its consequences.
             self.A22 = np.atleast_2d(A22)
             self.C2 = np.atleast_2d(C2)
             self.G = np.atleast_2d(G)
-    
+
             # Dimensions
             k, j = self.C2.shape        # Dimensions for randomness part
             n = k + 1                   # Number of states
@@ -216,92 +216,92 @@ its consequences.
             
             Sc = np.zeros(k)
             Sc[0] = 1
-    
+
             # Construct matrices of transition law
             A = np.zeros((n, n))
             A[0, 0] = 1
-            A[1:, 1:] = A22
-    
+            A[1:, 1:] = self.A22
+
             B = np.zeros((n, m))
             B[0, :] = 1, -1
-    
+
             C = np.zeros((n, j))
-            C[1:, :] = C2
-    
+            C[1:, :] = self.C2
+
             self.A, self.B, self.C = A, B, C
-    
+
             # Construct matrices of one period profit function
             R = np.zeros((n, n))
             R[0, 0] = d2
             R[1:, 0] = d1 / 2 * Sc
             R[0, 1:] = d1 / 2 * Sc
-    
+
             Q = np.zeros((m, m))
             Q[0, 0] = c2
             Q[1, 1] = a1 + d2
-    
+
             N = np.zeros((m, n))
             N[1, 0] = - d2
             N[0, 1:] = c1 / 2 * Sc
             N[1, 1:] = - a0 / 2 * Sc - self.G / 2
-    
+
             self.R, self.Q, self.N = R, Q, N
-    
+
             # Construct LQ instance
             self.LQ = qe.LQ(Q, R, A, B, C, N, beta=β)
             self.LQ.stationary_values()
-    
+
         def simulate(self, x0, T=100):
-    
+
             c1, c2 = self.c1, self.c2
             d1, d2 = self.d1, self.d2
             a0, a1 = self.a0, self.a1
             G = self.G
-    
+
             x_path, u_path, w_path = self.LQ.compute_sequence(x0, ts_length=T)
-    
+
             I_path = x_path[0, :-1]
             z_path = x_path[1:, :-1]
             𝜈_path = (G @ z_path)[0, :]
-    
+
             Q_path = u_path[0, :]
             S_path = u_path[1, :]
-    
+
             revenue = (a0 - a1 * S_path + 𝜈_path) * S_path
             cost_production = c1 * Q_path + c2 * Q_path ** 2
             cost_inventories = d1 * I_path + d2 * (S_path - I_path) ** 2
-    
+
             Q_no_inventory = (a0 + 𝜈_path - c1) / (2 * (a1 + c2))
             Q_hardwired = (a0 + 𝜈_path - c1) / (2 * (a1 + c2 + d2))
-    
+
             fig, ax = plt.subplots(2, 2, figsize=(15, 10))
-    
+
             ax[0, 0].plot(range(T), I_path, label="inventories")
             ax[0, 0].plot(range(T), S_path, label="sales")
             ax[0, 0].plot(range(T), Q_path, label="production")
             ax[0, 0].legend(loc=1)
             ax[0, 0].set_title("inventories, sales, and production")
-    
+
             ax[0, 1].plot(range(T), (Q_path - S_path), color='b')
             ax[0, 1].set_ylabel("change in inventories", color='b')
             span = max(abs(Q_path - S_path))
             ax[0, 1].set_ylim(0-span*1.1, 0+span*1.1)
             ax[0, 1].set_title("demand shock and change in inventories")
-    
+
             ax1_ = ax[0, 1].twinx()
             ax1_.plot(range(T), 𝜈_path, color='r')
             ax1_.set_ylabel("demand shock", color='r')
             span = max(abs(𝜈_path))
             ax1_.set_ylim(0-span*1.1, 0+span*1.1)
-    
+
             ax1_.plot([0, T], [0, 0], '--', color='k')
-    
+
             ax[1, 0].plot(range(T), revenue, label="revenue")
             ax[1, 0].plot(range(T), cost_production, label="cost_production")
             ax[1, 0].plot(range(T), cost_inventories, label="cost_inventories")
             ax[1, 0].legend(loc=1)
             ax[1, 0].set_title("profits decomposition")
-    
+
             ax[1, 1].plot(range(T), Q_path, label="production")
             ax[1, 1].plot(range(T), Q_hardwired, label='production when  $I_t$ \
                 forced to be zero')
@@ -309,7 +309,7 @@ its consequences.
                 inventories not useful')
             ax[1, 1].legend(loc=1)
             ax[1, 1].set_title('three production concepts')
-    
+
             plt.show()
 
 Notice that the above code sets parameters at the following default
@@ -361,8 +361,8 @@ pertinent figures.
 
 .. code-block:: python3
 
-    ex1 = smoothing_example()
-    
+    ex1 = SmoothingExample()
+
     x0 = [0, 1, 0]
     ex1.simulate(x0)
 
@@ -523,8 +523,8 @@ Again, we’ll compute and display outcomes in some figures
 
 .. code-block:: python3
 
-    ex2 = smoothing_example(C2=[[0], [0]])
-    
+    ex2 = SmoothingExample(C2=[[0], [0]])
+
     x0 = [0, 1, 0]
     ex2.simulate(x0)
 
@@ -548,8 +548,8 @@ the following figures confirm
 
 .. code-block:: python3
 
-    ex3 = smoothing_example(d1=0)
-    
+    ex3 = SmoothingExample(d1=0)
+
     x0 = [0, 1, 0]
     ex3.simulate(x0)
 
@@ -600,8 +600,8 @@ The following figures confirm that inventories head south without limit
 
 .. code-block:: python3
 
-    ex4 = smoothing_example(d1=0, d2=0)
-    
+    ex4 = SmoothingExample(d1=0, d2=0)
+
     x0 = [0, 1, 0]
     ex4.simulate(x0)
 
@@ -653,8 +653,8 @@ To represent this, we set
 
 .. code-block:: python3
 
-    ex5 = smoothing_example(A22=[[1, 0], [1, 1]], C2=[[0], [0]], G=[b, a])
-    
+    ex5 = SmoothingExample(A22=[[1, 0], [1, 1]], C2=[[0], [0]], G=[b, a])
+
     x0 = [0, 1, 0] # set the initial inventory as 0
     ex5.simulate(x0, T=10)
 
@@ -684,16 +684,16 @@ where :math:`a > 0, b>0` and
 
 .. code-block:: python3
 
-    ex5 = smoothing_example(A22=[[1, 0, 0, 0, 0],
-                                 [0, 0, 0, 0, 1],
-                                 [0, 1, 0, 0, 0],
-                                 [0, 0, 1, 0, 0],
-                                 [0, 0, 0, 1, 0]],
-                            C2=[[0], [0], [0], [0], [0]],
-                            G=[b, a, 0, 0, 0])
-    
+    ex6 = SmoothingExample(A22=[[1, 0, 0, 0, 0],
+                                [0, 0, 0, 0, 1],
+                                [0, 1, 0, 0, 0],
+                                [0, 0, 1, 0, 0],
+                                [0, 0, 0, 1, 0]],
+                           C2=[[0], [0], [0], [0], [0]],
+                           G=[b, a, 0, 0, 0])
+
     x00 = [0, 1, 0, 1, 0, 0] # Set the initial inventory as 0
-    ex5.simulate(x00, T=20)
+    ex6.simulate(x00, T=20)
 
 
 
@@ -705,7 +705,7 @@ initial **season** of the year in which we begin the demand shock
 .. code-block:: python3
 
     x01 = [0, 1, 1, 0, 0, 0]
-    ex5.simulate(x01, T=20)
+    ex6.simulate(x01, T=20)
 
 
 
@@ -715,7 +715,7 @@ initial **season** of the year in which we begin the demand shock
 .. code-block:: python3
 
     x02 = [0, 1, 0, 0, 1, 0]
-    ex5.simulate(x02, T=20)
+    ex6.simulate(x02, T=20)
 
 
 
@@ -725,7 +725,7 @@ initial **season** of the year in which we begin the demand shock
 .. code-block:: python3
 
     x03 = [0, 1, 0, 0, 0, 1]
-    ex5.simulate(x03, T=20)
+    ex6.simulate(x03, T=20)
 
 
 
@@ -735,7 +735,7 @@ Exercises
 ==============
 
 Please try to analyze some inventory sales smoothing problems using the
-``smoothing_example`` class.
+``SmoothingExample`` class.
 
 Exercise 1
 ~~~~~~~~~~
@@ -747,12 +747,13 @@ Assume that the demand shock follows AR(2) process below:
 
    \nu_{t}=\alpha+\rho_{1}\nu_{t-1}+\rho_{2}\nu_{t-2}+\epsilon_{t}.
 
+where :math:`\alpha=1`, :math:`\rho_{1}=1.2`, and :math:`\rho_{2}=-0.3`.
 You need to construct :math:`A22`, :math:`C`, and :math:`G` matrices
 properly and then to input them as the keyword arguments of
-``smoothing_example`` class. Simulate paths starting from the initial
+``SmoothingExample`` class. Simulate paths starting from the initial
 condition :math:`x_0 = \left[0, 1, 0, 0\right]^\prime`.
 
-After this, try to construct a very similar ``smoothing_example`` with
+After this, try to construct a very similar ``SmoothingExample`` with
 the same demand shock process but exclude the randomness
 :math:`\epsilon_t`. Compute the stationary states :math:`\bar{x}` by
 simulating for a long period. Then try to add shocks with different
@@ -789,7 +790,7 @@ Solution 1
 
 .. code-block:: python3
 
-    ex1 = smoothing_example(A22=A22, C2=C2, G=G)
+    ex1 = SmoothingExample(A22=A22, C2=C2, G=G)
     
     x0 = [0, 1, 0, 0] # initial condition
     ex1.simulate(x0)
@@ -797,7 +798,7 @@ Solution 1
 .. code-block:: python3
 
     # now silence the noise
-    ex1_no_noise = smoothing_example(A22=A22, C2=[[0], [0], [0]], G=G)
+    ex1_no_noise = SmoothingExample(A22=A22, C2=[[0], [0], [0]], G=G)
     
     # initial condition
     x0 = [0, 1, 0, 0]
@@ -838,11 +839,11 @@ Solution 2
 
 .. code-block:: python3
 
-    smoothing_example(c2=5).simulate(x0)
+    SmoothingExample(c2=5).simulate(x0)
 
 .. code-block:: python3
 
-    smoothing_example(d2=5).simulate(x0)
+    SmoothingExample(d2=5).simulate(x0)
 
 
 
