@@ -1,7 +1,7 @@
 .. _index:
 
 ***********************************************
-Introductory Quantitative Economics with Python
+Quantitative Economics with Python
 ***********************************************
 
 .. toctree::
@@ -13,12 +13,12 @@ Introductory Quantitative Economics with Python
 .. raw:: html
 
     <div><style type="text/css">h1,.breadcrumbs{display:none;}</style></div>
-    <h1 class="sr-only" style="display:block;">Introductory Quantitative Economics with Python</h1>
+    <h1 class="sr-only" style="display:block;">Quantitative Economics with Python</h1>
     <div class="home-intro">
         <div class="home-detail">
             <div class="home-blurb">
                 <p>This website presents a set of lectures on quantitative economic modeling, designed and written by <a href="http://www.tomsargent.com" target="_blank">Thomas J. Sargent</a> and <a href="http://johnstachurski.net" target="_blank">John Stachurski</a>.</p>
-                <p>Last compiled: <span id="compiled_date"></span><br><a href="https://github.com/QuantEcon/lecture-python-intro/commits/">View commits</a> | <a href="https://github.com/QuantEcon/lecture-python-intro/graphs/contributors">See all contributors</a></p>
+                <p>Last compiled: <span id="compiled_date"></span><br><a href="https://github.com/QuantEcon/lecture-python/commits/">View commits</a> | <a href="https://github.com/QuantEcon/lecture-python/graphs/contributors">See all contributors</a></p>
             </div>
             <div class="web-version">
                 <a href="/index_toc.html">
@@ -51,7 +51,7 @@ Introductory Quantitative Economics with Python
                 </a>
             </li>
             <li>
-                <a href="https://github.com/QuantEcon/lecture-python-intro">
+                <a href="https://github.com/QuantEcon/lecture-python">
                     <i class="fab fa-github"></i>
                     <h3>GitHub Repository</h3>
                     <p>The source files for these lectures are openly available and stored on GitHub.  We welcome feedback and improvements.</p>
