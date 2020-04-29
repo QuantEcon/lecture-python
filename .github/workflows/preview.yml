@@ -38,6 +38,7 @@ jobs:
         shell: bash -l {0}
         run: |
           make website THEMEPATH=theme/lecture-python-intro.theme
+          echo "::set-env name=BUILD_NETLIFY::true"
           ls _build/website/jupyter_html/*
       - name: Build Partial Website
         if: steps.cache-websites.outputs.cache-hit == 'true'
