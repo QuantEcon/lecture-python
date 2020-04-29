@@ -27,24 +27,10 @@ jobs:
           repository: QuantEcon/lecture-python-intro.theme
           token: ${{ secrets.ACTIONS_PAT }}
           path: theme/lecture-python-intro.theme
-      - name: Cache Website Build
-        id: cache
-        uses: actions/cache@v1
-        with:
-          path: _build
-          key: cache-sphinx
-      - name: Build Full Website
-        if: steps.cache.outputs.cache-hit != 'true'
-        shell: bash -l {0}
-        run: |
-          make website THEMEPATH=theme/lecture-python-intro.theme
-          echo "::set-env name=BUILD_NETLIFY::true"
-          ls _build/website/jupyter_html/*
-      - name: Build Partial Website
-        if: steps.cache.outputs.cache-hit == 'true'
+      - name: Build website files
         shell: bash -l {0}
         run: | 
-          bash scripts/build-changed-files.sh "${{ steps.files.outputs.added_modified }}"
+          bash scripts/build-website.sh "${{ steps.files.outputs.added_modified }}"
       - name: Preview Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.0
         if: env.BUILD_NETLIFY == 'true'
