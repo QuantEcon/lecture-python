@@ -41,7 +41,7 @@ jobs:
           echo "::set-env name=BUILD_NETLIFY::true"
           ls _build/website/jupyter_html/*
       - name: Build Partial Website
-        if: steps.cache-websites.outputs.cache-hit == 'true'
+        if: steps.cache.outputs.cache-hit == 'true'
         shell: bash -l {0}
         run: | 
           bash scripts/build-changed-files.sh "${{ steps.files.outputs.added_modified }}"
