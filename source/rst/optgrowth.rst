@@ -355,7 +355,7 @@ function.
 
 In our setting, we have the following key result
 
-    * A feasible consumption policy is optimal if and only it is :math:`v^*`-greedy.
+    * A feasible consumption policy is optimal if and only if it is :math:`v^*`-greedy.
 
 The intuition is similar to the intuition for the Bellman equation, which was
 provided after :eq:`fpb30`.
