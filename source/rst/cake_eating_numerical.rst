@@ -425,7 +425,7 @@ Let's plot this next to the true analytical solution
     fig, ax = plt.subplots()
 
     ax.plot(ce.x_grid, c_analytical, label='analytical')
-    ax.plot(ce.x_grid, c, label='Numerical')
+    ax.plot(ce.x_grid, c, label='numerical')
     ax.set_ylabel(r'$\sigma(x)$')
     ax.set_xlabel('$x$')
     ax.legend()
