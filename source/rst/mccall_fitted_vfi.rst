@@ -53,7 +53,8 @@ We will use the following imports:
     import quantecon as qe
     from interpolation import interp
     from numpy.random import randn
-    from numba import njit, jitclass, prange, float64, int32
+    from numba import njit, prange, float64, int32
+    from numba.experimental import jitclass
 
 
 

@@ -68,7 +68,8 @@ Let's start with some standard imports:
 
 .. code-block:: ipython
 
-    from numba import njit, jitclass, float64
+    from numba import njit, float64
+    from numba.experimental import jitclass
     import numpy as np
     import matplotlib.pyplot as plt
     %matplotlib inline
