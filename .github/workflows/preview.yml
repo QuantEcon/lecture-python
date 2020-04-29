@@ -27,7 +27,18 @@ jobs:
           repository: QuantEcon/lecture-python-intro.theme
           token: ${{ secrets.ACTIONS_PAT }}
           path: theme/lecture-python-intro.theme
-      - name: Build website files
+      - name: Cache Website Build
+        id: cache
+        uses: actions/cache@v1
+        with:
+          path: _build/website/jupyter_html
+          key: cache-website
+      - name: Build Full Website
+        if: steps.cache.outputs.cache-hit != 'true'
+        shell: bash -l {0}
+        run: bash scripts/build-website.sh
+      - name: Build Partial Website
+        if: steps.cache-websites.outputs.cache-hit == 'true'
         shell: bash -l {0}
         run: | 
           bash scripts/build-website.sh "${{ steps.files.outputs.added_modified }}"
