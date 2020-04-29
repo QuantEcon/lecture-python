@@ -23,7 +23,8 @@ In addition to what's in Anaconda, this lecture will need the following librarie
     import numpy as np
     import matplotlib.pyplot as plt
     %matplotlib inline
-    from numba import njit, prange, jitclass, float64, int64
+    from numba import njit, prange, float64, int64
+    from numba.experimental import jitclass
     from interpolation import interp
     from math import gamma
     from scipy.optimize import minimize
