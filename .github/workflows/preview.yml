@@ -31,7 +31,7 @@ jobs:
         id: cache
         uses: actions/cache@v1
         with:
-          path: _build/
+          path: _build
           key: cache-sphinx
       - name: Build Full Website
         if: steps.cache.outputs.cache-hit != 'true'
