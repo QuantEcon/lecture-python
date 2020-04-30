@@ -871,13 +871,15 @@ In fact if :math:`P` has two distinct stationary distributions :math:`\psi_1,
 
 is a stationary distribution for :math:`P` for any :math:`\lambda \in [0, 1]`.
 
-If we restrict attention to the case where only one stationary distribution exists, one option for finding it is to try to solve the linear system :math:`\psi (I_n - P) = 0` for :math:`\psi`, where :math:`I_n` is the :math:`n \times n` identity.
+If we restrict attention to the case where only one stationary distribution exists, one option for finding it is to try to solve the linear system :math:`\psi (I_n - P) = 0` for :math:`\psi`, where :math:`I_n` is an identity matrix of size :math:`n`.
 
 But the zero vector solves this equation.
 
 Hence we need to impose the restriction that the solution must be a probability distribution.
 
-A suitable algorithm is implemented in `QuantEcon.py <http://quantecon.org/quantecon-py>`__ --- the next code block illustrates
+A suitable algorithm is implemented in `QuantEcon.py <http://quantecon.org/quantecon-py>`__, which offers us another way to find stationary distributions. 
+
+The next code block illustrates this.
 
 
 
@@ -1276,8 +1278,17 @@ Here "random" means that each link is selected with equal probability.
 
 Since :math:`r` is the stationary distribution of :math:`P`, assuming that the uniform ergodicity condition is valid, we :ref:`can interpret <new_interp_sd>` :math:`r_j` as the fraction of time that a (very persistent) random surfer spends at page :math:`j`.
 
-Your exercise is to apply this ranking algorithm to the graph pictured above
-and return the list of pages ordered by rank.
+As we discussed `above <https://python-intro.quantecon.org/finite_markov.html#Calculating-Stationary-Distributions>`__, we can compute stationary distributions either by
+
+* the left eigenvector or
+
+* a Python method, called ``stationary_distributions``, in `QuantEcon.py <http://quantecon.org/quantecon-py>`__.
+
+With these two options, your exercise is to write two corresponding programs that do the same tasks:
+
+* apply this ranking algorithm to the graph pictured above and 
+
+* return the list of pages ordered by rank.
 
 There is a total of 14 nodes (i.e., web pages), the first named ``a`` and the last named ``n``.
 
@@ -1471,6 +1482,49 @@ As :math:`m` gets large, both series converge to zero.
 
 Exercise 2
 ----------
+
+Here's one program, where we compute the stationary distribution by the left eigenvector.
+
+.. code-block:: python3
+
+    """
+    Return list of pages, ordered by rank
+    """
+    import re
+    import scipy as sp
+    from operator import itemgetter
+
+    infile = 'web_graph_data.txt'
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+
+    n = 14 # Total number of web pages (nodes)
+
+    # Create a matrix Q indicating existence of links 
+    #  * Q[i, j] = 1 if there is a link from i to j
+    #  * Q[i, j] = 0 otherwise
+    Q = np.zeros((n, n), dtype=int)
+    f = open(infile, 'r')
+    edges = f.readlines()
+    f.close()
+    for edge in edges:
+        from_node, to_node = re.findall('\w', edge)
+        i, j = alphabet.index(from_node), alphabet.index(to_node)
+        Q[i, j] = 1
+    # Create the corresponding Markov matrix P 
+    P = np.empty((n, n))
+    for i in range(n):
+        P[i, :] = Q[i, :] / Q[i, :].sum()
+    mc = MarkovChain(P)
+    # Compute the stationary distribution r 
+    v, w = sp.linalg.eig(P, left=True, right=False)
+    ranked_pages = {alphabet[i] : abs(w[i, 0])/sum(abs(w[:,0])) for i in range(n)}
+    # Print solution, sorted from highest to lowest rank 
+    print('Rankings\n ***')
+    for name, rank in sorted(ranked_pages.items(), key=itemgetter(1), reverse=1):
+        print(f'{name}: {rank:.4}')
+
+
+Here's another program using the routine in `QuantEcon.py <http://quantecon.org/quantecon-py>`__ to find the stationary distribution.
 
 .. code-block:: python3
 
