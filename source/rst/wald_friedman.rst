@@ -1011,3 +1011,15 @@ Here is how Wald introduces the notion of a sequential test
 .. [#f1] The decision maker acts as if he believes that the sequence of random variables
     :math:`[z_{0}, z_{1}, \ldots]` is *exchangeable*.  See `Exchangeability and Bayesian Updating <https://python-intro.quantecon.org/exchangeable.html>`__ and 
     :cite:`Kreps88` chapter 11, for  discussions of exchangeability.
+
+Sequels
+========
+
+We'll dig deeper into some of the ideas used here in the following lectures:
+
+* :doc:`this lecture <exchangeable>` discusses the key concept of **exchangeability** that rationalizes statistical learning 
+
+* :doc:`this lecture <likelihood_ratio_process>` describes **likelihood ratio processes* and their role in frequentist and Bayesian statistical theories
+
+* :doc:`this lecture <navy_captain>` returns to the subject of this lecture and studies whether the Captain's hunch that the (frequentist) decision rule 
+  that the Navy had ordered him to use can be expected to be better or worse than the rule sequential rule that Abraham Wald designed

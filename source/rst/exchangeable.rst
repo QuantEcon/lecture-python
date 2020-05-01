@@ -215,23 +215,34 @@ Furthermore,  **conditional on nature having
 selected** :math:`G`, the sequence :math:`W_0, W_1, \ldots` is also
 independently and identically distributed.
 
-But what about the unconditional distribution?
+But what :doc:`this lecture <odu>` that augments the 
+:doc:`classic  <mccall_model>`
 
-The unconditional distribution of :math:`W_0, W_1, \ldots` is
-evidently
+The uncon:doc:`this lecture <odu>` that augments the 
+:doc:`classic  <mccall_model>`
+evidently:doc:`this lecture <odu>` that augments the 
+:doc:`classic  <mccall_model>`
 
-.. math::
-    :label: eq_definetti
+.. math:::doc:`this lecture <odu>` that augments the 
+:doc:`classic  <mccall_model>`
+    :labe:doc:`this lecture <odu>` that augments the 
+:doc:`classic  <mccall_model>`
 
-    h(W_0, W_1, \ldots ) \equiv \tilde \pi [f(W_0) f(W_1) \cdots ] + ( 1- \tilde \pi) [g(W_0) g(W_1) \cdots ] 
+    h(W_0:doc:`this lecture <odu>` that augments the 
+:doc:`classic  <mccall_model>`g(W_0) g(W_1) \cdots ] 
 
-Under the unconditional distribution :math:`h(W_0, W_1, \ldots )`, the
-sequence :math:`W_0, W_1, \ldots` is **not** independently and
-identically distributed.
+Under the:doc:`this lecture <odu>` that augments the 
+:doc:`classic  <mccall_model>`
+sequence :doc:`this lecture <odu>` that augments the 
+:doc:`classic  <mccall_model>`
+identical:doc:`this lecture <odu>` that augments the 
+:doc:`classic  <mccall_model>`
 
-To verify this claim, it is sufficient to notice, for example, that
+To verify:doc:`this lecture <odu>` that augments the 
+:doc:`classic  <mccall_model>`
 
-.. math::
+.. math:::doc:`this lecture <odu>` that augments the 
+:doc:`classic  <mccall_model>`
 
     h(w_0, w_1) = \tilde \pi f(w_0)f (w_1) + (1 - \tilde \pi) g(w_0)g(w_1) \neq
                   (\tilde \pi f(w_0) + (1-\tilde \pi) g(w_0))(
@@ -735,3 +746,14 @@ different nor identical, in particular one in which  :math:`F_a=2, F_b=1` and
 .. code-block:: python3
 
     expected_ratio(F_a=2, F_b=1, G_a=3, G_b=1.2)
+
+
+Sequels
+========
+
+We'll dig deeper into some of the ideas used here in the following lectures:
+
+* :doc:`this lecture <likelihood_ratio_process>` describes **likelihood ratio processes* and their role in frequentist and Bayesian statistical theories
+
+* :doc:`this lecture <navy_captain>` returns to the subject of this lecture and studies whether the Captain's hunch that the (frequentist) decision rule 
+  that the Navy had ordered him to use can be expected to be better or worse than the rule sequential rule that Abraham Wald designed    

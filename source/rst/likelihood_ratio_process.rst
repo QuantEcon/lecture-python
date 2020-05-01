@@ -737,3 +737,12 @@ target probability of detection, for example, :math:`0.9`.
     plt.ylabel("Probability of detection")
     plt.title(f"Probability of false alarm={PFA}")
     plt.show()
+
+
+
+Sequel
+========
+
+Likelihood ratio processes appear again in :doc:`this lecture <additive_functionals>`, which contains another illustration 
+of the **peculiar property** of likelihood ratio processes described above.
+
