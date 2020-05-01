@@ -873,13 +873,19 @@ is a stationary distribution for :math:`P` for any :math:`\lambda \in [0, 1]`.
 
 If we restrict attention to the case where only one stationary distribution exists, one option for finding it is to try to solve the linear system :math:`\psi (I_n - P) = 0` for :math:`\psi`, where :math:`I_n` is the :math:`n \times n` identity.
 
-But the zero vector solves this equation.
+But the zero vector solves this equation, so we need to proceed carefully.
 
-Hence we need to impose the restriction that the solution must be a probability distribution.
+In essence, we need to impose the restriction that the solution must be a probability distribution.
 
-A suitable algorithm is implemented in `QuantEcon.py <http://quantecon.org/quantecon-py>`__ --- the next code block illustrates
+There are various ways to do this.
 
+One option is to regard this as an eigenvector problem: a vector
+:math:`\psi` such that :math:`\psi = \psi P` is a left eigenvector associated
+with the unit eigenvalue :math:`\lambda = 1`.
 
+A more stable and sophisticated algorithm is implemented in `QuantEcon.py <http://quantecon.org/quantecon-py>`__.
+
+This is the one we recommend you use:
 
 .. code-block:: python3
 
@@ -889,10 +895,6 @@ A suitable algorithm is implemented in `QuantEcon.py <http://quantecon.org/quant
     mc = qe.MarkovChain(P)
     mc.stationary_distributions  # Show all stationary distributions
 
-
-
-
-The stationary distribution is unique.
 
 
 Convergence to Stationarity
