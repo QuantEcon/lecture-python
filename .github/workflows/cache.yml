@@ -25,11 +25,11 @@ jobs:
           token: ${{ secrets.ACTIONS_PAT }}
           path: theme/lecture-python-intro.theme
       - name: Cache Website Build Folder
-         id: cache
-         uses: actions/cache@v1
-         with:
-           path: _build
-           key: cache-sphinx
+        id: cache
+        uses: actions/cache@v1
+        with:
+          path: _build
+          key: cache-sphinx
       - name: Build Website files
         shell: bash -l {0}
         run: |
