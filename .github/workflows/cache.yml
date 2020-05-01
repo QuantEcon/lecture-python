@@ -28,7 +28,7 @@ jobs:
          id: cache
          uses: actions/cache@v1
          with:
-           path: _build/
+           path: _build
            key: cache-sphinx
       - name: Build Website files
         shell: bash -l {0}
