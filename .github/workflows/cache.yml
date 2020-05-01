@@ -1,10 +1,13 @@
-name: 'Build Website Cache'
+name: Build Website Cache
 on:
   schedule:
     - cron: '0 0 * * *'
+  push:
+    branches:
+      - master
 jobs:
   build-cache:
-    name: 'Build Website'
+    name: Build Website
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
