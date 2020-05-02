@@ -394,7 +394,7 @@ Here's one solution:
 
         og = OptimalGrowthModel(β=β, s=0.05)
 
-        v_greedy, v_solution = solve_model(og)
+        v_greedy, v_solution = solve_model(og, verbose=False)
 
         # Define an optimal policy function
         σ_func = lambda x: interp(og.grid, v_greedy, x)
