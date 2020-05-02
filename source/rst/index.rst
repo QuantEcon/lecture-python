@@ -1,7 +1,7 @@
 .. _index:
 
 ***********************************************
-Introductory Quantitative Economics with Python
+Quantitative Economics with Python
 ***********************************************
 
 .. toctree::
@@ -13,7 +13,7 @@ Introductory Quantitative Economics with Python
 .. raw:: html
 
     <div><style type="text/css">h1,.breadcrumbs{display:none;}</style></div>
-    <h1 class="sr-only" style="display:block;">Introductory Quantitative Economics with Python</h1>
+    <h1 class="sr-only" style="display:block;">Quantitative Economics with Python</h1>
     <div class="home-intro">
         <div class="home-detail">
             <div class="home-blurb">
