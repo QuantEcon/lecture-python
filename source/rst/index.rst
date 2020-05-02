@@ -44,7 +44,7 @@ Quantitative Economics with Python
 				</a>
 			</li>
             <li>
-                <a href="https://github.com/QuantEcon/quantecon-notebooks-python">
+                <a href="https://github.com/QuantEcon/lecture-python-intro.notebooks">
                     <i class="fas fa-file-download"></i>
                     <h3>Notebooks</h3>
                     <p>Get the full set of Jupyter notebooks</p>
