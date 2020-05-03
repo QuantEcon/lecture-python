@@ -34,12 +34,12 @@ Among the things that we'll learn about are
 
    * How a likelihood ratio process is the key ingredient in frequentist hypothesis testing
 
-   * How a **receiver operator characteristic curve** summarizes information about a false alarm probability and power in frequentist hypothesis testing 
+   * How a **receiver operator characteristic curve** summarizes information about a false alarm probability and power in frequentist hypothesis testing
 
 
 
 Likelihood Ratio Process
-========================  
+========================
 
 
 A nonnegative random variable :math:`W` has one of two probability density functions, either
@@ -60,13 +60,13 @@ But we want to know.
 
 To do that, we use observations.
 
-We observe a sequence :math:`\{w_t\}_{t=1}^T` of :math:`T` IID draws 
+We observe a sequence :math:`\{w_t\}_{t=1}^T` of :math:`T` IID draws
 from either :math:`f` or :math:`g`.
 
 We want to use these observations to infer whether nature chose :math:`f` or
-:math:`g` before the beginning of time. 
+:math:`g` before the beginning of time.
 
-A **likelihood ratio process** is a useful tool for this task. 
+A **likelihood ratio process** is a useful tool for this task.
 
 To begin, we define the key component of a likelihood ratio process, namely, the time :math:`t` likelihood ratio  as the random variable
 
@@ -80,7 +80,7 @@ same intervals of possible realizations of :math:`w_t`.
 
 That means that under the :math:`g` density,  :math:`\ell (w_t)=
 \frac{f\left(w_{t}\right)}{g\left(w_{t}\right)}`
-is evidently a nonnegative  random variable with mean :math:`1`.     
+is evidently a nonnegative  random variable with mean :math:`1`.
 
 
 A **likelihood ratio process** for sequence
@@ -132,7 +132,7 @@ probability distribution, for example, a sequence of  IID draws from :math:`g`.
     @njit
     def simulate(a, b, T=50, N=500):
         '''
-        Generate N sets of T observations of the likelihood ratio, 
+        Generate N sets of T observations of the likelihood ratio,
         return as N x T matrix.
 
         '''
@@ -268,10 +268,10 @@ Nature Permanently Draws from Density f
 
 Now suppose that before time :math:`0` nature permanently decided to draw repeatedly from density :math:`f`.
 
-A useful property is that while the mean of the likelihood ratio :math:`\ell \left(w_{t}\right)` under density 
-:math:`g` is :math:`1`, its mean under the density :math:`f` exceeds one.  
+A useful property is that while the mean of the likelihood ratio :math:`\ell \left(w_{t}\right)` under density
+:math:`g` is :math:`1`, its mean under the density :math:`f` exceeds one.
 
-To see this, we compute 
+To see this, we compute
 
 .. math::
 
@@ -287,7 +287,7 @@ To see this, we compute
    \end{aligned}
 
 
-This in turn implies that the unconditional mean of the likelihood ratio process :math:`L(w^t)` 
+This in turn implies that the unconditional mean of the likelihood ratio process :math:`L(w^t)`
 diverges toward :math:`+ \infty`.
 
 Simulations below confirm this conclusion.
@@ -368,7 +368,7 @@ implies
 
 
    \begin{aligned}
-   \frac{1}{\pi_{t+1}} 
+   \frac{1}{\pi_{t+1}}
        &=\frac{\pi_{t}\ell \left(w_{t+1}\right)
            +\left(1-\pi_{t}\right)}{\pi_{t}\ell \left(w_{t+1}\right)} \\
        &=1-\frac{1}{\ell \left(w_{t+1}\right)}
@@ -387,7 +387,7 @@ Therefore
 
 
    \begin{aligned}
-       \frac{1}{\pi_{t+1}}-1   
+       \frac{1}{\pi_{t+1}}-1
        =\frac{1}{\prod_{i=1}^{t+1}\ell \left(w_{i}\right)}
            \left(\frac{1}{\pi_{0}}-1\right)
        =\frac{1}{L\left(w^{t+1}\right)}\left(\frac{1}{\pi_{0}}-1\right).
@@ -415,7 +415,7 @@ Formula :eq:`eq_Bayeslaw103` shows the key role that the likelihood ratio proces
 the posterior probability :math:`\pi_{t+1}`.
 
 Formula :eq:`eq_Bayeslaw103` is the foundation for the insight that, because of the way the likelihood ratio process behaves
-as :math:`t \rightarrow + \infty`, the likelihood ratio process dominates the initial prior :math:`\pi_0` in determining the 
+as :math:`t \rightarrow + \infty`, the likelihood ratio process dominates the initial prior :math:`\pi_0` in determining the
 limiting behavior of :math:`\pi_t`.
 
 To illustrate this insight, below we will plot  graphs showing **one** simulated
@@ -517,11 +517,11 @@ nature chose permanently to draw from density :math:`f`.
 Likelihood Ratio Test
 ======================
 
-Having seen how the likelihood ratio process is a key ingredient of the formula :eq:`eq_Bayeslaw103` for 
-a Bayesian's posteior probabilty that nature has drawn history :math:`w^t` as repeated draws from density 
+Having seen how the likelihood ratio process is a key ingredient of the formula :eq:`eq_Bayeslaw103` for
+a Bayesian's posteior probabilty that nature has drawn history :math:`w^t` as repeated draws from density
 :math:`g`, we now turn to how a frequentist statistician would employ the hypothesis testing theory
 of Neyman and Pearson :cite:`Neyman_Pearson` to test the hypothesis that  history :math:`w^t` is generated by repeated
-IID draws from density :math:`g`. 
+IID draws from density :math:`g`.
 
 Denote :math:`q` as the data generating process, so that
 :math:`q=f \text{ or } g`.
@@ -542,7 +542,7 @@ Neyman and Pearson proved that the best way to test this hospital is to use a **
 
 where the discrimination threshold :math:`c` is arbitrarily given.
 
-This test is *best* in the sense that it is the uniformly most powerful test.  
+This test is *best* in the sense that it is the uniformly most powerful test.
 
 To understand what this means, we have to look at probabilities of two important events.
 
@@ -582,7 +582,7 @@ moving :math:`c`.
 A troublesome "that's life" fact is that these two probabilities  move in the same direction as we vary the critical value
 :math:`c`.
 
-Without specifying the penalties on making Type I and Type II errors, there is little that we can say 
+Without specifying the penalties on making Type I and Type II errors, there is little that we can say
 about how we *should*  trade off probabilities of the two types of mistakes.
 
 What we do know that increasing sample size :math:`t` improves
@@ -743,6 +743,6 @@ target probability of detection, for example, :math:`0.9`.
 Sequel
 ========
 
-Likelihood ratio processes appear again in :doc:`this lecture <additive_functionals>`, which contains another illustration 
+Likelihood ratio processes appear again in `this lecture <https://python-advanced.quantecon.org/additive_functionals.html>`__, which contains another illustration
 of the **peculiar property** of likelihood ratio processes described above.
 
