@@ -741,7 +741,7 @@ Sequels
 
 We'll dig deeper into some of the ideas used here in the following lectures:
 
-* :doc:`this lecture <likelihood_ratio_process>` describes **likelihood ratio processes* 
+* :doc:`this lecture <likelihood_ratio_process>` describes **likelihood ratio processes**
   and their role in frequentist and Bayesian statistical theories
 
 * :doc:`this lecture <navy_captain>` returns to the subject of this lecture and studies 
