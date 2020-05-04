@@ -114,7 +114,7 @@ We also want to know the values of the following objects
 * The unemployment rate :math:`u_t := U_t/N_t`.
 
 
-(Here and below, capital letters represent stocks and lowercase letters represent flows)
+(Here and below, capital letters represent stocks and lowercase letters represent rates)
 
 
 
@@ -313,7 +313,7 @@ Here's the code:
 
         @λ.setter
         def λ(self, new_value):
-            self._α = new_value
+            self._λ = new_value
             self.compute_derived_values()
 
         @property
@@ -1082,7 +1082,7 @@ Exercise 2
 Consider an economy with an initial stock  of workers :math:`N_0 = 100` at the
 steady state level of employment in the baseline parameterization.
 
-Suppose that for 20 periods the birth rate was temporarily high (:math:`b = 0.0025`) and then returned to its original level.
+Suppose that for 20 periods the birth rate was temporarily high (:math:`b = 0.025`) and then returned to its original level.
 
 Plot the transition dynamics of the unemployment and employment stocks for 50 periods.
 
@@ -1195,7 +1195,7 @@ Here are the other parameters:
 
 .. code-block:: python3
 
-    b_hat = 0.003
+    b_hat = 0.025
     T_hat = 20
 
 Let's increase :math:`b` to the new value and simulate for 20 periods
