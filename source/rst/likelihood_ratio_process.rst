@@ -551,7 +551,7 @@ threshold :math:`c`.
 
 The two probabities are:
 
-1. Probability of detection (= *statistical power* = 1 minus probability
+* Probability of detection (= *statistical power* = 1 minus probability
    of Type II error):
 
 .. math::
@@ -559,7 +559,7 @@ The two probabities are:
 
    1-\beta \equiv \Pr\left\{ L\left(w^{t}\right)<c\mid q=g\right\}
 
-2. Probability of false alarm (= *significance level* = probability of
+* Probability of false alarm (= *significance level* = probability of
    Type I error):
 
 .. math::
@@ -569,7 +569,7 @@ The two probabities are:
 
 The `Neyman-Pearson
 Lemma <https://en.wikipedia.org/wiki/Neyman–Pearson_lemma>`__
-states that among all possible tests, the likelihood ratio test
+states that among all possible tests, a likelihood ratio test
 maximizes the probability of detection for a given probability of false
 alarm.
 
@@ -577,23 +577,23 @@ To have made a confident inference, we want a small probability of
 false alarm and a large probability of detection.
 
 With sample size :math:`t` fixed, we can change our two probabilities by
-moving :math:`c`.
+adjusting :math:`c`.
 
 A troublesome "that's life" fact is that these two probabilities  move in the same direction as we vary the critical value
 :math:`c`.
 
-Without specifying the penalties on making Type I and Type II errors, there is little that we can say
+Without specifying quantitative losses from making Type I and Type II errors, there is little that we can say
 about how we *should*  trade off probabilities of the two types of mistakes.
 
-What we do know that increasing sample size :math:`t` improves
+We do know that increasing sample size :math:`t` improves
 statistical inference.
 
-Below we plot some informative figures that display showing this.
+Below we plot some informative figures that illustrate this.
 
 We also present a classical frequentist method for choosing a sample
-size :math:`t` that provides confident inferences.
+size :math:`t`.
 
-Let’s start with a case where we fix the threshold :math:`c` at
+Let’s start with a case in which we fix the threshold :math:`c` at
 :math:`1`.
 
 .. code-block:: python3
@@ -645,9 +645,8 @@ This diverse behavior is what makes it possible to distinguish
     plt.show()
 
 The graph below shows more clearly that, when we hold the threshold
-:math:`c` fixed, the probability of detection monotonically increases in
-:math:`t` and that the probability of a false alarm moves in the opposite
-direction.
+:math:`c` fixed, the probability of detection monotonically increases with increases in
+:math:`t` and that the probability of a false alarm monotonically decreases.
 
 .. code-block:: python3
 
@@ -665,16 +664,16 @@ direction.
     plt.legend()
     plt.show()
 
-Notice that the threshold :math:`c` uniquely pins down  probabilities
+For a given sample size :math:`t`,  the threshold :math:`c` uniquely pins down  probabilities
 of both types of error.
 
-If we now free up :math:`c` and move it, we will sweep out the probability
+If for a fixed :math:`t` we now free up and move :math:`c`, we will sweep out the probability
 of detection as a function of the probability of false alarm.
 
 This produces what is called a `receiver operating characteristic
-curve <https://en.wikipedia.org/wiki/Receiver_operating_characteristic>`__.
+curve <https://en.wikipedia.org/wiki/Receiver_operating_characteristic>`__ for a given discrimination threshold :math:`c`.
 
-Below, we plot receiver operating characteristic curves for different
+Below, we plot receiver operating characteristic curves for a given discrimination threshold :math:`c` but different
 sample sizes :math:`t`.
 
 .. code-block:: python3
@@ -705,16 +704,19 @@ a given discrimination threshold :math:`c`.
 As :math:`t \rightarrow + \infty`, we approach the the perfect detection
 curve that is indicated by a right angle hinging on the green dot.
 
-It is up to the test user to decide how to trade off probabilities of
-making two types of errors.
+For a given sample size :math:`t`, a value discrimination threshold :math:`c` determines a point on the receiver operating 
+characteristic curve.
 
-But we know how to choose the smallest sample size given any targets for
+It is up to the test designer to trade off probabilities of
+making the two types of errors.
+
+But we know how to choose the smallest sample size to achieve given targets for
 the probabilities.
 
 Typically, frequentists aim for a high probability of detection that
 respects an upper bound on the probability of false alarm.
 
-Below we show a case in which we fix the probability of false alarm at
+Below we show an example in which we fix the probability of false alarm at
 :math:`0.05`.
 
 The required sample size for making a decision is then determined by a

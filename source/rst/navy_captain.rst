@@ -229,7 +229,7 @@ The decision rule associated with a sample size :math:`t` is:
 -  decide that :math:`f_0` is the distribution if the likelihood ratio
    is greater than :math:`d`
 
-To understand how that rule was engineered, let null alternative
+To understand how that rule was engineered, let null and alternative
 hypotheses be
 
 -  null: :math:`H_{0}`: :math:`f=f_{0}`,
@@ -265,7 +265,7 @@ For a given sample size :math:`t`, the pairs :math:`\left(PFA,PD\right)`
 lie on a “receiver operating characteristic curve” and can be uniquely
 pinned down by choosing :math:`d`.
 
-To see some receiver operating characteristic cures, please see this
+To see some receiver operating characteristic curves, please see this
 lecture :doc:`Likelihood Ratio Processes <likelihood_ratio_process>`.
 
 To solve for :math:`\bar{V}_{fre}\left(t,d\right)` numerically, we first
