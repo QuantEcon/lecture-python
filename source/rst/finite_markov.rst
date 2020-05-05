@@ -143,15 +143,15 @@ Consider a worker who, at any given time :math:`t`, is either unemployed (state 
 
 Suppose that, over a one month period,
 
-#. An unemployed worker finds a job with probability :math:`\alpha \in (0, 1)`.
+#. An unemployed worker finds a job with probability :math:`\lambda \in (0, 1)`.
 
-#. An employed worker loses her job and becomes unemployed with probability :math:`\beta \in (0, 1)`.
+#. An employed worker loses her job and becomes unemployed with probability :math:`\alpha \in (0, 1)`.
 
 In terms of a Markov model, we have
 
 * :math:`S = \{ 0, 1\}`
 
-* :math:`P(0, 1) = \alpha` and :math:`P(1, 0) = \beta`
+* :math:`P(0, 1) = \lambda` and :math:`P(1, 0) = \alpha`
 
 We can write out the transition probabilities in matrix form as
 
@@ -161,13 +161,13 @@ We can write out the transition probabilities in matrix form as
     P
     = \left(
     \begin{array}{cc}
-        1 - \alpha & \alpha \\
-        \beta & 1 - \beta
+        1 - \lambda & \lambda \\
+        \alpha & 1 - \alpha
     \end{array}
       \right)
 
 
-Once we have the values :math:`\alpha` and :math:`\beta`, we can address a range of questions, such as
+Once we have the values :math:`\lambda` and :math:`\alpha`, we can address a range of questions, such as
 
 * What is the average duration of unemployment?
 
@@ -835,7 +835,7 @@ Example
 
 Recall our model of employment/unemployment dynamics for a given worker :ref:`discussed above <mc_eg1>`.
 
-Assuming :math:`\alpha \in (0,1)` and :math:`\beta \in (0,1)`, the uniform ergodicity condition is satisfied.
+Assuming :math:`\lambda \in (0,1)` and :math:`\alpha \in (0,1)`, the uniform ergodicity condition is satisfied.
 
 Let :math:`\psi^* = (p, 1-p)` be the stationary distribution, so that :math:`p` corresponds to unemployment (state 0).
 
@@ -843,12 +843,12 @@ Using :math:`\psi^* = \psi^* P` and a bit of algebra yields
 
 .. math::
 
-    p = \frac{\beta}{\alpha + \beta}
+    p = \frac{\alpha}{\lambda + \alpha}
 
 
 This is, in some sense, a steady state probability of unemployment --- more on interpretation below.
 
-Not surprisingly it tends to zero as :math:`\beta \to 0`, and to one as :math:`\alpha \to 0`.
+Not surprisingly it tends to zero as :math:`\alpha \to 0`, and to one as :math:`\lambda \to 0`.
 
 
 Calculating Stationary Distributions
@@ -866,10 +866,10 @@ In fact if :math:`P` has two distinct stationary distributions :math:`\psi_1,
 
 .. math::
 
-    \psi_3 := \lambda \psi_1 + (1 - \lambda) \psi_2
+    \psi_3 := \pi \psi_1 + (1 - \pi) \psi_2
 
 
-is a stationary distribution for :math:`P` for any :math:`\lambda \in [0, 1]`.
+is a stationary distribution for :math:`P` for any :math:`\pi \in [0, 1]`.
 
 If we restrict attention to the case where only one stationary distribution exists, one option for finding it is to try to solve the linear system :math:`\psi (I_n - P) = 0` for :math:`\psi`, where :math:`I_n` is the :math:`n \times n` identity.
 
@@ -881,7 +881,7 @@ There are various ways to do this.
 
 One option is to regard this as an eigenvector problem: a vector
 :math:`\psi` such that :math:`\psi = \psi P` is a left eigenvector associated
-with the unit eigenvalue :math:`\lambda = 1`.
+with the unit eigenvalue :math:`\pi = 1`.
 
 A more stable and sophisticated algorithm is implemented in `QuantEcon.py <http://quantecon.org/quantecon-py>`__.
 
@@ -1006,13 +1006,13 @@ Example
 
 Recall our cross-sectional interpretation of the employment/unemployment model :ref:`discussed above <mc_eg1-1>`.
 
-Assume that :math:`\alpha \in (0,1)` and :math:`\beta \in (0,1)`, so that irreducibility and aperiodicity both hold.
+Assume that :math:`\lambda \in (0,1)` and :math:`\alpha \in (0,1)`, so that irreducibility and aperiodicity both hold.
 
 We saw that the stationary distribution is :math:`(p, 1-p)`, where
 
 .. math::
 
-    p = \frac{\beta}{\alpha + \beta}
+    p = \frac{\alpha}{\lambda + \alpha}
 
 
 In the cross-sectional interpretation, this is the fraction of people unemployed.
@@ -1110,6 +1110,7 @@ Expectations of Geometric Sums
 Sometimes we also want to compute expectations of a geometric sum, such as
 :math:`\sum_t \beta^t h(X_t)`.
 
+Where :math:`\beta\in(0,1)` is the discount factor.
 
 In view of the preceding discussion, this is
 
@@ -1148,18 +1149,18 @@ According to the discussion :ref:`above <mc_eg1-2>`, if a worker's employment dy
     P
     = \left(
     \begin{array}{cc}
-        1 - \alpha & \alpha \\
-        \beta & 1 - \beta
+        1 - \lambda & \lambda \\
+        \alpha & 1 - \alpha
     \end{array}
       \right)
 
 
-with :math:`\alpha \in (0,1)` and :math:`\beta \in (0,1)`, then, in the long-run, the fraction
+with :math:`\lambda \in (0,1)` and :math:`\alpha \in (0,1)`, then, in the long-run, the fraction
 of time spent unemployed will be
 
 .. math::
 
-    p := \frac{\beta}{\alpha + \beta}
+    p := \frac{\alpha}{\lambda + \alpha}
 
 
 In other words, if :math:`\{X_t\}` represents the Markov chain for
@@ -1175,7 +1176,7 @@ The exercise is to illustrate this convergence by computing
 it is close to :math:`p`.
 
 You will see that this statement is true regardless of the choice of initial
-condition or the values of :math:`\alpha, \beta`, provided both lie in
+condition or the values of :math:`\lambda, \alpha`, provided both lie in
 :math:`(0, 1)`.
 
 
@@ -1343,7 +1344,7 @@ The following code snippet provides a hint as to how you can go about this
 .. code-block:: python3
 
     import re
-    re.findall('\w', 'x +++ y ****** z')  # \w matches alphanumerics
+    re.findall('\w', 'x +++ y ****** z')  # \w matches lambdanumerics
 
 .. code-block:: python3
 
@@ -1442,12 +1443,12 @@ As :math:`m` gets large, both series converge to zero.
 
 .. code-block:: python3
 
-    α = β = 0.1
+    α = λ = 0.1
     N = 10000
-    p = β / (α + β)
+    p = α / (λ + α)
 
-    P = ((1 - α,       α),               # Careful: P and p are distinct
-         (    β,   1 - β))
+    P = ((1 - λ,       λ),               # Careful: P and p are distinct
+         (    α,   1 - α))
     P = np.array(P)
     mc = MarkovChain(P)
 
@@ -1483,7 +1484,7 @@ Exercise 2
     from operator import itemgetter
 
     infile = 'web_graph_data.txt'
-    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    lambdabet = 'abcdefghijklmnopqrstuvwxyz'
 
     n = 14 # Total number of web pages (nodes)
 
@@ -1496,7 +1497,7 @@ Exercise 2
     f.close()
     for edge in edges:
         from_node, to_node = re.findall('\w', edge)
-        i, j = alphabet.index(from_node), alphabet.index(to_node)
+        i, j = lambdabet.index(from_node), lambdabet.index(to_node)
         Q[i, j] = 1
     # Create the corresponding Markov matrix P 
     P = np.empty((n, n))
@@ -1505,7 +1506,7 @@ Exercise 2
     mc = MarkovChain(P)
     # Compute the stationary distribution r 
     r = mc.stationary_distributions[0]
-    ranked_pages = {alphabet[i] : r[i] for i in range(n)}
+    ranked_pages = {lambdabet[i] : r[i] for i in range(n)}
     # Print solution, sorted from highest to lowest rank 
     print('Rankings\n ***')
     for name, rank in sorted(ranked_pages.items(), key=itemgetter(1), reverse=1):
