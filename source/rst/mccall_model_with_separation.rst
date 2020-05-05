@@ -198,7 +198,7 @@ First, let
 .. math::
     :label: defd_mm
 
-    d := \sum_{w' \in \mathbb W} h(w') q(w')
+    f := \sum_{w' \in \mathbb W} h(w') q(w')
 
 be the expected value of unemployment tomorrow.
 
@@ -206,14 +206,14 @@ We can now write :eq:`bell2_mccall` as
 
 .. math::
 
-    h(w) = \max \left\{ v(w), \,  u(c) + \beta d \right\} 
+    h(w) = \max \left\{ v(w), \,  u(c) + \beta f \right\} 
 
 or, shifting time forward one period 
 
 .. math::
 
      \sum_{w' \in \mathbb W} h(w') q(w')
-      = \sum_{w' \in \mathbb W} \max \left\{ v(w'), \,  u(c) + \beta d \right\} q(w')
+      = \sum_{w' \in \mathbb W} \max \left\{ v(w'), \,  u(c) + \beta f \right\} q(w')
 
 
 Using :eq:`defd_mm` again now gives
@@ -221,7 +221,7 @@ Using :eq:`defd_mm` again now gives
 .. math::
     :label: bell02_mccall
 
-      d = \sum_{w' \in \mathbb W} \max \left\{ v(w'), \,  u(c) + \beta d \right\} q(w')
+      f = \sum_{w' \in \mathbb W} \max \left\{ v(w'), \,  u(c) + \beta f \right\} q(w')
 
 Finally, :eq:`bell1_mccall` can now be rewritten as
 
@@ -230,7 +230,7 @@ Finally, :eq:`bell1_mccall` can now be rewritten as
 
     v(w) = u(w) + \beta 
         \left[
-            (1-\alpha)v(w) + \alpha d  
+            (1-\alpha)v(w) + \alpha f  
         \right]
 
 In the last expression, we wrote :math:`w_e` as :math:`w` to make the notation
@@ -241,14 +241,14 @@ The Reservation Wage
 --------------------
 
 Suppose we can use :eq:`bell02_mccall` and :eq:`bell01_mccall` to solve for
-:math:`d` and :math:`v`.
+:math:`f` and :math:`v`.
 
 (We will do this soon.)
 
 We can then determine optimal behavior for the worker.
 
 From :eq:`bell2_mccall`, we see that an unemployed agent accepts current offer
-:math:`w` if :math:`v(w) \geq  u(c) + \beta d`.
+:math:`w` if :math:`v(w) \geq  u(c) + \beta f`.
 
 This means precisely that the value of accepting is higher than the expected value of rejecting.
 
@@ -260,7 +260,7 @@ Hence, we can express the optimal choice as accepting wage offer :math:`w` if an
 
      w \geq \bar w 
      \quad \text{where} \quad
-     \bar w \text{ solves } v(\bar w) =  u(c) + \beta d 
+     \bar w \text{ solves } v(\bar w) =  u(c) + \beta f
 
 
 Solving the Bellman Equations
@@ -272,7 +272,7 @@ adopted in the :doc:`first job search lecture <mccall_model>`.
 
 Here this amounts to
 
-#. make guesses for :math:`d` and :math:`v`
+#. make guesses for :math:`f` and :math:`v`
 
 #. plug these guesses into the right-hand sides of :eq:`bell02_mccall` and :eq:`bell01_mccall`
 
@@ -284,21 +284,21 @@ In other words, we are iterating using the rules
 .. math::
     :label: bell1001
 
-      d_{n+1} = \sum_{w' \in \mathbb W} 
-        \max \left\{ v_n(w'), \,  u(c) + \beta d_n \right\} q(w')
+      f_{n+1} = \sum_{w' \in \mathbb W} 
+        \max \left\{ v_n(w'), \,  u(c) + \beta f_n \right\} q(w')
 
 .. math::
     :label: bell2001
 
     v_{n+1}(w) = u(w) + \beta 
         \left[
-            (1-\alpha)v_n(w) + \alpha d_n  
+            (1-\alpha)v_n(w) + \alpha f_n  
         \right]
 
-starting from some initial conditions :math:`d_0, v_0`.
+starting from some initial conditions :math:`f_0, v_0`.
 
 As before, the system always converges to the true solutions---in this case,
-the :math:`v` and :math:`d` that solve :eq:`bell02_mccall` and :eq:`bell01_mccall`.
+the :math:`v` and :math:`f` that solve :eq:`bell02_mccall` and :eq:`bell01_mccall`.
 
 (A proof can be obtained via the Banach contraction mapping theorem.)
 
@@ -357,18 +357,18 @@ Here's our jitted class for the McCall model with separation.
             self.α, self.β, self.c, self.w, self.q = α, β, c, w, q
 
 
-        def update(self, v, d):
+        def update(self, v, f):
 
             α, β, c, w, q = self.α, self.β, self.c, self.w, self.q
 
             v_new = np.empty_like(v)
 
             for i in range(len(w)):
-                v_new[i] = u(w[i]) + β * ((1 - α) * v[i] + α * d)
+                v_new[i] = u(w[i]) + β * ((1 - α) * v[i] + α * f)
 
-            d_new = np.sum(np.maximum(v, u(c) + β * d) * q)
+            f_new = np.sum(np.maximum(v, u(c) + β * f) * q)
 
-            return v_new, d_new
+            return v_new, f_new
 
 
 Now we iterate until successive realizations are closer together than some small tolerance level.
@@ -386,20 +386,20 @@ We then return the current iterate as an approximate solution.
         """
 
         v = np.ones_like(mcm.w)    # Initial guess of v
-        d = 1                      # Initial guess of d
+        f = 1                      # Initial guess of f
         i = 0
         error = tol + 1
 
         while error > tol and i < max_iter:
-            v_new, d_new = mcm.update(v, d)
+            v_new, f_new = mcm.update(v, f)
             error_1 = np.max(np.abs(v_new - v))
-            error_2 = np.abs(d_new - d)
+            error_2 = np.abs(f_new - f)
             error = max(error_1, error_2)
             v = v_new
-            d = d_new
+            f = f_new
             i += 1
 
-        return v, d
+        return v, f
 
 
 The Reservation Wage: First Pass
@@ -408,7 +408,7 @@ The Reservation Wage: First Pass
 The optimal choice of the agent is summarized by the reservation wage. 
 
 As discussed above, the reservation wage is the :math:`\bar w` that solves
-:math:`v(\bar w) = h` where :math:`h := u(c) + \beta d` is the continuation
+:math:`v(\bar w) = h` where :math:`h := u(c) + \beta f` is the continuation
 value.
 
 Let's compare :math:`v` and :math:`h` to see what they look like.
@@ -418,8 +418,8 @@ We'll use the default parameterizations found in the code above.
 .. code-block:: python3
 
     mcm = McCallModel()
-    v, d = solve_model(mcm)
-    h = u(mcm.c) + mcm.β * d
+    v, f = solve_model(mcm)
+    h = u(mcm.c) + mcm.β * f
 
     fig, ax = plt.subplots()
 
@@ -453,8 +453,8 @@ and returns the associated reservation wage.
         If no such w exists, then w_bar is set to np.inf.
         """
 
-        v, d = solve_model(mcm)
-        h = u(mcm.c) + mcm.β * d
+        v, f = solve_model(mcm)
+        h = u(mcm.c) + mcm.β * f
 
         w_bar = np.inf
         for i, wage in enumerate(mcm.w):
