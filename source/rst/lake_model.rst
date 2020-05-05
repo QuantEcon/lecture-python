@@ -63,7 +63,7 @@ Let's start with some imports:
     from scipy.stats import norm
     from scipy.optimize import brentq
     from quantecon.distributions import BetaBinomial
-    from numba import jit
+    from numba import jitclass, float64
 
 Prerequisites
 -------------
@@ -644,7 +644,7 @@ Let's plot the path of the sample averages over 5,000 periods
     xbar = lm.rate_steady_state()
 
     fig, axes = plt.subplots(2, 1, figsize=(10, 8))
-    s_path = mc.simulate(T, init=1)
+    s_path = mc.simulate(T, init=1, random_state=1234)
     s_bar_e = s_path.cumsum() / range(1, T+1)
     s_bar_u = 1 - s_bar_e
 
@@ -794,71 +794,76 @@ We will make use of techniques from the :doc:`McCall model lecture <mccall_model
 
 The first piece of code implements value function iteration
 
-.. code-block:: python3
-    :class: collapse
+.. code-block:: ipython3
 
-    # A default utility function
+    n = 60                                  # n possible outcomes for w
+    w_default = np.linspace(10, 20, n)      # wages between 10 and 20
+    a, b = 600, 400                         # shape parameters
+    dist = BetaBinomial(n-1, a, b)
+    p_default = dist.pdf()
 
-    @jit
-    def u(c, σ):
-        if c > 0:
-            return (c**(1 - σ) - 1) / (1 - σ)
-        else:
-            return -10e6
+.. code-block:: ipython3
 
+    mccall_data = [
+        ('α', float64),          # job separation rate
+        ('β', float64),          # discount factor
+        ('γ', float64),          # Job offer rate
+        ('c', float64),          # unemployment compensation
+        ('σ', float64),          # Utility parameter
+        ('w_vec', float64[:]),   # Possible wage values
+        ('p_vec', float64[:])    # Probabilities over w_vec
+    ]
 
+    @jitclass(mccall_data)
     class McCallModel:
         """
         Stores the parameters and functions associated with a given model.
         """
 
-        def __init__(self, 
-                    α=0.2,       # Job separation rate
-                    β=0.98,      # Discount rate
-                    γ=0.7,       # Job offer rate
-                    c=6.0,       # Unemployment compensation
-                    σ=2.0,       # Utility parameter
-                    w_vec=None,  # Possible wage values
-                    p_vec=None): # Probabilities over w_vec
+        def __init__(self,
+                    α=0.2,       
+                    β=0.98,      
+                    γ=1.0,       
+                    c=6.0,       
+                    σ=2.0,       
+                    w_vec=w_default, 
+                    p_vec=p_default): 
 
             self.α, self.β, self.γ, self.c = α, β, γ, c
             self.σ = σ
+            self.w_vec = w_vec
+            self.p_vec = p_vec
 
-            # Add a default wage vector and probabilities over the vector using
-            # the beta-binomial distribution
-            if w_vec is None:
-                n = 60  # Number of possible outcomes for wage
-                # Wages between 10 and 20
-                self.w_vec = np.linspace(10, 20, n)
-                a, b = 600, 400  # Shape parameters
-                dist = BetaBinomial(n-1, a, b)
-                self.p_vec = dist.pdf()  
+        
+        def u(self, c):
+            σ = self.σ
+            if c > 0:
+                return (c**(1 - σ) - 1) / (1 - σ)
             else:
-                self.w_vec = w_vec
-                self.p_vec = p_vec
+                return -10e6
+        
+        def update_bellman(self, V, V_new, U):
+            α, β, γ, c = self.α, self.β, self.γ, self.c
+            w_vec, p_vec, u = self.w_vec, self.p_vec, self.u
+            
+            
+            for w_idx, w in enumerate(w_vec):
+                # w_idx indexes the vector of possible wages
+                V_new[w_idx] = u(w) + β * ((1 - α) * V[w_idx] + α * U)
 
-    @jit
-    def _update_bellman(α, β, γ, c, σ, w_vec, p_vec, V, V_new, U):
-        """
-        A jitted function to update the Bellman equations.  Note that V_new is
-        modified in place (i.e, modified by this function).  The new value of U
-        is returned.
+            U_new = u(c) + β * (1 - γ) * U + \
+                            β * γ * np.sum(np.maximum(U, V) * p_vec)
 
-        """
-        for w_idx, w in enumerate(w_vec):
-            # w_idx indexes the vector of possible wages
-            V_new[w_idx] = u(w, σ) + β * ((1 - α) * V[w_idx] + α * U)
+            return U_new
 
-        U_new = u(c, σ) + β * (1 - γ) * U + \
-                        β * γ * np.sum(np.maximum(U, V) * p_vec)
+We will create a function ``solve_mccall_model`` to iterate with the Bellman operator.
 
-        return U_new
-
+.. code-block:: python3
 
     def solve_mccall_model(mcm, tol=1e-5, max_iter=2000):
         """
-        Iterates to convergence on the Bellman equations 
-        
+        Iterates to convergence on the Bellman equations
+
         Parameters
         ----------
         mcm : an instance of McCallModel
@@ -875,8 +880,7 @@ The first piece of code implements value function iteration
         error = tol + 1
 
         while error > tol and i < max_iter:
-            U_new = _update_bellman(mcm.α, mcm.β, mcm.γ, 
-                    mcm.c, mcm.σ, mcm.w_vec, mcm.p_vec, V, V_new, U)
+            U_new = mcm.update_bellman(V, V_new, U)
             error_1 = np.max(np.abs(V_new - V))
             error_2 = np.abs(U_new - U)
             error = max(error_1, error_2)
@@ -902,28 +906,28 @@ The second piece of code is used to complete the reservation wage:
         the lowest wage in mcm.w_vec.
 
         If v(w) < U for all w, then w_bar is set to np.inf.
-        
+
         Parameters
         ----------
         mcm : an instance of McCallModel
         return_values : bool (optional, default=False)
-            Return the value functions as well 
+            Return the value functions as well
 
         Returns
         -------
         w_bar : scalar
             The reservation wage
-            
+
         """
-
         V, U = solve_mccall_model(mcm)
-        w_idx = np.searchsorted(V - U, 0)  
+        h = mcm.u(mcm.c) + mcm.β * U
 
-        if w_idx == len(V):
-            w_bar = np.inf
-        else:
-            w_bar = mcm.w_vec[w_idx]
-
+        w_bar = np.inf
+        for i, wage in enumerate(mcm.w_vec):
+            if V[i] > h:
+                w_bar = wage
+                break
+        
         if return_values == False:
             return w_bar
         else:
@@ -939,11 +943,8 @@ function of the unemployment compensation rate
     # Some global variables that will stay constant
     α = 0.013
     α_q = (1-(1-α)**3)   # Quarterly (α is monthly)
-    b = 0.0124
-    d = 0.00822
-    β = 0.98
-    γ = 1.0
-    σ = 2.0
+    b = 0.0124           # US Birth rate
+    d = 0.00822          # US Death rate
 
     # The default wage distribution --- a discretized lognormal
     log_wage_mean, wage_grid_size, max_wage = 20, 200, 170
@@ -963,15 +964,12 @@ function of the unemployment compensation rate
         """
 
         mcm = McCallModel(α=α_q,
-                        β=β,
-                        γ=γ,
                         c=c-τ,          # Post tax compensation
-                        σ=σ,
                         w_vec=w_vec-τ,  # Post tax wages
                         p_vec=p_vec)
 
         w_bar, V, U = compute_reservation_wage(mcm, return_values=True)
-        λ = γ * np.sum(p_vec[w_vec - τ > w_bar])
+        λ = mcm.γ * np.sum(p_vec[w_vec - τ > w_bar])
         return w_bar, λ, V, U
 
     def compute_steady_state_quantities(c, τ):
