@@ -243,24 +243,7 @@ This class will
 #. provide a method to compute the state state of the rate
 
 
-To write a nice implementation, there's an issue we have to address.
-
-Derived data such as :math:`A` depend on the primitives like :math:`\alpha`
-and :math:`\lambda`.
-
-If a user alters these primitives, we would ideally like derived data to
-update automatically.
-
-(For example, if a user changes the value of :math:`b` for a given instance of the class, we would like :math:`g = b - d` to update automatically)
-
-To achieve this outcome, we're going to use descriptors and decorators such as `@property`.
-
-If you need to refresh your understanding of how these work, consult `this lecture <https://python-programming.quantecon.org/python_advanced_features.html>`__.
-
-
-
-Here's the code:
-
+In the class, the implied objects :math:`g, A, \hat A` will change if we change the primitives.
 
 .. code-block:: python3
 
@@ -282,66 +265,13 @@ Here's the code:
 
         """
         def __init__(self, λ=0.283, α=0.013, b=0.0124, d=0.00822):
-            self._λ, self._α, self._b, self._d = λ, α, b, d
-            self.compute_derived_values()
+            self.λ, self.α, self.b, self.d = λ, α, b, d
+          
+            self.g = self.b - self.d
+            self.A = np.array([[(1-self.d) * (1-self.λ) + self.b,      (1 - self.d) * self.α + self.b],
+                               [             (1-self.d) * self.λ,      (1 - self.d) * (1 - self.α)   ]])
 
-        def compute_derived_values(self):
-            # Unpack names to simplify expression
-            λ, α, b, d = self._λ, self._α, self._b, self._d
-
-            self._g = b - d
-            self._A = np.array([[(1-d) * (1-λ) + b,      (1 - d) * α + b],
-                                [        (1-d) * λ,   (1 - d) * (1 - α)]])
-
-            self._A_hat = self._A / (1 + self._g)
-
-        @property
-        def g(self):
-            return self._g
-
-        @property
-        def A(self):
-            return self._A
-
-        @property
-        def A_hat(self):
-            return self._A_hat
-
-        @property
-        def λ(self):
-            return self._λ
-
-        @λ.setter
-        def λ(self, new_value):
-            self._α = new_value
-            self.compute_derived_values()
-
-        @property
-        def α(self):
-            return self._α
-
-        @α.setter
-        def α(self, new_value):
-            self._α = new_value
-            self.compute_derived_values()
-
-        @property
-        def b(self):
-            return self._b
-
-        @b.setter
-        def b(self, new_value):
-            self._b = new_value
-            self.compute_derived_values()
-
-        @property
-        def d(self):
-            return self._d
-
-        @d.setter
-        def d(self, new_value):
-            self._d = new_value
-            self.compute_derived_values()
+            self.A_hat = self.A / (1 + self.g)
 
 
         def rate_steady_state(self, tol=1e-6):
@@ -405,7 +335,7 @@ Here's the code:
                 x = self.A_hat @ x
 
 
-As desired, if we create an instance and update a primitive like
+As explained, if we update a primitive like
 :math:`\alpha`, derived objects like :math:`A` will also change
 
 .. code-block:: python3
@@ -419,7 +349,7 @@ As desired, if we create an instance and update a primitive like
 
 .. code-block:: python3
 
-    lm.α = 2
+    lm = LakeModel(α = 2)
     lm.A
 
 
