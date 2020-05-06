@@ -19,7 +19,7 @@ dependencies:
   - statsmodels
   - seaborn
   - pip:
-    - sphinxcontrib-jupyter
+    - sphinxcontrib-jupyter=0.5.5
     - sphinxcontrib-bibtex
     - quantecon
     - joblib
