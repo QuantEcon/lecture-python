@@ -17,7 +17,7 @@ done
 
 echo "List of Changed RST Files: $RST_FILES"
 echo "Clean Build Requested: $CLEAN_BUILD"
-if [[ CLEAN_BUILD == True]]; then
+if [[ $CLEAN_BUILD == True]]; then
     make coverage
 elif [ -z "$RST_FILES" ]; then
     echo "No RST Files have changed -- nothing to do in this PR"
