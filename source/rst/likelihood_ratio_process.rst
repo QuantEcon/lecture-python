@@ -22,7 +22,7 @@ Likelihood Ratio Processes
 
 Overview
 =========
-This lecture describes likelihood ratio processes and some of their uses by frequentist and Bayesian statisticians.
+This lecture describes likelihood ratio processes and some of their uses.
 
 We'll use the simple statistical setting also used in :doc:`this lecture <exchangeable>`.
 
@@ -30,13 +30,11 @@ Among the things that we'll learn about are
 
    * A peculiar property of likelihood ratio processes
 
-   * How for a Bayesian  a likelihood ratio process and a prior probability determine a posterior probability
-
    * How a likelihood ratio process is the key ingredient in frequentist hypothesis testing
 
    * How a **receiver operator characteristic curve** summarizes information about a false alarm probability and power in frequentist hypothesis testing
 
-
+   * How during World War II the United States Navy devised a decision rule that Captain Garret L. Schyler challenged and asked Milton Friedman to justify to him, a topic to be studied in  :doc:`this lecture <wald_friedman>`
 
 Likelihood Ratio Process
 ========================
@@ -64,11 +62,11 @@ We observe a sequence :math:`\{w_t\}_{t=1}^T` of :math:`T` IID draws
 from either :math:`f` or :math:`g`.
 
 We want to use these observations to infer whether nature chose :math:`f` or
-:math:`g` before the beginning of time.
+:math:`g`.
 
 A **likelihood ratio process** is a useful tool for this task.
 
-To begin, we define the key component of a likelihood ratio process, namely, the time :math:`t` likelihood ratio  as the random variable
+To begin, we define key component of a likelihood ratio process, namely, the time :math:`t` likelihood ratio  as the random variable
 
 .. math::
 
@@ -76,7 +74,7 @@ To begin, we define the key component of a likelihood ratio process, namely, the
 
 
 We assume that :math:`f` and :math:`g` both put positive probabilities on the
-same intervals of possible realizations of :math:`w_t`.
+same intervals of possible realizations of the random variable :math:`W`.
 
 That means that under the :math:`g` density,  :math:`\ell (w_t)=
 \frac{f\left(w_{t}\right)}{g\left(w_{t}\right)}`
@@ -84,12 +82,12 @@ is evidently a nonnegative  random variable with mean :math:`1`.
 
 
 A **likelihood ratio process** for sequence
-:math:`\left\{ \ell \left(w_{t}\right)\right\} _{t=1}^{\infty}` is defined as
+:math:`\left\{ w_{t}\right\} _{t=1}^{\infty}` is defined as
 
 .. math::
 
 
-   L\left(w^{t}\right)=\prod_{i=1}^{t} \ell (w_i).
+   L\left(w^{t}\right)=\prod_{i=1}^{t} \ell (w_i),
 
 where :math:`w^t=\{ w_1,\dots,w_t\}` is a history of
 observations up to and including time :math:`t`.
@@ -107,7 +105,7 @@ The likelihood ratio and its logarithm are key tools for making
 inferences using a classic frequentist approach due to Neyman and
 Pearson :cite:`Neyman_Pearson`.
 
-To help us appreciate how things work, the following Python code evaluates :math:`f` and :math:`g` as different
+To help us appreciate how things work, the following Python code evaluates :math:`f` and :math:`g` as two different
 beta distributions, then computes and simulates an associated likelihood
 ratio process by generating a sequence :math:`w^t` from *some*
 probability distribution, for example, a sequence of  IID draws from :math:`g`.
@@ -180,9 +178,8 @@ paths :math:`L\left(w^{t}\right)` that fall in the interval
 
     plt.plot(range(T), np.sum(l_seq_g <= 0.01, axis=0) / N)
 
-Despite the evident convergence of virtually all probability mass to a
-very small interval near :math:`0`, a peculiar fact about a likelihood
-ratio process is that the unconditional mean of
+Despite the evident convergence of most probability mass to a
+very small interval near :math:`0`,  the unconditional mean of
 :math:`L\left(w^t\right)` under probability density :math:`g` is
 identically :math:`1` for all :math:`t`.
 
@@ -209,7 +206,7 @@ which immediately implies
        &=1.\\
    \end{aligned}
 
-Because :math:`L(w^t)` is a multiplicative process and
+Because :math:`L(w^t) = \ell(w_t) L(w^{t-1})` and
 :math:`\{w_t\}_{t=1}^t` is an IID sequence, we have
 
 .. math::
@@ -231,14 +228,14 @@ Mathematical induction implies
 Peculiar Property of Likelihood Ratio Process
 -----------------------------------------------
 
-How can this possibly be true if probability mass of the likelihood
-ratio process is piling up near :math:`1` as
+How can :math:`E_{0}\left[L\left(w^{t}\right)\bigm|q=g\right]=1` possibly be true when most  probability mass of the likelihood
+ratio process is piling up near :math:`0` as
 :math:`t \rightarrow + \infty`?
 
 The answer has to be that as :math:`t \rightarrow + \infty`, the
-distribution of :math:`L_t` becomes more and more thin-tailed as
-sufficient small mass shifts to very large values of :math:`L_t` to make
-the mean of :math:`L_t` continue to be zero despite the mass piling up
+distribution of :math:`L_t` becomes more and more fat-tailed:
+enough  mass shifts to larger and larger values of :math:`L_t` to make
+the mean of :math:`L_t` continue to be one despite most of the probability mass piling up
 near :math:`0`.
 
 To illustrate this peculiar property, we simulate many paths and
@@ -250,7 +247,7 @@ averaging across these many paths at each :math:`t`.
     l_arr_g = simulate(G_a, G_b, N=50000)
     l_seq_g = np.cumprod(l_arr_g, axis=1)
 
-The following Python code approximates the unconditional means
+The following Python code approximates  unconditional means
 :math:`E_{0}\left[L\left(w^{t}\right)\right]` by averaging across sample
 paths.
 
@@ -268,7 +265,7 @@ Nature Permanently Draws from Density f
 
 Now suppose that before time :math:`0` nature permanently decided to draw repeatedly from density :math:`f`.
 
-A useful property is that while the mean of the likelihood ratio :math:`\ell \left(w_{t}\right)` under density
+While the mean of the likelihood ratio :math:`\ell \left(w_{t}\right)` under density
 :math:`g` is :math:`1`, its mean under the density :math:`f` exceeds one.
 
 To see this, we compute
@@ -282,9 +279,8 @@ To see this, we compute
        &=\int \ell \left(w_{t}\right)^{2}g\left(w_{t}\right)dw_{t} \\
        &=E_{0}\left[\ell \left(w_{t}\right)^{2}\mid q=g\right] \\
        &=E_{0}\left[\ell \left(w_{t}\right)\mid q=g\right]^{2}+Var\left(\ell \left(w_{t}\right)\mid q=g\right) \\
-       &>E_{0}\left[\ell \left(w_{t}\right)\mid q=g\right]^{2} \\
-       &=1 \\
-   \end{aligned}
+       &>E_{0}\left[\ell \left(w_{t}\right)\mid q=g\right]^{2} = 1 \\
+          \end{aligned}
 
 
 This in turn implies that the unconditional mean of the likelihood ratio process :math:`L(w^t)`
@@ -312,222 +308,20 @@ fast probability mass diverges  to :math:`+\infty`.
 
     plt.plot(range(T), np.sum(l_seq_f > 10000, axis=0) / N)
 
-Likelihood Ratio Process and Bayes’ Law
-==========================================
 
-
-Let :math:`\pi_t` be a Bayesian posterior defined as
-
-.. math::  \pi_t = {\rm Prob}(q=f|w^t)
-
-The likelihood ratio process is a principal actor in the formula that governs the evolution
-of the posterior probability :math:`\pi_t`, an instance of **Bayes' Law**.
-
-Bayes’ law implies that :math:`\{\pi_t\}` obeys the recursion
-
-.. math::
-   :label: eq_recur1
-
-   \pi_t=\frac{\pi_{t-1} l_t(w_t)}{\pi_{t-1} l_t(w_t)+1-\pi_{t-1}}
-
-with :math:`\pi_{0}` be a Bayesian prior probability that :math:`q = f`,
-i.e., a belief about :math:`q` based on having seen no data.
-
-Below we define a Python function that updates belief :math:`\pi` using
-likelihood ratio :math:`\ell` according to  recursion :eq:`eq_recur1`
-
-.. code-block:: python3
-
-    @njit
-    def update(π, l):
-        "Update π using likelihood l"
-
-        # Update belief
-        π = π * l / (π * l + 1 - π)
-
-        return π
-
-Formula :eq:`eq_recur1` can be generalized in a useful way.
-
-We do this by iterating on recursion :eq:`eq_recur1` in order to derive an
-expression for  the time :math:`t` posterior :math:`\pi_{t+1}` as a function
-of the time :math:`0` prior :math:`\pi_0` and the likelihood ratio process
-:math:`L(w^{t+1})` at time :math:`t`.
-
-To begin, notice that the updating rule
-
-.. math::
-
-   \pi_{t+1}
-   =\frac{\pi_{t}\ell \left(w_{t+1}\right)}
-   {\pi_{t}\ell \left(w_{t+1}\right)+\left(1-\pi_{t}\right)}
-
-implies
-
-.. math::
-
-
-   \begin{aligned}
-   \frac{1}{\pi_{t+1}}
-       &=\frac{\pi_{t}\ell \left(w_{t+1}\right)
-           +\left(1-\pi_{t}\right)}{\pi_{t}\ell \left(w_{t+1}\right)} \\
-       &=1-\frac{1}{\ell \left(w_{t+1}\right)}
-           +\frac{1}{\ell \left(w_{t+1}\right)}\frac{1}{\pi_{t}}.
-   \end{aligned}
-
-.. math::
-
-   \Rightarrow
-   \frac{1}{\pi_{t+1}}-1
-   =\frac{1}{\ell \left(w_{t+1}\right)}\left(\frac{1}{\pi_{t}}-1\right).
-
-Therefore
-
-.. math::
-
-
-   \begin{aligned}
-       \frac{1}{\pi_{t+1}}-1
-       =\frac{1}{\prod_{i=1}^{t+1}\ell \left(w_{i}\right)}
-           \left(\frac{1}{\pi_{0}}-1\right)
-       =\frac{1}{L\left(w^{t+1}\right)}\left(\frac{1}{\pi_{0}}-1\right).
-   \end{aligned}
-
-Since :math:`\pi_{0}\in\left(0,1\right)` and
-:math:`L\left(w^{t+1}\right)>0`, we can verify that
-:math:`\pi_{t+1}\in\left(0,1\right)`.
-
-After rearranging the preceding equation, we can express :math:`\pi_{t+1}` as a
-function of  :math:`L\left(w^{t+1}\right)`, the  likelihood ratio process at :math:`t+1`,
-and the initial prior :math:`\pi_{0}`
-
-.. math::
-   :label: eq_Bayeslaw103
-
-   \pi_{t+1}=\frac{\pi_{0}L\left(w^{t+1}\right)}{\pi_{0}L\left(w^{t+1}\right)+1-\pi_{0}} .
-
-Formula :eq:`eq_Bayeslaw103` generalizes generalizes formula :eq:`eq_recur1`.
-
-Formula :eq:`eq_Bayeslaw103`  can be regarded as a one step  revision of prior probability :math:`\pi_0` after seeing
-the batch of data :math:`\left\{ w_{i}\right\} _{i=1}^{t+1}`.
-
-Formula :eq:`eq_Bayeslaw103` shows the key role that the likelihood ratio process  :math:`L\left(w^{t+1}\right)` plays in determining
-the posterior probability :math:`\pi_{t+1}`.
-
-Formula :eq:`eq_Bayeslaw103` is the foundation for the insight that, because of the way the likelihood ratio process behaves
-as :math:`t \rightarrow + \infty`, the likelihood ratio process dominates the initial prior :math:`\pi_0` in determining the
-limiting behavior of :math:`\pi_t`.
-
-To illustrate this insight, below we will plot  graphs showing **one** simulated
-path of the  likelihood ratio process :math:`L_t` along with two paths of
-:math:`\pi_t` that are associated with the *same* realization of the likelihood ratio process but *different* initial prior probabilities
-probabilities :math:`\pi_{0}`.
-
-First, we specify the two values of :math:`\pi_0`.
-
-.. code-block:: python3
-
-    π1, π2 = 0.2, 0.8
-
-Next we generate paths of the likelihood ratio process :math:`L_t` and the posteior :math:`\pi_t` for a history drawn as IID
-draws from density :math:`f`.
-
-.. code-block:: python3
-
-    T = l_arr_f.shape[1]
-    π_seq_f = np.empty((2, T+1))
-    π_seq_f[:, 0] = π1, π2
-
-    for t in range(T):
-        for i in range(2):
-            π_seq_f[i, t+1] = update(π_seq_f[i, t], l_arr_f[0, t])
-
-.. code-block:: python3
-
-    fig, ax1 = plt.subplots()
-
-    for i in range(2):
-        ax1.plot(range(T+1), π_seq_f[i, :], label=f"$\pi_0$={π_seq_f[i, 0]}")
-
-    ax1.set_ylabel("$\pi_t$")
-    ax1.set_xlabel("t")
-    ax1.legend()
-    ax1.set_title("when f governs data")
-
-    ax2 = ax1.twinx()
-    ax2.plot(range(1, T+1), np.log(l_seq_f[0, :]), '--', color='b')
-    ax2.set_ylabel("$log(L(w^{t}))$")
-
-    plt.show()
-
-
-The dotted line in the graph above records the logarithm of the  likelihood ratio process :math:`\log L(w^t)`.
-
-
-Please note that there are two different scales on the :math:`y` axis.
-
-Now let's study what happens when the history consists of IID draws from density :math:`g`
-
-
-.. code-block:: python3
-
-    T = l_arr_g.shape[1]
-    π_seq_g = np.empty((2, T+1))
-    π_seq_g[:, 0] = π1, π2
-
-    for t in range(T):
-        for i in range(2):
-            π_seq_g[i, t+1] = update(π_seq_g[i, t], l_arr_g[0, t])
-
-.. code-block:: python3
-
-    fig, ax1 = plt.subplots()
-
-    for i in range(2):
-        ax1.plot(range(T+1), π_seq_g[i, :], label=f"$\pi_0$={π_seq_g[i, 0]}")
-
-    ax1.set_ylabel("$\pi_t$")
-    ax1.set_xlabel("t")
-    ax1.legend()
-    ax1.set_title("when g governs data")
-
-    ax2 = ax1.twinx()
-    ax2.plot(range(1, T+1), np.log(l_seq_g[0, :]), '--', color='b')
-    ax2.set_ylabel("$log(L(w^{t}))$")
-
-    plt.show()
-
-
-Below we offer Python code that verifies this in a setting in which
-nature chose permanently to draw from density :math:`f`.
-
-.. code-block:: python3
-
-    π_seq = np.empty((2, T+1))
-    π_seq[:, 0] = π1, π2
-
-    for i in range(2):
-        πL = π_seq[i, 0] * l_seq_f[0, :]
-        π_seq[i, 1:] = πL / (πL + 1 - π_seq[i, 0])
-
-.. code-block:: python3
-
-    np.abs(π_seq - π_seq_f).max() < 1e-10
 
 Likelihood Ratio Test
 ======================
 
-Having seen how the likelihood ratio process is a key ingredient of the formula :eq:`eq_Bayeslaw103` for
-a Bayesian's posteior probabilty that nature has drawn history :math:`w^t` as repeated draws from density
-:math:`g`, we now turn to how a frequentist statistician would employ the hypothesis testing theory
+We now describe how to employ the machinery 
 of Neyman and Pearson :cite:`Neyman_Pearson` to test the hypothesis that  history :math:`w^t` is generated by repeated
 IID draws from density :math:`g`.
 
 Denote :math:`q` as the data generating process, so that
 :math:`q=f \text{ or } g`.
 
-Upon observing a sample :math:`\{W_i\}_{i=1}^t`, we want to figure out
-which one is the data generating process by executing a frequentist
+Upon observing a sample :math:`\{W_i\}_{i=1}^t`, we want to decide
+which one is the data generating process by performing  a (frequentist)
 hypothesis test.
 
 We specify
@@ -535,23 +329,23 @@ We specify
 -  Null hypothesis :math:`H_0`: :math:`q=f`,
 -  Alternative hypothesis :math:`H_1`: :math:`q=g`.
 
-Neyman and Pearson proved that the best way to test this hospital is to use a **likelihood ratio test**:
+Neyman and Pearson proved that the best way to test this hypothesis is to use a **likelihood ratio test** that takes the
+form:
 
 -  reject :math:`H_0` if :math:`L(W^t) < c`,
 -  accept :math:`H_0` otherwise.
 
-where the discrimination threshold :math:`c` is arbitrarily given.
+where :math:`c` is a given  discrimination threshold, to be chosen in a way we'll soon describe. 
 
-This test is *best* in the sense that it is the uniformly most powerful test.
+This test is *best* in the sense that it is a **uniformly most powerful** test.
 
-To understand what this means, we have to look at probabilities of two important events.
-
-These two probabilities allow us to characterize a test associated with particular
+To understand what this means, we have to define probabilities of two important events that 
+allow us to characterize a test associated with given
 threshold :math:`c`.
 
 The two probabities are:
 
-* Probability of detection (= *statistical power* = 1 minus probability
+- Probability of detection (= **statistical power** = 1 minus probability
    of Type II error):
 
 .. math::
@@ -559,7 +353,7 @@ The two probabities are:
 
    1-\beta \equiv \Pr\left\{ L\left(w^{t}\right)<c\mid q=g\right\}
 
-* Probability of false alarm (= *significance level* = probability of
+- Probability of false alarm (= **significance level** = probability of
    Type I error):
 
 .. math::
@@ -572,6 +366,10 @@ Lemma <https://en.wikipedia.org/wiki/Neyman–Pearson_lemma>`__
 states that among all possible tests, a likelihood ratio test
 maximizes the probability of detection for a given probability of false
 alarm.
+
+Another way to say the same thing is that  among all possible tests, a likelihood ratio test
+maximizes **power** for a given **significance level**. 
+
 
 To have made a confident inference, we want a small probability of
 false alarm and a large probability of detection.
@@ -720,7 +518,7 @@ Below we show an example in which we fix the probability of false alarm at
 :math:`0.05`.
 
 The required sample size for making a decision is then determined by a
-target probability of detection, for example, :math:`0.9`.
+target probability of detection, for example, :math:`0.9`, as depicted in the following graph.
 
 .. code-block:: python3
 
@@ -741,9 +539,18 @@ target probability of detection, for example, :math:`0.9`.
     plt.show()
 
 
+The United States Navy evidently used a procedure like this to select a sample size :math:`t` for doing quality
+control tests during World War II.  
 
-Sequel
+A Navy Captain who had been ordered to perform tests of this kind had second thoughts about it that he
+presented to Milton Friedman, as we describe in  :doc:`this lecture <wald_friedman>`.
+
+
+Sequels
 ========
+
+Likelihood processes play an important role in Bayesian learning, as described in :doc:`this lecture <likelihood_bayes>`
+and as applied in :doc:`this lecture <odu>`. 
 
 Likelihood ratio processes appear again in `this lecture <https://python-advanced.quantecon.org/additive_functionals.html>`__, which contains another illustration
 of the **peculiar property** of likelihood ratio processes described above.

@@ -466,8 +466,8 @@ Bayesian Decision Rule
 ========================
 
 In this lecture :doc:`A Problem that Stumped Milton Friedman <wald_friedman>`,
- we learned how Abraham Wald confirmed the Navy
-Captain’s hunch that there was a better decision rule.
+we learned how Abraham Wald confirmed the Navy
+Captain’s hunch that there is a better decision rule.
 
 We presented a Bayesian procedure that instructed the Captain to makes
 decisions by comparing his current Bayesian posterior probability
