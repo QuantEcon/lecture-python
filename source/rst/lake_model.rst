@@ -1050,18 +1050,18 @@ Exercises
 Exercise 1
 ----------
 
-In the Lake Model, there is derived data such as $ A $ depend on primitives like :math:`\alpha`
+In the Lake Model, there is derived data such as :math:`A` which depends on primitives like :math:`\alpha`
 and :math:`\lambda`.
 
-So, when a user alters these primitives, we need derived data to updates automatically.
+So, when a user alters these primitives, we need the derived data to update automatically.
 
 (For example, if a user changes the value of :math:`b` for a given instance of the class, we would like :math:`g = b - d` to update automatically)
 
-To achieve this outcome, we used ``class`` feature above lecture in ``LakeModel``.
+To achieve this outcome in the lecture, we used the ``class`` feature to set the local variables such as ``lm = LakeModel(α = 2)``.
 
-However, we can use descriptors and decorators such as ``@property`` to have the outcome nicely.
+However, we can use descriptors and decorators such as ``@property`` to achieve the outcome nicely.
 
-Arrange ``LakeModel`` class by using descriptors and decorators such as ``@property``.
+Arrange the ``LakeModel`` class by using descriptors and decorators such as ``@property``.
 
 (If you need to refresh your understanding of how these work, consult `this lecture <https://python-programming.quantecon.org/python_advanced_features.html>`_.)
 
