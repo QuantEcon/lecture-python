@@ -114,7 +114,7 @@ We also want to know the values of the following objects
 * The unemployment rate :math:`u_t := U_t/N_t`.
 
 
-(Here and below, capital letters represent stocks and lowercase letters represent flows)
+(Here and below, capital letters represent aggregates and lowercase letters represent rates)
 
 
 
