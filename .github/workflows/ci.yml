@@ -18,6 +18,9 @@ jobs:
       - name: Display Conda Environment Versions
         shell: bash -l {0}
         run: conda list
+      - name: Display Pip Versions
+        shell: bash -l {0}
+        run: pip list
       - name: Get Changed Files
         id: files
         uses: jitterbit/get-changed-files@v1
