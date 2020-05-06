@@ -6,12 +6,15 @@ MODIFIED_FILES="$1"
 RST_FILES=""
 for F in $MODIFIED_FILES
 do
+    if [[ $F == environment.yml ]]
+    then
+        CLEAN_BUILD=True
+        break
+    fi
+    #Extract List of RST Files
     if [[ $F == *.rst ]]
     then
         RST_FILES="$RST_FILES $F"
-    elif [[ $F == environment.yml ]]
-    then
-        CLEAN_BUILD=True
     fi
 done
 
