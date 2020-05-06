@@ -23,3 +23,4 @@ dependencies:
     - sphinxcontrib-bibtex
     - quantecon
     - joblib
+    - interpolation==2.1.2
