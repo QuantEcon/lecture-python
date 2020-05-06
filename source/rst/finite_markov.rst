@@ -1484,7 +1484,7 @@ Exercise 2
     from operator import itemgetter
 
     infile = 'web_graph_data.txt'
-    lambdabet = 'abcdefghijklmnopqrstuvwxyz'
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
 
     n = 14 # Total number of web pages (nodes)
 
@@ -1497,7 +1497,7 @@ Exercise 2
     f.close()
     for edge in edges:
         from_node, to_node = re.findall('\w', edge)
-        i, j = lambdabet.index(from_node), lambdabet.index(to_node)
+        i, j = alphabet.index(from_node), alphabet.index(to_node)
         Q[i, j] = 1
     # Create the corresponding Markov matrix P 
     P = np.empty((n, n))
@@ -1506,7 +1506,7 @@ Exercise 2
     mc = MarkovChain(P)
     # Compute the stationary distribution r 
     r = mc.stationary_distributions[0]
-    ranked_pages = {lambdabet[i] : r[i] for i in range(n)}
+    ranked_pages = {alphabet[i] : r[i] for i in range(n)}
     # Print solution, sorted from highest to lowest rank 
     print('Rankings\n ***')
     for name, rank in sorted(ranked_pages.items(), key=itemgetter(1), reverse=1):
