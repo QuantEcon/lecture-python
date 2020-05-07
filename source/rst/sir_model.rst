@@ -188,7 +188,7 @@ Now we construction a function that represents :math:`F` in :eq:`dfcv`
         
         return ds, de, di
 
-The value `R0` is the effective transmission rate and can be either constant
+The value ``R0`` is the effective transmission rate and can be either constant
 or a given function of time.
 
 The initial conditions are set to
@@ -207,7 +207,7 @@ In vector form the initial condition is
     x_0 = s_0, e_0, i_0
 
 We solve for the time path numerically using `odeint`, at a sequence of dates
-`t_vec`.
+``t_vec``.
 
 .. code-block:: ipython3
 
