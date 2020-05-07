@@ -20,11 +20,16 @@ done
 
 echo "List of Changed RST Files: $RST_FILES"
 echo "Clean Build Requested: $CLEAN_BUILD"
-if [ $CLEAN_BUILD ]; then
+
+if [ $CLEAN_BUILD ]
+then
+    echo "Running Clean Build"
     make coverage
-elif [ -z "$RST_FILES" ]; then
+elif [ -z "$RST_FILES" ]
+then
     echo "No RST Files have changed -- nothing to do in this PR"
 else
     RST_FILES="$RST_FILES source/rst/index_toc.rst"
+    echo "Running Selecting Build with: $RST_FILES"
     make coverage FILES="$RST_FILES"
 fi
