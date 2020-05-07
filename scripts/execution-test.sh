@@ -21,7 +21,7 @@ done
 echo "List of Changed RST Files: $RST_FILES"
 echo "Clean Build Requested: $CLEAN_BUILD"
 
-if [ $CLEAN_BUILD ]
+if [ "$CLEAN_BUILD" = true ]
 then
     echo "Running Clean Build"
     make coverage
