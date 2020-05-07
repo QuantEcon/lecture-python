@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CLEAN_BUILD=False
+CLEAN_BUILD=false
 MODIFIED_FILES="$1"
 
 RST_FILES=""
@@ -8,7 +8,7 @@ for F in $MODIFIED_FILES
 do
     if [[ $F == environment.yml ]]
     then
-        CLEAN_BUILD=True
+        CLEAN_BUILD=true
         break
     fi
     #Extract List of RST Files
