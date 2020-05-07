@@ -12,7 +12,7 @@ In addition to what's in Anaconda, this lecture will require the following libra
 .. code-block:: ipython
   :class: hide-output
 
-  !pip install --upgrade interpolation
+  !pip install interpolation
 
 
 
@@ -69,7 +69,7 @@ where :math:`u` is the CRRA utility function.
 The analytical solutions for the value function and optimal policy were found
 to be as follows.
 
-.. literalinclude:: /_static/lecture_specific/cake_eating_numerical/analytical.py 
+.. literalinclude:: /_static/lecture_specific/cake_eating_numerical/analytical.py
 
 
 Our first aim is to obtain these analytical solutions numerically.
@@ -78,7 +78,7 @@ Our first aim is to obtain these analytical solutions numerically.
 Value Function Iteration
 ========================
 
-The first approach we will take is **value function iteration**. 
+The first approach we will take is **value function iteration**.
 
 This is a form of **successive approximation**, and was discussed in our :doc:`lecture on job search <mccall_model>`.
 
@@ -86,7 +86,7 @@ The basic idea is:
 
 1. Take an arbitary intial guess of :math:`v`.
 
-2. Obtain an update :math:`w` defined by 
+2. Obtain an update :math:`w` defined by
 
     .. math::
         w(x) = \max_{0\leq c \leq x} \{u(c) + \beta v(x-c)\}
@@ -121,7 +121,7 @@ v` converges to the solution to the Bellman equation.
 Fitted Value Function Iteration
 -------------------------------
 
-Both consumption :math:`c` and the state variable :math:`x` are continous. 
+Both consumption :math:`c` and the state variable :math:`x` are continous.
 
 This causes complications when it comes to numerical work.
 
@@ -174,8 +174,8 @@ SciPy minimization routine into a maximization routine.
         maximizer, maximum = result.x, -result.fun
         return maximizer, maximum
 
-We'll store the parameters :math:`\beta` and :math:`\gamma` in a 
-class called ``CakeEating``. 
+We'll store the parameters :math:`\beta` and :math:`\gamma` in a
+class called ``CakeEating``.
 
 The same class will also provide a method called ``state_action_value`` that
 returns the value of a consumption choice given a particular state and guess
@@ -254,7 +254,7 @@ Let's start by creating a ``CakeEating`` instance using the default parameteriza
 Now let's see the iteration of the value function in action.
 
 We start from guess :math:`v` given by :math:`v(x) = u(x)` for every
-:math:`x` grid point. 
+:math:`x` grid point.
 
 
 .. code-block:: python3
@@ -322,7 +322,7 @@ Now let's call it, noting that it takes a little while to run.
 
     v = compute_value_function(ce)
 
-Now we can plot and see what the converged value function looks like. 
+Now we can plot and see what the converged value function looks like.
 
 .. code-block:: python3
 
@@ -376,7 +376,7 @@ consumption policy was shown to be
 
 Let's see if our numerical results lead to something similar.
 
-Our numerical strategy will be to compute 
+Our numerical strategy will be to compute
 
 .. math::
     \sigma(x) = \arg \max_{0 \leq c \leq x} \{u(c) + \beta v(x - c)\}
@@ -412,7 +412,7 @@ Now let's pass the approximate value function and compute optimal consumption:
 
 .. code-block:: python3
 
-    c = σ(ce, v)  
+    c = σ(ce, v)
 
 .. _pol_an:
 
@@ -451,7 +451,7 @@ Time Iteration
 
 Now let's look at a different strategy to compute the optimal policy.
 
-Recall that the optimal policy satisfies the Euler equation 
+Recall that the optimal policy satisfies the Euler equation
 
 .. math::
     :label: euler-cen
@@ -510,7 +510,7 @@ Exercise 1
 Try the following modification of the problem.
 
 Instead of the cake size changing according to :math:`x_{t+1} = x_t - c_t`,
-let it change according to 
+let it change according to
 
 .. math::
     x_{t+1} = (x_t - c_t)^{\alpha}
@@ -519,7 +519,7 @@ where :math:`\alpha` is a parameter satisfying :math:`0 < \alpha < 1`.
 
 (We will see this kind of update rule when we study optimal growth models.)
 
-Make the required changes to value function iteration code and plot the value and policy functions. 
+Make the required changes to value function iteration code and plot the value and policy functions.
 
 Try to reuse as much code as possible.
 
@@ -560,7 +560,7 @@ We will use `inheritance <https://en.wikipedia.org/wiki/Inheritance_(object-orie
                      x_grid_max=2.5,   # size of cake
                      x_grid_size=120):
 
-            self.α = α 
+            self.α = α
             CakeEating.__init__(self, β, γ, x_grid_min, x_grid_max, x_grid_size)
 
         def state_action_value(self, c, x, v_array):
@@ -648,7 +648,7 @@ Here's one way to implement time iteration.
             if x < 1e-12:
                 σ_new[i] = 0.0
 
-            # handle other x 
+            # handle other x
             else:
                 σ_new[i] = bisect(euler_diff, 1e-10, x - 1e-10, x)
 
@@ -687,7 +687,7 @@ Here's one way to implement time iteration.
         if verbose and i < max_iter:
             print(f"\nConverged in {i} iterations.")
 
-        return σ 
+        return σ
 
 .. code-block:: python3
 
