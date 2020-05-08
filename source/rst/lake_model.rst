@@ -267,9 +267,10 @@ In the class, the implied objects :math:`g, A, \hat A` will change if we change 
         def __init__(self, λ=0.283, α=0.013, b=0.0124, d=0.00822):
             self.λ, self.α, self.b, self.d = λ, α, b, d
           
-            self.g = self.b - self.d
-            self.A = np.array([[(1-self.d) * (1-self.λ) + self.b,      (1 - self.d) * self.α + self.b],
-                               [             (1-self.d) * self.λ,      (1 - self.d) * (1 - self.α)   ]])
+            λ, α, b, d = self.λ, self.α, self.b, self.d
+            self.g = b - d
+            self.A = np.array([[(1-d) * (1-λ) + b,      (1 - d) * α + b],
+                               [        (1-d) * λ,      (1 - d) * (1 - α)]])
 
             self.A_hat = self.A / (1 + self.g)
 
