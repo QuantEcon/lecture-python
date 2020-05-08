@@ -16,7 +16,7 @@ In addition to what's in Anaconda, this lecture will need the following librarie
   :class: hide-output
 
   !pip install --upgrade quantecon
-  !pip install --upgrade interpolation
+  !pip install interpolation
 
 
 Overview
@@ -25,7 +25,7 @@ Overview
 In this lecture we again study the :doc:`McCall job search model with separation <mccall_model_with_separation>`, but now with a continuous wage distribution.
 
 While we already considered continuous wage distributions briefly in the
-exercises of the :doc:`first job search lecture <mccall_model>`, 
+exercises of the :doc:`first job search lecture <mccall_model>`,
 the change was relatively trivial in that case.
 
 This is because we were able to reduce the problem to solving for a single
@@ -77,9 +77,9 @@ and
 .. math::
     :label: bell2mcmc
 
-    v(w) = u(w) + \beta 
+    v(w) = u(w) + \beta
         \left[
-            (1-\alpha)v(w) + \alpha d  
+            (1-\alpha)v(w) + \alpha d
         \right]
 
 The unknowns here are the function :math:`v` and the scalar :math:`d`.
@@ -114,7 +114,7 @@ The iterates of the value function can neither be calculated exactly nor stored 
 
 To see the issue, consider :eq:`bell2mcmc`.
 
-Even if :math:`v` is a known function,  the only way to store its update :math:`v'` 
+Even if :math:`v` is a known function,  the only way to store its update :math:`v'`
 is to record its value :math:`v'(w)` for every :math:`w \in \mathbb R_+`.
 
 Clearly, this is impossible.
@@ -154,7 +154,7 @@ produce a good approximation to each :math:`v`, but also that it combines well w
 
 One good choice from both respects is continuous piecewise linear interpolation.
 
-This method 
+This method
 
 1. combines well with value function iteration (see., e.g.,
    :cite:`gordon1995stable` or :cite:`stachurski2008continuous`) and
@@ -233,10 +233,10 @@ Here's our class.
     @jitclass(mccall_data_continuous)
     class McCallModelContinuous:
 
-        def __init__(self, 
-                     c=1, 
-                     α=0.1, 
-                     β=0.96, 
+        def __init__(self,
+                     c=1,
+                     α=0.1,
+                     β=0.96,
                      grid_min=1e-10,
                      grid_max=5,
                      grid_size=100,
@@ -250,10 +250,10 @@ Here's our class.
         def update(self, v, d):
 
             # Simplify names
-            c, α, β, σ, μ = self.c, self.α, self.β, self.σ, self.μ 
+            c, α, β, σ, μ = self.c, self.α, self.β, self.σ, self.μ
             w = self.w_grid
             u = lambda x: np.log(x)
-            
+
             # Interpolate array represented value function
             vf = lambda x: interp(w, v, x)
 
@@ -338,7 +338,7 @@ Exercise 1
 ----------
 
 Use the code above to explore what happens to the reservation wage when the wage parameter :math:`\mu`
-changes. 
+changes.
 
 Use the default parameters and :math:`\mu` in ``mu_vals = np.linspace(0.0, 2.0, 15)``
 
@@ -360,7 +360,7 @@ support.
 
 Use ``s_vals = np.linspace(1.0, 2.0, 15)`` and ``m = 2.0``.
 
-State how you expect the reservation wage vary with :math:`s`.  
+State how you expect the reservation wage vary with :math:`s`.
 
 Now compute it.  Is this as you expected?
 
@@ -381,7 +381,7 @@ Here is one solution.
     w_bar_vals = np.empty_like(mu_vals)
 
     fig, ax = plt.subplots()
-    
+
     for i, m in enumerate(mu_vals):
         mcm.w_draws = lognormal_draws(μ=m)
         w_bar = compute_reservation_wage(mcm)
@@ -409,7 +409,7 @@ Here is one solution.
     w_bar_vals = np.empty_like(s_vals)
 
     fig, ax = plt.subplots()
-    
+
     for i, s in enumerate(s_vals):
         a, b = m - s, m + s
         mcm.w_draws = np.random.uniform(low=a, high=b, size=10_000)
