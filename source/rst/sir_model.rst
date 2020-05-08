@@ -46,7 +46,7 @@ We will use the following standard imports:
 
     import matplotlib.pyplot as plt
 
-We will also use SciPy's numerical routine `odeint` for solving differential
+We will also use SciPy's numerical routine ``odeint`` for solving differential
 equations.
 
 .. code-block:: ipython3
@@ -108,7 +108,7 @@ In these equations,
 
 * :math:`\beta(t)` is called the *transmission rate* (the rate at which individuals bump into others and expose them to the virus).
 * :math:`\sigma` is called the *infection rate* (the rate at which those who are exposed become infected)
-* :math:`\gamma` is called the *recovery rate* (the rate at which infected people recover or die).
+* :math:`\gamma` is called the *removal rate* (the rate at which infected people recover or die).
 * the dot symbol :math:`\dot y` represents the time derivative :math:`dy/dt`.
 
 
@@ -125,8 +125,7 @@ The system :eq:`sir_system` can be written in vector form as
     \dot x = F(x, t),  \qquad x := (s, e, i)
     :label: dfcv
 
-for suitable definition of :math:`F` (see the code below).
-
+:math:`F` as defined here is implemented in the code below.
 
 Parameters
 ----------
@@ -140,9 +139,9 @@ As in Atkeson's note, we set
 
 The transmission rate is modeled as 
 
-* :math:`\beta(t) := R(t) \gamma` where :math:`R(t)` is the *effective reproduction number* at time :math:`t`.
+* :math:`\beta(t) := R_t \gamma` where :math:`R_t` is the *effective reproduction number* at time :math:`t`.
 
-(The notation is slightly confusing, since :math:`R(t)` is different to
+(The notation is slightly confusing, since :math:`R_t` is different to
 :math:`R`, the symbol that represents the removed state.)
 
 
@@ -162,23 +161,23 @@ Next we fix parameters as described above.
     γ = 1 / 18
     σ = 1 / 5.2
 
-Now we construction a function that represents :math:`F` in :eq:`dfcv`
+Now we construct a function that represents :math:`F` in :eq:`dfcv`
 
 .. code-block:: ipython3
 
-    def F(x, t, R0=1.6):
+    def F(x, t, R_t=1.6):
         """
         Time derivative of the state vector.
 
             * x is the state vector (array_like)
             * t is time (scalar)
-            * R0 is the effective transmission rate, defaulting to a constant
+            * R_t is the effective transmission rate, defaulting to a constant R0 of 1.6
 
         """
         s, e, i = x
 
         # New exposure of susceptibles
-        β = R0(t) * γ if callable(R0) else R0 * γ
+        β = R_t(t) * γ if callable(R_t) else R_t * γ
         ne = β * s * i   
         
         # Time derivatives
@@ -188,7 +187,7 @@ Now we construction a function that represents :math:`F` in :eq:`dfcv`
         
         return ds, de, di
 
-Note that ``R0`` can be either constant or a given function of time.
+Note that ``R_t`` can be either the constant ``R0`` or a given function of time.
 
 The initial conditions are set to
 
@@ -205,18 +204,18 @@ In vector form the initial condition is
 
     x_0 = s_0, e_0, i_0
 
-We solve for the time path numerically using `odeint`, at a sequence of dates
+We solve for the time path numerically using ``odeint``, at a sequence of dates
 ``t_vec``.
 
 .. code-block:: ipython3
 
-    def solve_path(R0, t_vec, x_init=x_0):
+    def solve_path(R_t, t_vec, x_init=x_0):
         """
         Solve for i(t) and c(t) via numerical integration, 
-        given the time path for R0.
+        given the time path for R_t.
 
         """
-        G = lambda x, t: F(x, t, R0)
+        G = lambda x, t: F(x, t, R_t)
         s_path, e_path, i_path = odeint(G, x_init, t_vec).transpose()
 
         c_path = 1 - s_path - e_path       # cumulative cases
@@ -239,11 +238,11 @@ The time period we investigate will be 550 days, or around 18 months:
 
 
 
-Experiment 1: Constant R0 Case
-------------------------------
+Experiment 1: Constant :math:`R_t` Case
+---------------------------------------
 
 
-Let's start with the case where ``R0`` is constant.
+Let's start with the case where :math:`R_t = R0`.
 
 We calculate the time path of infected people under different assumptions for ``R0``:
 
@@ -281,7 +280,7 @@ Let's plot current cases as a fraction of the population.
 
 As expected, lower effective transmission rates defer the peak of infections.
 
-The also lead to a lower peak in current cases.
+They also lead to a lower peak in current cases.
 
 Here is cumulative cases, as a fraction of population:
 
@@ -297,19 +296,19 @@ Experiment 2: Changing Mitigation
 Let's look at a scenario where mitigation (e.g., social distancing) is 
 successively imposed.
 
-Here's a specification for ``R0`` as a function of time.
+Here's a specification for ``R_t`` changing as a function of time.
 
 .. code-block:: ipython3
 
-    def R0_mitigating(t, r0=3, η=1, r_bar=1.6): 
-        R0 = r0 * exp(- η * t) + (1 - exp(- η * t)) * r_bar
-        return R0
+    def R_t_mitigating(t, r0=3, η=1, r_bar=1.6): 
+        R_t = r0 * exp(- η * t) + (1 - exp(- η * t)) * r_bar
+        return R_t
 
-The idea is that ``R0`` starts off at 3 and falls to 1.6.
+The idea is that ``R_t`` starts off at 3 and falls to 1.6.
 
 This is due to progressive adoption of stricter mitigation measures.
 
-The parameter ``η`` controls the rate, or the speed at which restrictions are
+The parameter ``η`` controls the rate at which restrictions are
 imposed.
 
 We consider several different rates:
@@ -319,14 +318,14 @@ We consider several different rates:
     η_vals = 1/5, 1/10, 1/20, 1/50, 1/100
     labels = [fr'$\eta = {η:.2f}$' for η in η_vals]
 
-This is what the time path of ``R0`` looks like at these alternative rates:
+This is what the time path of ``R_t`` looks like at these alternative rates:
 
 .. code-block:: ipython3
 
     fig, ax = plt.subplots()
 
     for η, label in zip(η_vals, labels):
-        ax.plot(t_vec, R0_mitigating(t_vec, η=η), label=label)
+        ax.plot(t_vec, R_t_mitigating(t_vec, η=η), label=label)
 
     ax.legend()
     plt.show()
@@ -338,8 +337,8 @@ Let's calculate the time path of infected people:
     i_paths, c_paths = [], []
 
     for η in η_vals:
-        R0 = lambda t: R0_mitigating(t, η=η)
-        i_path, c_path = solve_path(R0, t_vec)
+        R_t = lambda t: R_t_mitigating(t, η=η)
+        i_path, c_path = solve_path(R_t, t_vec)
         i_paths.append(i_path)
         c_paths.append(c_path)
 
@@ -385,15 +384,15 @@ Let's calculate the paths:
 
 .. code-block:: ipython3
 
-    R0_paths = (lambda t: 0.5 if t < 30 else 2,
+    R_t_paths = (lambda t: 0.5 if t < 30 else 2,
                 lambda t: 0.5 if t < 120 else 2)
 
     labels = [f'scenario {i}' for i in (1, 2)]
 
     i_paths, c_paths = [], []
 
-    for R0 in R0_paths:
-        i_path, c_path = solve_path(R0, t_vec, x_init=x_0)
+    for R in R_t_paths:
+        i_path, c_path = solve_path(R, t_vec, x_init=x_0)
         i_paths.append(i_path)
         c_paths.append(c_path)
 
