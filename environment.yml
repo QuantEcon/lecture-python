@@ -10,7 +10,7 @@ dependencies:
   - nbconvert
   - pandoc
   - pandas
-  - numba=0.46
+  - numba
   - numpy
   - matplotlib
   - networkx
