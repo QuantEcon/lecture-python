@@ -34,7 +34,7 @@ equations.
 The main objective is to study the impact of suppression through social
 distancing on the spread of the infection.
 
-The focus is on US outcomes but the parameters can easily be adjusted to study
+The focus is on US outcomes but the parameters can be adjusted to study
 other countries.
 
 We will use the following standard imports:
@@ -82,8 +82,9 @@ Time Path
 
 The flow across states follows the path :math:`S \to E \to I \to R`.
 
-As long as the transmission rate is positive, all individuals in the
-population are eventually infected.
+
+All individuals in the population are eventually infected when 
+the transmission rate is positive and :math:`i(0) > 0`. 
 
 The interest is primarily in 
 
@@ -115,7 +116,7 @@ We do not need to model the fraction :math:`r` of the population in state :math:
 
 In particular, the "removed" fraction of the population is :math:`r = 1 - s - e - i`.
 
-We will also track :math:`c = 1 - s - e`, which is the cumulative case load
+We will also track :math:`c = i + r`, which is the cumulative case load
 (i.e., all those who have or have had the infection).
 
 The system :eq:`sir_system` can be written in vector form as
@@ -139,11 +140,10 @@ As in Atkeson's note, we set
 
 The transmission rate is modeled as 
 
-* :math:`\beta(t) := R(t) * \gamma` where :math:`R(t)` is the *effective
-  reproduction number* at time :math:`t`.
+* :math:`\beta(t) := R(t) \gamma` where :math:`R(t)` is the *effective reproduction number* at time :math:`t`.
 
-Warning: The notation is slightly confusing, since :math:`R(t)` is different to R, the
-symbol that represents the removed state.
+(The notation is slightly confusing, since :math:`R(t)` is different to
+:math:`R`, the symbol that represents the removed state.)
 
 
 Implementation
@@ -172,7 +172,7 @@ Now we construction a function that represents :math:`F` in :eq:`dfcv`
 
             * x is the state vector (array_like)
             * t is time (scalar)
-            * R0 is the effective transmission rate
+            * R0 is the effective transmission rate, defaulting to a constant
 
         """
         s, e, i = x
@@ -188,8 +188,7 @@ Now we construction a function that represents :math:`F` in :eq:`dfcv`
         
         return ds, de, di
 
-The value ``R0`` is the effective transmission rate and can be either constant
-or a given function of time.
+Note that ``R0`` can be either constant or a given function of time.
 
 The initial conditions are set to
 
@@ -219,7 +218,8 @@ We solve for the time path numerically using `odeint`, at a sequence of dates
         """
         G = lambda x, t: F(x, t, R0)
         s_path, e_path, i_path = odeint(G, x_init, t_vec).transpose()
-        c_path = 1 - s_path - e_path
+
+        c_path = 1 - s_path - e_path       # cumulative cases
         return i_path, c_path
 
 
@@ -288,7 +288,6 @@ Here is cumulative cases, as a fraction of population:
 .. code-block:: ipython3
 
     plot_paths(c_paths, labels)
-
 
 
 
@@ -362,8 +361,6 @@ Here is cumulative cases, as a fraction of population:
 Ending Lockdown
 ===============
 
-At the time of writing, interest in the US is focused on appropriate timing
-for ending lockdown.
 
 The following replicates `additional results <https://drive.google.com/file/d/1uS7n-7zq5gfSgrL3S0HByExmpq4Bn3oh/view>`__ by Andrew Atkeson on the timing of lifting lockdown.
 
