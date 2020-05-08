@@ -1344,7 +1344,7 @@ The following code snippet provides a hint as to how you can go about this
 .. code-block:: python3
 
     import re
-    re.findall('\w', 'x +++ y ****** z')  # \w matches lambdanumerics
+    re.findall('\w', 'x +++ y ****** z')  # \w matches alphanumerics
 
 .. code-block:: python3
 
