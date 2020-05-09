@@ -464,7 +464,7 @@ jupyter_pdf_author = "Thomas J. Sargent and John Stachurski"
 jupyter_pdf_excludepatterns = ["404", "index", "references"]
 
 # Set urlpath for html links in documents
-jupyter_pdf_urlpath = "https://python-intro.quantecon.org/"
+jupyter_pdf_urlpath = "https://python.quantecon.org/"
 
 # make book
 jupyter_pdf_book = False

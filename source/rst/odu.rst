@@ -22,10 +22,10 @@ In addition to what’s in Anaconda, this lecture deploys the libraries:
 Overview
 --------
 
-In this lecture, we consider an extension of the `previously studied <https://python-intro.quantecon.org/mccall_model.html>`__ job search model of McCall
+In this lecture, we consider an extension of the `previously studied <https://python.quantecon.org/mccall_model.html>`__ job search model of McCall
 :cite:`McCall1970`.
 
-We'll build on a model of Bayesian learning discussed in `this lecture <https://python-intro.quantecon.org/exchangeable.html>`__ on the topic of exchangeability and its relationship to
+We'll build on a model of Bayesian learning discussed in `this lecture <https://python.quantecon.org/exchangeable.html>`__ on the topic of exchangeability and its relationship to
 the concept of IID (identically and independently distributed) random variables and to  Bayesian updating. 
 
 In the McCall model, an unemployed worker decides when to accept a
@@ -834,7 +834,7 @@ In this appendix we provide more details about how Bayes' Law contributes to the
 
 We present some graphs that bring out additional insights about how learning works.
 
-We build on graphs proposed in `this lecture <https://python-intro.quantecon.org/exchangeable.html>`__. 
+We build on graphs proposed in `this lecture <https://python.quantecon.org/exchangeable.html>`__. 
 
 In particular, we'll add actions of  our searching worker to a key graph 
 presented in that lecture.
@@ -1048,7 +1048,7 @@ In the graphs below, the red arrows in the upper right figure show how :math:`\p
 new information :math:`w_t`. 
 
 
-Recall the following formula from `this lecture <https://python-intro.quantecon.org/exchangeable.html>`__
+Recall the following formula from `this lecture <https://python.quantecon.org/exchangeable.html>`__
 
 
 .. math::
