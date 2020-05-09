@@ -1119,7 +1119,7 @@ Exercise 1
 
 .. code-block:: python3
 
-    class LakeModel:
+    class LakeModelModified:
         """
         Solves the lake model and computes dynamics of unemployment stocks and
         rates.
@@ -1267,7 +1267,7 @@ steady state values to ``x0``
 
 .. code-block:: python3
 
-    lm = LakeModel()
+    lm = LakeModelModified()
     x0 = lm.rate_steady_state()
     print(f"Initial Steady State: {x0}")
 
@@ -1345,7 +1345,7 @@ state
 
 .. code-block:: python3
 
-    lm = LakeModel()
+    lm = LakeModelModified()
     x0 = lm.rate_steady_state()
 
 Here are the other parameters:
