@@ -162,7 +162,7 @@ Next we fix parameters as described above.
     γ = 1 / 18
     σ = 1 / 5.2
 
-Now we construction a function that represents :math:`F` in :eq:`dfcv`
+Now we construct a function that represents :math:`F` in :eq:`dfcv`
 
 .. code-block:: ipython3
 
@@ -281,7 +281,7 @@ Let's plot current cases as a fraction of the population.
 
 As expected, lower effective transmission rates defer the peak of infections.
 
-The also lead to a lower peak in current cases.
+They also lead to a lower peak in current cases.
 
 Here is cumulative cases, as a fraction of population:
 
