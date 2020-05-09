@@ -10,7 +10,7 @@ dependencies:
   - nbconvert
   - pandoc
   - pandas
-  - numba
+  - numba=0.46
   - numpy
   - matplotlib
   - networkx
@@ -19,6 +19,7 @@ dependencies:
   - statsmodels
   - seaborn
   - pip:
+    - interpolation==2.1.2
     - sphinxcontrib-jupyter
     - sphinxcontrib-bibtex
     - quantecon
