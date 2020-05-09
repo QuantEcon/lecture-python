@@ -695,7 +695,7 @@ Exercise 1
 ----------
 
 To map a problem into a `discounted optimal linear control
-problem <https://python-intro.quantecon.org/lqcontrol.html>`__, we need to define
+problem <https://python.quantecon.org/lqcontrol.html>`__, we need to define
 
 -  state vector :math:`x_t` and control vector :math:`u_t`
 
