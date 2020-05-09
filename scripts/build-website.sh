@@ -17,6 +17,6 @@ if [ -z "$RST_FILES" ]; then
 else
     echo "::set-env name=BUILD_NETLIFY::true"
     RST_FILES="$RST_FILES source/rst/index_toc.rst"
-    make website THEMEPATH=theme/lecture-python-intro.theme FILES="$RST_FILES"
+    make website THEMEPATH=theme/lecture-python.theme FILES="$RST_FILES"
     ls _build/website/jupyter_html/*  #Ensure build files are created
 fi
