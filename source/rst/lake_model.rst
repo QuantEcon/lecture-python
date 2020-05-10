@@ -1057,11 +1057,17 @@ So, when a user alters these primitives, we need the derived data to update auto
 
 (For example, if a user changes the value of :math:`b` for a given instance of the class, we would like :math:`g = b - d` to update automatically)
 
-To achieve this outcome in the lecture, we used the ``class`` feature to set the local variables such as ``lm = LakeModel(α = 2)``.
+In the code above, we took care of this issue by creating new instances every time we wanted to change parameters.
 
-However, we can use descriptors and decorators such as ``@property`` to achieve the outcome nicely.
+That way the derived data is always matched to current parameter values.
 
-Arrange the ``LakeModel`` class by using descriptors and decorators such as ``@property``.
+However, we can use descriptors instead, so that derived data is updated whenever parameters are changed.
+
+This is safer and means we don't need to create a fresh instance for every new parameterization.
+
+(On the other hand, the code becomes denser, which is why we don't always use the descriptor approach in our lectures.)
+
+In this exercise, your task is to arrange the ``LakeModel`` class by using descriptors and decorators such as ``@property``.
 
 (If you need to refresh your understanding of how these work, consult `this lecture <https://python-programming.quantecon.org/python_advanced_features.html>`_.)
 
