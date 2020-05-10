@@ -230,7 +230,7 @@ Let's code up these equations.
 
 
 
-To do this we're going to use a class that we'll call `LakeModel`.
+To do this we're going to use a class that we'll call ``LakeModel``.
 
 This class will
 
@@ -243,7 +243,13 @@ This class will
 #. provide a method to compute the state state of the rate
 
 
-In the class, the implied objects :math:`g, A, \hat A` will change if we change the primitives.
+Please be careful because the implied objects :math:`g, A, \hat A` will not change 
+if you only change the primitives. 
+
+For example, if you would like to update a primitive like :math:`\alpha = 0.03`, 
+you need to create an instance and update it by ``lm = LakeModel(α=0.03)``. 
+
+In the exercises, we show how to avoid this issue by using getter and setter methods.
 
 .. code-block:: python3
 
@@ -336,8 +342,8 @@ In the class, the implied objects :math:`g, A, \hat A` will change if we change 
                 x = self.A_hat @ x
 
 
-As explained, if we update a primitive like
-:math:`\alpha`, derived objects like :math:`A` will also change
+As explained, if we create an instance and update it by ``lm = LakeModel(α=0.03)``, 
+derived objects like :math:`A` will also change.
 
 .. code-block:: python3
 
@@ -350,7 +356,7 @@ As explained, if we update a primitive like
 
 .. code-block:: python3
 
-    lm = LakeModel(α = 2)
+    lm = LakeModel(α = 0.03)
     lm.A
 
 
