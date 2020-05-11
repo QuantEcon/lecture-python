@@ -33,7 +33,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: _build
-          key: cache-sphinx-%{{ date.date }}
+          key: cache-sphinx-${{ steps.date.outputs.date }}
       - name: Build Website files
         shell: bash -l {0}
         run: |
