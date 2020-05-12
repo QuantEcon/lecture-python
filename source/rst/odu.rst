@@ -838,7 +838,7 @@ In this appendix we provide more details about how Bayes' Law contributes to the
 
 We present some graphs that bring out additional insights about how learning works.
 
-We build on graphs proposed in `this lecture <https://python.quantecon.org/exchangeable.html>`__.
+We build on graphs proposed in `this lecture <https://python.quantecon.org/exchangeable.html>`__. 
 
 In particular, we'll add actions of  our searching worker to a key graph
 presented in that lecture.
