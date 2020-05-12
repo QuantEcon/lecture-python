@@ -73,7 +73,7 @@ We want to use these observations to infer whether nature chose :math:`f` or
 
 A **likelihood ratio process** is a useful tool for this task.
 
-To begin, we define key component of a likelihood ratio process, namely, the time :math:`t` likelihood ratio  as the random variable
+To begin, we define the key component of a likelihood ratio process, namely, the time :math:`t` likelihood ratio  as the random variable
 
 .. math::
 
@@ -112,7 +112,7 @@ The likelihood ratio and its logarithm are key tools for making
 inferences using a classic frequentist approach due to Neyman and
 Pearson :cite:`Neyman_Pearson`.
 
-We'll again deply the following Python code from :doc:`this lecture <likelihood_ratio_process>` that 
+We'll again deploy the following Python code from :doc:`this lecture <likelihood_ratio_process>` that 
 evaluates :math:`f` and :math:`g` as two different
 beta distributions, then computes and simulates an associated likelihood
 ratio process by generating a sequence :math:`w^t` from *some*
@@ -190,7 +190,7 @@ Bayes’ law implies that :math:`\{\pi_t\}` obeys the recursion
    \pi_t=\frac{\pi_{t-1} l_t(w_t)}{\pi_{t-1} l_t(w_t)+1-\pi_{t-1}}
 
 with :math:`\pi_{0}` being a Bayesian prior probability that :math:`q = f`,
-i.e., a personal or subjectinve belief about :math:`q` based on our having seen no data.
+i.e., a personal or subjective belief about :math:`q` based on our having seen no data.
 
 Below we define a Python function that updates belief :math:`\pi` using
 likelihood ratio :math:`\ell` according to  recursion :eq:`eq_recur1`
@@ -286,7 +286,7 @@ First, we tell Python two values of :math:`\pi_0`.
 
     π1, π2 = 0.2, 0.8
 
-Next we generate paths of the likelihood ratio process :math:`L_t` and the posteior :math:`\pi_t` for a 
+Next we generate paths of the likelihood ratio process :math:`L_t` and the posterior :math:`\pi_t` for a 
 history of IID draws from density :math:`f`.
 
 .. code-block:: python3

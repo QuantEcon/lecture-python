@@ -26,7 +26,7 @@ In this lecture, we consider an extension of the `previously studied <https://py
 :cite:`McCall1970`.
 
 We'll build on a model of Bayesian learning discussed in `this lecture <https://python.quantecon.org/exchangeable.html>`__ on the topic of exchangeability and its relationship to
-the concept of IID (identically and independently distributed) random variables and to  Bayesian updating.
+the concept of IID (identically and independently distributed) random variables and to  Bayesian updating. 
 
 In the McCall model, an unemployed worker decides when to accept a
 permanent job at a specific fixed wage, given
@@ -838,7 +838,7 @@ In this appendix we provide more details about how Bayes' Law contributes to the
 
 We present some graphs that bring out additional insights about how learning works.
 
-We build on graphs proposed in `this lecture <https://python.quantecon.org/exchangeable.html>`__.
+We build on graphs proposed in `this lecture <https://python.quantecon.org/exchangeable.html>`__. 
 
 In particular, we'll add actions of  our searching worker to a key graph
 presented in that lecture.
