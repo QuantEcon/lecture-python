@@ -68,7 +68,7 @@ We'll begin with some imports:
     from interpolation import interp
     from math import gamma
 
-This lecture uses ideas studied in :doc:`this lecture <likelihood_process>`, :doc:`this lecture <likelihood_bayes>`.
+This lecture uses ideas studied in :doc:`this lecture <likelihood_ratio_process>`, :doc:`this lecture <likelihood_bayes>`.
 and :doc:`this lecture <exchangeable>`.
 
 Origin of the Problem
@@ -131,16 +131,16 @@ A decision-maker observes a sequence of draws of a random variable :math:`z`.
 
 He (or she) wants to know which of two probability distributions :math:`f_0` or :math:`f_1` governs :math:`z`.
 
-Conditional on knowing that successive observations are drawn from distribution :math:`f_0`, the sequence of 
+Conditional on knowing that successive observations are drawn from distribution :math:`f_0`, the sequence of
 random variables is independently and identically distributed (IID).
 
 
-Conditional on knowing that successive observations are drawn from distribution :math:`f_1`, the sequence of 
+Conditional on knowing that successive observations are drawn from distribution :math:`f_1`, the sequence of
 random variables is also independently and identically distributed (IID).
 
 But the observer does not know which of the two distributions generated the sequence.
 
-For reasons explained  `Exchangeability and Bayesian Updating <https://python-intro.quantecon.org/exchangeable.html>`__, this means that the sequence is not 
+For reasons explained  `Exchangeability and Bayesian Updating <https://python.quantecon.org/exchangeable.html>`__, this means that the sequence is not
 IID and that the observer has something to learn, even though he knows both :math:`f_0` and :math:`f_1`.
 
 After a number of draws, also to be determined, he makes a decision about
@@ -607,7 +607,7 @@ and plot these on our value function plot
     def find_cutoff_rule(wf, h):
 
         """
-        This function takes a continuation value function and returns the 
+        This function takes a continuation value function and returns the
         corresponding cutoffs of where you transition between continuing and
         choosing a specific model
         """
@@ -982,7 +982,7 @@ Wald summarizes Neyman and Pearson's setup as follows:
   .. math::
 
     \frac{ f_1(z_1) \cdots f_1(z_n)}{f_0(z_1) \cdots f_0(z_n)} \geq k
- 
+
   is a most powerful critical region for testing the hypothesis
   :math:`H_0` against the alternative hypothesis :math:`H_1`. The term
   :math:`k` on the right side is a constant chosen so that the region
@@ -1012,7 +1012,7 @@ Here is how Wald introduces the notion of a sequential test
 .. rubric:: Footnotes
 
 .. [#f1] The decision maker acts as if he believes that the sequence of random variables
-    :math:`[z_{0}, z_{1}, \ldots]` is *exchangeable*.  See `Exchangeability and Bayesian Updating <https://python-intro.quantecon.org/exchangeable.html>`__ and 
+    :math:`[z_{0}, z_{1}, \ldots]` is *exchangeable*.  See `Exchangeability and Bayesian Updating <https://python.quantecon.org/exchangeable.html>`__ and
     :cite:`Kreps88` chapter 11, for  discussions of exchangeability.
 
 Sequels
@@ -1020,11 +1020,11 @@ Sequels
 
 We'll dig deeper into some of the ideas used here in the following lectures:
 
-* :doc:`this lecture <exchangeable>` discusses the key concept of **exchangeability** that rationalizes statistical learning 
+* :doc:`this lecture <exchangeable>` discusses the key concept of **exchangeability** that rationalizes statistical learning
 
 * :doc:`this lecture <likelihood_ratio_process>` describes **likelihood ratio processes** and their role in frequentist and Bayesian statistical theories
 
 * :doc:`this lecture <likelihood_bayes>` discusses the role of likelihood ratio processes in **Bayesian learning**
 
-* :doc:`this lecture <navy_captain>` returns to the subject of this lecture and studies whether the Captain's hunch that the (frequentist) decision rule 
+* :doc:`this lecture <navy_captain>` returns to the subject of this lecture and studies whether the Captain's hunch that the (frequentist) decision rule
   that the Navy had ordered him to use can be expected to be better or worse than the rule sequential rule that Abraham Wald designed
