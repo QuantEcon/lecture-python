@@ -26,7 +26,7 @@ In this lecture, we consider an extension of the `previously studied <https://py
 :cite:`McCall1970`.
 
 We'll build on a model of Bayesian learning discussed in `this lecture <https://python.quantecon.org/exchangeable.html>`__ on the topic of exchangeability and its relationship to
-the concept of IID (identically and independently distributed) random variables and to  Bayesian updating. 
+the concept of IID (identically and independently distributed) random variables and to  Bayesian updating.
 
 In the McCall model, an unemployed worker decides when to accept a
 permanent job at a specific fixed wage, given
@@ -189,16 +189,16 @@ The densities :math:`f` and :math:`g` have the following shape
     def p(x, a, b):
         r = gamma(a + b) / (gamma(a) * gamma(b))
         return r * x**(a-1) * (1 - x)**(b-1)
-    
-    
+
+
     x_grid = np.linspace(0, 1, 100)
     f = lambda x: p(x, 1, 1)
     g = lambda x: p(x, 3, 1.2)
-    
+
     fig, ax = plt.subplots(figsize=(10, 8))
     ax.plot(x_grid, f(x_grid), label='$f$', lw=2)
     ax.plot(x_grid, g(x_grid), label='$g$', lw=2)
-    
+
     ax.legend()
     plt.show()
 
@@ -249,9 +249,9 @@ needed to compute optimal actions.
         """
         A class to store a given parameterization of the "offer distribution
         unknown" model.
-    
+
         """
-    
+
         def __init__(self,
                      β=0.95,            # Discount factor
                      c=0.3,             # Unemployment compensation
@@ -263,18 +263,18 @@ needed to compute optimal actions.
                      w_grid_size=100,
                      π_grid_size=100,
                      mc_size=500):
-    
+
             self.β, self.c, self.w_max = β, c, w_max
-    
+
             self.f = njit(lambda x: p(x, F_a, F_b))
             self.g = njit(lambda x: p(x, G_a, G_b))
-    
+
             self.π_min, self.π_max = 1e-3, 1-1e-3    # Avoids instability
             self.w_grid = np.linspace(0, w_max, w_grid_size)
             self.π_grid = np.linspace(self.π_min, self.π_max, π_grid_size)
-    
+
             self.mc_size = mc_size
-    
+
             self.w_f = np.random.beta(F_a, F_b, mc_size)
             self.w_g = np.random.beta(G_a, G_b, mc_size)
 
@@ -286,13 +286,17 @@ the value function
 .. code-block:: python3
 
     def operator_factory(sp, parallel_flag=True):
-    
+
         f, g = sp.f, sp.g
         w_f, w_g = sp.w_f, sp.w_g
         β, c = sp.β, sp.c
         mc_size = sp.mc_size
         w_grid, π_grid = sp.w_grid, sp.π_grid
-    
+
+        @njit
+        def v_func(x, y, v):
+            return mlinterp((w_grid, π_grid), v, (x, y))
+
         @njit
         def κ(w, π):
             """
@@ -300,65 +304,62 @@ the value function
             """
             pf, pg = π * f(w), (1 - π) * g(w)
             π_new = pf / (pf + pg)
-    
+
             return π_new
-    
+
         @njit(parallel=parallel_flag)
         def T(v):
             """
             The Bellman operator.
-    
+
             """
-            v_func = lambda x, y: mlinterp((w_grid, π_grid), v, (x, y))
             v_new = np.empty_like(v)
-    
+
             for i in prange(len(w_grid)):
                 for j in prange(len(π_grid)):
                     w = w_grid[i]
                     π = π_grid[j]
-    
+
                     v_1 = w / (1 - β)
-    
-                    integral_f, integral_g = 0.0, 0.0
+
+                    integral_f, integral_g = 0, 0
                     for m in prange(mc_size):
-                        integral_f += v_func(w_f[m], κ(w_f[m], π))
-                        integral_g += v_func(w_g[m], κ(w_g[m], π))
+                        integral_f += v_func(w_f[m], κ(w_f[m], π), v)
+                        integral_g += v_func(w_g[m], κ(w_g[m], π), v)
                     integral = (π * integral_f + (1 - π) * integral_g) / mc_size
-    
+
                     v_2 = c + β * integral
                     v_new[i, j] = max(v_1, v_2)
-    
+
             return v_new
-    
+
         @njit(parallel=parallel_flag)
         def get_greedy(v):
             """"
             Compute optimal actions taking v as the value function.
-    
+
             """
-    
-            v_func = lambda x, y: mlinterp((w_grid, π_grid), v, (x, y))
             σ = np.empty_like(v)
-    
+
             for i in prange(len(w_grid)):
                 for j in prange(len(π_grid)):
                     w = w_grid[i]
                     π = π_grid[j]
-    
+
                     v_1 = w / (1 - β)
-    
-                    integral_f, integral_g = 0.0, 0.0
+
+                    integral_f, integral_g = 0, 0
                     for m in prange(mc_size):
-                        integral_f += v_func(w_f[m], κ(w_f[m], π))
-                        integral_g += v_func(w_g[m], κ(w_g[m], π))
+                        integral_f += v_func(w_f[m], κ(w_f[m], π), v)
+                        integral_g += v_func(w_g[m], κ(w_g[m], π), v)
                     integral = (π * integral_f + (1 - π) * integral_g) / mc_size
-    
+
                     v_2 = c + β * integral
-    
+
                     σ[i, j] = v_1 > v_2  # Evaluates to 1 or 0
-    
+
             return σ
-    
+
         return T, get_greedy
 
 We will omit a detailed discussion of the code because there is a more
@@ -375,23 +376,23 @@ using T to find a fixed point
                     max_iter=1000,
                     verbose=True,
                     print_skip=5):
-    
+
         """
         Solves for the value function
-    
+
         * sp is an instance of SearchProblem
         """
-    
+
         T, _ = operator_factory(sp, use_parallel)
-    
+
         # Set up loop
         i = 0
         error = tol + 1
         m, n = len(sp.w_grid), len(sp.π_grid)
-    
+
         # Initialize v
         v = np.zeros((m, n)) + sp.c / (1 - sp.β)
-    
+
         while i < max_iter and error > tol:
             v_new = T(v)
             error = np.max(np.abs(v - v_new))
@@ -399,14 +400,14 @@ using T to find a fixed point
             if verbose and i % print_skip == 0:
                 print(f"Error at iteration {i} is {error}.")
             v = v_new
-    
+
         if i == max_iter:
             print("Failed to converge!")
-    
+
         if verbose and i < max_iter:
             print(f"\nConverged in {i} iterations.")
-    
-    
+
+
         return v_new
 
 Let’s look at solutions computed from value function iteration
@@ -420,7 +421,7 @@ Let’s look at solutions computed from value function iteration
     cs = ax.contour(sp.π_grid, sp.w_grid, v_star, 12, colors="black")
     ax.clabel(cs, inline=1, fontsize=10)
     ax.set(xlabel='$\pi$', ylabel='$w$')
-    
+
     plt.show()
 
 
@@ -431,15 +432,15 @@ We will also plot the optimal policy
 
     T, get_greedy = operator_factory(sp)
     σ_star = get_greedy(v_star)
-    
+
     fig, ax = plt.subplots(figsize=(6, 6))
     ax.contourf(sp.π_grid, sp.w_grid, σ_star, 1, alpha=0.6, cmap=cm.jet)
     ax.contour(sp.π_grid, sp.w_grid, σ_star, 1, colors="black")
     ax.set(xlabel='$\pi$', ylabel='$w$')
-    
+
     ax.text(0.5, 0.6, 'reject')
     ax.text(0.7, 0.9, 'accept')
-    
+
     plt.show()
 
 The results fit well with our intuition from section `looking
@@ -610,13 +611,17 @@ returns the operator ``Q``
 .. code-block:: python3
 
     def Q_factory(sp, parallel_flag=True):
-    
+
         f, g = sp.f, sp.g
         w_f, w_g = sp.w_f, sp.w_g
         β, c = sp.β, sp.c
         mc_size = sp.mc_size
         w_grid, π_grid = sp.w_grid, sp.π_grid
-    
+
+        @njit
+        def ω_func(p, ω):
+            return interp(π_grid, ω, p)
+
         @njit
         def κ(w, π):
             """
@@ -624,33 +629,32 @@ returns the operator ``Q``
             """
             pf, pg = π * f(w), (1 - π) * g(w)
             π_new = pf / (pf + pg)
-    
+
             return π_new
-    
+
         @njit(parallel=parallel_flag)
         def Q(ω):
             """
-    
+
             Updates the reservation wage function guess ω via the operator
             Q.
-    
+
             """
-            ω_func = lambda p: interp(π_grid, ω, p)
             ω_new = np.empty_like(ω)
-    
+
             for i in prange(len(π_grid)):
                 π = π_grid[i]
-                integral_f, integral_g = 0.0, 0.0
-    
+                integral_f, integral_g = 0, 0
+
                 for m in prange(mc_size):
-                    integral_f += max(w_f[m], ω_func(κ(w_f[m], π)))
-                    integral_g += max(w_g[m], ω_func(κ(w_g[m], π)))
+                    integral_f += max(w_f[m], ω_func(κ(w_f[m], π), ω))
+                    integral_g += max(w_g[m], ω_func(κ(w_g[m], π), ω))
                 integral = (π * integral_f + (1 - π) * integral_g) / mc_size
-    
+
                 ω_new[i] = (1 - β) * c + β * integral
-    
+
             return ω_new
-    
+
         return Q
 
 In the next exercise, you are asked to compute an approximation to
@@ -694,17 +698,17 @@ fixed point
                    max_iter=1000,
                    verbose=True,
                    print_skip=5):
-    
+
         Q = Q_factory(sp, use_parallel)
-    
+
         # Set up loop
         i = 0
         error = tol + 1
         m, n = len(sp.w_grid), len(sp.π_grid)
-    
+
         # Initialize w
         w = np.ones_like(sp.π_grid)
-    
+
         while i < max_iter and error > tol:
             w_new = Q(w)
             error = np.max(np.abs(w - w_new))
@@ -712,13 +716,13 @@ fixed point
             if verbose and i % print_skip == 0:
                 print(f"Error at iteration {i} is {error}.")
             w = w_new
-    
+
         if i == max_iter:
             print("Failed to converge!")
-    
+
         if verbose and i < max_iter:
             print(f"\nConverged in {i} iterations.")
-    
+
         return w_new
 
 The solution can be plotted as follows
@@ -727,9 +731,9 @@ The solution can be plotted as follows
 
     sp = SearchProblem()
     w_bar = solve_wbar(sp)
-    
+
     fig, ax = plt.subplots(figsize=(9, 7))
-    
+
     ax.plot(sp.π_grid, w_bar, color='k')
     ax.fill_between(sp.π_grid, 0, w_bar, color='blue', alpha=0.15)
     ax.fill_between(sp.π_grid, w_bar, sp.w_max, color='green', alpha=0.15)
@@ -756,30 +760,30 @@ As a result, the unemployment rate spikes
 .. code-block:: python3
 
     F_a, F_b, G_a, G_b = 1, 1, 3, 1.2
-    
+
     sp = SearchProblem(F_a=F_a, F_b=F_b, G_a=G_a, G_b=G_b)
     f, g = sp.f, sp.g
-    
+
     # Solve for reservation wage
     w_bar = solve_wbar(sp, verbose=False)
-    
+
     # Interpolate reservation wage function
     π_grid = sp.π_grid
     w_func = njit(lambda x: interp(π_grid, w_bar, x))
-    
+
     @njit
     def update(a, b, e, π):
         "Update e and π by drawing wage offer from beta distribution with parameters a and b"
-    
+
         if e == False:
             w = np.random.beta(a, b)       # Draw random wage
             if w >= w_func(π):
                 e = True                   # Take new job
             else:
                 π = 1 / (1 + ((1 - π) * g(w)) / (π * f(w)))
-    
+
         return e, π
-    
+
     @njit
     def simulate_path(F_a=F_a,
                       F_b=F_b,
@@ -789,35 +793,35 @@ As a result, the unemployment rate spikes
                       T=600,        # Simulation length
                       d=200,        # Change date
                       s=0.025):     # Separation rate
-    
+
         """Simulates path of employment for N number of works over T periods"""
-    
+
         e = np.ones((N, T+1))
         π = np.ones((N, T+1)) * 1e-3
-    
+
         a, b = G_a, G_b   # Initial distribution parameters
-    
+
         for t in range(T+1):
-    
+
             if t == d:
                 a, b = F_a, F_b  # Change distribution parameters
-    
+
             # Update each agent
             for n in range(N):
                 if e[n, t] == 1:                    # If agent is currently employment
                     p = np.random.uniform(0, 1)
                     if p <= s:                      # Randomly separate with probability s
                         e[n, t] = 0
-    
+
                 new_e, new_π = update(a, b, e[n, t], π[n, t])
                 e[n, t+1] = new_e
                 π[n, t+1] = new_π
-    
+
         return e[:, 1:]
-    
+
     d = 200  # Change distribution at time d
     unemployment_rate = 1 - simulate_path(d=d).mean(axis=0)
-    
+
     fig, ax = plt.subplots(figsize=(10, 6))
     ax.plot(unemployment_rate)
     ax.axvline(d, color='r', alpha=0.6, label='Change date')
@@ -834,9 +838,9 @@ In this appendix we provide more details about how Bayes' Law contributes to the
 
 We present some graphs that bring out additional insights about how learning works.
 
-We build on graphs proposed in `this lecture <https://python.quantecon.org/exchangeable.html>`__. 
+We build on graphs proposed in `this lecture <https://python.quantecon.org/exchangeable.html>`__.
 
-In particular, we'll add actions of  our searching worker to a key graph 
+In particular, we'll add actions of  our searching worker to a key graph
 presented in that lecture.
 
 
@@ -855,64 +859,64 @@ employment.
         the worker accepts the wage offer. For each job searching
         problem, we simulate for two cases that either f or g is
         the true offer distribution.
-    
+
         Parameters
         ----------
-    
+
         F_a, F_b, G_a, G_b : parameters of beta distributions F and G.
         w_bar : the reservation wage
         π_grid : grid points of π, for interpolation
         N : number of workers for simulation, optional
         T : maximum of time periods for simulation, optional
-    
+
         Returns
         -------
-        accpet_t : 2 by N ndarray. the empirical distribution of 
+        accpet_t : 2 by N ndarray. the empirical distribution of
                    unemployment duration when f or g generates offers.
-        accept_π : 2 by N ndarray. the empirical distribution of 
+        accept_π : 2 by N ndarray. the empirical distribution of
                    π at the time of employment when f or g generates offers.
         """
-    
+
         accept_t = np.empty((2, N))
         accept_π = np.empty((2, N))
-    
+
         # f or g generates offers
         for i, (a, b) in enumerate([(F_a, F_b), (G_a, G_b)]):
             # update each agent
             for n in range(N):
-    
+
                 # initial priori
                 π = 0.5
-    
+
                 for t in range(T+1):
-    
+
                     # Draw random wage
                     w = np.random.beta(a, b)
                     lw = p(w, F_a, F_b) / p(w, G_a, G_b)
                     π = π * lw / (π * lw + 1 - π)
-    
+
                     # move to next agent if accepts
                     if w >= interp(π_grid, w_bar, π):
                         break
-    
+
                 # record the unemployment duration
                 # and π at the time of acceptance
                 accept_t[i, n] = t
                 accept_π[i, n] = π
-    
+
         return accept_t, accept_π
-    
+
     def cumfreq_x(res):
         """
         A helper function for calculating the x grids of
         the cumulative frequency histogram.
         """
-    
+
         cumcount = res.cumcount
         lowerlimit, binsize = res.lowerlimit, res.binsize
-    
+
         x = lowerlimit + np.linspace(0, binsize*cumcount.size, cumcount.size)
-    
+
         return x
 
 Now we define a wrapper function for analyzing job search models with
@@ -935,103 +939,103 @@ In addition, it computes empirical cumulative distributions of two key objects.
         the empirical cumulative distribution of the duration of
         unemployment and π at the time the worker accepts the offer.
         """
-    
+
         # construct a search problem
         sp = SearchProblem(F_a=F_a, F_b=F_b, G_a=G_a, G_b=G_b, c=c)
         f, g = sp.f, sp.g
         π_grid = sp.π_grid
-    
+
         # Solve for reservation wage
         w_bar = solve_wbar(sp, verbose=False)
-    
+
         # l(w) = f(w) / g(w)
         l = lambda w: f(w) / g(w)
         # objective function for solving l(w) = 1
         obj = lambda w: l(w) - 1.
-    
+
         # the mode of beta distribution
         # use this to divide w into two intervals for root finding
         G_mode = (G_a - 1) / (G_a + G_b - 2)
         roots = np.empty(2)
         roots[0] = op.root_scalar(obj, bracket=[1e-10, G_mode]).root
         roots[1] = op.root_scalar(obj, bracket=[G_mode, 1-1e-10]).root
-    
+
         fig, axs = plt.subplots(2, 2, figsize=(12, 9))
-    
+
         # part 1: display the details of the model settings and some results
         w_grid = np.linspace(1e-12, 1-1e-12, 100)
-    
+
         axs[0, 0].plot(l(w_grid), w_grid, label='$l$', lw=2)
         axs[0, 0].vlines(1., 0., 1., linestyle="--")
         axs[0, 0].hlines(roots, 0., 2., linestyle="--")
         axs[0, 0].set_xlim([0., 2.])
         axs[0, 0].legend(loc=4)
         axs[0, 0].set(xlabel='$l(w)=f(w)/g(w)$', ylabel='$w$')
-    
+
         axs[0, 1].plot(sp.π_grid, w_bar, color='k')
         axs[0, 1].fill_between(sp.π_grid, 0, w_bar, color='blue', alpha=0.15)
         axs[0, 1].fill_between(sp.π_grid, w_bar, sp.w_max, color='green', alpha=0.15)
         axs[0, 1].text(0.5, 0.6, 'reject')
         axs[0, 1].text(0.7, 0.9, 'accept')
-    
+
         W = np.arange(0.01, 0.99, 0.08)
         Π = np.arange(0.01, 0.99, 0.08)
-    
+
         ΔW = np.zeros((len(W), len(Π)))
         ΔΠ = np.empty((len(W), len(Π)))
         for i, w in enumerate(W):
             for j, π in enumerate(Π):
                 lw = l(w)
                 ΔΠ[i, j] = π * (lw / (π * lw + 1 - π) - 1)
-    
+
         q = axs[0, 1].quiver(Π, W, ΔΠ, ΔW, scale=2, color='r', alpha=0.8)
-    
+
         axs[0, 1].hlines(roots, 0., 1., linestyle="--")
         axs[0, 1].set(xlabel='$\pi$', ylabel='$w$')
         axs[0, 1].grid()
-    
+
         axs[1, 0].plot(f(x_grid), x_grid, label='$f$', lw=2)
         axs[1, 0].plot(g(x_grid), x_grid, label='$g$', lw=2)
         axs[1, 0].vlines(1., 0., 1., linestyle="--")
         axs[1, 0].hlines(roots, 0., 2., linestyle="--")
         axs[1, 0].legend(loc=4)
         axs[1, 0].set(xlabel='$f(w), g(w)$', ylabel='$w$')
-    
+
         axs[1, 1].plot(sp.π_grid, 1 - beta.cdf(w_bar, F_a, F_b), label='$f$')
         axs[1, 1].plot(sp.π_grid, 1 - beta.cdf(w_bar, G_a, G_b), label='$g$')
         axs[1, 1].set_ylim([0., 1.])
         axs[1, 1].grid()
         axs[1, 1].legend(loc=4)
         axs[1, 1].set(xlabel='$\pi$', ylabel='$\mathbb{P}\{w > \overline{w} (\pi)\}$')
-    
+
         plt.show()
-    
+
         # part 2: simulate empirical cumulative distribution
         accept_t, accept_π = empirical_dist(F_a, F_b, G_a, G_b, w_bar, π_grid)
         N = accept_t.shape[1]
-    
+
         cfq_t_F = cumfreq(accept_t[0, :], numbins=100)
         cfq_π_F = cumfreq(accept_π[0, :], numbins=100)
-    
+
         cfq_t_G = cumfreq(accept_t[1, :], numbins=100)
         cfq_π_G = cumfreq(accept_π[1, :], numbins=100)
-    
+
         fig, axs = plt.subplots(2, 1, figsize=(12, 9))
-    
+
         axs[0].plot(cumfreq_x(cfq_t_F), cfq_t_F.cumcount/N, label="f generates")
         axs[0].plot(cumfreq_x(cfq_t_G), cfq_t_G.cumcount/N, label="g generates")
         axs[0].grid(linestyle='--')
         axs[0].legend(loc=4)
         axs[0].title.set_text('CDF of duration of unemployment')
         axs[0].set(xlabel='time', ylabel='Prob(time)')
-    
+
         axs[1].plot(cumfreq_x(cfq_π_F), cfq_π_F.cumcount/N, label="f generates")
         axs[1].plot(cumfreq_x(cfq_π_G), cfq_π_G.cumcount/N, label="g generates")
         axs[1].grid(linestyle='--')
         axs[1].legend(loc=4)
         axs[1].title.set_text('CDF of π at time worker accepts wage and leaves unemployment')
         axs[1].set(xlabel='π', ylabel='Prob(π)')
-    
+
         plt.show()
 
 We now provide some examples that provide insights about how the model works.
@@ -1045,7 +1049,7 @@ Example 1 (Baseline)
 :math:`F` ~ Beta(1, 1), :math:`G` ~ Beta(3, 1.2), :math:`c`\ =0.3.
 
 In the graphs below, the red arrows in the upper right figure show how :math:`\pi_t` is updated in response to the
-new information :math:`w_t`. 
+new information :math:`w_t`.
 
 
 Recall the following formula from `this lecture <https://python.quantecon.org/exchangeable.html>`__
@@ -1071,28 +1075,28 @@ The magnitude is small if
 
 Will an unemployed  worker accept an offer earlier or
 not, when the actual ruling distribution is :math:`g` instead of
-:math:`f`? 
+:math:`f`?
 
 Two countervailing effects are at work.
 
 
--  if f generates successive wage offers, then :math:`w` is more likely to be low, but 
-   :math:`\pi` is moving up toward to 1, which lowers the reservation wage, 
+-  if f generates successive wage offers, then :math:`w` is more likely to be low, but
+   :math:`\pi` is moving up toward to 1, which lowers the reservation wage,
    i.e., the worker becomes  less selective the longer he or she remains unemployed.
 -  if g generates wage offers, then :math:`w` is more likely to be high, but
    :math:`\pi` is moving downward toward 0, increasing the reservation wage, i.e., the worker becomes  more selective
-   the longer he or she remains unemployed. 
+   the longer he or she remains unemployed.
 
 Quantitatively, the lower right figure sheds light on which effect dominates in this example.
 
 It shows the probability that a previously unemployed  worker
 accepts an offer at different values of :math:`\pi` when :math:`f` or :math:`g` generates
-wage offers. 
+wage offers.
 
 That graph shows that for the particular :math:`f` and :math:`g` in this example, the
 worker is always more likely to accept an offer when :math:`f` generates the data  even when :math:`\pi` is close to zero so
 that  the worker believes the true distribution is :math:`g` and therefore is relatively
-more selective. 
+more selective.
 
 The empirical cumulative distribution of the duration of
 unemployment verifies our conjecture.
@@ -1139,9 +1143,9 @@ Example 4
 
 In this example, we keep the parameters of beta distributions to be the
 same with the baseline case but increase the unemployment compensation
-:math:`c`. 
+:math:`c`.
 
-Comparing outcomes to the baseline case (example 1) in which 
+Comparing outcomes to the baseline case (example 1) in which
 unemployment compensation if low (:math:`c`\ =0.3), now the worker can
 afford a longer  learning period.
 
@@ -1151,7 +1155,7 @@ wage offers much later.
 Furthermore, at the time of accepting employment, the belief
 :math:`\pi` is closer to either :math:`0` or :math:`1`.
 
-That means that 
+That means that
 the worker has a better  idea about what the true distribution is
 when he eventually chooses to accept a wage offer.
 
