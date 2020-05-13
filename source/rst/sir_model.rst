@@ -89,7 +89,7 @@ the transmission rate is positive and :math:`i(0) > 0`.
 The interest is primarily in 
 
 * the number of infections at a given time (which determines whether or not the health care system is overwhelmed) and
-* how long the case load can be deferred (hopefully until a vaccine arrives)
+* how long the caseload can be deferred (hopefully until a vaccine arrives)
 
 Using lower case letters for the fraction of the population in each state, the
 dynamics are
@@ -116,7 +116,7 @@ We do not need to model the fraction :math:`r` of the population in state :math:
 
 In particular, the "removed" fraction of the population is :math:`r = 1 - s - e - i`.
 
-We will also track :math:`c = i + r`, which is the cumulative case load
+We will also track :math:`c = i + r`, which is the cumulative caseload
 (i.e., all those who have or have had the infection).
 
 The system :eq:`sir_system` can be written in vector form as
@@ -350,7 +350,7 @@ This is current cases under the different scenarios:
 
     plot_paths(i_paths, labels)
 
-Here is cumulative cases, as a fraction of population:
+Here are cumulative cases, as a fraction of population:
 
 .. code-block:: ipython3
 
