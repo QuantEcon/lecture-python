@@ -240,7 +240,7 @@ This class will
 
 #. provide methods to simulate dynamics of the stocks and rates
 
-#. provide a method to compute the state state of the rate
+#. provide a method to compute the steady state of the rate
 
 
 To write a nice implementation, there's an issue we have to address.
