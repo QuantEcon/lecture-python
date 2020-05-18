@@ -64,7 +64,7 @@ We'll begin with some imports:
 
     import numpy as np
     import matplotlib.pyplot as plt
-    from numba import njit, prange, vectorize
+    from numba import jit, prange, jitclass, float64, int64
     from interpolation import interp
     from math import gamma
 
@@ -198,22 +198,13 @@ The bottom panel presents mixtures of these distributions, with various mixing p
 
 .. code-block:: python3
 
-    def beta_function_factory(a, b):
+    @jit(nopython=True)
+    def p(x, a, b):
+        r = gamma(a + b) / (gamma(a) * gamma(b))
+        return r * x**(a-1) * (1 - x)**(b-1)
 
-        @vectorize
-        def p(x):
-            r = gamma(a + b) / (gamma(a) * gamma(b))
-            return r * x**(a-1) * (1 - x)**(b-1)
-
-        @njit
-        def p_rvs():
-            return np.random.beta(a, b)
-
-        return p, p_rvs
-
-
-    f0, _ = beta_function_factory(1, 1)
-    f1, _ = beta_function_factory(9, 9)
+    f0 = lambda x: p(x, 1, 1)
+    f1 = lambda x: p(x, 9, 9)
     grid = np.linspace(0, 1, 50)
 
     fig, axes = plt.subplots(2, figsize=(10, 8))
@@ -439,34 +430,74 @@ In other words, we iterate with an operator :math:`Q`, where
 Implementation
 ==============
 
-First, we will construct a class to store the parameters of the model
+First, we will construct a ``jitclass`` to store the parameters of the model
 
 .. code-block:: python3
 
+    wf_data = [('a0', float64),          # Parameters of beta distributions
+               ('b0', float64),
+               ('a1', float64),
+               ('b1', float64),
+               ('c', float64),           # Cost of another draw
+               ('π_grid_size', int64),
+               ('L0', float64),          # Cost of selecting f0 when f1 is true
+               ('L1', float64),          # Cost of selecting f1 when f0 is true
+               ('π_grid', float64[:]),
+               ('mc_size', int64),
+               ('z0', float64[:]),
+               ('z1', float64[:])]
+
+.. code-block:: python3
+
+    @jitclass(wf_data)
     class WaldFriedman:
 
         def __init__(self,
-                     c=1.25,         # Cost of another draw
+                     c=1.25,
                      a0=1,
                      b0=1,
                      a1=3,
                      b1=1.2,
-                     L0=25,          # Cost of selecting f0 when f1 is true
-                     L1=25,          # Cost of selecting f1 when f0 is true
+                     L0=25,
+                     L1=25,
                      π_grid_size=200,
                      mc_size=1000):
 
+            self.a0, self.b0 = a0, b0
+            self.a1, self.b1 = a1, b1
             self.c, self.π_grid_size = c, π_grid_size
             self.L0, self.L1 = L0, L1
             self.π_grid = np.linspace(0, 1, π_grid_size)
             self.mc_size = mc_size
 
-            # Set up distributions
-            self.f0, self.f0_rvs = beta_function_factory(a0, b0)
-            self.f1, self.f1_rvs = beta_function_factory(a1, b1)
-
             self.z0 = np.random.beta(a0, b0, mc_size)
             self.z1 = np.random.beta(a1, b1, mc_size)
+
+        def f0(self, x):
+
+            return p(x, self.a0, self.b0)
+
+        def f1(self, x):
+
+            return p(x, self.a1, self.b1)
+
+        def f0_rvs(self):
+            return np.random.beta(self.a0, self.b0)
+
+        def f1_rvs(self):
+            return np.random.beta(self.a1, self.b1)
+
+        def κ(self, z, π):
+            """
+            Updates π using Bayes' rule and the current observation z
+            """
+
+            f0, f1 = self.f0, self.f1
+
+            π_f0, π_f1 = π * f0(z), (1 - π) * f1(z)
+            π_new = π_f0 / (π_f0 + π_f1)
+
+            return π_new
 
 
 As in the :doc:`optimal growth lecture <optgrowth>`, to approximate a continuous value function
@@ -475,78 +506,53 @@ As in the :doc:`optimal growth lecture <optgrowth>`, to approximate a continuous
 
 * When we evaluate :math:`\mathbb E[J(\pi')]` between grid points, we use linear interpolation.
 
-The function ``operator_factory`` returns the operator ``Q``
+We define the operator function ``Q`` below.
 
 .. code-block:: python3
 
-    def operator_factory(wf, parallel_flag=True):
-
-        """
-        Returns a jitted version of the Q operator.
-
-        * wf is an instance of the WaldFriedman class
-        """
+    @jit(nopython=True, parallel=True)
+    def Q(h, wf):
 
         c, π_grid = wf.c, wf.π_grid
         L0, L1 = wf.L0, wf.L1
-        f0, f1 = wf.f0, wf.f1
         z0, z1 = wf.z0, wf.z1
         mc_size = wf.mc_size
 
-        @njit
-        def κ(z, π):
-            """
-            Updates π using Bayes' rule and the current observation z
-            """
-            π_f0, π_f1 = π * f0(z), (1 - π) * f1(z)
-            π_new = π_f0 / (π_f0 + π_f1)
+        κ = wf.κ
 
-            return π_new
+        h_new = np.empty_like(π_grid)
+        h_func = lambda p: interp(π_grid, h, p)
 
-        @njit(parallel=parallel_flag)
-        def Q(h):
-            h_new = np.empty_like(π_grid)
-            h_func = lambda p: interp(π_grid, h, p)
+        for i in prange(len(π_grid)):
+            π = π_grid[i]
 
-            for i in prange(len(π_grid)):
-                π = π_grid[i]
+            # Find the expected value of J by integrating over z
+            integral_f0, integral_f1 = 0, 0
+            for m in range(mc_size):
+                π_0 = κ(z0[m], π)  # Draw z from f0 and update π
+                integral_f0 += min((1 - π_0) * L0, π_0 * L1, h_func(π_0))
 
-                # Find the expected value of J by integrating over z
-                integral_f0, integral_f1 = 0, 0
-                for m in range(mc_size):
-                    π_0 = κ(z0[m], π)  # Draw z from f0 and update π
-                    integral_f0 += min((1 - π_0) * L0, π_0 * L1, h_func(π_0))
+                π_1 = κ(z1[m], π)  # Draw z from f1 and update π
+                integral_f1 += min((1 - π_1) * L0, π_1 * L1, h_func(π_1))
 
-                    π_1 = κ(z1[m], π)  # Draw z from f1 and update π
-                    integral_f1 += min((1 - π_1) * L0, π_1 * L1, h_func(π_1))
+            integral = (π * integral_f0 + (1 - π) * integral_f1) / mc_size
 
-                integral = (π * integral_f0 + (1 - π) * integral_f1) / mc_size
+            h_new[i] = c + integral
 
-                h_new[i] = c + integral
-
-            return h_new
-
-        return Q
+        return h_new
 
 
 To solve the model, we will iterate using ``Q`` to find the fixed point
 
 .. code-block:: python3
 
-    def solve_model(wf,
-                    use_parallel=True,
-                    tol=1e-4,
-                    max_iter=1000,
-                    verbose=True,
-                    print_skip=25):
-
+    @jit(nopython=True)
+    def solve_model(wf, tol=1e-4, max_iter=1000):
         """
         Compute the continuation value function
 
         * wf is an instance of WaldFriedman
         """
-
-        Q = operator_factory(wf, parallel_flag=use_parallel)
 
         # Set up loop
         h = np.zeros(len(wf.π_grid))
@@ -554,18 +560,13 @@ To solve the model, we will iterate using ``Q`` to find the fixed point
         error = tol + 1
 
         while i < max_iter and error > tol:
-            h_new = Q(h)
+            h_new = Q(h, wf)
             error = np.max(np.abs(h - h_new))
             i += 1
-            if verbose and i % print_skip == 0:
-                print(f"Error at iteration {i} is {error}.")
             h = h_new
 
         if i == max_iter:
             print("Failed to converge!")
-
-        if verbose and i < max_iter:
-            print(f"\nConverged in {i} iterations.")
 
         return h_new
 
@@ -604,6 +605,7 @@ and plot these on our value function plot
 
 .. code-block:: python3
 
+    @jit(nopython=True)
     def find_cutoff_rule(wf, h):
 
         """
@@ -696,15 +698,7 @@ In this case, the decision-maker is correct 80% of the time
         f0, f1 = wf.f0, wf.f1
         f0_rvs, f1_rvs = wf.f0_rvs, wf.f1_rvs
         π_grid = wf.π_grid
-
-        def κ(z, π):
-            """
-            Updates π using Bayes' rule and the current observation z
-            """
-            π_f0, π_f1 = π * f0(z), (1 - π) * f1(z)
-            π_new = π_f0 / (π_f0 + π_f1)
-
-            return π_new
+        κ = wf.κ
 
         if true_dist == "f0":
             f, f_rvs = wf.f0, wf.f0_rvs
