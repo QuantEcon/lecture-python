@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MODIFIED_FILES="$1"
-PRIVATE_THEME=false
+PRIVATE_THEME=$2
 
 # Find List of RST Files
 RST_FILES=""
