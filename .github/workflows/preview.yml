@@ -22,24 +22,26 @@ jobs:
         id: files
         uses: jitterbit/get-changed-files@v1
       - name: Checkout QuantEcon theme
+        if: github.event.pull_request.head.repo.full_name == github.repository
         uses: actions/checkout@v2
         with:
           repository: QuantEcon/lecture-python.theme
           token: ${{ secrets.ACTIONS_PAT }}
           path: theme/lecture-python.theme
-      - name: Get current date
-        id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      # - name: Get current date
+      #   id: date
+      #   run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - name: Check Sphinx Cache
         id: cache
         uses: actions/cache@v1
         with:
           path: _build
-          key: cache-sphinx-${{ steps.date.outputs.date }}
+          key: cache-sphinx
+          # key: cache-sphinx-${{ steps.date.outputs.date }}
       - name: Build website files
         shell: bash -l {0}
-        run: | 
-          bash scripts/build-website.sh "${{ steps.files.outputs.added_modified }}"
+        run: |
+          bash scripts/build-website.sh "${{ steps.files.outputs.added_modified }}" "${{ github.event.pull_request.head.repo.full_name == github.repository }}"
       - name: Preview Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.0
         if: env.BUILD_NETLIFY == 'true'
