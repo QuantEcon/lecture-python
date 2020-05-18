@@ -240,7 +240,7 @@ This class will
 
 #. provide methods to simulate dynamics of the stocks and rates
 
-#. provide a method to compute the state state of the rate
+#. provide a method to compute the steady state of the rate
 
 
 Please be careful because the implied objects :math:`g, A, \hat A` will not change 
