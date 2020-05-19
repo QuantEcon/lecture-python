@@ -10,6 +10,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Install Fonts
+        run: |
+          sudo apt-get install -y fonts-liberation
+          sudo apt-get install -y fonts-cmu
       - name: TexLive Cache
         id: cache
         uses: actions/cache@v1
