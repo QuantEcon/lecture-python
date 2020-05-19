@@ -721,7 +721,7 @@ Exercise 2
 .. code-block:: python3
 
     # Load in data
-    df1 = pd.read_stata('https://github.com/QuantEcon//blob/master/source/_static/lecture_specific/ols/maketable1.dta?raw=true')
+    df1 = pd.read_stata('https://github.com/QuantEcon/lecture-python/blob/master/source/_static/lecture_specific/ols/maketable1.dta?raw=true')
     df1 = df1.dropna(subset=['logpgp95', 'avexpr'])
 
     # Add a constant term
