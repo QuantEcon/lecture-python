@@ -82,7 +82,7 @@ We will use pandas' ``.read_stata()`` function to read in data contained in the 
 
 .. code-block:: python3
 
-    df1 = pd.read_stata('https://github.com/QuantEcon/lecture-source-py/blob/master/source/_static/lecture_specific/ols/maketable1.dta?raw=true')
+    df1 = pd.read_stata('https://github.com/QuantEcon/lecture-python/blob/master/source/_static/lecture_specific/ols/maketable1.dta?raw=true')
     df1.head()
 
 
@@ -338,7 +338,7 @@ Let's estimate some of the extended models considered in the paper
 
 .. code-block:: python3
 
-    df2 = pd.read_stata('https://github.com/QuantEcon/lecture-source-py/blob/master/source/_static/lecture_specific/ols/maketable2.dta?raw=true')
+    df2 = pd.read_stata('https://github.com/QuantEcon/lecture-python/blob/master/source/_static/lecture_specific/ols/maketable2.dta?raw=true')
 
     # Add constant term to dataset
     df2['const'] = 1
@@ -497,7 +497,7 @@ used for estimation)
 .. code-block:: python3
 
     # Import and select the data
-    df4 = pd.read_stata('https://github.com/QuantEcon/lecture-source-py/blob/master/source/_static/lecture_specific/ols/maketable4.dta?raw=true')
+    df4 = pd.read_stata('https://github.com/QuantEcon/lecture-python/blob/master/source/_static/lecture_specific/ols/maketable4.dta?raw=true')
     df4 = df4[df4['baseco'] == 1]
 
     # Add a constant variable
@@ -691,7 +691,7 @@ Exercise 1
 .. code-block:: python3
 
     # Load in data
-    df4 = pd.read_stata('https://github.com/QuantEcon/lecture-source-py/blob/master/source/_static/lecture_specific/ols/maketable4.dta?raw=true')
+    df4 = pd.read_stata('https://github.com/QuantEcon/lecture-python/blob/master/source/_static/lecture_specific/ols/maketable4.dta?raw=true')
 
     # Add a constant term
     df4['const'] = 1
@@ -721,7 +721,7 @@ Exercise 2
 .. code-block:: python3
 
     # Load in data
-    df1 = pd.read_stata('https://github.com/QuantEcon/lecture-source-py/blob/master/source/_static/lecture_specific/ols/maketable1.dta?raw=true')
+    df1 = pd.read_stata('https://github.com/QuantEcon//blob/master/source/_static/lecture_specific/ols/maketable1.dta?raw=true')
     df1 = df1.dropna(subset=['logpgp95', 'avexpr'])
 
     # Add a constant term
