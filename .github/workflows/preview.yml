@@ -44,7 +44,7 @@ jobs:
           bash scripts/build-website.sh "${{ steps.files.outputs.added_modified }}" "${{ github.event.pull_request.head.repo.full_name == github.repository }}"
       - name: Preview Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.0
-        if: env.BUILD_NETLIFY == 'true'
+        if: env.BUILD_NETLIFY == 'true' && github.event.pull_request.head.repo.full_name == github.repository
         with:
           publish-dir: './_build/website/jupyter_html'
           production-branch: master
@@ -53,3 +53,9 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      - name: Save Build as Artifact (Forks)
+        uses: actions/upload-artifact@v1
+        if: github.event.pull_request.head.repo.full_name != github.repository
+        with:
+          name: website
+          path: _build/website/jupyter_html
