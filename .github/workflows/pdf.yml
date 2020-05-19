@@ -22,6 +22,7 @@ jobs:
           bash scripts/install_latex.sh
           echo 'export PATH=/tmp/texlive/bin/x86_64-linux:$PATH' >> ~/.bash_profile
           source ~/.bash_profile
+          ls /tmp/texlive/
       - name: Setup Anaconda
         uses: goanpeca/setup-miniconda@v1
         with:
@@ -33,7 +34,9 @@ jobs:
           activate-environment: qe-lectures
       - name: Build PDF
         shell: bash -l {0}
-        run: make pdf
+        run: |
+          ls /tmp/texlive/bin/x86_64-linux/
+          make pdf
       - uses: actions/upload-artifact@v2
         with:
           name: pdf
