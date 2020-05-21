@@ -56,7 +56,7 @@ The dataset can be accessed with the following link:
 
 .. code-block:: python3
    
-   url1 = 'https://raw.githubusercontent.com/QuantEcon/lecture-source-py/master/source/_static/lecture_specific/pandas_panel/realwage.csv'
+   url1 = 'https://raw.githubusercontent.com/QuantEcon/lecture-python/master/source/_static/lecture_specific/pandas_panel/realwage.csv'
 
 
 .. code-block:: python3
@@ -186,7 +186,7 @@ The dataset can be accessed with the following link:
 
 .. code-block:: python3
 
-    url2 = 'https://raw.githubusercontent.com/QuantEcon/lecture-source-py/master/source/_static/lecture_specific/pandas_panel/countries.csv'
+    url2 = 'https://raw.githubusercontent.com/QuantEcon/lecture-python/master/source/_static/lecture_specific/pandas_panel/countries.csv'
 
 
 .. code-block:: python3
@@ -537,7 +537,7 @@ The dataset can be accessed with the following link:
 
 .. code-block:: python3
 
-    url3 = 'https://raw.githubusercontent.com/QuantEcon/lecture-source-py/master/source/_static/lecture_specific/pandas_panel/employ.csv'
+    url3 = 'https://raw.githubusercontent.com/QuantEcon/lecture-python/master/source/_static/lecture_specific/pandas_panel/employ.csv'
 
 Reading in the CSV file returns a panel dataset in long format. Use ``.pivot_table()`` to construct
 a wide format dataframe with a ``MultiIndex`` in the columns.
