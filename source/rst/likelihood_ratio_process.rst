@@ -345,7 +345,7 @@ threshold :math:`c`.
 
 The two probabities are:
 
-- Probability of detection (= **statistical power** = 1 minus probability
+- Probability of detection (= power = 1 minus probability
    of Type II error):
 
 .. math::
@@ -353,7 +353,7 @@ The two probabities are:
 
    1-\beta \equiv \Pr\left\{ L\left(w^{t}\right)<c\mid q=g\right\}
 
-- Probability of false alarm (= **significance level** = probability of
+- Probability of false alarm (= significance level = probability of
    Type I error):
 
 .. math::
