@@ -8,462 +8,462 @@
 
 
 <url>
-  <loc>https://python-intro.quantecon.org/</loc>
+  <loc>https://python.quantecon.org/</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/index_toc.html</loc>
+  <loc>https://python.quantecon.org/index_toc.html</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/introductory_quantitative_economics_with_python.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/introductory_quantitative_economics_with_python.pdf</loc>
   <lastmod>2020-03-26T23:55:05+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/about_lectures.html</loc>
+  <loc>https://python.quantecon.org/about_lectures.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/index_tools_and_techniques.html</loc>
+  <loc>https://python.quantecon.org/index_tools_and_techniques.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/geom_series.html</loc>
+  <loc>https://python.quantecon.org/geom_series.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/linear_algebra.html</loc>
+  <loc>https://python.quantecon.org/linear_algebra.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/complex_and_trig.html</loc>
+  <loc>https://python.quantecon.org/complex_and_trig.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/lln_clt.html</loc>
+  <loc>https://python.quantecon.org/lln_clt.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/heavy_tails.html</loc>
+  <loc>https://python.quantecon.org/heavy_tails.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/index_intro_dynam.html</loc>
+  <loc>https://python.quantecon.org/index_intro_dynam.html</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/scalar_dynam.html</loc>
+  <loc>https://python.quantecon.org/scalar_dynam.html</loc>
   <lastmod>2020-03-26T11:23:51+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/ar1_processes.html</loc>
+  <loc>https://python.quantecon.org/ar1_processes.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/finite_markov.html</loc>
+  <loc>https://python.quantecon.org/finite_markov.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/inventory_dynamics.html</loc>
+  <loc>https://python.quantecon.org/inventory_dynamics.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/linear_models.html</loc>
+  <loc>https://python.quantecon.org/linear_models.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/samuelson.html</loc>
+  <loc>https://python.quantecon.org/samuelson.html</loc>
   <lastmod>2020-03-26T11:23:51+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/kesten_processes.html</loc>
+  <loc>https://python.quantecon.org/kesten_processes.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/wealth_dynamics.html</loc>
+  <loc>https://python.quantecon.org/wealth_dynamics.html</loc>
   <lastmod>2020-03-26T11:23:51+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/kalman.html</loc>
+  <loc>https://python.quantecon.org/kalman.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/index_dynamic_programming.html</loc>
+  <loc>https://python.quantecon.org/index_dynamic_programming.html</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/short_path.html</loc>
+  <loc>https://python.quantecon.org/short_path.html</loc>
   <lastmod>2020-03-26T11:23:51+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/mccall_model.html</loc>
+  <loc>https://python.quantecon.org/mccall_model.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/mccall_model_with_separation.html</loc>
+  <loc>https://python.quantecon.org/mccall_model_with_separation.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/mccall_fitted_vfi.html</loc>
+  <loc>https://python.quantecon.org/mccall_fitted_vfi.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/mccall_correlated.html</loc>
+  <loc>https://python.quantecon.org/mccall_correlated.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/exchangeable.html</loc>
+  <loc>https://python.quantecon.org/exchangeable.html</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/likelihood_ratio_process.html</loc>
+  <loc>https://python.quantecon.org/likelihood_ratio_process.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/index_lq_control.html</loc>
+  <loc>https://python.quantecon.org/index_lq_control.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/lqcontrol.html</loc>
+  <loc>https://python.quantecon.org/lqcontrol.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/perm_income.html</loc>
+  <loc>https://python.quantecon.org/perm_income.html</loc>
   <lastmod>2020-03-26T11:23:51+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/perm_income_cons.html</loc>
+  <loc>https://python.quantecon.org/perm_income_cons.html</loc>
   <lastmod>2020-03-26T11:23:51+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/lq_inventories.html</loc>
+  <loc>https://python.quantecon.org/lq_inventories.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/index_data_and_empirics.html</loc>
+  <loc>https://python.quantecon.org/index_data_and_empirics.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/pandas_panel.html</loc>
+  <loc>https://python.quantecon.org/pandas_panel.html</loc>
   <lastmod>2020-03-26T11:23:51+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/ols.html</loc>
+  <loc>https://python.quantecon.org/ols.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/mle.html</loc>
+  <loc>https://python.quantecon.org/mle.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/index_multi_agent_models.html</loc>
+  <loc>https://python.quantecon.org/index_multi_agent_models.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/schelling.html</loc>
+  <loc>https://python.quantecon.org/schelling.html</loc>
   <lastmod>2020-03-26T11:23:51+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/lake_model.html</loc>
+  <loc>https://python.quantecon.org/lake_model.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/rational_expectations.html</loc>
+  <loc>https://python.quantecon.org/rational_expectations.html</loc>
   <lastmod>2020-03-26T11:23:51+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/re_with_feedback.html</loc>
+  <loc>https://python.quantecon.org/re_with_feedback.html</loc>
   <lastmod>2020-03-26T11:23:51+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/markov_perf.html</loc>
+  <loc>https://python.quantecon.org/markov_perf.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/uncertainty_traps.html</loc>
+  <loc>https://python.quantecon.org/uncertainty_traps.html</loc>
   <lastmod>2020-03-26T11:23:51+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/aiyagari.html</loc>
+  <loc>https://python.quantecon.org/aiyagari.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/index_asset_pricing.html</loc>
+  <loc>https://python.quantecon.org/index_asset_pricing.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/markov_asset.html</loc>
+  <loc>https://python.quantecon.org/markov_asset.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/harrison_kreps.html</loc>
+  <loc>https://python.quantecon.org/harrison_kreps.html</loc>
   <lastmod>2020-03-26T11:23:50+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/zreferences.html</loc>
+  <loc>https://python.quantecon.org/zreferences.html</loc>
   <lastmod>2020-03-26T11:23:51+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/about_lectures.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/about_lectures.pdf</loc>
   <lastmod>2020-03-26T23:55:05+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/troubleshooting.html</loc>
+  <loc>https://python.quantecon.org/troubleshooting.html</loc>
   <lastmod>2020-03-26T11:23:51+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/geom_series.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/geom_series.pdf</loc>
   <lastmod>2020-03-26T23:55:05+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/linear_algebra.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/linear_algebra.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_static/lecture_specific/linear_algebra/course_notes.pdf</loc>
+  <loc>https://python.quantecon.org/_static/lecture_specific/linear_algebra/course_notes.pdf</loc>
   <lastmod>2020-03-24T23:06:25+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/complex_and_trig.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/complex_and_trig.pdf</loc>
   <lastmod>2020-03-26T23:55:05+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/lln_clt.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/lln_clt.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/heavy_tails.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/heavy_tails.pdf</loc>
   <lastmod>2020-03-26T23:55:05+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/scalar_dynam.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/scalar_dynam.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/ar1_processes.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/ar1_processes.pdf</loc>
   <lastmod>2020-03-26T23:55:05+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/finite_markov.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/finite_markov.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/inventory_dynamics.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/inventory_dynamics.pdf</loc>
   <lastmod>2020-03-26T23:55:05+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/linear_models.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/linear_models.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_static/lecture_specific/linear_models/iteration_notes.pdf</loc>
+  <loc>https://python.quantecon.org/_static/lecture_specific/linear_models/iteration_notes.pdf</loc>
   <lastmod>2020-03-24T23:06:25+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/samuelson.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/samuelson.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/kesten_processes.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/kesten_processes.pdf</loc>
   <lastmod>2020-03-26T23:55:05+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/wealth_dynamics.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/wealth_dynamics.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/kalman.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/kalman.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/short_path.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/short_path.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/mccall_model.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/mccall_model.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/mccall_model_with_separation.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/mccall_model_with_separation.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/mccall_fitted_vfi.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/mccall_fitted_vfi.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/mccall_correlated.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/mccall_correlated.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/exchangeable.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/exchangeable.pdf</loc>
   <lastmod>2020-03-26T23:55:05+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/likelihood_ratio_process.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/likelihood_ratio_process.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/lqcontrol.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/lqcontrol.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/perm_income.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/perm_income.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/perm_income_cons.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/perm_income_cons.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/lq_inventories.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/lq_inventories.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/pandas_panel.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/pandas_panel.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/ols.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/ols.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/mle.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/mle.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/schelling.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/schelling.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/lake_model.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/lake_model.pdf</loc>
   <lastmod>2020-03-26T23:55:05+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/rational_expectations.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/rational_expectations.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/re_with_feedback.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/re_with_feedback.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/markov_perf.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/markov_perf.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/uncertainty_traps.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/uncertainty_traps.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/aiyagari.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/aiyagari.pdf</loc>
   <lastmod>2020-03-26T23:55:05+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_static/lecture_specific/aiyagari/aiyagari_obit.pdf</loc>
+  <loc>https://python.quantecon.org/_static/lecture_specific/aiyagari/aiyagari_obit.pdf</loc>
   <lastmod>2020-03-24T23:06:25+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/markov_asset.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/markov_asset.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/harrison_kreps.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/harrison_kreps.pdf</loc>
   <lastmod>2020-03-26T23:55:05+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://python-intro.quantecon.org/_downloads/pdf/troubleshooting.pdf</loc>
+  <loc>https://python.quantecon.org/_downloads/pdf/troubleshooting.pdf</loc>
   <lastmod>2020-03-26T23:55:06+00:00</lastmod>
   <priority>0.41</priority>
 </url>

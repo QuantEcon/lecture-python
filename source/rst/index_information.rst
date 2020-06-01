@@ -20,7 +20,9 @@ agents as given.  Later we will look at full equilibrium problems.
     :maxdepth: 2
 
     odu
-    wald_friedman.rst
+    likelihood_ratio_process
+    wald_friedman
     exchangeable
-    likelihood_ratio_process.rst
+    likelihood_bayes
     navy_captain
+    

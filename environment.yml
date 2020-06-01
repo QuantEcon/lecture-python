@@ -19,6 +19,7 @@ dependencies:
   - statsmodels
   - seaborn
   - pip:
+    - interpolation
     - sphinxcontrib-jupyter
     - sphinxcontrib-bibtex
     - quantecon

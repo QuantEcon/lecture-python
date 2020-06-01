@@ -421,7 +421,7 @@ Here's some code that does exactly this for the exponential distribution
 
 (Please experiment with other choices of :math:`F`, but remember that, to conform with the conditions of the CLT, the distribution must have a finite second moment)
 
-
+.. _sim_one:
 
 .. code-block:: python3
 
@@ -721,7 +721,7 @@ The proof is based on a Taylor expansion of :math:`g` around the point :math:`\m
 
 Taking the result as given, let the distribution :math:`F` of each :math:`X_i` be uniform on :math:`[0, \pi / 2]` and let :math:`g(x) = \sin(x)`.
 
-Derive the asymptotic distribution of :math:`\sqrt{n} \{ g(\bar X_n) - g(\mu) \}` and illustrate convergence in the same spirit as the program ``illustrate_clt.py`` discussed above.
+Derive the asymptotic distribution of :math:`\sqrt{n} \{ g(\bar X_n) - g(\mu) \}` and illustrate convergence in the same spirit as the program discussed :ref:`above <sim_one>`.
 
 What happens when you replace :math:`[0, \pi / 2]` with :math:`[0, \pi]`?
 

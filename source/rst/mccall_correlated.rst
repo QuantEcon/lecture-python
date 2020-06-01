@@ -18,7 +18,7 @@ In addition to what's in Anaconda, this lecture will need the following librarie
   :class: hide-output
 
   !pip install --upgrade quantecon
-  !pip install --upgrade interpolation
+  !pip install interpolation
 
 Overview
 ========
@@ -53,15 +53,15 @@ The Model
 
 Wages at each point in time are given by
 
-.. math::     
+.. math::
 
-    w_t = \exp(z_t) + y_t 
+    w_t = \exp(z_t) + y_t
 
 where
 
-.. math::     
+.. math::
 
-    y_t \sim \exp(\mu + s \zeta_t)  
+    y_t \sim \exp(\mu + s \zeta_t)
     \quad \text{and} \quad
     z_{t+1} = d + \rho z_t + \sigma \epsilon_{t+1}
 
@@ -77,13 +77,13 @@ As before, the worker can either
 
 The value function satisfies the Bellman equation
 
-.. math::  
+.. math::
 
-    v^*(w, z) = 
-        \max 
-        \left\{ 
-            \frac{u(w)}{1-\beta}, u(c) + \beta \, \mathbb E_z v^*(w', z') 
-        \right\} 
+    v^*(w, z) =
+        \max
+        \left\{
+            \frac{u(w)}{1-\beta}, u(c) + \beta \, \mathbb E_z v^*(w', z')
+        \right\}
 
 In this express, :math:`u` is a utility function and :math:`\mathbb E_z` is expectation of next period variables given current :math:`z`.
 
@@ -97,55 +97,55 @@ There is a way that we can reduce dimensionality in this problem, which greatly 
 To start, let :math:`f^*` be the continuation value function, defined
 by
 
-.. math::  
+.. math::
 
-    f^*(z) := u(c) + \beta \, \mathbb E_z v^*(w', z') 
+    f^*(z) := u(c) + \beta \, \mathbb E_z v^*(w', z')
 
 The Bellman equation can now be written
 
-.. math::  
+.. math::
 
-    v^*(w, z) = \max \left\{ \frac{u(w)}{1-\beta}, \, f^*(z) \right\} 
+    v^*(w, z) = \max \left\{ \frac{u(w)}{1-\beta}, \, f^*(z) \right\}
 
 Combining the last two expressions, we see that the continuation value
 function satisfies
 
-.. math::     
+.. math::
 
-    f^*(z) = u(c) + \beta \, \mathbb E_z \max \left\{ \frac{u(w')}{1-\beta}, f^*(z') \right\} 
+    f^*(z) = u(c) + \beta \, \mathbb E_z \max \left\{ \frac{u(w')}{1-\beta}, f^*(z') \right\}
 
 We’ll solve this functional equation for :math:`f^*` by introducing the
 operator
 
-.. math::     
+.. math::
 
-    Qf(z) = u(c) + \beta \, \mathbb E_z \max \left\{ \frac{u(w')}{1-\beta}, f(z') \right\} 
+    Qf(z) = u(c) + \beta \, \mathbb E_z \max \left\{ \frac{u(w')}{1-\beta}, f(z') \right\}
 
 
 By construction, :math:`f^*` is a fixed point of :math:`Q`, in the sense that
 :math:`Q f^* = f^*`.
 
-Under mild assumptions, it can be shown that :math:`Q` is a `contraction mapping <https://en.wikipedia.org/wiki/Contraction_mapping>`__ over a suitable space of continuous functions on :math:`\mathbb R`. 
+Under mild assumptions, it can be shown that :math:`Q` is a `contraction mapping <https://en.wikipedia.org/wiki/Contraction_mapping>`__ over a suitable space of continuous functions on :math:`\mathbb R`.
 
 By Banach's contraction mapping theorem, this means that :math:`f^*` is the unique fixed point and we can calculate it by iterating with :math:`Q` from any reasonable initial condition.
 
 Once we have :math:`f^*`, we can solve the search problem by stopping when the reward for accepting exceeds the continuation value, or
 
-.. math::     
+.. math::
 
-    \frac{u(w)}{1-\beta} \geq f^*(z) 
+    \frac{u(w)}{1-\beta} \geq f^*(z)
 
-For utility we take :math:`u(c) = \ln(c)`. 
+For utility we take :math:`u(c) = \ln(c)`.
 
 The reservation wage is the wage where equality holds in the last expression.
 
 
 That is,
 
-.. math::     
+.. math::
     :label: corr_mcm_barw
 
-    \bar w (z) := \exp(f^*(z) (1-\beta)) 
+    \bar w (z) := \exp(f^*(z) (1-\beta))
 
 
 Our main aim is to solve for the reservation rule and study its properties and implications.
@@ -159,7 +159,7 @@ Let :math:`f` be our initial guess of :math:`f^*`.
 
 When we iterate, we use the :doc:`fitted value function iteration <mccall_fitted_vfi>` algorithm.
 
-In particular, :math:`f` and all subsequent iterates are stored as a vector of values on a grid. 
+In particular, :math:`f` and all subsequent iterates are stored as a vector of values on a grid.
 
 These points are interpolated into a function as required, using piecewise linear interpolation.
 
@@ -190,7 +190,7 @@ Default parameter values are embedded in the class.
 
     @jitclass(job_search_data)
     class JobSearch:
-    
+
         def __init__(self,
                      μ=0.0,       # transient shock log mean
                      s=1.0,       # transient shock log variance
@@ -201,36 +201,36 @@ Default parameter values are embedded in the class.
                      c=5,         # unemployment compensation
                      mc_size=1000,
                      grid_size=100):
-    
-            self.μ, self.s, self.d,  = μ, s, d, 
-            self.ρ, self.σ, self.β, self.c = ρ, σ, β, c 
-    
+
+            self.μ, self.s, self.d,  = μ, s, d,
+            self.ρ, self.σ, self.β, self.c = ρ, σ, β, c
+
             # Set up grid
             z_mean = d / (1 - ρ)
             z_sd = np.sqrt(σ / (1 - ρ**2))
             k = 3  # std devs from mean
             a, b = z_mean - k * z_sd, z_mean + k * z_sd
             self.z_grid = np.linspace(a, b, grid_size)
-    
+
             # Draw and store shocks
             np.random.seed(1234)
             self.e_draws = randn(2, mc_size)
-    
+
         def parameters(self):
             """
             Return all parameters as a tuple.
             """
             return self.μ, self.s, self.d, \
                     self.ρ, self.σ, self.β, self.c
-            
+
 Next we implement the :math:`Q` operator.
 
 .. code:: ipython3
 
     @njit(parallel=True)
-    def Q(js, f_in, f_out):       
+    def Q(js, f_in, f_out):
         """
-        Apply the operator Q.  
+        Apply the operator Q.
 
             * js is an instance of JobSearch
             * f_in and f_out are arrays that represent f and Qf respectively
@@ -246,12 +246,12 @@ Next we implement the :math:`Q` operator.
             for m in range(M):
                 e1, e2 = js.e_draws[:, m]
                 z_next = d + ρ * z + σ * e1
-                go_val = interp(js.z_grid, f_in, z_next)     # f(z') 
+                go_val = interp(js.z_grid, f_in, z_next)     # f(z')
                 y_next = np.exp(μ + s * e2)                  # y' draw
                 w_next = np.exp(z_next) + y_next             # w' draw
-                stop_val = np.log(w_next) / (1 - β)    
+                stop_val = np.log(w_next) / (1 - β)
                 expectation += max(stop_val, go_val)
-            expectation = expectation / M 
+            expectation = expectation / M
             f_out[i] = np.log(c) + β * expectation
 
 Here's a function to compute an approximation to the fixed point of :math:`Q`.
@@ -260,19 +260,19 @@ Here's a function to compute an approximation to the fixed point of :math:`Q`.
 
     def compute_fixed_point(js,
                             use_parallel=True,
-                            tol=1e-4, 
-                            max_iter=1000, 
+                            tol=1e-4,
+                            max_iter=1000,
                             verbose=True,
-                            print_skip=25): 
-    
+                            print_skip=25):
+
         f_init = np.log(js.c) * np.ones(len(js.z_grid))
         f_out = np.empty_like(f_init)
-    
+
         # Set up loop
         f_in = f_init
         i = 0
         error = tol + 1
-    
+
         while i < max_iter and error > tol:
             Q(js, f_in, f_out)
             error = np.max(np.abs(f_in - f_out))
@@ -280,13 +280,13 @@ Here's a function to compute an approximation to the fixed point of :math:`Q`.
             if verbose and i % print_skip == 0:
                 print(f"Error at iteration {i} is {error}.")
             f_in[:] = f_out
-    
-        if i == max_iter: 
+
+        if i == max_iter:
             print("Failed to converge!")
-    
+
         if verbose and i < max_iter:
             print(f"\nConverged in {i} iterations.")
-    
+
         return f_out
 
 Let's try generating an instance and solving the model.
@@ -305,7 +305,7 @@ Next we will compute and plot the reservation wage function defined in :eq:`corr
 .. code:: ipython3
 
     res_wage_function = np.exp(f_star * (1 - js.β))
-    
+
     fig, ax = plt.subplots()
     ax.plot(js.z_grid, res_wage_function, label="reservation wage given $z$")
     ax.set(xlabel="$z$", ylabel="wage")
@@ -323,15 +323,15 @@ reservation wage:
 .. code:: ipython3
 
     c_vals = 1, 2, 3
-    
+
     fig, ax = plt.subplots()
-    
+
     for c in c_vals:
         js = JobSearch(c=c)
         f_star = compute_fixed_point(js, verbose=False)
         res_wage_function = np.exp(f_star * (1 - js.β))
         ax.plot(js.z_grid, res_wage_function, label=f"$\\bar w$ at $c = {c}$")
-        
+
     ax.set(xlabel="$z$", ylabel="wage")
     ax.legend()
     plt.show()
@@ -350,21 +350,21 @@ For simplicity we’ll fix the initial state at :math:`z_t = 0`.
 .. code:: ipython3
 
     def compute_unemployment_duration(js, seed=1234):
-        
+
         f_star = compute_fixed_point(js, verbose=False)
         μ, s, d, ρ, σ, β, c = js.parameters()
         z_grid = js.z_grid
         np.random.seed(seed)
-            
+
         @njit
         def f_star_function(z):
             return interp(z_grid, f_star, z)
-    
+
         @njit
         def draw_tau(t_max=10_000):
             z = 0
             t = 0
-    
+
             unemployed = True
             while unemployed and t < t_max:
                 # draw current wage
@@ -375,21 +375,21 @@ For simplicity we’ll fix the initial state at :math:`z_t = 0`.
                 if w >= res_wage:
                     unemployed = False
                     τ = t
-                # else increment data and state 
+                # else increment data and state
                 else:
                     z = ρ * z + d + σ * np.random.randn()
                     t += 1
             return τ
-    
+
         @njit(parallel=True)
         def compute_expected_tau(num_reps=100_000):
             sum_value = 0
             for i in prange(num_reps):
                 sum_value += draw_tau()
             return sum_value / num_reps
-    
+
         return compute_expected_tau()
-            
+
 
 Let's test this out with some possible values for unemployment compensation.
 
@@ -401,8 +401,8 @@ Let's test this out with some possible values for unemployment compensation.
         js = JobSearch(c=c)
         τ = compute_unemployment_duration(js)
         durations[i] = τ
-        
-Here is a plot of the results.        
+
+Here is a plot of the results.
 
 .. code:: ipython3
 
@@ -425,9 +425,9 @@ Exercises
 Exercise 1
 ----------
 
-Investigate how mean unemployment duration varies with the discount factor :math:`\beta`. 
+Investigate how mean unemployment duration varies with the discount factor :math:`\beta`.
 
-* What is your prior expectation? 
+* What is your prior expectation?
 
 * Do your results match up?
 
@@ -449,8 +449,8 @@ Here is one solution.
         js = JobSearch(β=β)
         τ = compute_unemployment_duration(js)
         durations[i] = τ
-        
-        
+
+
 
 .. code:: ipython3
 

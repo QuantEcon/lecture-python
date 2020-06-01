@@ -462,8 +462,8 @@ The following code block performs the calculation with that code.
 
     # plot
     plt.figure()
-    plt.plot(range(T+1), m_seq, label='$m_t$')
-    plt.plot(range(T+1), p_seq, label='$p_t$')
+    plt.plot(range(T), y[0,:], label='$m_t$')
+    plt.plot(range(T), y[1,:], label='$p_t$')
     plt.xlabel('t')
     plt.title(f'λ={λ}, α={α}, $ρ_1$={ρ1}, $ρ_2$={ρ2}')
     plt.legend()

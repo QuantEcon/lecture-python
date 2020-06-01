@@ -18,6 +18,7 @@ tools and techniques
     :maxdepth: 2
 
     geom_series
+    sir_model
     linear_algebra
     complex_and_trig
     lln_clt

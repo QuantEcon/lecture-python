@@ -17,7 +17,7 @@ In addition to what's in Anaconda, this lecture will need the following librarie
   :class: hide-output
 
   !pip install --upgrade quantecon
-  !pip install --upgrade interpolation
+  !pip install interpolation
 
 Overview
 ========
@@ -35,12 +35,12 @@ speed.
 The reason is that, when code is less flexible, we can exploit structure more
 easily.
 
-(This is true about algorithms and mathematical problems more generally: 
+(This is true about algorithms and mathematical problems more generally:
 more specific problems have more structure, which, with some thought, can be
 exploited for better results.)
 
 So, in this lecture, we are going to accept less flexibility while gaining
-speed, using just-in-time (JIT) compilation to 
+speed, using just-in-time (JIT) compilation to
 accelerate our code.
 
 Let's start with some imports:
@@ -174,11 +174,11 @@ of the Bellman equation:
 
         for i in range(len(og.grid)):
             y = og.grid[i]
-           
+
             # Maximize RHS of Bellman equation at state y
             result = brent_max(state_action_value, 1e-10, y, args=(y, v, og))
             v_greedy[i], v_new[i] = result[0], result[1]
-           
+
         return v_greedy, v_new
 
 We use the ``solve_model`` function to perform iteration until convergence.
@@ -310,7 +310,7 @@ Let's set up the initial condition.
 
 .. code-block:: ipython3
 
-    v = og.u(og.grid)  
+    v = og.u(og.grid)
 
 Here's the timing:
 
@@ -395,7 +395,7 @@ Here's one solution:
 
         og = OptimalGrowthModel(β=β, s=0.05)
 
-        v_greedy, v_solution = solve_model(og)
+        v_greedy, v_solution = solve_model(og, verbose=False)
 
         # Define an optimal policy function
         σ_func = lambda x: interp(og.grid, v_greedy, x)

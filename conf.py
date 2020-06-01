@@ -34,20 +34,20 @@ needs_sphinx = '1.5'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = [  
-	'sphinx.ext.mathjax', 
-	'sphinxcontrib.bibtex', 
+extensions = [
+	'sphinx.ext.mathjax',
+	'sphinxcontrib.bibtex',
 	'IPython.sphinxext.ipython_console_highlighting',
     # Custom Sphinx Extensions
-    'sphinxcontrib.jupyter', 
+    'sphinxcontrib.jupyter',
 ]
 
 # Retired Extensions but may be useful in Future
 
-	# 'matplotlib.sphinxext.plot_directive',               
+	# 'matplotlib.sphinxext.plot_directive',
 	# 'matplotlib.sphinxext.only_directives',
 	# 'sphinxcontrib.tikz',
-	# 'sphinx.ext.graphviz',  
+	# 'sphinx.ext.graphviz',
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -297,7 +297,7 @@ latex_elements = {
 \chapter*{Preface}
 \large
 This \textbf{pdf} presents a series of lectures on quantitative economic
-modeling, designed and written by \href{http://www.tomsargent.com/}{Thomas J. Sargent} and \href{http://johnstachurski.net}{John Stachurski}.  
+modeling, designed and written by \href{http://www.tomsargent.com/}{Thomas J. Sargent} and \href{http://johnstachurski.net}{John Stachurski}.
 The primary programming languages are \href{https://www.python.org}{Python} and \href{http://julialang.org/}{Julia}.
 You can send feedback to the authors via contact@quantecon.org.
 
@@ -363,9 +363,11 @@ latex_documents = [
 # Linkcheck Options
 # ------------------
 
-linkcheck_ignore = [r'https:\/\/github\.com\/.*?#.*'] #Anchors on Github seem to create issues with linkchecker
+linkcheck_ignore = [r'https:\/\/github\.com\/.*?#.*', #Anchors on Github seem to create issues with linkchecker
+    r'https://economics.mit.edu/faculty/acemoglu/data/ajr2001',
+    r'https://economics.mit.edu/files/4123']
 
-linkcheck_timeout = 30 
+linkcheck_timeout = 30
 
 # --------------------------------------------
 # jupyter Sphinx Extension conversion settings
@@ -408,7 +410,7 @@ jupyter_welcome_block = ""
 #Adjust links to target html (rather than ipynb)
 jupyter_target_html = False
 
-#path to download notebooks from 
+#path to download notebooks from
 jupyter_download_nb_urlpath = None
 
 #allow downloading of notebooks
@@ -462,16 +464,16 @@ jupyter_pdf_author = "Thomas J. Sargent and John Stachurski"
 jupyter_pdf_excludepatterns = ["404", "index", "references"]
 
 # Set urlpath for html links in documents
-jupyter_pdf_urlpath = "https://python-intro.quantecon.org/"
+jupyter_pdf_urlpath = "https://python.quantecon.org/"
 
 # make book
 jupyter_pdf_book = False
 
 # book title
-jupyter_pdf_book_title = "Introductory Quantitative Economics with Python"
+jupyter_pdf_book_title = "Quantitative Economics with Python"
 
 # pdf book name
-jupyter_pdf_book_name = "introductory_quantitative_economics_with_python"
+jupyter_pdf_book_name = "quantitative_economics_with_python"
 
 # pdf toc file
 jupyter_pdf_book_index = "index_toc"

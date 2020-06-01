@@ -114,7 +114,7 @@ We also want to know the values of the following objects
 * The unemployment rate :math:`u_t := U_t/N_t`.
 
 
-(Here and below, capital letters represent stocks and lowercase letters represent flows)
+(Here and below, capital letters represent aggregates and lowercase letters represent rates)
 
 
 
@@ -230,7 +230,7 @@ Let's code up these equations.
 
 
 
-To do this we're going to use a class that we'll call `LakeModel`.
+To do this we're going to use a class that we'll call ``LakeModel``.
 
 This class will
 
@@ -240,27 +240,16 @@ This class will
 
 #. provide methods to simulate dynamics of the stocks and rates
 
-#. provide a method to compute the state state of the rate
+#. provide a method to compute the steady state of the rate
 
 
-To write a nice implementation, there's an issue we have to address.
+Please be careful because the implied objects :math:`g, A, \hat A` will not change 
+if you only change the primitives. 
 
-Derived data such as :math:`A` depend on the primitives like :math:`\alpha`
-and :math:`\lambda`.
+For example, if you would like to update a primitive like :math:`\alpha = 0.03`, 
+you need to create an instance and update it by ``lm = LakeModel(α=0.03)``. 
 
-If a user alters these primitives, we would ideally like derived data to
-update automatically.
-
-(For example, if a user changes the value of :math:`b` for a given instance of the class, we would like :math:`g = b - d` to update automatically)
-
-To achieve this outcome, we're going to use descriptors and decorators such as `@property`.
-
-If you need to refresh your understanding of how these work, consult `this lecture <https://python-programming.quantecon.org/python_advanced_features.html>`__.
-
-
-
-Here's the code:
-
+In the exercises, we show how to avoid this issue by using getter and setter methods.
 
 .. code-block:: python3
 
@@ -282,66 +271,14 @@ Here's the code:
 
         """
         def __init__(self, λ=0.283, α=0.013, b=0.0124, d=0.00822):
-            self._λ, self._α, self._b, self._d = λ, α, b, d
-            self.compute_derived_values()
+            self.λ, self.α, self.b, self.d = λ, α, b, d
+          
+            λ, α, b, d = self.λ, self.α, self.b, self.d
+            self.g = b - d
+            self.A = np.array([[(1-d) * (1-λ) + b,      (1 - d) * α + b],
+                               [        (1-d) * λ,      (1 - d) * (1 - α)]])
 
-        def compute_derived_values(self):
-            # Unpack names to simplify expression
-            λ, α, b, d = self._λ, self._α, self._b, self._d
-
-            self._g = b - d
-            self._A = np.array([[(1-d) * (1-λ) + b,      (1 - d) * α + b],
-                                [        (1-d) * λ,   (1 - d) * (1 - α)]])
-
-            self._A_hat = self._A / (1 + self._g)
-
-        @property
-        def g(self):
-            return self._g
-
-        @property
-        def A(self):
-            return self._A
-
-        @property
-        def A_hat(self):
-            return self._A_hat
-
-        @property
-        def λ(self):
-            return self._λ
-
-        @λ.setter
-        def λ(self, new_value):
-            self._α = new_value
-            self.compute_derived_values()
-
-        @property
-        def α(self):
-            return self._α
-
-        @α.setter
-        def α(self, new_value):
-            self._α = new_value
-            self.compute_derived_values()
-
-        @property
-        def b(self):
-            return self._b
-
-        @b.setter
-        def b(self, new_value):
-            self._b = new_value
-            self.compute_derived_values()
-
-        @property
-        def d(self):
-            return self._d
-
-        @d.setter
-        def d(self, new_value):
-            self._d = new_value
-            self.compute_derived_values()
+            self.A_hat = self.A / (1 + self.g)
 
 
         def rate_steady_state(self, tol=1e-6):
@@ -405,8 +342,8 @@ Here's the code:
                 x = self.A_hat @ x
 
 
-As desired, if we create an instance and update a primitive like
-:math:`\alpha`, derived objects like :math:`A` will also change
+As explained, if we create an instance and update it by ``lm = LakeModel(α=0.03)``, 
+derived objects like :math:`A` will also change.
 
 .. code-block:: python3
 
@@ -419,7 +356,7 @@ As desired, if we create an instance and update a primitive like
 
 .. code-block:: python3
 
-    lm.α = 2
+    lm = LakeModel(α = 0.03)
     lm.A
 
 
@@ -1050,6 +987,30 @@ Exercises
 Exercise 1
 ----------
 
+In the Lake Model, there is derived data such as :math:`A` which depends on primitives like :math:`\alpha`
+and :math:`\lambda`.
+
+So, when a user alters these primitives, we need the derived data to update automatically.
+
+(For example, if a user changes the value of :math:`b` for a given instance of the class, we would like :math:`g = b - d` to update automatically)
+
+In the code above, we took care of this issue by creating new instances every time we wanted to change parameters.
+
+That way the derived data is always matched to current parameter values.
+
+However, we can use descriptors instead, so that derived data is updated whenever parameters are changed.
+
+This is safer and means we don't need to create a fresh instance for every new parameterization.
+
+(On the other hand, the code becomes denser, which is why we don't always use the descriptor approach in our lectures.)
+
+In this exercise, your task is to arrange the ``LakeModel`` class by using descriptors and decorators such as ``@property``.
+
+(If you need to refresh your understanding of how these work, consult `this lecture <https://python-programming.quantecon.org/python_advanced_features.html>`_.)
+
+Exercise 2
+----------
+
 Consider an economy with an initial stock  of workers :math:`N_0 = 100` at the
 steady state level of employment in the baseline parameterization
 
@@ -1073,16 +1034,16 @@ How long does the economy take to converge to its new steady state?
 
 What is the new steady state level of employment?
 
+Note: it may be easier to use the class created in exercise 1 to help with changing variables.
 
 
-
-Exercise 2
+Exercise 3
 ----------
 
 Consider an economy with an initial stock  of workers :math:`N_0 = 100` at the
 steady state level of employment in the baseline parameterization.
 
-Suppose that for 20 periods the birth rate was temporarily high (:math:`b = 0.0025`) and then returned to its original level.
+Suppose that for 20 periods the birth rate was temporarily high (:math:`b = 0.025`) and then returned to its original level.
 
 Plot the transition dynamics of the unemployment and employment stocks for 50 periods.
 
@@ -1096,21 +1057,160 @@ How long does the economy take to return to its original steady state?
 Solutions
 =========
 
-
-
-
-Lake Model Solutions
-====================
-
 Exercise 1
------------
-
-We begin by constructing the class containing the default parameters and assigning the
-steady state values to `x0`
+----------
 
 .. code-block:: python3
 
-    lm = LakeModel()
+    class LakeModelModified:
+        """
+        Solves the lake model and computes dynamics of unemployment stocks and
+        rates.
+
+        Parameters:
+        ------------
+        λ : scalar
+            The job finding rate for currently unemployed workers
+        α : scalar
+            The dismissal rate for currently employed workers
+        b : scalar
+            Entry rate into the labor force
+        d : scalar
+            Exit rate from the labor force
+
+        """
+        def __init__(self, λ=0.283, α=0.013, b=0.0124, d=0.00822):
+            self._λ, self._α, self._b, self._d = λ, α, b, d
+            self.compute_derived_values()
+
+        def compute_derived_values(self):
+            # Unpack names to simplify expression
+            λ, α, b, d = self._λ, self._α, self._b, self._d
+
+            self._g = b - d
+            self._A = np.array([[(1-d) * (1-λ) + b,      (1 - d) * α + b],
+                                [        (1-d) * λ,   (1 - d) * (1 - α)]])
+
+            self._A_hat = self._A / (1 + self._g)
+
+        @property
+        def g(self):
+            return self._g
+
+        @property
+        def A(self):
+            return self._A
+
+        @property
+        def A_hat(self):
+            return self._A_hat
+
+        @property
+        def λ(self):
+            return self._λ
+
+        @λ.setter
+        def λ(self, new_value):
+            self._λ = new_value
+            self.compute_derived_values()
+
+        @property
+        def α(self):
+            return self._α
+
+        @α.setter
+        def α(self, new_value):
+            self._α = new_value
+            self.compute_derived_values()
+
+        @property
+        def b(self):
+            return self._b
+
+        @b.setter
+        def b(self, new_value):
+            self._b = new_value
+            self.compute_derived_values()
+
+        @property
+        def d(self):
+            return self._d
+
+        @d.setter
+        def d(self, new_value):
+            self._d = new_value
+            self.compute_derived_values()
+
+
+        def rate_steady_state(self, tol=1e-6):
+            """
+            Finds the steady state of the system :math:`x_{t+1} = \hat A x_{t}`
+
+            Returns
+            --------
+            xbar : steady state vector of employment and unemployment rates
+            """
+            x = 0.5 * np.ones(2)
+            error = tol + 1
+            while error > tol:
+                new_x = self.A_hat @ x
+                error = np.max(np.abs(new_x - x))
+                x = new_x
+            return x
+
+        def simulate_stock_path(self, X0, T):
+            """
+            Simulates the sequence of Employment and Unemployment stocks
+
+            Parameters
+            ------------
+            X0 : array
+                Contains initial values (E0, U0)
+            T : int
+                Number of periods to simulate
+
+            Returns
+            ---------
+            X : iterator
+                Contains sequence of employment and unemployment stocks
+            """
+
+            X = np.atleast_1d(X0)  # Recast as array just in case
+            for t in range(T):
+                yield X
+                X = self.A @ X
+
+        def simulate_rate_path(self, x0, T):
+            """
+            Simulates the sequence of employment and unemployment rates
+
+            Parameters
+            ------------
+            x0 : array
+                Contains initial values (e0,u0)
+            T : int
+                Number of periods to simulate
+
+            Returns
+            ---------
+            x : iterator
+                Contains sequence of employment and unemployment rates
+
+            """
+            x = np.atleast_1d(x0)  # Recast as array just in case
+            for t in range(T):
+                yield x
+                x = self.A_hat @ x
+
+Exercise 2
+-----------
+
+We begin by constructing the class containing the default parameters and assigning the
+steady state values to ``x0``
+
+.. code-block:: python3
+
+    lm = LakeModelModified()
     x0 = lm.rate_steady_state()
     print(f"Initial Steady State: {x0}")
 
@@ -1125,7 +1225,7 @@ New legislation changes :math:`\lambda` to :math:`0.2`
 
 .. code-block:: python3
 
-    lm.lmda = 0.2
+    lm.λ = 0.2
 
     xbar = lm.rate_steady_state()  # new steady state
     X_path = np.vstack(tuple(lm.simulate_stock_path(x0 * N0, T)))
@@ -1175,7 +1275,7 @@ And how the rates evolve
 We see that it takes 20 periods for the economy to converge to its new
 steady state levels.
 
-Exercise 2
+Exercise 3
 ----------
 
 This next exercise has the economy experiencing a boom in entrances to
@@ -1188,14 +1288,14 @@ state
 
 .. code-block:: python3
 
-    lm = LakeModel()
+    lm = LakeModelModified()
     x0 = lm.rate_steady_state()
 
 Here are the other parameters:
 
 .. code-block:: python3
 
-    b_hat = 0.003
+    b_hat = 0.025
     T_hat = 20
 
 Let's increase :math:`b` to the new value and simulate for 20 periods

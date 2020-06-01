@@ -1,2 +1,5 @@
-# lecture-python-intro
-Source files for https://python-intro.quantecon.org
+# lecture-python
+
+Source files for https://python.quantecon.org
+
+For a guide on contributing to this repository click [here](https://quantecon.org/contribute-lectures/)

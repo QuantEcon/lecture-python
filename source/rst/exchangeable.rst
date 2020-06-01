@@ -735,3 +735,16 @@ different nor identical, in particular one in which  :math:`F_a=2, F_b=1` and
 .. code-block:: python3
 
     expected_ratio(F_a=2, F_b=1, G_a=3, G_b=1.2)
+
+Sequels
+=======
+
+We'll dig deeper into some of the ideas used here in the following lectures:
+
+* :doc:`this lecture <likelihood_ratio_process>` describes **likelihood ratio processes**
+  and their role in frequentist and Bayesian statistical theories
+
+* :doc:`this lecture <navy_captain>` returns to the subject of this lecture and studies 
+  whether the Captain's hunch that the (frequentist) decision rule that the Navy had ordered 
+  him to use can be expected to be better or worse than the rule sequential rule that Abraham 
+  Wald designed 

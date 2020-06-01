@@ -409,7 +409,7 @@ If we did, our job would be easy:
 But we don't have an initial condition for :math:`\mu_0`, so this
 won't work.
 
-Indeed, part of our task is to compute the optimal value of :math:\mu_0`.
+Indeed, part of our task is to compute the optimal value of :math:`\mu_0`.
 
 To compute :math:`\mu_0` and the other objects we want, a  simple modification of the above procedure will work.
 
