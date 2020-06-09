@@ -479,7 +479,7 @@ Here's code to solve for :math:`\bar p`, :math:`\hat p_a` and :math:`\hat p_b` u
                                 1)
 
             # If we succeed in converging, break out of for loop
-            if np.max(np.sqrt((p_new - p_old)**2)) < 1e-12:
+            if np.max(np.sqrt((p_new - p_old)**2)) < tol:
                 break
 
         ptwiddle = β * np.min([q @ p_old
@@ -549,7 +549,7 @@ Here's code to solve for :math:`\check p` using iteration
                                1)
 
             # If we succeed in converging, break out of for loop
-            if np.max(np.sqrt((p_new - p_old)**2)) < 1e-12:
+            if np.max(np.sqrt((p_new - p_old)**2)) < tol:
                 break
 
         return p_new
