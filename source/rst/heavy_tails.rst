@@ -417,7 +417,7 @@ Exercise 4
 
 Replicate the rank-size plot figure :ref:`presented above <rank_size_fig1>`.
 
-If you like you can use the function ``qe.rank_size_plot`` from the ``quantecon`` library to generate the plots.
+If you like you can use the function ``qe.rank_size`` from the ``quantecon`` library to generate the plots.
 
 Use ``np.random.seed(13)`` to set the seed.
 
@@ -597,7 +597,12 @@ Now we plot the data:
     
     for data, label, ax in zip(data_list, labels, axes):
 
-        qe.rank_size_plot(data, ax, label=label)
+        rank_data, size_data = qe.rank_size(data)
+
+        ax.loglog(rank_data, size_data, 'o', markersize=3.0, alpha=0.5, label=label)
+        ax.set_xlabel("log rank")
+        ax.set_ylabel("log size")
+
         ax.legend()
     
     fig.subplots_adjust(hspace=0.4)
