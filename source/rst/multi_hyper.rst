@@ -5,7 +5,7 @@
 .. highlight:: python3
 
 *****************************************
-Multivariate hypergeometric distribution
+Multivariate Hypergeometric Distribution
 *****************************************
 
 .. contents:: :depth: 2
@@ -16,7 +16,7 @@ Overview
 
 This lecture describes how an  administrator deployed the **multivariate hypergeometric distribution** in order to access the fairness of a procedure for awarding research grants. 
 
-In the lecture we'll learn about 
+In the lecture we'll learn about
 
 * properties of the multivariate hypergeometric distribution
 
@@ -62,7 +62,7 @@ Under the hypothesisis that the selection process judges proposals on their qual
 To evaluate whether the selection procedure is **color blind** the administator wants to  study whether the particular realization of :math:`X` drawn can plausibly
 be said to be a random draw from the probability distribution that is implied by the **color blind** hypothesis.  
 
-The appropriate probability distribution is the one described `here <https://en.wikipedia.org/wiki/Hypergeometric_distribution>`
+The appropriate probability distribution is the one described `here<https://en.wikipedia.org/wiki/Hypergeometric_distribution>`__
 
 Let's now instantiate the administrator's problem, while continuing to use the colored balls metaphor.
 
