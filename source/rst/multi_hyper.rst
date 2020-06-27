@@ -51,7 +51,7 @@ The :math:`n` balls drawn represent  successful proposals and are  awarded resea
 The remaining :math:`N-n` balls receive no research funds.  
 
 Details of the Awards Procedure Under Study
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------------------
 
 Let :math:`k_i` be the number of balls of color :math:`i` that are drawn.
 
@@ -96,7 +96,7 @@ The right tool for the administrator's job is the **multivariate hypergeometric 
 
 
 Multivariate Hypergeometric Distribution
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------------
 
 Let's start with some imports.
 
