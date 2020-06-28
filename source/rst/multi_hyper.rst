@@ -5,7 +5,7 @@
 .. highlight:: python3
 
 *****************************************
-Multivariate hypergeometric distribution
+Multivariate Hypergeometric Distribution
 *****************************************
 
 .. contents:: :depth: 2
@@ -16,7 +16,7 @@ Overview
 
 This lecture describes how an  administrator deployed the **multivariate hypergeometric distribution** in order to access the fairness of a procedure for awarding research grants. 
 
-In the lecture we'll learn about 
+In the lecture we'll learn about
 
 * properties of the multivariate hypergeometric distribution
 
@@ -31,7 +31,7 @@ The Administrator's Problem
 
 An administrator in charge of allocating research grants is in the following situation.
 
-To help us forget details that are none of our business here and to protect the anonymity of the adminstrator and the subjects, we call 
+To help us forget details that are none of our business here and to protect the anonymity of the administrator and the subjects, we call 
 research proposals **balls** and continents of residence of authors of a proposal a **color**.  
 
 There are :math:`K_i` balls (proposals) from of color :math:`i` and :math:`i = 1, 2, \ldots, c`.
@@ -48,21 +48,24 @@ Thus, the selection procedure is supposed randomly to draw :math:`n`  balls from
 
 The :math:`n` balls drawn represent  successful proposals and are  awarded research funds.
 
-The ramaining :math:`N-n` balls receive no research funds.  
+The remaining :math:`N-n` balls receive no research funds.  
 
 Details of the Awards Procedure Under Study
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------------------
 
 Let :math:`k_i` be the number of balls of color :math:`i` that are drawn.
 
 Things have to add up so :math:`\sum_{i=1}^c k_i = n`.  
 
-Under the hypothesisis that the selection process judges proposals on their quality and that quality is independent of continent of the author's residence, the administrator views the outcome of the selection procedure as a random vector :math:`X = \begin{bmatrix} k_1 \cr k_2 \cr \vdots \cr k_c \end{bmatrix}`.
+Under the hypothesis that the selection process judges proposals on their quality and that quality is independent of continent of the author's residence, the administrator views the outcome of the selection procedure as a random vector 
 
-To evaluate whether the selection procedure is **color blind** the administator wants to  study whether the particular realization of :math:`X` drawn can plausibly
+.. math::
+    X = \begin{pmatrix} k_1 \cr k_2 \cr \vdots \cr k_c \end{pmatrix}.
+
+To evaluate whether the selection procedure is **color blind** the administrator wants to  study whether the particular realization of :math:`X` drawn can plausibly
 be said to be a random draw from the probability distribution that is implied by the **color blind** hypothesis.  
 
-The appropriate probability distribution is the one described `here <https://en.wikipedia.org/wiki/Hypergeometric_distribution>`
+The appropriate probability distribution is the one described `here <https://en.wikipedia.org/wiki/Hypergeometric_distribution>`__
 
 Let's now instantiate the administrator's problem, while continuing to use the colored balls metaphor.
 
@@ -70,27 +73,32 @@ The administrator has an urn with :math:`N = 238` balls.
 
 157 balls are blue, 11 balls are green, 46 balls are yellow, and 24 balls are black.
 
-So :math:`\begin{bmatrix}K_1, K_2, K_3, K_4\end{bmatrix} = \begin{bmatrix} 157 & 11 & 46 & 24 \end{bmatrix}` and :math:`c = 4`.
+So :math:`(K_1, K_2, K_3, K_4) = (157 , 11 , 46 , 24)` and :math:`c = 4`.
 
 15 balls are drawn without replacement.
 
 So :math:`n = 15`.
 
 
-The administrator wants to know the probability distribution of outcomes :math:`X = \begin{bmatrix} k_1 \cr k_2 \cr \vdots \cr k_4 \end{bmatrix}`.
+The administrator wants to know the probability distribution of outcomes 
 
-In particular, he wants to know whether the probability of a particular outcome - in the form of a :math:`4 \times 1`
-vector of integers recording the numbers of blue,
-green, yellow, and black balls, respectively, contains evidence against the hypothesis that the selection process is *fair*, which here means  
-*color blind* and truly are random draws without replacement from  the population of :math:`N` balls.  
+.. math::
+    X = \begin{pmatrix} k_1 \cr k_2 \cr \vdots \cr k_4 \end{pmatrix}.
 
-The right tool   for the administrator's job is the **multivaraiate hypergeometric distribution**.
+In particular, he wants to know whether the probability of a particular
+outcome - in the form of a :math:`4 \times 1` vector of integers recording the
+numbers of blue, green, yellow, and black balls, respectively, contains
+evidence against the hypothesis that the selection process is *fair*, which
+here means  *color blind* and truly are random draws without replacement from
+the population of :math:`N` balls.  
+
+The right tool for the administrator's job is the **multivariate hypergeometric distribution**.
 
 
 Multivariate Hypergeometric Distribution
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------------
 
-Let's Start with some imports.
+Let's start with some imports.
 
 .. code-block:: ipython
 
@@ -103,14 +111,12 @@ Let's Start with some imports.
     import matplotlib.cm as cm
 
 
-To recapitulate, we asume there are in total :math:`c` types of objects in an urn. 
+To recapitulate, we assume there are in total :math:`c` types of objects in an urn. 
 
-If there
-are :math:`K_{i}` type :math:`i` object in the urn and we take
-:math:`n` draws at random without replacement, then the numbers of 
-type :math:`i` objects in the sample
-:math:`\left(k_{1},k_{2},\dots,k_{c}\right)` has the multivariate
-hypergeometric distribution. 
+If there are :math:`K_{i}` type :math:`i` object in the urn and we take
+:math:`n` draws at random without replacement, then the numbers of type
+:math:`i` objects in the sample :math:`(k_{1},k_{2},\dots,k_{c})`
+has the multivariate hypergeometric distribution. 
 
 Note again  that :math:`N=\sum_{i=1}^{c} K_{i}` is
 the total number of objects in the urn and :math:`n=\sum_{i=1}^{c}k_{i}`.
@@ -127,19 +133,18 @@ The multivariate hypergeometric distribution has the following properties:
 
 .. math::
 
+   \Pr \{X_{i}=k_{i} \  \forall i\} = 
+    \frac {\prod _{i=1}^{c}{\binom {K_{i}}{k_{i}}}}{\binom {N}{n}}
 
-   \Pr \left(\{X_{i}=k_{i} \  \forall i\}\right) = {\displaystyle {\frac {\prod _{i=1}^{c}{\binom {K_{i}}{k_{i}}}}{\binom {N}{n}}}}
 
-**Moments**:
-
-1. **means**:
+**Mean**:
 
 .. math::
 
 
    {\displaystyle \operatorname {E} (X_{i})=n{\frac {K_{i}}{N}}}
 
-2. **variances and covariances**:
+**Variances and covariances**:
 
 .. math::
 
@@ -147,7 +152,6 @@ The multivariate hypergeometric distribution has the following properties:
    {\displaystyle \operatorname {Var} (X_{i})=n{\frac {N-n}{N-1}}\;{\frac {K_{i}}{N}}\left(1-{\frac {K_{i}}{N}}\right)}
 
 .. math::
-
 
    {\displaystyle \operatorname {Cov} (X_{i},X_{j})=-n{\frac {N-n}{N-1}}\;{\frac {K_{i}}{N}}{\frac {K_{j}}{N}}}
 
@@ -246,6 +250,8 @@ To do our work for us, we'll write an ``Urn`` class.
 
             return sample
 
+
+
 Usage
 =====
 
@@ -270,14 +276,15 @@ two of each color are chosen is
     K_arr = [5, 10, 15]
     urn = Urn(K_arr)
 
-Now use the Urn Class method ``pmf`` to compute the probability of the outcome :math:`X = \begin{bmatrix} 2 & 2 & 2 \end{bmatrix}`
+Now use the Urn Class method ``pmf`` to compute the probability of the outcome :math:`X = \begin{pmatrix} 2 & 2 & 2 \end{pmatrix}`
 
 .. code-block:: python3
 
     k_arr = [2, 2, 2] # array of number of observed successes
     urn.pmf(k_arr)
 
-We can use the code to compute probabilities of a list of possible outcomes by constructng  a 2-dimensional
+We can use the code to compute probabilities of a list of possible outcomes by 
+constructing  a 2-dimensional
 array ``k_arr`` and ``pmf`` will return an array of probabilities for
 observing each case.
 
@@ -286,7 +293,7 @@ observing each case.
     k_arr = [[2, 2, 2], [1, 3, 2]]
     urn.pmf(k_arr)
 
-Now let’s compute the mean vector and variance-covariance matrix.
+Now let's compute the mean vector and variance-covariance matrix.
 
 .. code-block:: python3
 
@@ -301,8 +308,9 @@ Now let’s compute the mean vector and variance-covariance matrix.
 
     Σ
 
-The Administrator's problem
------------------------------
+
+Back to The Administrator's Problem
+-----------------------------------
 
 Now let's turn to the grant administrator's problem.
 
@@ -330,7 +338,7 @@ arrays ``k_arr`` and utilizing the method ``pmf`` of the ``Urn`` class.
     k_arr = [[5, 5, 4 ,1], [10, 1, 2, 2], [13, 0, 2, 0]]
     urn.pmf(k_arr)
 
-Now let’s compute the mean and variance-covariance matrix of :math:`X` when :math:`n=6`.
+Now let's compute the mean and variance-covariance matrix of :math:`X` when :math:`n=6`.
 
 .. code-block:: python3
 
@@ -367,8 +375,8 @@ We can simulate a large sample and verify that sample means and covariances clos
 Evidently, the sample means and covariances approximate their population counterparts well.
 
 
-Quality of Normal Approximation to distribution of :math:`X`
--------------------------------------------------------------
+Quality of Normal Approximation 
+-------------------------------
 
 To judge the quality of a multivariate normal approximation to the multivariate hypergeometric distribution, we draw a large sample from a multivariate normal distribution with the mean vector  and covariance matrix for the corresponding multivariate hypergeometric distribution and compare the simulated distribution with the population multivariate hypergeometric distribution. 
 
@@ -448,7 +456,8 @@ The off-diagonal graphs plot the empirical joint distribution of
 
  The contour maps plot the bivariate Gaussian density function of :math:`\left(k_i, k_j\right)` with the population mean and covariance given by slices of :math:`\mu` and :math:`\Sigma` that we computed above.
 
-Let’s also test the normality for each :math:`k_i` using ``scipy.stats.normaltest`` that implements D’Agostino and Pearson’s test that combines skew and kurtosis to form an omnibus test of normality. 
+Let's also test the normality for each :math:`k_i` using ``scipy.stats.normaltest`` that implements D’Agostino and Pearson's 
+test that combines skew and kurtosis to form an omnibus test of normality. 
 
 The null hypothesis is that the sample follows normal distribution.
 
