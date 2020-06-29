@@ -14,7 +14,7 @@ Multivariate Hypergeometric Distribution
 Overview
 =========
 
-This lecture describes how an  administrator deployed the **multivariate hypergeometric distribution** in order to access the fairness of a procedure for awarding research grants. 
+This lecture describes how an  administrator deployed a **multivariate hypergeometric distribution** in order to access the fairness of a procedure for awarding research grants. 
 
 In the lecture we'll learn about
 
@@ -34,13 +34,17 @@ An administrator in charge of allocating research grants is in the following sit
 To help us forget details that are none of our business here and to protect the anonymity of the administrator and the subjects, we call 
 research proposals **balls** and continents of residence of authors of a proposal a **color**.  
 
-There are :math:`K_i` balls (proposals) from of color :math:`i` and :math:`i = 1, 2, \ldots, c`.
+There are :math:`K_i` balls (proposals) of color :math:`i`. 
 
-Thus, there are :math:`c` distinct colors (continents of residence).
+There are :math:`c` distinct colors (continents of residence).
+
+Thus, :math:`i = 1, 2, \ldots, c`
 
 So there is a total of :math:`N = \sum_{i=1}^c K_i` balls.  
 
 All :math:`N` of these balls are placed in an urn.
+
+Then :math:`n` balls are drawn randomly.
 
 The selection procedure is supposed to be **color blind**  meaning that **ball quality**, a random variable that is supposed to be  independent of **ball color**, governs whether a ball is drawn. 
 
@@ -57,7 +61,7 @@ Let :math:`k_i` be the number of balls of color :math:`i` that are drawn.
 
 Things have to add up so :math:`\sum_{i=1}^c k_i = n`.  
 
-Under the hypothesis that the selection process judges proposals on their quality and that quality is independent of continent of the author's residence, the administrator views the outcome of the selection procedure as a random vector 
+Under the hypothesis that the selection process judges proposals on their quality and that quality is independent of continent of the author's continent of residence, the administrator views the outcome of the selection procedure as a random vector 
 
 .. math::
     X = \begin{pmatrix} k_1 \cr k_2 \cr \vdots \cr k_c \end{pmatrix}.
@@ -85,9 +89,9 @@ The administrator wants to know the probability distribution of outcomes
 .. math::
     X = \begin{pmatrix} k_1 \cr k_2 \cr \vdots \cr k_4 \end{pmatrix}.
 
-In particular, he wants to know whether the probability of a particular
+In particular, he wants to know whether a particular
 outcome - in the form of a :math:`4 \times 1` vector of integers recording the
-numbers of blue, green, yellow, and black balls, respectively, contains
+numbers of blue, green, yellow, and black balls, respectively, - contains
 evidence against the hypothesis that the selection process is *fair*, which
 here means  *color blind* and truly are random draws without replacement from
 the population of :math:`N` balls.  
