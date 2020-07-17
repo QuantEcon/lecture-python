@@ -16,7 +16,7 @@ In addition to what’s in Anaconda, this lecture deploys the libraries:
 .. code-block:: ipython
   :class: hide-output
 
-    !conda install -c conda-forge quantecon
+    !conda install quantecon
     !pip install interpolation
 
 Overview

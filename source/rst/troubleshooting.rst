@@ -35,9 +35,9 @@ You also need to keep the external code libraries, such as `QuantEcon.py
 
 For this task you can either
 
-* use `conda install -c conda-forge quantecon` on the command line, or
+* use `conda install quantecon` on the command line, or
 
-* execute `!conda install -c conda-forge quantecon` within a Jupyter notebook.
+* execute `!conda install quantecon` within a Jupyter notebook.
 
 If your local environment is still not working you can do two things.
 

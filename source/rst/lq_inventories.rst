@@ -17,7 +17,7 @@ In addition to what's in Anaconda, this lecture employs the following library:
 .. code-block:: ipython
   :class: hide-output
 
-  !conda install -c conda-forge quantecon
+  !conda install quantecon
 
 
 Overview
