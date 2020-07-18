@@ -18,9 +18,10 @@ dependencies:
   - scikit-learn
   - statsmodels
   - seaborn
+  - scipy
+  - sympy
   - pip:
     - interpolation
     - sphinxcontrib-jupyter
     - sphinxcontrib-bibtex
-    - quantecon
     - joblib
