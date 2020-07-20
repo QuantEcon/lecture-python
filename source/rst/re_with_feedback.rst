@@ -20,7 +20,7 @@ In addition to what's in Anaconda, this lecture deploys the following libraries:
 .. code-block:: ipython
   :class: hide-output
 
-  !conda install quantecon
+  !conda install -y quantecon
 
 
 .. code-block:: ipython
