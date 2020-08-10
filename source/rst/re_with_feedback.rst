@@ -681,7 +681,7 @@ stable eigenvalue :math:`\rho` is proportional to
 Notice that if we set :math:`A=\rho` and :math:`G=1` in our earlier
 formula for :math:`p_t` we get
 
-.. math::  Q = G (I - \lambda A)^{-1} m_t =  (1-\lambda) (1 - \lambda \rho)^{-1} m_t
+.. math::  p_t = G (I - \lambda A)^{-1} m_t =  (1-\lambda) (1 - \lambda \rho)^{-1} m_t
 
 a formula that is equivalent with
 
