@@ -1,7 +1,6 @@
 name: qe-lectures
 channels:
   - default
-  - conda-forge
 dependencies:
   - pip
   - python
