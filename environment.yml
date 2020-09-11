@@ -1,6 +1,4 @@
 name: qe-lectures
-channels:
-  - default
 dependencies:
   - pip
   - python
