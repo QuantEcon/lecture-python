@@ -3,7 +3,5 @@ dependencies:
   - pip
   - anaconda=2020.07
   - pip:
-    - interpolation
     - sphinxcontrib-jupyter
     - sphinxcontrib-bibtex
-    - joblib
