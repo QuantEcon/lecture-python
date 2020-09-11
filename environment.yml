@@ -1,6 +1,7 @@
 name: qe-lectures
 dependencies:
   - pip
+  - python=3.8
   - anaconda=2020.07
   - pip:
     - sphinxcontrib-jupyter
