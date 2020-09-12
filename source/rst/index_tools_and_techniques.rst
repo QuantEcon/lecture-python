@@ -24,3 +24,5 @@ tools and techniques
     complex_and_trig
     lln_clt
     heavy_tails
+    multivariate_normal
+    time_series_with_matrices
