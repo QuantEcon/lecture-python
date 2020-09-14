@@ -1,8 +1,26 @@
 name: qe-lectures
+channels:
+  - default
 dependencies:
   - pip
-  - python=3.8
-  - anaconda=2020.07
+  - python
+  - jupyter
+  - jupyterlab
+  - nbconvert=5.6.1
+  - pandoc
+  - pandas
+  - numba
+  - numpy
+  - matplotlib
+  - networkx
+  - sphinx=2.4.4
+  - scikit-learn
+  - statsmodels
+  - seaborn
+  - scipy
+  - sympy
   - pip:
+    - interpolation
     - sphinxcontrib-jupyter
     - sphinxcontrib-bibtex
+    - joblib
