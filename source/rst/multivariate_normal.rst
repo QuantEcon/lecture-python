@@ -112,7 +112,7 @@ covariance matrix of :math:`z`.
     
         return (2 * np.pi) ** (-N/2) * temp1 * temp2
 
-For some integer :math:`k\in\left[2,\dots,N-1\right]`, partition
+For some integer :math:`k\in \{2,\dots, N-1\}`, partition
 :math:`z` as
 :math:`z=\left[\begin{array}{c} z_{1}\\ z_{2} \end{array}\right]`, where
 :math:`z_1` is an :math:`\left(N-k\right)\times1` vector and :math:`z_2`
@@ -656,7 +656,7 @@ change as more test results come in.
     plt.show()
 
 The solid blue line in the plot above shows :math:`\hat{\mu}_{\theta}`
-as function of the the number of test scores that we have recorded and
+as function of the number of test scores that we have recorded and
 conditioned on.
 
 The blue area shows the span that comes from adding or deducing
@@ -675,7 +675,7 @@ By staring at the changes in the conditional distributions, we see that
 adding more test scores makes :math:`\hat{\theta}` settle down and
 approach :math:`\theta`.
 
-Thus, each :math:`y_{i}` adds informtion about :math:`\theta`.
+Thus, each :math:`y_{i}` adds information about :math:`\theta`.
 
 If we drove the number of tests :math:`n \rightarrow + \infty`, the
 conditional standard deviation :math:`\hat{\sigma}_{\theta}` would
@@ -737,7 +737,7 @@ Then we can write
 
 
 The mutual orthogonality of the :math:`\epsilon_i`\ ’s provides us an
-informative way to interpet them in light of equation (1).
+informative way to interpret them in light of equation (1).
 
 Thus, relative to what is known from tests :math:`i=1, \ldots, n-1`,
 :math:`c_i \epsilon_i` is the amount of **new information** about
@@ -783,7 +783,7 @@ earlier, we can compare the means and variances of :math:`\theta`
 conditional on :math:`\{y_i\}_{i=1}^k` with what we obtained above using
 the formulas implemented in the class ``MultivariateNormal`` built on
 our original representation of conditional distributions for
-multivariable normal distributions.
+multivariate normal distributions.
 
 .. code-block:: python3
 
@@ -936,7 +936,7 @@ We first compute the joint normal distribution of
 Now let’s compute distributions of :math:`\theta` and :math:`\mu`
 separately conditional on various subsets of test scores.
 
-It will be fun to compare outcomes ith the help of an auxiliary function
+It will be fun to compare outcomes with the help of an auxiliary function
 ``cond_dist_IQ2d`` that we now construct.
 
 .. code-block:: python3
@@ -1035,8 +1035,8 @@ and therefore
 
    Y = C X + D V
 
-where :math:`C` and :math:`D` are both diagonol matrices with constant
-:math:`c` and :math:`d` as diagonol respectively.
+where :math:`C` and :math:`D` are both diagonal matrices with constant
+:math:`c` and :math:`d` as diagonal respectively.
 
 Consequently, the covariance matrix of :math:`Y` is
 
@@ -1599,7 +1599,7 @@ In this example, it turns out that the projection :math:`\hat{Y}` of
 :math:`Y` on the first two principal components does a good job of
 approximating :math:`Ef \mid y`.
 
-We confirm this in the the following plot of :math:`f`,
+We confirm this in the following plot of :math:`f`,
 :math:`E y \mid f`, :math:`E f \mid y`, and :math:`\hat{y}` on the
 coordinate axis versus :math:`y` on the ordinate axis.
 
@@ -1912,7 +1912,7 @@ the ``MultivariateNormal`` class.
     plt.show()
 
 In the above graph, the green line is what the price of the stock would
-be if people had perfect foresight about the pah of dividends while the
+be if people had perfect foresight about the path of dividends while the
 green line is the conditional expectation :math:`E p_t | y_t, y_{t-1}`, which is what the price would
 be if people did not have perfect foresight but were optimally
 predicting future dividends on the basis of the information
