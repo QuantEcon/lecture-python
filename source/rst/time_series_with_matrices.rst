@@ -119,7 +119,7 @@ The vector :math:`y` is a complete time path :math:`\{y_t\}_{t=1}^T`.
 Let’s put Python to work on an example that captures the flavor of
 Samuelson’s multiplier-accelerator model.
 
-We'll set parameters equal to the same values we used in doc:`this<samuelson>` QuantEcon lecture.
+We'll set parameters equal to the same values we used in :doc:`this QuantEcon lecture<samuelson>`.
 
 .. code-block:: python3
 
