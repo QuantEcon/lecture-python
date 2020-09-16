@@ -15,25 +15,22 @@ Univariate Time Series with Matrix Algebra
 Overview
 ========
 
-This lecture uses  matrices to solve some linear difference equations.
-
-
+This lecture uses matrices to solve some linear difference equations.
 
 As a running example, we’ll study a **second-order linear difference
 equation** that was the key technical tool in Paul Samuelson’s 1939
 article :cite:`Samuelson1939` that introduced the **multiplier-accelerator** model.
 
-This model became the workhorse that powered early econometric versions of Keynesian macroeconomic models
-in the United States.  
+This model became the workhorse that powered early econometric versions of
+Keynesian macroeconomic models in the United States.  
 
-You can read about the details of that model in :doc:`this<samuelson>` quantecon lecture.
+You can read about the details of that model in :doc:`this<samuelson>`
+QuantEcon lecture.
 
-(that lecture also describes some technicalities about second-order
-linear difference equations)
+(That lecture also describes some technicalities about second-order linear difference equations.)
 
 We'll also study a "perfect foresight" model of stock prices that involves solving
 a "forward-looking" linear difference equation.
-
 
 We will use the following imports:
 
@@ -64,8 +61,7 @@ that we take as **initial conditions**.
 In Samuelson's model, :math:`y_t` stood for **national income** or perhaps a different
 measure of aggregate activity called **gross domestic product** (GDP) at time :math:`t`.
 
-Equation :eq:`tswm_1` is called a **second-order linear
-difference equation**.
+Equation :eq:`tswm_1` is called a **second-order linear difference equation**.
 
 But actually, it is a collection of :math:`T` simultaneous linear
 equations in the :math:`T` variables :math:`y_1, y_2, \ldots, y_T`.
@@ -123,7 +119,7 @@ The vector :math:`y` is a complete time path :math:`\{y_t\}_{t=1}^T`.
 Let’s put Python to work on an example that captures the flavor of
 Samuelson’s multiplier-accelerator model.
 
-We'll set parameters equal to the same values we used in doc:`this<samuelson>` quantecon lecture.
+We'll set parameters equal to the same values we used in doc:`this<samuelson>` QuantEcon lecture.
 
 .. code-block:: python3
 
@@ -330,7 +326,7 @@ As an example, we suppose that :math:`p_t` is the price of a stock and
 that :math:`y_t` is its dividend.
 
 We assume that :math:`y_t` is determined by second-order difference
-equation that we analyzed just above so that
+equation that we analyzed just above, so that
 
 .. math::
 
