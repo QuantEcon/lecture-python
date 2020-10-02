@@ -4,7 +4,7 @@ SHELL := bash
 #
 
 # You can set these variables from the command line.
-SPHINXOPTS    = -c "./"
+SPHINXOPTS    = -c "./" -P
 SPHINXBUILD   = python -msphinx
 SPHINXPROJ    = lecture-python-programming
 SOURCEDIR     = source/rst

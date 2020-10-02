@@ -40,6 +40,7 @@ extensions = [
 	'IPython.sphinxext.ipython_console_highlighting',
     # Custom Sphinx Extensions
     'sphinxcontrib.jupyter',
+    'sphinx_tomyst'
 ]
 
 # Retired Extensions but may be useful in Future
@@ -369,6 +370,8 @@ linkcheck_ignore = [r'https:\/\/github\.com\/.*?#.*', #Anchors on Github seem to
 
 linkcheck_timeout = 30
 
+# {{ tomyst-remove-start }}
+
 # --------------------------------------------
 # jupyter Sphinx Extension conversion settings
 # --------------------------------------------
@@ -479,3 +482,13 @@ jupyter_pdf_book_name = "quantitative_economics_with_python"
 
 # pdf toc file
 jupyter_pdf_book_index = "index_toc"
+
+# sphinx-tomyst config
+
+# Set Destination path
+tomyst_static_file_path = ['source/rst/_static']
+tomyst_parser = "myst_nb"
+tomyst_conf_removeblocks = True
+tomyst_conf_dropcontaining = ["sphinxcontrib.jupyter"]
+
+# {{ tomyst-remove-finish }}
