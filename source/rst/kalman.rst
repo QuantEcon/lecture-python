@@ -531,7 +531,7 @@ Implementation
 
 
 
-The class ``Kalman`` from the `QuantEcon.py`_ package implements the Kalman filter
+The class ``Kalman`` from the `QuantEcon.py <http://quantecon.org/quantecon-py>`_ package implements the Kalman filter
 
 
 
