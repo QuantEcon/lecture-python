@@ -15,19 +15,19 @@ Exchangeability and Bayesian Updating
 Overview
 =========
 
-This lecture studies an example  of learning 
+This lecture studies an example  of learning
 via Bayes' Law.
 
 We touch on foundations of Bayesian statistical inference invented by Bruno DeFinetti :cite:`definetti`.
 
-The relevance of DeFinetti's work for economists is presented forcefully 
+The relevance of DeFinetti's work for economists is presented forcefully
 in chapter 11 of :cite:`Kreps88` by David Kreps.
 
-The example  that we study in this lecture  is a key component of :doc:`this lecture <odu>` that augments the 
+The example  that we study in this lecture  is a key component of :doc:`this lecture <odu>` that augments the
 :doc:`classic  <mccall_model>`  job search model of McCall
-:cite:`McCall1970` by presenting an unemployed worker with a statistical inference problem. 
+:cite:`McCall1970` by presenting an unemployed worker with a statistical inference problem.
 
-Here we create  graphs that illustrate the role that  a  likelihood ratio  
+Here we create  graphs that illustrate the role that  a  likelihood ratio
 plays in  Bayes' Law.
 
 We'll use such graphs to provide insights into the mechanics driving outcomes in :doc:`this lecture <odu>` about learning in an augmented McCall job
@@ -40,18 +40,18 @@ that are
 
 - exchangeable
 
-Understanding the distinction between these concepts is essential for appreciating how Bayesian updating 
+Understanding the distinction between these concepts is essential for appreciating how Bayesian updating
 works in our example.
 
 You can read about exchangeability `here <https://en.wikipedia.org/wiki/Exchangeable_random_variables>`__
 
 
 
-Below, we'll often use 
+Below, we'll often use
 
 - :math:`W` to denote a random variable
 
-- :math:`w` to denote a particular realization of a random variable :math:`W` 
+- :math:`w` to denote a particular realization of a random variable :math:`W`
 
 Let’s start with some imports:
 
@@ -67,7 +67,7 @@ Let’s start with some imports:
     %matplotlib inline
 
 
-Independently and Identically Distributed 
+Independently and Identically Distributed
 ==========================================
 
 We begin by looking at the notion of an  **independently and identically  distributed sequence** of random variables.
@@ -77,34 +77,34 @@ An independently and identically distributed sequence is often abbreviated as II
 Two notions are involved, **independently** and **identically** distributed.
 
 A sequence :math:`W_0, W_1, \ldots` is **independently distributed** if the joint probability density
-of the sequence is the **product** of the densities of the  components of the sequence. 
+of the sequence is the **product** of the densities of the  components of the sequence.
 
 The sequence :math:`W_0, W_1, \ldots` is **independently and identically distributed** if in addition the marginal
-density of :math:`W_t` is the same for all :math:`t =0, 1, \ldots`.  
+density of :math:`W_t` is the same for all :math:`t =0, 1, \ldots`.
 
 For example,  let :math:`p(W_0, W_1, \ldots)` be the **joint density** of the sequence and
 let :math:`p(W_t)` be the **marginal density** for a particular :math:`W_t` for all :math:`t =0, 1, \ldots`.
 
-Then the joint density of the sequence :math:`W_0, W_1, \ldots` is IID if 
+Then the joint density of the sequence :math:`W_0, W_1, \ldots` is IID if
 
-.. math:: p(W_0, W_1, \ldots) =  p(W_0) p(W_1) \cdots 
+.. math:: p(W_0, W_1, \ldots) =  p(W_0) p(W_1) \cdots
 
 so that the joint density is the product of a sequence of identical marginal densities.
 
 
-IID Means Past Observations Don't Tell Us Anything About Future Observations 
+IID Means Past Observations Don't Tell Us Anything About Future Observations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If a sequence is random variables is IID, past information provides no information about future realizations.
 
-In this sense, there is **nothing to learn**  about the future from the past.  
-
-
+In this sense, there is **nothing to learn**  about the future from the past.
 
 To understand these statements, let the joint distribution of a sequence of random variables :math:`\{W_t\}_{t=0}^T`
 that is not necessarily IID, be
 
-.. math::  p(W_T, W_{T-1}, \ldots, W_1, W_0)
+.. math::
+
+    p(W_T, W_{T-1}, \ldots, W_1, W_0)
 
 
 Using the laws of probability, we can always factor such a joint density into a product of conditional densities:
@@ -113,37 +113,37 @@ Using the laws of probability, we can always factor such a joint density into a 
 
    \begin{align}
      p(W_T, W_{T-1}, \ldots, W_1, W_0)    = & p(W_T | W_{t-1}, \ldots, W_0) p(W_{T-1} | W_{T-2}, \ldots, W_0) \cdots  \cr
-     & p(W_1 | W_0) p(W_0) 
+     & p(W_1 | W_0) p(W_0)
    \end{align}
 
 
 
-In general,   
+In general,
 
-.. math::  p(W_t | W_{t-1}, \ldots, W_0)   \neq   p(W_t)             
+.. math::  p(W_t | W_{t-1}, \ldots, W_0)   \neq   p(W_t)
 
 which states that the **conditional density** on the left side does not equal the **marginal density** on the right side.
 
-In the special IID case, 
+In the special IID case,
 
 .. math::  p(W_t | W_{t-1}, \ldots, W_0)   =  p(W_t)
 
 and partial history :math:`W_{t-1}, \ldots, W_0` contains no information about the probability of :math:`W_t`.
 
-So in the IID case, there is **nothing to learn** about the densities of future random variables from past data.   
- 
+So in the IID case, there is **nothing to learn** about the densities of future random variables from past data.
+
 In the general case, there is something go learn from past data.
 
-We turn next to an instance of this general case in which there is something to learn from past data. 
+We turn next to an instance of this general case in which there is something to learn from past data.
 
-Please keep your eye out for **what** there is to learn from past data. 
+Please keep your eye out for **what** there is to learn from past data.
 
 
 
 A Setting in Which Past Observations Are Informative
 =====================================================
 
-We now turn to a setting in which there **is** something to learn.  
+We now turn to a setting in which there **is** something to learn.
 
 Let :math:`\{W_t\}_{t=0}^\infty` be a sequence of nonnegative
 scalar random variables with a joint probability distribution
@@ -162,50 +162,47 @@ So  the data are permanently generated as independently and identically distribu
 :math:`G`.
 
 We could say that *objectively* the probability that the data are generated as draws from :math:`F` is either :math:`0`
-or :math:`1`.  
+or :math:`1`.
 
-We now drop into this setting a decision maker who knows :math:`F` and :math:`G` and that nature picked one 
+We now drop into this setting a decision maker who knows :math:`F` and :math:`G` and that nature picked one
 of them once and for all and then drew an IID sequence of draws from that distribution.
 
-But our decision maker does not know which of the two distributions nature selected.  
+But our decision maker does not know which of the two distributions nature selected.
 
-The decision maker summarizes his ignorance about this by picking a **subjective probability** 
+The decision maker summarizes his ignorance about this by picking a **subjective probability**
 :math:`\tilde \pi` and reasons as if  nature had selected :math:`F` with probability
 :math:`\tilde \pi \in (0,1)` and
 :math:`G` with probability :math:`1 - \tilde \pi`.
 
 Thus, we  assume that the decision maker
 
- - **knows** both :math:`F` and :math:`G`
+- **knows** both :math:`F` and :math:`G`
 
- - **doesnt't know** which of these two distributions that nature has drawn 
+- **doesnt't know** which of these two distributions that nature has drawn
 
- - summarizing his ignorance by acting  as if or **thinking** that nature chose distribution :math:`F` with probability :math:`\tilde \pi \in (0,1)` and distribution
-   :math:`G` with probability :math:`1 - \tilde \pi` 
+- summarizing his ignorance by acting  as if or **thinking** that nature chose distribution :math:`F` with probability :math:`\tilde \pi \in (0,1)` and distribution
+  :math:`G` with probability :math:`1 - \tilde \pi`
 
 
- - at date :math:`t \geq 0` has observed  the partial history :math:`w_t, w_{t-1}, \ldots, w_0` of draws from the appropriate joint
-   density of the partial history
+- at date :math:`t \geq 0` has observed  the partial history :math:`w_t, w_{t-1}, \ldots, w_0` of draws from the appropriate joint
+  density of the partial history
 
 But what do we mean by the *appropriate joint distribution*?
 
 We'll discuss that next and in the process describe the concept of **exchangeability**.
 
-Relationship Between IID and Exchangeable 
+Relationship Between IID and Exchangeable
 ==========================================
-
-
-
 
 Conditional on nature selecting :math:`F`, the joint density of the
 sequence :math:`W_0, W_1, \ldots` is
 
-.. math::  f(W_0) f(W_1) \cdots 
+.. math::  f(W_0) f(W_1) \cdots
 
 Conditional on nature selecting :math:`G`, the joint density of the
 sequence :math:`W_0, W_1, \ldots` is
 
-.. math::  g(W_0) g(W_1) \cdots 
+.. math::  g(W_0) g(W_1) \cdots
 
 Notice that **conditional on nature having selected** :math:`F`, the
 sequence :math:`W_0, W_1, \ldots` is independently and
@@ -223,7 +220,7 @@ evidently
 .. math::
     :label: eq_definetti
 
-    h(W_0, W_1, \ldots ) \equiv \tilde \pi [f(W_0) f(W_1) \cdots ] + ( 1- \tilde \pi) [g(W_0) g(W_1) \cdots ] 
+    h(W_0, W_1, \ldots ) \equiv \tilde \pi [f(W_0) f(W_1) \cdots ] + ( 1- \tilde \pi) [g(W_0) g(W_1) \cdots ]
 
 Under the unconditional distribution :math:`h(W_0, W_1, \ldots )`, the
 sequence :math:`W_0, W_1, \ldots` is **not** independently and
@@ -235,28 +232,28 @@ To verify this claim, it is sufficient to notice, for example, that
 
     h(w_0, w_1) = \tilde \pi f(w_0)f (w_1) + (1 - \tilde \pi) g(w_0)g(w_1) \neq
                   (\tilde \pi f(w_0) + (1-\tilde \pi) g(w_0))(
-                   \tilde \pi f(w_1) + (1-\tilde \pi) g(w_1))  
+                   \tilde \pi f(w_1) + (1-\tilde \pi) g(w_1))
 
 Thus, the conditional distribution
 
 .. math::
 
     h(w_1 | w_0) \equiv \frac{h(w_0, w_1)}{(\tilde \pi f(w_0) + (1-\tilde \pi) g(w_0))}
-     \neq ( \tilde \pi f(w_1) + (1-\tilde \pi) g(w_1)) 
+     \neq ( \tilde \pi f(w_1) + (1-\tilde \pi) g(w_1))
 
 This means that the realization :math:`w_0` contains information about :math:`w_1`.
 
-So there is something to learn.  
+So there is something to learn.
 
 But what and how?
 
-Exchangeability 
-================= 
+Exchangeability
+=================
 
 While the sequence :math:`W_0, W_1, \ldots` is not IID, it can be verified that it is
 **exchangeable**, which means that
 
-.. math::  h(w_0, w_1) = h(w_1, w_0) 
+.. math::  h(w_0, w_1) = h(w_1, w_0)
 
 and so on.
 
@@ -265,7 +262,7 @@ More generally, a sequence of random variables is said to be **exchangeable** if
 for the sequence does not change when the positions in the sequence in which finitely many of the random variables
 appear are altered.
 
-Equation :eq:`eq_definetti` represents our instance of an exchangeable joint density over a sequence of random 
+Equation :eq:`eq_definetti` represents our instance of an exchangeable joint density over a sequence of random
 variables  as a **mixture**  of  two IID joint densities over a sequence of random variables.
 
 For a Bayesian statistician, the mixing parameter :math:`\tilde \pi \in (0,1)` has a special interpretation
@@ -280,7 +277,7 @@ Bernoulli paramter :math:`\theta`.
 Bayes' Law
 ============
 
-We noted above that in our example model there is something to learn about about the future from past data drawn 
+We noted above that in our example model there is something to learn about about the future from past data drawn
 from our particular instance of a process that is exchangeable but not IID.
 
 But how can we learn?
@@ -300,7 +297,7 @@ Let's dive into Bayes' Law in this context.
 Let :math:`q` represent the distribution that nature actually draws from
 :math:`w` from and let
 
-.. math::   \pi = \mathbb{P}\{q = f \} 
+.. math::   \pi = \mathbb{P}\{q = f \}
 
 where we regard :math:`\pi` as the decision maker's **subjective probability**  (also called a **personal probability**.
 
@@ -309,15 +306,15 @@ Suppose that at :math:`t \geq 0`, the decision maker has  observed a history
 
 We let
 
-.. math::  \pi_t  = \mathbb{P}\{q = f  | w^t \} 
+.. math::  \pi_t  = \mathbb{P}\{q = f  | w^t \}
 
 where we adopt the convention
 
-.. math:: \pi_{-1}  = \tilde \pi 
+.. math:: \pi_{-1}  = \tilde \pi
 
 The distribution of :math:`w_{t+1}` conditional on :math:`w^t` is then
 
-.. math::  \pi_t f + (1 - \pi_t) g . 
+.. math::  \pi_t f + (1 - \pi_t) g .
 
 Bayes’ rule for updating :math:`\pi_{t+1}` is
 
@@ -339,7 +336,7 @@ tells us that
    \quad \text{and} \quad
    \mathbb{P}\{W = w\} = \sum_{\omega \in \{f, g\}} \mathbb{P}\{W = w \,|\, q = \omega\} \mathbb{P}\{q = \omega\}
 
-More Details about Bayesian Updating 
+More Details about Bayesian Updating
 =====================================
 
 Let's stare at and rearrange Bayes' Law as represented in equation :eq:`eq_Bayes102` with the aim of understanding
@@ -355,7 +352,6 @@ It is convenient for us to rewrite the updating rule :eq:`eq_Bayes102` as
 
 .. math::
 
-
    \pi_{t+1}   =\frac{\pi_{t}f\left(w_{t+1}\right)}{\pi_{t}f\left(w_{t+1}\right)+\left(1-\pi_{t}\right)g\left(w_{t+1}\right)}
        =\frac{\pi_{t}\frac{f\left(w_{t+1}\right)}{g\left(w_{t+1}\right)}}{\pi_{t}\frac{f\left(w_{t+1}\right)}{g\left(w_{t+1}\right)}+\left(1-\pi_{t}\right)}
        =\frac{\pi_{t}l\left(w_{t+1}\right)}{\pi_{t}l\left(w_{t+1}\right)+\left(1-\pi_{t}\right)}
@@ -366,23 +362,23 @@ This implies that
 .. math::
    :label: eq_Bayes103
 
-   \frac{\pi_{t+1}}{\pi_{t}}=\frac{l\left(w_{t+1}\right)}{\pi_{t}l\left(w_{t+1}\right)+\left(1-\pi_{t}\right)}\begin{cases} >1 & 
+   \frac{\pi_{t+1}}{\pi_{t}}=\frac{l\left(w_{t+1}\right)}{\pi_{t}l\left(w_{t+1}\right)+\left(1-\pi_{t}\right)}\begin{cases} >1 &
    \text{if }l\left(w_{t+1}\right)>1\\
    \leq1 & \text{if }l\left(w_{t+1}\right)\leq1
    \end{cases}
 
-Notice how the likelihood ratio and the prior interact to determine whether an observation :math:`w_{t+1}` leads the decision maker 
-to increase or decrease the subjective probability he/she attaches to distribution :math:`F`. 
+Notice how the likelihood ratio and the prior interact to determine whether an observation :math:`w_{t+1}` leads the decision maker
+to increase or decrease the subjective probability he/she attaches to distribution :math:`F`.
 
-When the likelihood ratio :math:`l(w_{t+1})` exceeds one, the observation :math:`w_{t+1}` nudges the probability 
+When the likelihood ratio :math:`l(w_{t+1})` exceeds one, the observation :math:`w_{t+1}` nudges the probability
 :math:`\pi` put on distribution :math:`F` upward,
 and when the likelihood ratio :math:`l(w_{t+1})` is less that  one, the observation :math:`w_{t+1}` nudges :math:`\pi` downward.
 
 
 
-Representation :eq:`eq_Bayes103` is the foundation of the graphs that we'll use to display the dynamics of 
+Representation :eq:`eq_Bayes103` is the foundation of the graphs that we'll use to display the dynamics of
 :math:`\{\pi_t\}_{t=0}^\infty` that are  induced by
-Bayes' Law.  
+Bayes' Law.
 
 We’ll plot :math:`l\left(w\right)` as a way to enlighten us about how
 learning – i.e., Bayesian updating of the probability :math:`\pi` that
@@ -486,29 +482,26 @@ We'll begin with the default values of various objects, then change them in a su
     learning_example()
 
 Please look at the three graphs above created for an instance in which :math:`f` is a uniform distribution on :math:`[0,1]`
-(i.e., a Beta distribution with parameters :math:`F_a=1, F_b=1`, while  :math:`g` is a Beta distribution with the default parameter values :math:`G_a=3, G_b=1.2`.  
-
-
+(i.e., a Beta distribution with parameters :math:`F_a=1, F_b=1`, while  :math:`g` is a Beta distribution with the default parameter values :math:`G_a=3, G_b=1.2`.
 
 The graph in the left  plots the likehood ratio :math:`l(w)` on the coordinate axis against :math:`w` on the coordinate axis.
 
-The middle graph plots both :math:`f(w)` and :math:`g(w)`  against :math:`w`, with the horizontal dotted lines showing values 
+The middle graph plots both :math:`f(w)` and :math:`g(w)`  against :math:`w`, with the horizontal dotted lines showing values
 of :math:`w` at which the likelihood ratio equals :math:`1`.
 
-The graph on the right side plots arrows to the right that show when Bayes' Law  makes :math:`\pi` increase and arrows 
-to the left that show when Bayes' Law make :math:`\pi` decrease.  
+The graph on the right side plots arrows to the right that show when Bayes' Law  makes :math:`\pi` increase and arrows
+to the left that show when Bayes' Law make :math:`\pi` decrease.
 
 Notice how the length of the arrows, which show the magnitude of the force from Bayes' Law impelling :math:`\pi` to change,
-depend on both the prior probability :math:`\pi` on the ordinate axis and the evidence in the form of the current draw of 
-:math:`w` on the coordinate axis.  
-
+depend on both the prior probability :math:`\pi` on the ordinate axis and the evidence in the form of the current draw of
+:math:`w` on the coordinate axis.
 
 The fractions in the colored areas of the middle graphs are probabilities under :math:`F` and :math:`G`, respectively,
 that  realizations of :math:`w` fall
-into the interval that updates the belief :math:`\pi` in a correct direction (i.e., toward :math:`0` when :math:`G` is the true 
+into the interval that updates the belief :math:`\pi` in a correct direction (i.e., toward :math:`0` when :math:`G` is the true
 distribution, and towards :math:`1` when :math:`F` is the true distribution).
 
-For example, 
+For example,
 in the above  example, under true distribution :math:`F`,  :math:`\pi` will  be updated toward :math:`0` if :math:`w` falls into the interval
 :math:`[0.524, 0.999]`, which occurs with probability :math:`1 - .524 = .476` under :math:`F`.  But this
 would occur with probability
@@ -519,32 +512,30 @@ in the orange region is the integral of :math:`g(w)` over this interval.
 Next we use our code to create graphs for another instance of our model.
 
 We keep :math:`F` the same as in the preceding instance, namely a uniform distribution, but now assume that :math:`G`
-is a Beta distribution with parameters :math:`G_a=2, G_b=1.6`. 
+is a Beta distribution with parameters :math:`G_a=2, G_b=1.6`.
 
 .. code-block:: python3
 
     learning_example(G_a=2, G_b=1.6)
 
-Notice how the likelihood ratio, the middle graph, and the arrows compare with the previous instance of our example.    
+Notice how the likelihood ratio, the middle graph, and the arrows compare with the previous instance of our example.
 
-
-
-Appendix 
+Appendix
 =========
 
 Sample Paths of :math:`\pi_t`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Now we'll have some fun by plotting multiple realizations of sample paths of :math:`\pi_t` under two possible 
+Now we'll have some fun by plotting multiple realizations of sample paths of :math:`\pi_t` under two possible
 assumptions about nature's choice of distribution:
 
--  that nature permanently draws from :math:`F`
+- that nature permanently draws from :math:`F`
 
--  that nature permanently draws from :math:`G`
+- that nature permanently draws from :math:`G`
 
 
-Outcomes depend on a peculiar property of likelihood ratio processes that are discussed in 
-`this lecture <https://python-advanced.quantecon.org/additive_functionals.html>`__ 
+Outcomes depend on a peculiar property of likelihood ratio processes that are discussed in
+`this lecture <https://python-advanced.quantecon.org/additive_functionals.html>`__
 
 To do this, we create some Python code.
 
@@ -632,10 +623,10 @@ periods when the sequence is truly IID draws from :math:`G`. Again, we set the i
     # when nature selects G
     π_paths_G = simulate(a=3, b=1.2, T=T, N=1000)
 
-In  the above graph we observe that now  most paths :math:`\pi_t \rightarrow 0`.    
+In the above graph we observe that now  most paths :math:`\pi_t \rightarrow 0`.
 
 
-Rates of convergence 
+Rates of convergence
 ^^^^^^^^^^^^^^^^^^^^^
 
 We study rates of  convergence of :math:`\pi_t` to :math:`1` when nature generates the data as IID draws from :math:`F`
@@ -666,7 +657,6 @@ conditional expectations of :math:`\frac{\pi_{t+1}}{\pi_{t}}` as functions of :m
 to the pertinent probability distribution:
 
 .. math::
-
 
    \begin{aligned}
    E\left[\frac{\pi_{t+1}}{\pi_{t}}\biggm|q=\omega, \pi_{t}\right] &=E\left[\frac{l\left(w_{t+1}\right)}{\pi_{t}l\left(w_{t+1}\right)+\left(1-\pi_{t}\right)}\biggm|q=\omega, \pi_{t}\right], \\
@@ -711,13 +701,11 @@ First, consider the case where :math:`F_a=F_b=1` and
 
     expected_ratio()
 
-The above graphs shows that when :math:`F` generates the data, :math:`\pi_t` on average always heads north, while 
-when :math:`G` generates the data, :math:`\pi_t` heads south. 
-
-
+The above graphs shows that when :math:`F` generates the data, :math:`\pi_t` on average always heads north, while
+when :math:`G` generates the data, :math:`\pi_t` heads south.
 
 Next, we'll look at a degenerate case in whcih  :math:`f` and :math:`g` are identical beta
-distributions, and :math:`F_a=G_a=3, F_b=G_b=1.2`. 
+distributions, and :math:`F_a=G_a=3, F_b=G_b=1.2`.
 
 In a sense, here  there
 is nothing to learn.
@@ -744,7 +732,7 @@ We'll dig deeper into some of the ideas used here in the following lectures:
 * :doc:`this lecture <likelihood_ratio_process>` describes **likelihood ratio processes**
   and their role in frequentist and Bayesian statistical theories
 
-* :doc:`this lecture <navy_captain>` returns to the subject of this lecture and studies 
-  whether the Captain's hunch that the (frequentist) decision rule that the Navy had ordered 
-  him to use can be expected to be better or worse than the rule sequential rule that Abraham 
-  Wald designed 
+* :doc:`this lecture <navy_captain>` returns to the subject of this lecture and studies
+  whether the Captain's hunch that the (frequentist) decision rule that the Navy had ordered
+  him to use can be expected to be better or worse than the rule sequential rule that Abraham
+  Wald designed
