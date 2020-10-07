@@ -1,5 +1,3 @@
-
-
 .. highlight:: python3
 
 **********************************************
@@ -32,7 +30,7 @@ Readers might find it helpful to review the following lectures before reading th
 * The :doc:`shortest paths lecture <short_path>`
 * The :doc:`basic McCall model <mccall_model>`
 * The :doc:`McCall model with separation <mccall_model_with_separation>`
-* The :doc:`McCall model with separation and a continuous wage distribution <mccall_fitted_vfi>` 
+* The :doc:`McCall model with separation and a continuous wage distribution <mccall_fitted_vfi>`
 
 In what follows, we require the following imports:
 
@@ -46,7 +44,7 @@ In what follows, we require the following imports:
 
 
 The Model
-==================
+=========
 
 We consider an infinite time horizon :math:`t=0, 1, 2, 3..`
 
@@ -60,7 +58,8 @@ We choose how much of the cake to eat in any given period :math:`t`.
 After choosing to consume :math:`c_t` of the cake in period :math:`t` there is
 
 .. math::
-    x_{t+1} = x_t - c_t 
+
+    x_{t+1} = x_t - c_t
 
 left in period :math:`t+1`.
 
@@ -70,8 +69,10 @@ Consuming quantity :math:`c` of the cake gives current utility :math:`u(c)`.
 We adopt the CRRA utility function
 
 .. math::
-    u(c) = \frac{c^{1-\gamma}}{1-\gamma} \qquad (\gamma \gt 0, \, \gamma \neq 1)
     :label: crra_utility
+
+    u(c) = \frac{c^{1-\gamma}}{1-\gamma} \qquad (\gamma \gt 0, \, \gamma \neq 1)
+
 
 In Python this is
 
@@ -89,16 +90,19 @@ In particular, consumption of :math:`c` units :math:`t` periods hence has presen
 The agent's problem can be written as
 
 .. math::
-    \max_{\{c_t\}} \sum_{t=0}^\infty \beta^t u(c_t)
     :label: cake_objective
+
+    \max_{\{c_t\}} \sum_{t=0}^\infty \beta^t u(c_t)
+
 
 subject to
 
 .. math::
-    x_{t+1} = x_t - c_t 
+    :label: cake_feasible
+
+    x_{t+1} = x_t - c_t
     \quad \text{and} \quad
     0\leq c_t\leq x_t
-    :label: cake_feasible
 
 for all :math:`t`.
 
@@ -169,8 +173,10 @@ the current time when :math:`x` units of cake are left.
 That is,
 
 .. math::
-    v(x) = \max \sum_{t=0}^{\infty} \beta^t u(c_t) 
     :label: value_fun
+
+    v(x) = \max \sum_{t=0}^{\infty} \beta^t u(c_t)
+
 
 where the maximization is over all paths :math:`\{ c_t \}` that are feasible
 from :math:`x_0 = x`.
@@ -181,7 +187,7 @@ make inferences about it.
 For example, as was the case with the :doc:`McCall model <mccall_model>`, the
 value function will satisfy a version of the *Bellman equation*.
 
-In the present case, this equation states that :math:`v` satisfies 
+In the present case, this equation states that :math:`v` satisfies
 
 .. math::
     :label: bellman-cep
@@ -214,8 +220,10 @@ It has been shown that, with :math:`u` as the CRRA utility function in
 :eq:`crra_utility`, the function
 
 .. math::
-    v^*(x_t) = \left( 1-\beta^{1/\gamma} \right)^{-\gamma}u(x_t)
     :label: crra_vstar
+
+    v^*(x_t) = \left( 1-\beta^{1/\gamma} \right)^{-\gamma}u(x_t)
+
 
 solves the Bellman equation and hence is equal to the value function.
 
@@ -269,6 +277,7 @@ We should choose consumption to maximize the
 right hand side of the Bellman equation :eq:`bellman-cep`.
 
 .. math::
+
     c^* = \arg \max_{c} \{u(c) + \beta v(x - c)\}
 
 We can think of this optimal choice as a function of the state :math:`x`, in
@@ -277,15 +286,18 @@ which case we call it the **optimal policy**.
 We denote the optimal policy by :math:`\sigma^*`, so that
 
 .. math::
+
     \sigma^*(x) := \arg \max_{c} \{u(c) + \beta v(x - c)\}
     \quad \text{for all } x
 
 If we plug the analytical expression :eq:`crra_vstar` for the value function
-into the right hand side and compute the optimum, we find that 
+into the right hand side and compute the optimum, we find that
 
 .. math::
-    \sigma^*(x) = \left( 1-\beta^{1/\gamma} \right) x
     :label: crra_opt_pol
+
+    \sigma^*(x) = \left( 1-\beta^{1/\gamma} \right) x
+
 
 Now let's recall our intuition on the impact of parameters.
 
@@ -338,14 +350,14 @@ provides key insights that are hard to obtain by other methods.
 Statement and Implications
 --------------------------
 
-The Euler equation for the present problem can be stated as 
+The Euler equation for the present problem can be stated as
 
 .. math::
     :label: euler-cep
 
     u^{\prime} (c^*_{t})=\beta u^{\prime}(c^*_{t+1})
 
-This is necessary condition for the optimal path.  
+This is necessary condition for the optimal path.
 
 It says that, along the optimal path, marginal rewards are equalized across time, after appropriate discounting.
 
@@ -383,7 +395,7 @@ In the exercises, you are asked to verify that the optimal policy
 For a proof of sufficiency of the Euler equation in a very general setting,
 see proposition 2.2 of :cite:`ma2020income`.
 
-The following arguments focus on necessity, explaining why an optimal path or 
+The following arguments focus on necessity, explaining why an optimal path or
 policy should satisfy the Euler equation.
 
 
@@ -397,7 +409,8 @@ Let's write :math:`c` as a shorthand for consumption path :math:`\{c_t\}_{t=0}^\
 The overall cake-eating maximization problem can be written as
 
 .. math::
-    \max_{c \in F} U(c) 
+
+    \max_{c \in F} U(c)
     \quad \text{where } U(c) := \sum_{t=0}^\infty \beta^t u(c_t)
 
 and :math:`F` is the set of feasible consumption paths.
@@ -408,6 +421,7 @@ So the optimal path :math:`c^* := \{c^*_t\}_{t=0}^\infty` must satisfy
 :math:`U'(c^*) = 0`.
 
 .. note::
+
     If you want to know exactly how the derivative :math:`U'(c^*)` is
     defined, given that the argument :math:`c^*` is a vector of infinite
     length, you can start by learning about `Gateaux derivatives
@@ -417,7 +431,7 @@ So the optimal path :math:`c^* := \{c^*_t\}_{t=0}^\infty` must satisfy
 In other words, the rate of change in :math:`U` must be zero for any
 infinitesimally small (and feasible) perturbation away from the optimal path.
 
-So consider a feasible perturbation that reduces consumption at time :math:`t` to 
+So consider a feasible perturbation that reduces consumption at time :math:`t` to
 :math:`c^*_t - h`
 and increases it in the next period to :math:`c^*_{t+1} + h`.
 
@@ -428,6 +442,7 @@ We call this perturbed path :math:`c^h`.
 By the preceding argument about zero gradients, we have
 
 .. math::
+
     \lim_{h \to 0} \frac{U(c^h) - U(c^*)}{h} = U'(c^*) = 0
 
 
@@ -435,21 +450,24 @@ Recalling that consumption only changes at :math:`t` and :math:`t+1`, this
 becomes
 
 .. math::
-    \lim_{h \to 0} 
-    \frac{\beta^t u(c^*_t - h) + \beta^{t+1} u(c^*_{t+1} + h) 
+
+    \lim_{h \to 0}
+    \frac{\beta^t u(c^*_t - h) + \beta^{t+1} u(c^*_{t+1} + h)
           - \beta^t u(c^*_t) - \beta^{t+1} u(c^*_{t+1}) }{h} = 0
 
 After rearranging, the same expression can be written as
 
 .. math::
-    \lim_{h \to 0} 
+
+    \lim_{h \to 0}
         \frac{u(c^*_t - h) - u(c^*_t) }{h}
-    + \lim_{h \to 0} 
+    + \lim_{h \to 0}
         \frac{ \beta u(c^*_{t+1} + h) - u(c^*_{t+1}) }{h} = 0
 
 or, taking the limit,
 
 .. math::
+
     - u'(c^*_t) + \beta u'(c^*_{t+1}) = 0
 
 This is just the Euler equation.
@@ -458,7 +476,7 @@ This is just the Euler equation.
 Derivation II: Using the Bellman Equation
 ------------------------------------------
 
-Another way to derive the Euler equation is to use the Bellman equation :eq:`bellman-cep`. 
+Another way to derive the Euler equation is to use the Bellman equation :eq:`bellman-cep`.
 
 Taking the derivative on the right hand side of the Bellman equation with
 respect to :math:`c` and setting it to zero, we get
@@ -470,7 +488,7 @@ respect to :math:`c` and setting it to zero, we get
 
 To obtain :math:`v^{\prime}(x - c)`, we set
 :math:`g(c,x) = u(c) + \beta v(x - c)`, so that, at the optimal choice of
-consumption, 
+consumption,
 
 .. math::
     :label: bellman_equality
@@ -481,24 +499,27 @@ Differentiating both sides while acknowledging that the maximizing consumption w
 on :math:`x`, we get
 
 .. math::
-    v' (x) = 
+
+    v' (x) =
     \frac{\partial }{\partial c} g(c,x) \frac{\partial c}{\partial x}
      + \frac{\partial }{\partial x} g(c,x)
-    
+
 
 When :math:`g(c,x)` is maximized at :math:`c`, we have :math:`\frac{\partial }{\partial c} g(c,x) = 0`.
 
 Hence the derivative simplifies to
 
 .. math::
-    v' (x) = 
+    :label: bellman_envelope
+
+    v' (x) =
     \frac{\partial g(c,x)}{\partial x}
     = \frac{\partial }{\partial x} \beta v(x - c)
     = \beta v^{\prime}(x - c)
-    :label: bellman_envelope
 
 
-(This argument is an example of the `Envelope Theorem <https://en.wikipedia.org/wiki/Envelope_theorem>`__.) 
+
+(This argument is an example of the `Envelope Theorem <https://en.wikipedia.org/wiki/Envelope_theorem>`__.)
 
 
 But now an application of :eq:`bellman_FOC` gives
@@ -545,9 +566,10 @@ Exercise 1
 -----------
 
 We start with the conjecture :math:`c_t^*=\theta x_t`, which leads to a path
-for the state variable (cake size) given by 
+for the state variable (cake size) given by
 
 .. math::
+
     x_{t+1}=x_t(1-\theta)
 
 Then :math:`x_t = x_{0}(1-\theta)^t` and hence
@@ -556,7 +578,7 @@ Then :math:`x_t = x_{0}(1-\theta)^t` and hence
 .. math::
 
     \begin{aligned}
-    v(x_0) 
+    v(x_0)
        & = \sum_{t=0}^{\infty} \beta^t u(\theta x_t)\\
        & = \sum_{t=0}^{\infty} \beta^t u(\theta x_0 (1-\theta)^t ) \\
        & = \sum_{t=0}^{\infty} \theta^{1-\gamma} \beta^t (1-\theta)^{t(1-\gamma)} u(x_0) \\
@@ -566,15 +588,16 @@ Then :math:`x_t = x_{0}(1-\theta)^t` and hence
 From the Bellman equation, then,
 
 .. math::
+
     \begin{aligned}
         v(x) & = \max_{0\leq c\leq x}
             \left\{
-                u(c) + 
+                u(c) +
                 \beta\frac{\theta^{1-\gamma}}{1-\beta(1-\theta)^{1-\gamma}}\cdot u(x-c)
             \right\} \\
              & = \max_{0\leq c\leq x}
                 \left\{
-                    \frac{c^{1-\gamma}}{1-\gamma} + 
+                    \frac{c^{1-\gamma}}{1-\gamma} +
                     \beta\frac{\theta^{1-\gamma}}
                     {1-\beta(1-\theta)^{1-\gamma}}
                     \cdot\frac{(x-c)^{1-\gamma}}{1-\gamma}
@@ -584,41 +607,48 @@ From the Bellman equation, then,
 From the first order condition, we obtain
 
 .. math::
+
     c^{-\gamma} + \beta\frac{\theta^{1-\gamma}}{1-\beta(1-\theta)^{1-\gamma}}\cdot(x-c)^{-\gamma}(-1) = 0
 
 or
 
 .. math::
+
     c^{-\gamma} = \beta\frac{\theta^{1-\gamma}}{1-\beta(1-\theta)^{1-\gamma}}\cdot(x-c)^{-\gamma}
 
 
 With :math:`c = \theta x` we get
 
 .. math::
+
     \left(\theta x\right)^{-\gamma} =  \beta\frac{\theta^{1-\gamma}}{1-\beta(1-\theta)^{1-\gamma}}\cdot(x(1-\theta))^{-
     \gamma}
 
 Some rearrangement produces
 
 .. math::
+
     \theta = 1-\beta^{\frac{1}{\gamma}}
 
 
 This confirms our earlier expression for the optimal policy:
 
 .. math::
+
     c_t^* = \left(1-\beta^{\frac{1}{\gamma}}\right)x_t
 
 
 Substituting :math:`\theta` into the value function above gives
 
 .. math::
+
     v^*(x_t) = \frac{\left(1-\beta^{\frac{1}{\gamma}}\right)^{1-\gamma}}
     {1-\beta\left(\beta^{\frac{{1-\gamma}}{\gamma}}\right)} u(x_t) \\
 
 Rearranging gives
 
 .. math::
+
     v^*(x_t) = \left(1-\beta^\frac{1}{\gamma}\right)^{-\gamma}u(x_t)
 
 
