@@ -6,6 +6,7 @@ dependencies:
   - anaconda=2020.07
   - pip
   - pip:
+    - quantecon
     - interpolation
     - sphinxcontrib-jupyter
     - sphinxcontrib-bibtex
