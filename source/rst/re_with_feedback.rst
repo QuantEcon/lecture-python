@@ -20,7 +20,7 @@ In addition to what's in Anaconda, this lecture deploys the following libraries:
 .. code-block:: ipython
   :class: hide-output
 
-  !pip install --upgrade quantecon
+  !conda install -y quantecon
 
 
 .. code-block:: ipython
@@ -42,12 +42,12 @@ the price level to the money supply.
 
 Cagan did not use a rational expectations version of his model, but Sargent :cite:`Sargent77hyper` did.
 
-We study this model because it is intrinsically interesting and also because it  has a mathematical structure that 
-also appears in virtually all  linear rational expectations model, namely, that a key  endogenous variable equals
+We study a rational expectations version of this model because it is intrinsically interesting and  because it 
+has a mathematical structure that 
+appears in virtually all  linear rational expectations model, namely, that a key  endogenous variable equals
 a mathematical expectation of a geometric sum of future values of another variable.
 
-In a rational expectations version of Cagan's model, the endogenous variable is the price level or rate of inflation and 
-the other variable is the money supply or the rate of change in the money supply. 
+The model determines  the price level or rate of inflation as a function of  the money supply or the rate of change in the money supply. 
 
 In this lecture, we'll encounter:
 
@@ -59,9 +59,10 @@ In this lecture, we'll encounter:
 
 * a use of eigenvector decompositions of matrices that allowed Blanchard and Khan (1981) :cite:`Blanchard_Khan` and Whiteman (1983) :cite:`Whiteman` to solve a class of linear rational expectations models 
 
+* how to use **SymPy** to get analytical formulas for some key objects comprising a rational expectations equilibrium
 
-Cagan's model with rational expectations
-is formulated as an **expectational difference equation** whose solution is a rational expectations equilibrium.
+We formulate a version of  Cagan's model under  rational expectations
+as an **expectational difference equation** whose solution is a rational expectations equilibrium.
 
 We'll start this lecture with a quick review of deterministic (i.e., non-random)
 first-order and second-order linear difference equations.
@@ -71,28 +72,26 @@ first-order and second-order linear difference equations.
 Linear difference equations
 =============================
 
-In this quick review of linear difference equations, we'll use the *backward shift* or *lag* operator :math:`L`
+We'll use the *backward shift* or *lag* operator :math:`L`.
 
 The lag operator :math:`L`  maps a sequence :math:`\{x_t\}_{t=0}^\infty` into the sequence :math:`\{x_{t-1}\}_{t=0}^\infty`
 
-We'll can use  :math:`L` in linear difference equations by using the equality  
+We'll deploy  :math:`L`  by using the equality  
 :math:`L x_t \equiv x_{t-1}` in algebraic expressions.
 
 Further,  the inverse :math:`L^{-1}` of the lag operator is  the *forward shift*
 operator.
 
-In linear difference equations, we'll often use the equaltiy  :math:`L^{-1} x_t \equiv x_{t+1}` in the the algebra
-below.
+We'll often use the equality  :math:`L^{-1} x_t \equiv x_{t+1}` below.
 
-The algebra of lag and forward shift operators often simplifies formulas for linear difference equations and their
-solutions.
+The algebra of lag and forward shift operators can simplify representing and solving linear difference equations.
 
 First order
 -----------
 
 We want to solve a linear first-order scalar difference equation.
 
-First, let :math:`|\lambda | < 1`, and let
+Let :math:`|\lambda | < 1` and let
 :math:`\{u_t\}_{t=-\infty}^\infty` be a bounded sequence of scalar real
 numbers.
 
@@ -156,14 +155,14 @@ To verify that this is a solution, check the consequences of operating
 on both sides of equation :eq:`equn_5` by :math:`(1 -\lambda L)` and compare to
 equation :eq:`equn_1`.
 
-Solution :eq:`equn_2` exists for :math:`|\lambda | < 1` because
-the distributed lag in :math:`u` converges.
+For any bounded :math:`\{u_t\}` sequence, solution :eq:`equn_2` exists for :math:`|\lambda | < 1` because
+the **distributed lag** in :math:`u` converges.
 
 Solution :eq:`equn_5` exists when :math:`|\lambda| > 1` because the **distributed
 lead** in :math:`u` converges.
 
 When :math:`|\lambda | > 1`, the distributed lag in :math:`u` in :eq:`equn_2` may
-diverge, so that a solution of this form does not exist.
+diverge, in which case a solution of this form does not exist.
 
 The distributed lead in :math:`u` in :eq:`equn_5` need not
 converge when :math:`|\lambda| < 1`.
@@ -196,14 +195,14 @@ or
   y_{t+1} = \lambda_1 y_t - \lambda_2^{-1} \sum_{j=0}^\infty \lambda_2^{-j} u_{t+j+1} .  
 
 Thus, we obtained equation :eq:`equn_7` by
-solving stable roots (in this case :math:`\lambda_1`) **backward**, and
-unstable roots (in this case :math:`\lambda_2`) **forward**.
+solving a stable root (in this case :math:`\lambda_1`) **backward**, and an
+unstable root (in this case :math:`\lambda_2`) **forward**.
 
 Equation :eq:`equn_7` has a form that we shall encounter often.
 
-:math:`\lambda_1 y_t` is called the **feedback part** and
-:math:`-{\frac{\lambda_2^{-1}}{1 - \lambda_2^{-1}L^{-1}}} u_{t+1}` is
-called the **feedforward part** of the solution.
+   * :math:`\lambda_1 y_t` is called the **feedback part** 
+
+   * :math:`-{\frac{\lambda_2^{-1}}{1 - \lambda_2^{-1}L^{-1}}} u_{t+1}` is called the **feedforward part** 
 
 
 
@@ -211,6 +210,11 @@ called the **feedforward part** of the solution.
 
 Illustration: Cagan's Model
 =============================
+
+Now let's use linear difference equations to represent and solve Sargent's  :cite:`Sargent77hyper` rational expectations version of
+Cagan’s model :cite:`Cagan` that connects the price level to the public's anticipations of future money supplies. 
+
+Cagan did not use a rational expectations version of his model, but Sargent :cite:`Sargent77hyper`
 
 Let
 
@@ -240,6 +244,9 @@ the money supply :math:`m_t` by
 
 where :math:`\lambda \equiv \frac{\beta}{1+\beta} \in (0,1)`.
 
+(We note that the characteristic polynomial if :math:`1 - \lambda^{-1} z^{-1} = 0` so that the zero of the
+characteristic polynomial in this case is :math:`\lambda \in (0,1)` which here is **inside** the unit circle.)
+
 Solving the first order difference equation :eq:`equation_1` forward gives
 
 .. math::
@@ -258,6 +265,8 @@ a class of more general solutions
 that is indexed by the real number :math:`c \in {\bf R}`.
 
 Because we want to focus on stable solutions, we set :math:`c=0`.
+
+Equation :eq:`equation_1a` attributes  **perfect foresight** about the money supply sequence to the holders of real balances.
 
 We begin by assuming that the log of the money supply is **exogenous**
 in the sense that it is an autonomous process that does not feed back on
@@ -281,7 +290,7 @@ absolute values, and :math:`G` is a :math:`1 \times n` selector matrix.
 Variables appearing in the vector :math:`x_t` contain information that
 might help predict future values of the money supply.
 
-We’ll take an example in which :math:`x_t` includes only :math:`m_t`,
+We’ll start with an example in which :math:`x_t` includes only :math:`m_t`,
 possibly lagged values of :math:`m`, and a constant.
 
 An example of such an :math:`\{m_t\}` process that fits info state space
@@ -292,7 +301,9 @@ equation
 
 where the zeros of the characteristic polynomial
 :math:`(1 - \rho_1 z - \rho_2 z^2)` are strictly greater than :math:`1`
-in modulus
+in modulus.
+
+(Please see  :doc:`this<samuelson>` QuantEcon lecture for more about characteristic polynomials and their role in solving linear difference equations.)
 
 We seek a stable or non-explosive solution of the difference equation :eq:`equation_1` that
 obeys the system comprised of :eq:`equation_1`-:eq:`equation_3`.
@@ -300,7 +311,7 @@ obeys the system comprised of :eq:`equation_1`-:eq:`equation_3`.
 By stable or non-explosive, we mean that neither :math:`m_t` nor :math:`p_t`
 diverges as :math:`t \rightarrow + \infty`.
 
-This means that we are shutting down the term :math:`c \lambda^{-t}` in equation :eq:`equation_1a` above by setting :math:`c=0`
+This requirees  that we  shut down the term :math:`c \lambda^{-t}` in equation :eq:`equation_1a` above by setting :math:`c=0`
 
 The solution we are after is
 
@@ -361,8 +372,9 @@ Here is Python code
                   [0,  1,  0]])
     G = np.array([[0, 1, 0]])
 
-The matrix :math:`A` has one eigenvalue equal to unity that is 
-associated with the :math:`A_{11}` component that captures a
+The matrix :math:`A` has one eigenvalue equal to unity.
+
+It is associated with the :math:`A_{11}` component that captures a
 constant component of the state :math:`x_t`.
 
 We can verify that the two eigenvalues of :math:`A` not associated with
@@ -378,7 +390,7 @@ modulus.
 
     (abs(eigvals) <= 1).all()
 
-Now let’s compute :math:`F` in formulas :eq:`equation_4` and :eq:`equation_5`
+Now let’s compute :math:`F` in formulas :eq:`equation_4` and :eq:`equation_5`.
 
 .. code-block:: python3
 
@@ -426,7 +438,7 @@ initial value :math:`x_0`.
 In the above graph, why is the log of the price level always less than
 the log of the money supply?
 
-The answer is because
+Because
 
 -  according to equation :eq:`equation_2`, :math:`p_t` is a geometric weighted
    average of current and future values of :math:`m_t`, and
@@ -493,18 +505,18 @@ become
 
 .. math::  F = (1-\lambda) (1 -\lambda \rho)^{-1} .
 
-and the log the log price level satisfies
+so that the log the log price level satisfies
 
 .. math::  p_t = F m_t .
 
 Please keep these formulas in mind as we investigate an alternative
-route to and interpretation of the formula for :math:`F`.
+route to and interpretation of our formula for :math:`F`.
 
 Another perspective
 ===================
 
 Above, we imposed stability or non-explosiveness on the solution of the key difference equation :eq:`equation_1`
-in Cagan's model by solving the  unstable root :math:`\lambda^{-1}` forward.  
+in Cagan's model by solving the  unstable root of the characteristic polynomial forward.  
 
 To shed light on the mechanics involved in imposing stability on a
 solution of a potentially unstable system of linear difference equations
@@ -536,7 +548,7 @@ Transition matrix :math:`H` has eigenvalues :math:`\rho \in (0,1)` and
 
 Because an eigenvalue of :math:`H` exceeds unity, if we iterate on
 equation :eq:`equation_9` starting from an arbitrary initial vector
-:math:`y_0 = \begin{bmatrix} m_0 \\ p_0 \end{bmatrix}`, we discover that
+:math:`y_0 = \begin{bmatrix} m_0 \\ p_0 \end{bmatrix}` with :math:`m_0 >0, p_0 >0`, we discover that
 in general absolute values of both components of :math:`y_t` diverge
 toward :math:`+\infty` as :math:`t \rightarrow + \infty`.
 
@@ -547,7 +559,7 @@ eigenvalues of :math:`H` are distinct
 .. math::  H = Q \Lambda Q^{-1} .
 
 Here :math:`\Lambda` is a diagonal matrix of eigenvalues of :math:`H`
-and :math:`Q` is a matrix whose columns are eigenvectors of the
+and :math:`Q` is a matrix whose columns are eigenvectors associated with the
 corresponding eigenvalues.
 
 Note that
@@ -562,7 +574,7 @@ For almost all initial vectors :math:`y_0`, the presence of the
 eigenvalue :math:`\lambda^{-1} > 1` causes both components of
 :math:`y_t` to diverge in absolute value to :math:`+\infty`.
 
-To explore this outcome in more detail, we use the following
+To explore this outcome in more detail, we can use the following
 transformation
 
 .. math::  y^*_t = Q^{-1} y_t
@@ -577,7 +589,7 @@ Staring at this equation indicates that unless
 .. math::
   :label: equation_11
 
-    y^*_0 = \begin{bmatrix} y^*_{1,0} \cr 0 \end{bmatrix} ,
+    y^*_0 = \begin{bmatrix} y^*_{1,0} \cr 0 \end{bmatrix} 
 
 the path of :math:`y^*_t` and therefore the paths of both components of
 :math:`y_t = Q y^*_t` will diverge in absolute value as
@@ -594,12 +606,11 @@ that
 
 But note that since
 :math:`y_0 = \begin{bmatrix} m_0 \cr p_0 \end{bmatrix}` and :math:`m_0`
-is given to us an an initial condition, it has to be :math:`p_0` that
-does all the adjusting to satisfy this equation.
+is given to us an an initial condition,  :math:`p_0` has to do all the adjusting to satisfy this equation.
 
 Sometimes this situation is described by saying that while :math:`m_0`
 is truly a **state** variable, :math:`p_0` is a **jump** variable that
-is free to adjust at :math:`t=0` in order to satisfy the equation.
+must adjust at :math:`t=0` in order to satisfy the equation.
 
 Thus, in a nutshell the unique value of the vector :math:`y_0` for which
 the paths of :math:`y_t` do not diverge must have second component
@@ -623,14 +634,14 @@ restriction that is equivalent to
 where :math:`Q^{ij}` denotes the :math:`(i,j)` component of
 :math:`Q^{-1}`.
 
-Solving this equation for :math:`p_0` we find
+Solving this equation for :math:`p_0`, we find
 
 .. math::
   :label: equation_13
 
     p_0 = - (Q^{22})^{-1} Q^{21} m_0.
 
-This is the unique **stabilizing value** of :math:`p_0` as a function of
+This is the unique **stabilizing value** of :math:`p_0` expressed as a function of
 :math:`m_0`.
 
 Refining the formula
@@ -661,7 +672,7 @@ So we can write
 
     p_0 = Q_{21} Q_{11}^{-1} m_0 .
 
-It can be verified that this formula replicates itself over time so that
+It can be verified that this formula replicates itself over time in the sense  that
 
 .. math::
   :label: equation_15
@@ -681,7 +692,7 @@ stable eigenvalue :math:`\rho` is proportional to
 Notice that if we set :math:`A=\rho` and :math:`G=1` in our earlier
 formula for :math:`p_t` we get
 
-.. math::  Q = G (I - \lambda A)^{-1} m_t =  (1-\lambda) (1 - \lambda \rho)^{-1} m_t
+.. math::  p_t = G (I - \lambda A)^{-1} m_t =  (1-\lambda) (1 - \lambda \rho)^{-1} m_t ,
 
 a formula that is equivalent with
 
@@ -695,7 +706,7 @@ Some remarks about feedback
 ---------------------------
 
 We have expressed :eq:`equation_8` in what superficially appears to be a form in
-which :math:`y_{t+1}` feeds back on :math:`y_t`. even though what we
+which :math:`y_{t+1}` feeds back on :math:`y_t`, even though what we
 actually want to represent is that the component :math:`p_t` feeds
 **forward** on :math:`p_{t+1}`, and through it, on future
 :math:`m_{t+j}`, :math:`j = 0, 1, 2, \ldots`.
@@ -717,9 +728,8 @@ level.
 Log money supply feeds back on log price level
 ==============================================
 
-The same pattern of eigenvalues splitting around unity, with one being
-below unity and another greater than unity, sometimes continues to
-prevail when there is  *feedback* from the log price level to the log
+An arrangement of eigenvalues that split around unity, with one being
+below unity and another being greater than unity, sometimes prevails when there is  *feedback* from the log price level to the log
 money supply.
 
 Let the feedback rule be
@@ -729,20 +739,18 @@ Let the feedback rule be
 
     m_{t+1} =  \rho m_t + \delta p_t
 
-where :math:`\rho \in (0,1)` as before and where we shall now allow
+where :math:`\rho \in (0,1)`  and where we shall now allow
 :math:`\delta \neq 0`.
 
-However, 
-:math:`\delta` cannot be too large if things are to fit together as we
-wish to deliver a stable system for some initial value :math:`p_0` that we want to determine uniquely.
-.
+**Warning:**  If things are to fit together as we
+wish to deliver a stable system for some initial value :math:`p_0` that we want to determine uniquely, :math:`\delta` cannot be too large.
 
 The forward-looking equation :eq:`equation_1` continues to describe equality between
 the demand and supply of money.
 
 We assume that equations :eq:`equation_1` and :eq:`equation_16` govern
 :math:`y_t \equiv \begin{bmatrix} m_t \cr p_t \end{bmatrix}` for
-:math:`t \geq 0`
+:math:`t \geq 0`.
 
 The transition matrix :math:`H` in the law of motion
 
@@ -756,12 +764,12 @@ We take :math:`m_0` as a given intial condition and as before seek an
 initial value :math:`p_0` that stabilizes the system in the sense that
 :math:`y_t` converges as :math:`t \rightarrow + \infty`.
 
-Our approach is identical with that followed above and is based on an
+Our approach is identical with the one  followed above and is based on an
 eigenvalue decomposition in which, cross our fingers, one eigenvalue
 exceeds unity and the other is less than unity in absolute value.
 
 When :math:`\delta \neq 0` as we now assume, the eigenvalues of
-:math:`H` are no longer :math:`\rho \in (0,1)` and
+:math:`H` will no longer be :math:`\rho \in (0,1)` and
 :math:`\lambda^{-1} > 1`
 
 We’ll just calculate them and apply the same algorithm that we used
@@ -833,7 +841,9 @@ For example,
 
 We want to study systems in which one eigenvalue exceeds unity in
 modulus while the other is less than unity in modulus, so we avoid
-values of :math:`\delta` that are too large
+values of :math:`\delta` that are too.
+
+That is, we want to avoid too much positive feedback from :math:`p_t` to :math:`m_{t+1}`.  
 
 .. code-block:: python3
 
@@ -900,8 +910,8 @@ exist.
 Big :math:`P`, little :math:`p` interpretation
 ===============================================
 
-It is helpful to view our solutions with feedback from the price level or inflation to money or the rate of money 
-creation in terms of the Big :math:`K`, little :math:`k` idea discussed in :doc:`Rational Expectations Models<rational_expectations>`
+It is helpful to view our solutions of difference equations having  feedback from the price level or inflation to money or the rate of money 
+creation in terms of the Big :math:`K`, little :math:`k` idea discussed in :doc:`Rational Expectations Models<rational_expectations>`.
 
 This will help us sort out what is taken as given by the decision makers who use the 
 difference equation :eq:`equation_2` to determine :math:`p_t` as a function of their forecasts of future values of
@@ -909,11 +919,11 @@ difference equation :eq:`equation_2` to determine :math:`p_t` as a function of t
 
 
 Let's write the stabilizing solution that we have computed using the eigenvector decomposition of :math:`H` as 
-:math:`P_t = F^* m_t` where
+:math:`P_t = F^* m_t`, where
 
 .. math:: 
 
-    F^* = Q_{21} Q_{11}^{-1} 
+    F^* = Q_{21} Q_{11}^{-1} .
 
 Then from :math:`P_{t+1} = F^* m_{t+1}` and :math:`m_{t+1} = \rho m_t + \delta P_t` we can deduce the recursion :math:`P_{t+1} = F^* \rho m_t + F^* \delta P_t` and create the stacked system
 
@@ -930,7 +940,7 @@ or
 
 where :math:`x_t = \begin{bmatrix} m_t \cr P_t \end{bmatrix}`. 
 
-Then apply formula :eq:`equation_5` for :math:`F` to deduce that 
+Apply formula :eq:`equation_5` for :math:`F` to deduce that 
 
 .. math::
 
@@ -942,14 +952,14 @@ which implies that
 
     p_t = \begin{bmatrix} F_1 & F_2 \end{bmatrix}    \begin{bmatrix} m_t \cr F^* m_t \end{bmatrix} = F_1 m_t + F_2 F^* m_t
 
-so that we expect to have
+so that we can anticipate that 
 
 .. math::
 
      F^* = F_1 + F_2 F^*
 
 
-We verify this equality in the next block of Python code that implements the following
+We shall verify this equality in the next block of Python code that implements the following
 computations. 
 
 1. For the system with :math:`\delta\neq 0` so that there is feedback,
@@ -965,7 +975,7 @@ computations.
    from equation :eq:`equation_5` above.
 
 3. We compute :math:`F_1 +  F_2 F^*` and compare it
-   with :math:`F^*` and verify equality.
+   with :math:`F^*` and check for the anticipated  equality.
 
 .. code-block:: python3
 
@@ -1003,16 +1013,16 @@ Compare :math:`F^*` with :math:`F_1 + F_2 F^*`
     F_check[0] + F_check[1] * F_star, F_star
 
 
-Fun with Sympy code
+Fun with SymPy code
 =========================
 
-This section is a small gift for readers who have made it this far.  
+This section is a  gift for readers who have made it this far.  
 
-It puts Sympy to work on our model.
+It puts SymPy to work on our model.
 
-Thus, we  use Sympy to compute some of the key objects comprising the eigenvector decomposition of :math:`H`.
+Thus, we  use Sympy to compute some  key objects comprising the eigenvector decomposition of :math:`H`.
 
-:math:`H` with nonzero :math:`\delta`.
+We start by generating an :math:`H` with nonzero :math:`\delta`.
 
 .. code-block:: python3
 
@@ -1034,7 +1044,7 @@ Thus, we  use Sympy to compute some of the key objects comprising the eigenvecto
 
     H1.eigenvects()
 
-:math:`H` with :math:`\delta` being zero.
+Now let's compute :math:`H` when  :math:`\delta` is zero.
 
 .. code-block:: python3
 
@@ -1052,19 +1062,19 @@ Thus, we  use Sympy to compute some of the key objects comprising the eigenvecto
 
     H2.eigenvects()
 
-Below we do induce sympy to do the following fun things for us analytically:
+Below we do induce SymPy to do the following fun things for us analytically:
 
 1. We compute the matrix :math:`Q` whose first column is
    the eigenvector associated with :math:`\rho`. and whose second column
    is the eigenvector associated with :math:`\lambda^{-1}`.
 
-2. We use sympy to compute the inverse :math:`Q^{-1}` of :math:`Q`
+2. We use SymPy to compute the inverse :math:`Q^{-1}` of :math:`Q`
    (both in symbols).
 
-3. We use sympy to compute :math:`Q_{21} Q_{11}^{-1}` (in symbols).
+3. We use SymPy to compute :math:`Q_{21} Q_{11}^{-1}` (in symbols).
 
 4. Where :math:`Q^{ij}` denotes the :math:`(i,j)` component of
-   :math:`Q^{-1}`, weighted use sympy to compute
+   :math:`Q^{-1}`, we use SymPy to compute
    :math:`- (Q^{22})^{-1} Q^{21}` (again in symbols)
 
 

@@ -16,7 +16,7 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 .. code-block:: ipython
   :class: hide-output
 
-  !pip install --upgrade quantecon
+  !conda install -y quantecon
   !pip install --upgrade yfinance
 
 
@@ -737,8 +737,11 @@ Now we produce the rank-size plot:
 
     fig, ax = plt.subplots()
     
-    qe.rank_size_plot(data, ax, c=0.01)
-    
+    rank_data, size_data = qe.rank_size(data, c=0.01)
+    ax.loglog(rank_data, size_data, 'o', markersize=3.0, alpha=0.5)
+    ax.set_xlabel("log rank")
+    ax.set_ylabel("log size")
+
     plt.show()
 
 The plot produces a straight line, consistent with a Pareto tail.

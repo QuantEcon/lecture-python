@@ -18,8 +18,11 @@ tools and techniques
     :maxdepth: 2
 
     geom_series
+    multi_hyper
     sir_model
     linear_algebra
     complex_and_trig
     lln_clt
     heavy_tails
+    multivariate_normal
+    time_series_with_matrices

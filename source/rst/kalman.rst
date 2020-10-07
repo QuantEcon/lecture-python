@@ -18,7 +18,7 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 .. code-block:: ipython
   :class: hide-output
 
-  !pip install --upgrade quantecon
+  !conda install -y quantecon
 
 Overview
 ========
@@ -531,7 +531,7 @@ Implementation
 
 
 
-The class ``Kalman`` from the `QuantEcon.py`_ package implements the Kalman filter
+The class ``Kalman`` from the `QuantEcon.py <http://quantecon.org/quantecon-py>`_ package implements the Kalman filter
 
 
 

@@ -14,7 +14,7 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 .. code-block:: ipython
   :class: hide-output
 
-  !pip install --upgrade quantecon
+  !conda install -y quantecon
 
 
 Overview
@@ -577,7 +577,7 @@ At the same time, given the similarities, perhaps Pareto tails will arise.
 To test this, run a simulation that generates a cross-section of wealth and
 generate a rank-size plot.
 
-If you like, you can use the function ``rank_size_plot`` from the ``quantecon`` library (documentation `here <https://quanteconpy.readthedocs.io/en/latest/tools/inequality.html#quantecon.inequality.rank_size_plot>`__). 
+If you like, you can use the function ``rank_size`` from the ``quantecon`` library (documentation `here <https://quanteconpy.readthedocs.io/en/latest/tools/inequality.html#quantecon.inequality.rank_size>`__).
 
 In viewing the plot, remember that Pareto tails generate a straight line.  Is
 this what you see?
@@ -646,6 +646,9 @@ Now let's see the rank-size plot:
 
     fig, ax = plt.subplots()
 
-    qe.rank_size_plot(ψ_star, ax, c=0.001)
-    
+    rank_data, size_data = qe.rank_size(ψ_star, c=0.001)
+    ax.loglog(rank_data, size_data, 'o', markersize=3.0, alpha=0.5)
+    ax.set_xlabel("log rank")
+    ax.set_ylabel("log size")
+
     plt.show()
