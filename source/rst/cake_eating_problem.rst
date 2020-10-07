@@ -30,7 +30,7 @@ Readers might find it helpful to review the following lectures before reading th
 * The :doc:`shortest paths lecture <short_path>`
 * The :doc:`basic McCall model <mccall_model>`
 * The :doc:`McCall model with separation <mccall_model_with_separation>`
-* The :doc:`McCall model with separation and a continuous wage distribution <mccall_fitted_vfi>` 
+* The :doc:`McCall model with separation and a continuous wage distribution <mccall_fitted_vfi>`
 
 In what follows, we require the following imports:
 
@@ -44,7 +44,7 @@ In what follows, we require the following imports:
 
 
 The Model
-==================
+=========
 
 We consider an infinite time horizon :math:`t=0, 1, 2, 3..`
 
@@ -187,7 +187,7 @@ make inferences about it.
 For example, as was the case with the :doc:`McCall model <mccall_model>`, the
 value function will satisfy a version of the *Bellman equation*.
 
-In the present case, this equation states that :math:`v` satisfies 
+In the present case, this equation states that :math:`v` satisfies
 
 .. math::
     :label: bellman-cep
@@ -291,7 +291,7 @@ We denote the optimal policy by :math:`\sigma^*`, so that
     \quad \text{for all } x
 
 If we plug the analytical expression :eq:`crra_vstar` for the value function
-into the right hand side and compute the optimum, we find that 
+into the right hand side and compute the optimum, we find that
 
 .. math::
     :label: crra_opt_pol
@@ -395,7 +395,7 @@ In the exercises, you are asked to verify that the optimal policy
 For a proof of sufficiency of the Euler equation in a very general setting,
 see proposition 2.2 of :cite:`ma2020income`.
 
-The following arguments focus on necessity, explaining why an optimal path or 
+The following arguments focus on necessity, explaining why an optimal path or
 policy should satisfy the Euler equation.
 
 
@@ -431,7 +431,7 @@ So the optimal path :math:`c^* := \{c^*_t\}_{t=0}^\infty` must satisfy
 In other words, the rate of change in :math:`U` must be zero for any
 infinitesimally small (and feasible) perturbation away from the optimal path.
 
-So consider a feasible perturbation that reduces consumption at time :math:`t` to 
+So consider a feasible perturbation that reduces consumption at time :math:`t` to
 :math:`c^*_t - h`
 and increases it in the next period to :math:`c^*_{t+1} + h`.
 
@@ -476,7 +476,7 @@ This is just the Euler equation.
 Derivation II: Using the Bellman Equation
 ------------------------------------------
 
-Another way to derive the Euler equation is to use the Bellman equation :eq:`bellman-cep`. 
+Another way to derive the Euler equation is to use the Bellman equation :eq:`bellman-cep`.
 
 Taking the derivative on the right hand side of the Bellman equation with
 respect to :math:`c` and setting it to zero, we get
@@ -512,14 +512,14 @@ Hence the derivative simplifies to
 .. math::
     :label: bellman_envelope
 
-    v' (x) = 
+    v' (x) =
     \frac{\partial g(c,x)}{\partial x}
     = \frac{\partial }{\partial x} \beta v(x - c)
     = \beta v^{\prime}(x - c)
 
 
 
-(This argument is an example of the `Envelope Theorem <https://en.wikipedia.org/wiki/Envelope_theorem>`__.) 
+(This argument is an example of the `Envelope Theorem <https://en.wikipedia.org/wiki/Envelope_theorem>`__.)
 
 
 But now an application of :eq:`bellman_FOC` gives
