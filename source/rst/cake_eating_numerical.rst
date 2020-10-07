@@ -14,11 +14,8 @@ In addition to what's in Anaconda, this lecture will require the following libra
 
   !pip install interpolation
 
-
-
 Overview
 ========
-
 
 In this lecture we continue the study of :doc:`the cake eating problem
 <cake_eating_problem>`.
@@ -88,7 +85,8 @@ The basic idea is:
 
 2. Obtain an update :math:`w` defined by
 
-    .. math::
+   .. math::
+
         w(x) = \max_{0\leq c \leq x} \{u(c) + \beta v(x-c)\}
 
 3. Stop if :math:`w` is approximately equal to :math:`v`, otherwise set
@@ -116,8 +114,6 @@ As we discuss in more detail in later lectures, one can use Banach's
 contraction mapping theorem to prove that the sequence of functions :math:`T^n
 v` converges to the solution to the Bellman equation.
 
-
-
 Fitted Value Function Iteration
 -------------------------------
 
@@ -138,17 +134,18 @@ The process looks like this:
 
 #. Begin with an array of values :math:`\{ v_0, \ldots, v_I \}`  representing
    the values of some initial function :math:`v` on the grid points :math:`\{ x_0, \ldots, x_I \}`.
+
 #. Build a function :math:`\hat v` on the state space :math:`\mathbb R_+` by
    linear interpolation, based on these data points.
+
 #. Obtain and record the value :math:`T \hat v(x_i)` on each grid point
    :math:`x_i` by repeatedly solving the maximization problem in the Bellman
    equation.
+
 #. Unless some stopping condition is satisfied, set
    :math:`\{ v_0, \ldots, v_I \} = \{ T \hat v(x_0), \ldots, T \hat v(x_I) \}` and go to step 2.
 
 In step 2 we'll use continuous piecewise linear interpolation.
-
-
 
 Implementation
 --------------
@@ -361,8 +358,6 @@ The reason is that the utility function and hence value function is very
 steep near the lower boundary, and hence hard to approximate.
 
 
-
-
 Policy Function
 ---------------
 
@@ -372,6 +367,7 @@ In the :doc:`first lecture on cake eating <cake_eating_problem>`, the optimal
 consumption policy was shown to be
 
 .. math::
+
     \sigma^*(x) = \left(1-\beta^{1/\gamma} \right) x
 
 Let's see if our numerical results lead to something similar.
@@ -379,6 +375,7 @@ Let's see if our numerical results lead to something similar.
 Our numerical strategy will be to compute
 
 .. math::
+
     \sigma(x) = \arg \max_{0 \leq c \leq x} \{u(c) + \beta v(x - c)\}
 
 on a grid of :math:`x` points and then interpolate.
@@ -498,8 +495,6 @@ This is due to
 
 
 
-
-
 Exercises
 =========
 
@@ -513,6 +508,7 @@ Instead of the cake size changing according to :math:`x_{t+1} = x_t - c_t`,
 let it change according to
 
 .. math::
+
     x_{t+1} = (x_t - c_t)^{\alpha}
 
 where :math:`\alpha` is a parameter satisfying :math:`0 < \alpha < 1`.
@@ -531,14 +527,12 @@ Implement time iteration, returning to the original case (i.e., dropping the
 modification in the exercise above).
 
 
-
-
 Solutions
-==========
+=========
 
 
 Exercise 1
------------
+----------
 
 We need to create a class to hold our primitives and return the right hand side of the bellman equation.
 
@@ -613,14 +607,10 @@ the standard cake eating case :math:`\alpha=1`.
 
 Consumption is higher when :math:`\alpha < 1` because, at least for large :math:`x`, the return to savings is lower.
 
-
-
-
 Exercise 2
 ----------
 
 Here's one way to implement time iteration.
-
 
 .. code-block:: python3
 
@@ -706,5 +696,3 @@ Here's one way to implement time iteration.
     ax.legend(fontsize=12)
 
     plt.show()
-
-
