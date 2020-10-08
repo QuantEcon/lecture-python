@@ -64,6 +64,7 @@ Things have to add up so :math:`\sum_{i=1}^c k_i = n`.
 Under the hypothesis that the selection process judges proposals on their quality and that quality is independent of continent of the author's continent of residence, the administrator views the outcome of the selection procedure as a random vector 
 
 .. math::
+
     X = \begin{pmatrix} k_1 \cr k_2 \cr \vdots \cr k_c \end{pmatrix}.
 
 To evaluate whether the selection procedure is **color blind** the administrator wants to  study whether the particular realization of :math:`X` drawn can plausibly
@@ -87,6 +88,7 @@ So :math:`n = 15`.
 The administrator wants to know the probability distribution of outcomes 
 
 .. math::
+
     X = \begin{pmatrix} k_1 \cr k_2 \cr \vdots \cr k_4 \end{pmatrix}.
 
 In particular, he wants to know whether a particular
@@ -145,13 +147,11 @@ The multivariate hypergeometric distribution has the following properties:
 
 .. math::
 
-
    {\displaystyle \operatorname {E} (X_{i})=n{\frac {K_{i}}{N}}}
 
 **Variances and covariances**:
 
 .. math::
-
 
    {\displaystyle \operatorname {Var} (X_{i})=n{\frac {N-n}{N-1}}\;{\frac {K_{i}}{N}}\left(1-{\frac {K_{i}}{N}}\right)}
 
@@ -270,7 +270,6 @@ six marbles are chosen without replacement, the probability that exactly
 two of each color are chosen is
 
 .. math::
-
 
    P(2{\text{ black}},2{\text{ white}},2{\text{ red}})={{{5 \choose 2}{10 \choose 2}{15 \choose 2}} \over {30 \choose 6}}=0.079575596816976
 
@@ -456,9 +455,9 @@ Note the substantial differences between hypergeometric distribution and the app
 The off-diagonal graphs plot the empirical joint distribution of
 :math:`k_i` and :math:`k_j` for each pair :math:`(i, j)`.
 
- The darker the blue, the more data points are contained in the corresponding cell.  (Note that :math:`k_i` is on the x-axis and :math:`k_j` is on the y-axis).
+The darker the blue, the more data points are contained in the corresponding cell.  (Note that :math:`k_i` is on the x-axis and :math:`k_j` is on the y-axis).
 
- The contour maps plot the bivariate Gaussian density function of :math:`\left(k_i, k_j\right)` with the population mean and covariance given by slices of :math:`\mu` and :math:`\Sigma` that we computed above.
+The contour maps plot the bivariate Gaussian density function of :math:`\left(k_i, k_j\right)` with the population mean and covariance given by slices of :math:`\mu` and :math:`\Sigma` that we computed above.
 
 Let's also test the normality for each :math:`k_i` using ``scipy.stats.normaltest`` that implements D’Agostino and Pearson's 
 test that combines skew and kurtosis to form an omnibus test of normality. 
