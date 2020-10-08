@@ -233,24 +233,24 @@ After observing :math:`z_k, z_{k-1}, \ldots, z_0`, the decision-maker
 chooses among three distinct actions:
 
 
--  He decides that :math:`f = f_0` and draws no more :math:`z`'s
+- He decides that :math:`f = f_0` and draws no more :math:`z`'s
 
--  He decides that :math:`f = f_1` and draws no more :math:`z`'s
+- He decides that :math:`f = f_1` and draws no more :math:`z`'s
 
--  He postpones deciding now and instead chooses to draw a
-   :math:`z_{k+1}`
+- He postpones deciding now and instead chooses to draw a
+  :math:`z_{k+1}`
 
 Associated with these three actions, the decision-maker can suffer three
 kinds of losses:
 
--  A loss :math:`L_0` if he decides :math:`f = f_0` when actually
-   :math:`f=f_1`
+- A loss :math:`L_0` if he decides :math:`f = f_0` when actually
+  :math:`f=f_1`
 
--  A loss :math:`L_1` if he decides :math:`f = f_1` when actually
-   :math:`f=f_0`
+- A loss :math:`L_1` if he decides :math:`f = f_1` when actually
+  :math:`f=f_0`
 
--  A cost :math:`c` if he postpones deciding and chooses instead to draw
-   another :math:`z`
+- A cost :math:`c` if he postpones deciding and chooses instead to draw
+  another :math:`z`
 
 
 
@@ -266,11 +266,11 @@ then :math:`L_1` and :math:`L_0` are losses associated with two types of statist
 
 So when we treat :math:`f=f_0` as the null hypothesis
 
--  We can think of :math:`L_1` as the loss associated with a type I
-   error.
+- We can think of :math:`L_1` as the loss associated with a type I
+  error.
 
--  We can think of :math:`L_0` as the loss associated with a type II
-   error.
+- We can think of :math:`L_0` as the loss associated with a type II
+  error.
 
 
 
@@ -352,14 +352,14 @@ We can represent the  Bellman equation as
 
 where :math:`\pi \in [0,1]` and
 
--  :math:`(1-\pi) L_0` is the expected loss associated with accepting
-   :math:`f_0` (i.e., the cost of making a type II error).
+- :math:`(1-\pi) L_0` is the expected loss associated with accepting
+  :math:`f_0` (i.e., the cost of making a type II error).
 
--  :math:`\pi L_1` is the expected loss associated with accepting
-   :math:`f_1` (i.e., the cost of making a type I error).
+- :math:`\pi L_1` is the expected loss associated with accepting
+  :math:`f_1` (i.e., the cost of making a type I error).
 
--  :math:`h(\pi) :=  c + \mathbb E [J(\pi')]` the continuation value; i.e.,
-   the expected cost associated with drawing one more :math:`z`.
+- :math:`h(\pi) :=  c + \mathbb E [J(\pi')]` the continuation value; i.e.,
+  the expected cost associated with drawing one more :math:`z`.
 
 
 
@@ -789,9 +789,9 @@ We double the cost of drawing an additional observation.
 
 Before you look, think about what will happen:
 
--  Will the decision-maker be correct more or less often?
+- Will the decision-maker be correct more or less often?
 
--  Will he make decisions sooner or later?
+- Will he make decisions sooner or later?
 
 
 .. code-block:: python3
@@ -851,22 +851,22 @@ We'll rely on Abraham Wald's :cite:`Wald47` elegant summary of Neyman-Pearson th
 
 For our purposes, watch for there features of the setup:
 
--  the assumption of a *fixed* sample size :math:`n`
+- the assumption of a *fixed* sample size :math:`n`
 
--  the application of laws of large numbers, conditioned on alternative
-   probability models, to interpret the probabilities :math:`\alpha` and
-   :math:`\beta` defined in the Neyman-Pearson theory
+- the application of laws of large numbers, conditioned on alternative
+  probability models, to interpret the probabilities :math:`\alpha` and
+  :math:`\beta` defined in the Neyman-Pearson theory
 
 Recall that in the sequential analytic formulation above, that
 
--  The sample size :math:`n` is not fixed but rather an object to be
-   chosen; technically :math:`n` is a random variable.
+- The sample size :math:`n` is not fixed but rather an object to be
+  chosen; technically :math:`n` is a random variable.
 
--  The parameters :math:`\beta` and :math:`\alpha` characterize cut-off
-   rules used to determine :math:`n` as a random variable.
+- The parameters :math:`\beta` and :math:`\alpha` characterize cut-off
+  rules used to determine :math:`n` as a random variable.
 
--  Laws of large numbers make no appearances in the sequential
-   construction.
+- Laws of large numbers make no appearances in the sequential
+  construction.
 
 In chapter 1 of **Sequential Analysis** :cite:`Wald47` Abraham Wald summarizes the
 Neyman-Pearson approach to hypothesis testing.
@@ -880,20 +880,20 @@ problem -- usually, *something* means *a lot*)
 By limiting  what is unknown, Wald uses the following simple structure
 to illustrate the main ideas:
 
--  A decision-maker wants to decide which of two distributions
-   :math:`f_0`, :math:`f_1` govern an IID random variable :math:`z`.
+- A decision-maker wants to decide which of two distributions
+  :math:`f_0`, :math:`f_1` govern an IID random variable :math:`z`.
 
--  The null hypothesis :math:`H_0` is the statement that :math:`f_0`
-   governs the data.
+- The null hypothesis :math:`H_0` is the statement that :math:`f_0`
+  governs the data.
 
--  The alternative hypothesis :math:`H_1` is the statement that
-   :math:`f_1` governs the data.
+- The alternative hypothesis :math:`H_1` is the statement that
+  :math:`f_1` governs the data.
 
--  The problem is to devise and analyze a test of hypothesis
-   :math:`H_0` against the alternative hypothesis :math:`H_1` on the
-   basis of a sample of a fixed number :math:`n` independent
-   observations :math:`z_1, z_2, \ldots, z_n` of the random variable
-   :math:`z`.
+- The problem is to devise and analyze a test of hypothesis
+  :math:`H_0` against the alternative hypothesis :math:`H_1` on the
+  basis of a sample of a fixed number :math:`n` independent
+  observations :math:`z_1, z_2, \ldots, z_n` of the random variable
+  :math:`z`.
 
 To quote Abraham Wald,
 
