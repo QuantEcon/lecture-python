@@ -562,13 +562,13 @@ To connect this with the notation of this lecture we set
 
 * Methods pertinent for this lecture  are:
 
-    * ``prior_to_filtered``, which updates :math:`(\hat x_t, \Sigma_t)` to :math:`(\hat x_t^F, \Sigma_t^F)`
+  * ``prior_to_filtered``, which updates :math:`(\hat x_t, \Sigma_t)` to :math:`(\hat x_t^F, \Sigma_t^F)`
 
-    * ``filtered_to_forecast``, which updates the filtering distribution to the predictive distribution -- which becomes the new prior :math:`(\hat x_{t+1}, \Sigma_{t+1})`
+  * ``filtered_to_forecast``, which updates the filtering distribution to the predictive distribution -- which becomes the new prior :math:`(\hat x_{t+1}, \Sigma_{t+1})`
 
-    * ``update``, which combines the last two methods
+  * ``update``, which combines the last two methods
 
-    * a ``stationary_values``, which computes the solution to :eq:`kalman_dare` and the corresponding (stationary) Kalman gain
+  * a ``stationary_values``, which computes the solution to :eq:`kalman_dare` and the corresponding (stationary) Kalman gain
 
 
 You can view the program `on GitHub <https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/kalman.py>`__.
