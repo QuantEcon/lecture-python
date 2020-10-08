@@ -652,7 +652,7 @@ Recall the planner's problem :ref:`described above <ree_pp>`
 
 #. Solve it using the same parameter values in exercise 1
 
-    * :math:`a_0= 100, a_1= 0.05, \beta = 0.95, \gamma=10`
+   * :math:`a_0= 100, a_1= 0.05, \beta = 0.95, \gamma=10`
 
 #.  Represent the solution in the form :math:`Y_{t+1} = \kappa_0 + \kappa_1 Y_t`.
 
