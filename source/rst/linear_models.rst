@@ -41,24 +41,23 @@ Its many applications include:
 
 * predicting a geometric sum of future values of a variable like
 
-    * non-financial income
+  * non-financial income
 
-    * dividends on a stock
+  * dividends on a stock
 
-    * the money supply
+  * the money supply
 
-    * a government deficit or surplus, etc.
-
+  * a government deficit or surplus, etc.
 
 * key ingredient of useful models
 
-    * Friedman's permanent income model of consumption smoothing.
+  * Friedman's permanent income model of consumption smoothing.
 
-    * Barro's model of smoothing total tax collections.
+  * Barro's model of smoothing total tax collections.
 
-    * Rational expectations version of Cagan's model of hyperinflation.
+  * Rational expectations version of Cagan's model of hyperinflation.
 
-    * Sargent and Wallace's "unpleasant monetarist arithmetic," etc.
+  * Sargent and Wallace's "unpleasant monetarist arithmetic," etc.
 
 Let's start with some imports:
 
