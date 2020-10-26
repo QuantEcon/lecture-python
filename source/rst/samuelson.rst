@@ -126,7 +126,7 @@ Let's assume that
    consumption function :math:`C_t = a Y_{t-1} + \gamma`.
 
 -  :math:`b` is the "accelerator coefficient" in the "investment
-   accelerator" :math:`I\_t = b (Y\_{t-1} - Y\_{t-2})`.
+   accelerator" :math:`I_t = b (Y_{t-1} - Y_{t-2})`.
 
 -  :math:`\{\epsilon_{t}\}` is an IID sequence standard normal random variables.
 
@@ -186,7 +186,7 @@ require initial values
 
 We'll ordinarily set the parameters :math:`(a,b)` so that starting from
 an arbitrary pair of initial conditions
-:math:`(\bar Y_{-1}, \bar Y_{-2})`, national income :math:`Y\_t` converges to
+:math:`(\bar Y_{-1}, \bar Y_{-2})`, national income :math:`Y_t` converges to
 a constant value as :math:`t` becomes large.
 
 We are interested in studying
