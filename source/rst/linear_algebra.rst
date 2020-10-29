@@ -1414,8 +1414,7 @@ The associated Lagrangian is:
 
     L = -y'Py - u'Qu + \lambda' \lbrack Ax + Bu - y \rbrack
 
-1.
-^^.
+**Step 1.**
 
 Differentiating Lagrangian equation w.r.t y and setting its derivative
 equal to zero yields
@@ -1432,8 +1431,7 @@ Accordingly, the first-order condition for maximizing L w.r.t. y implies
 
     \lambda = -2 Py \:
 
-2.
-^^.
+**Step 2.**
 
 Differentiating Lagrangian equation w.r.t. u and setting its derivative
 equal to zero yields
@@ -1470,8 +1468,7 @@ Thus, the optimal choice of u must satisfy
 which follows from the definition of the first-order conditions for
 Lagrangian equation.
 
-3.
-^^.
+**Step 3.**
 
 Rewriting our problem by substituting the constraint into the objective
 function, we get
