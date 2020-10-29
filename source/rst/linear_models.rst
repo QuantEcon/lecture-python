@@ -1490,7 +1490,7 @@ The code implements a class for handling linear state space models (simulations,
 
 One Python construct you might not be familiar with is the use of a generator function in the method ``moment_sequence()``.
 
-Go back and `read the relevant documentation <https://python-programming.quantecon.org/python_advanced_features.html#Generators>`__ if you've forgotten how generator functions work.
+Go back and `read the relevant documentation <https://python-programming.quantecon.org/python_advanced_features.html#generators>`__ if you've forgotten how generator functions work.
 
 
 
