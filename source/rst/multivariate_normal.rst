@@ -642,15 +642,15 @@ change as more test results come in.
     μ𝜃_hat_lower = μ𝜃_hat_arr - 1.96 * 𝜎𝜃_hat_arr
     μ𝜃_hat_higher = μ𝜃_hat_arr + 1.96 * 𝜎𝜃_hat_arr
     
-    plt.hlines(𝜃, 1, n+1, ls='--', label='true $𝜃$')
-    plt.plot(range(1, n+1), μ𝜃_hat_arr, color='b', label='$\hat{μ}_{𝜃}$')
+    plt.hlines(𝜃, 1, n+1, ls='--', label='true $\theta$')
+    plt.plot(range(1, n+1), μ𝜃_hat_arr, color='b', label='$\hat{\mu}_{\theta}$')
     plt.plot(range(1, n+1), μ𝜃_hat_lower, color='b', ls='--')
     plt.plot(range(1, n+1), μ𝜃_hat_higher, color='b', ls='--')
     plt.fill_between(range(1, n+1), μ𝜃_hat_lower, μ𝜃_hat_higher,
                      color='b', alpha=0.2, label='95%')
     
     plt.xlabel('number of test scores')
-    plt.ylabel('$\hat{𝜃}$')
+    plt.ylabel('$\hat{\theta}$')
     plt.legend()
     
     plt.show()
