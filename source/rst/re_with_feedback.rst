@@ -200,9 +200,9 @@ unstable root (in this case :math:`\lambda_2`) **forward**.
 
 Equation :eq:`equn_7` has a form that we shall encounter often.
 
-   * :math:`\lambda_1 y_t` is called the **feedback part** 
+* :math:`\lambda_1 y_t` is called the **feedback part** 
 
-   * :math:`-{\frac{\lambda_2^{-1}}{1 - \lambda_2^{-1}L^{-1}}} u_{t+1}` is called the **feedforward part** 
+* :math:`-{\frac{\lambda_2^{-1}}{1 - \lambda_2^{-1}L^{-1}}} u_{t+1}` is called the **feedforward part** 
 
 
 

@@ -34,9 +34,9 @@ Overview
 
 This lecture follows up on ideas presented in the following lectures: 
 
- * :doc:`A Problem that Stumped Milton Friedman <wald_friedman>` 
- * :doc:`Exchangeability and Bayesian Updating <exchangeable>`  
- * :doc:`Likelihood Ratio Processes <likelihood_ratio_process>`
+* :doc:`A Problem that Stumped Milton Friedman <wald_friedman>` 
+* :doc:`Exchangeability and Bayesian Updating <exchangeable>`  
+* :doc:`Likelihood Ratio Processes <likelihood_ratio_process>`
 
 In :doc:`A Problem that Stumped Milton Friedman <wald_friedman>`  we described a problem
 that a Navy Captain presented to Milton Friedman during World War II.  

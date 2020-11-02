@@ -41,24 +41,23 @@ Its many applications include:
 
 * predicting a geometric sum of future values of a variable like
 
-    * non-financial income
+  * non-financial income
 
-    * dividends on a stock
+  * dividends on a stock
 
-    * the money supply
+  * the money supply
 
-    * a government deficit or surplus, etc.
-
+  * a government deficit or surplus, etc.
 
 * key ingredient of useful models
 
-    * Friedman's permanent income model of consumption smoothing.
+  * Friedman's permanent income model of consumption smoothing.
 
-    * Barro's model of smoothing total tax collections.
+  * Barro's model of smoothing total tax collections.
 
-    * Rational expectations version of Cagan's model of hyperinflation.
+  * Rational expectations version of Cagan's model of hyperinflation.
 
-    * Sargent and Wallace's "unpleasant monetarist arithmetic," etc.
+  * Sargent and Wallace's "unpleasant monetarist arithmetic," etc.
 
 Let's start with some imports:
 
@@ -1491,7 +1490,7 @@ The code implements a class for handling linear state space models (simulations,
 
 One Python construct you might not be familiar with is the use of a generator function in the method ``moment_sequence()``.
 
-Go back and `read the relevant documentation <https://python-programming.quantecon.org/python_advanced_features.html#Generators>`__ if you've forgotten how generator functions work.
+Go back and `read the relevant documentation <https://python-programming.quantecon.org/python_advanced_features.html#generators>`__ if you've forgotten how generator functions work.
 
 
 

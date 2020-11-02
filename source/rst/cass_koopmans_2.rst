@@ -5,14 +5,14 @@
 .. highlight:: python3
 
 
-**************************************
-Cass-Koopmans Competitive Equilibrium 
-**************************************
+*************************************
+Cass-Koopmans Competitive Equilibrium
+*************************************
 
 .. contents:: :depth: 2
 
 Overview
-=========
+========
 
 This lecture continues our analysis in this  lecture
 :doc:`Cass-Koopmans Planning Model <cass_koopmans_1>` about the  model that Tjalling Koopmans :cite:`Koopmans`
@@ -25,44 +25,41 @@ organized as a **competitive equilibrium**.
 The earlier  lecture :doc:`Cass-Koopmans Planning Model <cass_koopmans_1>` studied a planning problem and used ideas including
 
 
--  A min-max problem for solving the planning problem.
+- A min-max problem for solving the planning problem.
 
--  A **shooting algorithm** for solving difference equations subject
-   to initial and terminal conditions.
+- A **shooting algorithm** for solving difference equations subject
+  to initial and terminal conditions.
 
--  A **turnpike** property that describes optimal paths for
-   long-but-finite horizon economies.
+- A **turnpike** property that describes optimal paths for
+  long-but-finite horizon economies.
 
 The present lecture uses  additional  ideas including
 
--  Hicks-Arrow prices named after John R. Hicks and Kenneth Arrow.
+- Hicks-Arrow prices named after John R. Hicks and Kenneth Arrow.
 
--  A connection between some Lagrange multipliers in the min-max
-   problem and the Hicks-Arrow prices.
+- A connection between some Lagrange multipliers in the min-max
+  problem and the Hicks-Arrow prices.
 
--  A **Big** :math:`K` **, little** :math:`k` trick widely used in
-   macroeconomic dynamics.
+- A **Big** :math:`K` **, little** :math:`k` trick widely used in
+  macroeconomic dynamics.
 
+  * We shall encounter this trick in `this lecture <https://lectures.quantecon.org/py/rational_expectations.html#>`__
+    and also in `this lecture <https://lectures.quantecon.org/py/dyn_stack.html#>`__.
 
-  *  We shall encounter this trick in `this lecture <https://lectures.quantecon.org/py/rational_expectations.html#>`__
-     and also in `this lecture <https://lectures.quantecon.org/py/dyn_stack.html#>`__.
+- A non-stochastic version of a theory of the **term structure of
+  interest rates**.
 
--  A non-stochastic version of a theory of the **term structure of
-   interest rates**.     
+- An intimate connection between the cases for the optimality of two
+  competing visions of good ways to organize an economy, namely:
 
--  An intimate connection between the cases for the optimality of two
-   competing visions of good ways to organize an economy, namely:
+  * **socialism** in which a central planner commands the
+    allocation of resources, and
 
-  *  **socialism** in which a central planner commands the
-     allocation of resources, and
-
-  *  **capitalism** (also known as **a  market economy**) in
-     which competitive equilibrium **prices** induce individual
-     consumers and producers to choose a socially optimal allocation
-     as an unintended consequence of their selfish
-     decisions
-
-
+  * **capitalism** (also known as **a  market economy**) in
+    which competitive equilibrium **prices** induce individual
+    consumers and producers to choose a socially optimal allocation
+    as an unintended consequence of their selfish
+    decisions
 
 Let's start with some standard imports:
 
@@ -106,7 +103,7 @@ The representative household has preferences over consumption bundles
 ordered by the utility functional:
 
 .. math::
-    
+
     U(\vec{C}) = \sum_{t=0}^{T} \beta^t \frac{C_t^{1-\gamma}}{1-\gamma}
 
 where :math:`\beta \in (0,1)` is a discount factor and :math:`\gamma >0`
@@ -117,16 +114,16 @@ We assume that :math:`K_0 > 0`.
 There is an economy-wide production function
 
 .. math::
-  
-   F(K_t,N_t) = A K_t^{\alpha}N_t^{1-\alpha}
+
+    F(K_t,N_t) = A K_t^{\alpha}N_t^{1-\alpha}
 
 with :math:`0 < \alpha<1`, :math:`A > 0`.
 
 A feasible allocation :math:`\vec{C}, \vec{K}` satisfies
 
 .. math::
- 
-   C_t + K_{t+1} \leq F(K_t,N_t) + (1-\delta) K_t, \quad \text{for all } t \in [0, T]
+
+    C_t + K_{t+1} \leq F(K_t,N_t) + (1-\delta) K_t, \quad \text{for all } t \in [0, T]
 
 where :math:`\delta \in (0,1)` is a depreciation rate of capital.
 
@@ -137,7 +134,6 @@ In this lecture :doc:`Cass-Koopmans Planning Model <cass_koopmans_1>`, we studie
 maximize :eq:`utility-functional` subject to :eq:`allocation`.
 
 The allocation that solves the planning problem plays an important role in a competitive equilibrium as we shall see below.
-
 
 
 Competitive Equilibrium
@@ -153,41 +149,39 @@ But now there is no planner.
 Market prices adjust to reconcile distinct decisions that are made
 separately by a representative household and a representative firm.
 
-
-
 There is a representative consumer who has the same preferences over
 consumption plans as did the consumer in the planned economy.
 
 Instead of being told what to consume and save by a planner, the
 household chooses for itself subject to a budget constraint
 
--  At each time :math:`t`, the household receives wages and rentals
-   of capital from a firm -- these comprise its **income** at
-   time :math:`t`.
+- At each time :math:`t`, the household receives wages and rentals
+  of capital from a firm -- these comprise its **income** at
+  time :math:`t`.
 
--  The consumer decides how much income to allocate to consumption or
-   to savings.
+- The consumer decides how much income to allocate to consumption or
+  to savings.
 
--  The household can save either by acquiring additional physical
-   capital (it trades one for one with time :math:`t` consumption)
-   or by acquiring claims on consumption at dates other
-   than :math:`t`.
+- The household can save either by acquiring additional physical
+  capital (it trades one for one with time :math:`t` consumption)
+  or by acquiring claims on consumption at dates other
+  than :math:`t`.
 
--  The household owns all physical capital and labor
-   and rents them to the firm.
+- The household owns all physical capital and labor
+  and rents them to the firm.
 
--  The household consumes, supplies labor, and invests in physical
-   capital.
+- The household consumes, supplies labor, and invests in physical
+  capital.
 
--  A profit-maximizing representative firm operates the production
-   technology.
+- A profit-maximizing representative firm operates the production
+  technology.
 
--  The firm rents labor and capital each period from the
-   representative household and sells its output each period to the
-   household.
+- The firm rents labor and capital each period from the
+  representative household and sells its output each period to the
+  household.
 
--  The representative household and the representative firm are both
-   **price takers** who believe that prices are not affected by their choices
+- The representative household and the representative firm are both
+  **price takers** who believe that prices are not affected by their choices
 
 **Note:** We can think of there being a large number
 :math:`M` of identical representative consumers and :math:`M`
@@ -195,8 +189,8 @@ identical representative firms.
 
 
 
-Market Structure 
-=================
+Market Structure
+================
 
 The representative household and the representative firm are both price takers.
 
@@ -210,10 +204,10 @@ all other dates :math:`t=1, 2, \ldots, T`.
 
 
 Prices
---------------
+------
 
 
-There are  sequences of prices 
+There are  sequences of prices
 :math:`\{w_t,\eta_t\}_{t=0}^T= \{\vec{w}, \vec{\eta} \}`
 where :math:`w_t` is a wage or rental rate for labor at time :math:`t` and
 :math:`eta_t` is a rental rate for capital at time :math:`t`.
@@ -228,37 +222,42 @@ named after the 1972 economics Nobel prize winners.
 
 Evidently,
 
-.. math:: q^0_t=\frac{\text{number of time 0 goods}}{\text{number of time t goods}}
+.. math::
+
+    q^0_t=\frac{\text{number of time 0 goods}}{\text{number of time t goods}}
 
 Because :math:`q^0_t` is a **relative price**, the units in terms of
 which prices are quoted are arbitrary -- we are free to normalize them.
 
-
-
-
 Firm Problem
-==============
+============
 
 At time :math:`t` a representative firm hires labor
 :math:`\tilde n_t` and capital :math:`\tilde k_t`.
 
 The firm's profits at time :math:`t` are
 
-.. math:: F(\tilde k_t, \tilde n_t)-w_t \tilde n_t -\eta_t \tilde k_t
+.. math::
+
+    F(\tilde k_t, \tilde n_t)-w_t \tilde n_t -\eta_t \tilde k_t
 
 where :math:`w_t` is a wage rate at :math:`t`
 and :math:`\eta_t` is the rental rate on capital at :math:`t`.
 
 As in the planned economy model
 
-.. math:: F(\tilde k_t, \tilde n_t) = A \tilde k_t^\alpha \tilde n_t^{1-\alpha}
+.. math::
+
+    F(\tilde k_t, \tilde n_t) = A \tilde k_t^\alpha \tilde n_t^{1-\alpha}
 
 Zero Profit Conditions
------------------------
+----------------------
 
 Zero-profits condition for capital and labor are
 
-.. math:: F_k(\tilde k_t, \tilde n_t) =\eta_t
+.. math::
+
+    F_k(\tilde k_t, \tilde n_t) =\eta_t
 
 and
 
@@ -275,7 +274,9 @@ Euler about linearly homogenous functions.
 The theorem applies to the Cobb-Douglas production function because
 it assumed displays constant returns to scale:
 
-.. math:: \alpha F(\tilde k_t, \tilde n_t) =  F(\alpha  \tilde k_t, \alpha \tilde n_t)
+.. math::
+
+    \alpha F(\tilde k_t, \tilde n_t) =  F(\alpha  \tilde k_t, \alpha \tilde n_t)
 
 for :math:`\alpha \in (0,1)`.
 
@@ -285,22 +286,22 @@ above equation gives
 
 .. math::
 
-  F(\tilde k_t,\tilde n_t) =_\text{chain rule} \frac{\partial F}{\partial \tilde k_t}
-  \tilde k_t + \frac{\partial F}{\partial \tilde  n_t} \tilde n_t
+    F(\tilde k_t,\tilde n_t) =_\text{chain rule} \frac{\partial F}{\partial \tilde k_t}
+    \tilde k_t + \frac{\partial F}{\partial \tilde  n_t} \tilde n_t
 
 Rewrite the firm's profits as
 
 .. math::
 
-  \frac{\partial F}{\partial \tilde k_t} \tilde k_t +
-  \frac{\partial F}{\partial \tilde  n_t} \tilde n_t-w_t \tilde n_t -\eta_t k_t
+    \frac{\partial F}{\partial \tilde k_t} \tilde k_t +
+    \frac{\partial F}{\partial \tilde  n_t} \tilde n_t-w_t \tilde n_t -\eta_t k_t
 
 or
 
 .. math::
 
-  \left(\frac{\partial F}{\partial \tilde k_t}-\eta_t\right) \tilde k_t +
-  \left(\frac{\partial F}{\partial \tilde  n_t}-w_t\right) \tilde n_t
+    \left(\frac{\partial F}{\partial \tilde k_t}-\eta_t\right) \tilde k_t +
+    \left(\frac{\partial F}{\partial \tilde  n_t}-w_t\right) \tilde n_t
 
 Because :math:`F` is homogeneous of degree :math:`1`, it follows
 that :math:`\frac{\partial F}{\partial \tilde k_t}` and
@@ -327,19 +328,23 @@ It is convenient to define
 :math:`\vec{w} =\{w_0, \dots,w_T\}`\ and :math:`\vec{\eta}= \{\eta_0, \dots, \eta_T\}`.
 
 Household Problem
-===================
+=================
 
 A representative household lives at :math:`t=0,1,\dots, T`.
 
 At :math:`t`, the household rents :math:`1` unit of labor
 and :math:`k_t` units of capital to a firm and receives income
 
-.. math:: w_t 1+ \eta_t k_t
+.. math::
+
+    w_t 1+ \eta_t k_t
 
 At :math:`t` the household allocates its income to the following
 purchases
 
-.. math:: \left(c_t + (k_{t+1} -(1-\delta)k_t)\right)
+.. math::
+
+    \left(c_t + (k_{t+1} -(1-\delta)k_t)\right)
 
 Here :math:`\left(k_{t+1} -(1-\delta)k_t\right)` is the household's
 net investment in physical capital and :math:`\delta \in (0,1)` is
@@ -353,7 +358,9 @@ exceeds its purchases.
 A household's net excess demand for time :math:`t` consumption goods
 is the gap
 
-.. math:: e_t \equiv \left(c_t + (k_{t+1} -(1-\delta)k_t)\right)-(w_t 1 + \eta_t k_t)
+.. math::
+
+    e_t \equiv \left(c_t + (k_{t+1} -(1-\delta)k_t)\right)-(w_t 1 + \eta_t k_t)
 
 Let :math:`\vec{c} = \{c_0,\dots,c_T\}` and let :math:`\vec{k} = \{k_1,\dots,k_{T+1}\}`.
 
@@ -365,50 +372,52 @@ that states that the present value of the household's net excess
 demands must be zero:
 
 .. math::
+
     \sum_{t=0}^T q^0_t e_t  \leq 0
 
 or
 
-.. math:: \sum_{t=0}^T q^0_t  \left(c_t + (k_{t+1} -(1-\delta)k_t)-(w_t 1 + \eta_t k_t) \right) \leq 0
+.. math::
+
+    \sum_{t=0}^T q^0_t  \left(c_t + (k_{t+1} -(1-\delta)k_t)-(w_t 1 + \eta_t k_t) \right) \leq 0
 
 
 
 The household chooses an allocation to solve the constrained optimization problem:
 
-.. math:: \begin{aligned}& \max_{\vec{c}, \vec{k} }  \sum_{t=0}^T \beta^t u(c_t) \\ \text{subject to} \ \   & \sum_{t=0}^T q_t^0\left(c_t +\left(k_{t+1}-(1-\delta) k_t\right) -w_t -\eta_t k_t\right) \leq 0  \notag \end{aligned}
+.. math::
 
-
-
+    \begin{aligned}& \max_{\vec{c}, \vec{k} }  \sum_{t=0}^T \beta^t u(c_t) \\ \text{subject to} \ \   & \sum_{t=0}^T q_t^0\left(c_t +\left(k_{t+1}-(1-\delta) k_t\right) -w_t -\eta_t k_t\right) \leq 0  \notag \end{aligned}
 
 Definitions
-------------
+-----------
 
--  A **price system** is a sequence
-   :math:`\{q_t^0,\eta_t,w_t\}_{t=0}^T= \{\vec{q}, \vec{\eta}, \vec{w}\}`.
+- A **price system** is a sequence
+  :math:`\{q_t^0,\eta_t,w_t\}_{t=0}^T= \{\vec{q}, \vec{\eta}, \vec{w}\}`.
 
--  An **allocation** is a sequence
-   :math:`\{c_t,k_{t+1},n_t=1\}_{t=0}^T = \{\vec{c}, \vec{k}, \vec{n}\}`.
+- An **allocation** is a sequence
+  :math:`\{c_t,k_{t+1},n_t=1\}_{t=0}^T = \{\vec{c}, \vec{k}, \vec{n}\}`.
 
--  A **competitive equilibrium** is a price system and an allocation
-   for which
+- A **competitive equilibrium** is a price system and an allocation
+  for which
 
-   -  Given the price system, the allocation solves the household's
-      problem.
+  - Given the price system, the allocation solves the household's
+    problem.
 
-   -  Given the price system, the allocation solves the firm's
-      problem.
+  - Given the price system, the allocation solves the firm's
+    problem.
 
 Computing a Competitive Equilibrium
-====================================
+===================================
 
 We compute a competitive equilibrium by using a **guess and
 verify** approach.
 
--  We  **guess** equilibrium price sequences
-   :math:`\{\vec{q}, \vec{\eta}, \vec{w}\}`.
+- We  **guess** equilibrium price sequences
+  :math:`\{\vec{q}, \vec{\eta}, \vec{w}\}`.
 
--  We then **verify** that at those prices, the household and
-   the firm choose the same allocation.
+- We then **verify** that at those prices, the household and
+  the firm choose the same allocation.
 
 Guess for Price System
 -----------------------
@@ -450,7 +459,9 @@ At these prices, let the capital chosen by the household be
 
 and let the allocation chosen by the firm be
 
-.. math:: \tilde k^*_t(\vec{q}, \vec{w}, \vec{\eta}), \quad t \geq 0
+.. math::
+
+    \tilde k^*_t(\vec{q}, \vec{w}, \vec{\eta}), \quad t \geq 0
 
 and so on.
 
@@ -482,7 +493,7 @@ the planning problem:
     k^*_t = \tilde k^*_t=K_t, \tilde n_t=1, c^*_t=C_t
 
 Verification Procedure
------------------------
+----------------------
 
 Our approach is to stare at first-order necessary conditions for the
 optimization problems of the household and the firm.
@@ -492,9 +503,9 @@ conditions are satisfied at the allocation that solves the planning
 problem.
 
 Household's Lagrangian
-------------------------
+----------------------
 
-To solve the household's problem, we formulate the Lagrangian 
+To solve the household's problem, we formulate the Lagrangian
 
 .. math::
 
@@ -502,9 +513,9 @@ To solve the household's problem, we formulate the Lagrangian
     +\eta_t k_t -c_t  - k_{t+1}\right)\right)
 
 
-and attack the min-max problem:  
+and attack the min-max problem:
 
-.. math:: 
+.. math::
 
     \min_{\lambda} \max_{\vec{c},\vec{k}}  \mathcal{L}(\vec{c},\vec{k},\lambda)
 
@@ -538,7 +549,9 @@ Now we plug in our guesses of prices and embark on some algebra in the hope of d
 
 Combining :eq:`cond1` and :eq:`eq-price`, we get:
 
-.. math:: u'(C_t) = \mu_t
+.. math::
+
+    u'(C_t) = \mu_t
 
 which is :eq:`constraint1`.
 
@@ -553,11 +566,15 @@ Combining :eq:`cond2`, :eq:`eq-price`, and
 Rewriting :eq:`co-re` by dividing by :math:`\lambda` on
 both sides (which is nonzero since  u'>0) we get:
 
-.. math:: \beta^t \mu_t [(1-\delta+f'(K_t)] = \beta^{t-1} \mu_{t-1}
+.. math::
+
+    \beta^t \mu_t [(1-\delta+f'(K_t)] = \beta^{t-1} \mu_{t-1}
 
 or
 
-.. math:: \beta \mu_t [(1-\delta+f'(K_t)] = \mu_{t-1}
+.. math::
+
+    \beta \mu_t [(1-\delta+f'(K_t)] = \mu_{t-1}
 
 which is :eq:`constraint2`.
 
@@ -565,25 +582,35 @@ Combining :eq:`cond3`, :eq:`eq-price`, :eq:`eq-price2`
 and :eq:`eq-price3` after multiplying both sides of
 :eq:`cond3` by :math:`\lambda`, we get
 
-.. math:: \sum_{t=0}^T \beta^t \mu_{t} \left(C_t+ (K_{t+1} -(1-\delta)K_t)-f(K_t)+K_t f'(K_t)-f'(K_t)K_t\right) \leq 0
+.. math::
+
+    \sum_{t=0}^T \beta^t \mu_{t} \left(C_t+ (K_{t+1} -(1-\delta)K_t)-f(K_t)+K_t f'(K_t)-f'(K_t)K_t\right) \leq 0
 
 which simplifies
 
-.. math:: \sum_{t=0}^T  \beta^t \mu_{t} \left(C_t +K_{t+1} -(1-\delta)K_t - F(K_t,1)\right) \leq 0
+.. math::
 
-Since :math:`\beta^t \mu_t >0` for :math:`t =0, \ldots, T`, it follows that 
+    \sum_{t=0}^T  \beta^t \mu_{t} \left(C_t +K_{t+1} -(1-\delta)K_t - F(K_t,1)\right) \leq 0
 
-.. math:: C_t+K_{t+1}-(1-\delta)K_t -F(K_t,1)=0 \quad  \text{ for all }t \text{ in } 0,\dots,T
+Since :math:`\beta^t \mu_t >0` for :math:`t =0, \ldots, T`, it follows that
+
+.. math::
+
+    C_t+K_{t+1}-(1-\delta)K_t -F(K_t,1)=0 \quad  \text{ for all }t \text{ in } 0,\dots,T
 
 which is :eq:`constraint3`.
 
 Combining :eq:`cond4` and :eq:`eq-price`, we get:
 
-.. math:: - \beta^{T+1} \mu_{T+1} \leq 0
+.. math::
+
+    -\beta^{T+1} \mu_{T+1} \leq 0
 
 Dividing both sides by :math:`\beta^{T+1}` gives
 
-.. math:: -\mu_{T+1} \leq 0
+.. math::
+
+    -\mu_{T+1} \leq 0
 
 which is  :eq:`constraint4` for the  planning problem.
 
@@ -597,16 +624,20 @@ equilibrium:
 If we plug in :eq:`eq-pl` into :eq:`Zero-profits` for all t, we
 get
 
-.. math:: \frac{\partial F(K_t, 1)}{\partial K_t} = f'(K_t) = \eta_t
+.. math::
 
-\ which is :eq:`eq-price3`.
+    \frac{\partial F(K_t, 1)}{\partial K_t} = f'(K_t) = \eta_t
+
+which is :eq:`eq-price3`.
 
 If we now plug :eq:`eq-pl` into :eq:`Zero-profits` for all t, we
 get:
 
-.. math:: \frac{\partial F(\tilde K_t, 1)}{\partial \tilde L_t} = f(K_t)-f'(K_t)K_t=w_t
+.. math::
 
-\ which is exactly :eq:`eq-pr4`.
+    \frac{\partial F(\tilde K_t, 1)}{\partial \tilde L_t} = f(K_t)-f'(K_t)K_t=w_t
+
+which is exactly :eq:`eq-pr4`.
 
 So at our guess for the equilibrium price system, the allocation
 that solves the planning problem also solves the problem faced by a firm
@@ -623,11 +654,9 @@ positive constant.
 makes :math:`\lambda=1` so that we are measuring :math:`q_0^t`  in
 units of the marginal utility of time :math:`0` goods.
 
-
 We will  plot :math:`q, w, \eta` below to show these equilibrium  prices 
 induce the same aggregate movements that we saw earlier in the planning
 problem.
-
 
 To proceed, we bring in Python code that :doc:`Cass-Koopmans Planning Model <cass_koopmans_1>` used to solve the planning problem
 
@@ -843,7 +872,6 @@ Now we calculate and plot for each :math:`T`
 Varying Curvature
 ^^^^^^^^^^^^^^^^^^
 
-
 Now we see how our results change if we keep :math:`T` constant, but allow
 the curvature parameter, :math:`\gamma` to vary, starting
 with :math:`K_0` below the steady state.
@@ -888,8 +916,8 @@ resulting in slower adjustments to the steady state allocations.
 Vice-versa for lower :math:`\gamma`.
 
 
-Yield Curves and Hicks-Arrow Prices 
-==========================================
+Yield Curves and Hicks-Arrow Prices
+===================================
 
 We return to  Hicks-Arrow prices and  calculate how they are related to  **yields**  on loans of alternative maturities.
 
@@ -963,4 +991,4 @@ Now we plot when :math:`t_0=20`
     plot_yield_curves(pp, 20, 0.3, k_ss/3, T_arr)
 
 We aim to have more to say about the term structure of interest rates
-in a planned lecture on the topic. 
+in a planned lecture on the topic.

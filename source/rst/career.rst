@@ -64,9 +64,8 @@ In what follows we distinguish between a career and a job, where
 For workers, wages can be decomposed into the contribution of job and career
 
 * :math:`w_t = \theta_t + \epsilon_t`, where
-
-    * :math:`\theta_t` is the contribution of career at time :math:`t`
-    * :math:`\epsilon_t` is the contribution of the job at time :math:`t`
+  * :math:`\theta_t` is the contribution of career at time :math:`t`
+  * :math:`\epsilon_t` is the contribution of the job at time :math:`t`
 
 At the start of time :math:`t`, a worker has the following options
 

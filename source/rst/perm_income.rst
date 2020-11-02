@@ -661,13 +661,13 @@ Representation :eq:`sprob16abcd` makes clear that
 
 * The state can be taken as :math:`(c_t, z_t)`.
 
-    * The endogenous part is :math:`c_t` and the exogenous part is :math:`z_t`.
+  * The endogenous part is :math:`c_t` and the exogenous part is :math:`z_t`.
 
-    * Debt :math:`b_t` has disappeared as a component of the state because it is encoded in :math:`c_t`.
+  * Debt :math:`b_t` has disappeared as a component of the state because it is encoded in :math:`c_t`.
 
 * Consumption is a random walk with innovation :math:`(1-\beta) U  (I-\beta A)^{-1} C w_{t+1}`.
 
-    * This is a more explicit representation of the martingale result in :eq:`sprob5`.
+  * This is a more explicit representation of the martingale result in :eq:`sprob5`.
 
 
 .. _coint_pi:

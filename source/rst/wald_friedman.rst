@@ -40,23 +40,23 @@ In this lecture, we apply dynamic programming algorithms to Friedman and Wallis 
 
 Key ideas in play will be:
 
--  Bayes' Law
+- Bayes' Law
 
--  Dynamic programming
+- Dynamic programming
 
--  Type I and type II statistical errors
+- Type I and type II statistical errors
 
-   -  a type I error occurs when you reject a null hypothesis that is true
+  - a type I error occurs when you reject a null hypothesis that is true
 
-   -  a type II error is when you accept a null hypothesis that is false
+  - a type II error is when you accept a null hypothesis that is false
 
--  Abraham Wald's **sequential probability ratio test**
+- Abraham Wald's **sequential probability ratio test**
 
--  The **power** of a statistical test
+- The **power** of a statistical test
 
--  The **critical region** of a statistical test
+- The **critical region** of a statistical test
 
--  A **uniformly most powerful test**
+- A **uniformly most powerful test**
 
 We'll begin with some imports:
 
@@ -233,24 +233,24 @@ After observing :math:`z_k, z_{k-1}, \ldots, z_0`, the decision-maker
 chooses among three distinct actions:
 
 
--  He decides that :math:`f = f_0` and draws no more :math:`z`'s
+- He decides that :math:`f = f_0` and draws no more :math:`z`'s
 
--  He decides that :math:`f = f_1` and draws no more :math:`z`'s
+- He decides that :math:`f = f_1` and draws no more :math:`z`'s
 
--  He postpones deciding now and instead chooses to draw a
-   :math:`z_{k+1}`
+- He postpones deciding now and instead chooses to draw a
+  :math:`z_{k+1}`
 
 Associated with these three actions, the decision-maker can suffer three
 kinds of losses:
 
--  A loss :math:`L_0` if he decides :math:`f = f_0` when actually
-   :math:`f=f_1`
+- A loss :math:`L_0` if he decides :math:`f = f_0` when actually
+  :math:`f=f_1`
 
--  A loss :math:`L_1` if he decides :math:`f = f_1` when actually
-   :math:`f=f_0`
+- A loss :math:`L_1` if he decides :math:`f = f_1` when actually
+  :math:`f=f_0`
 
--  A cost :math:`c` if he postpones deciding and chooses instead to draw
-   another :math:`z`
+- A cost :math:`c` if he postpones deciding and chooses instead to draw
+  another :math:`z`
 
 
 
@@ -266,11 +266,11 @@ then :math:`L_1` and :math:`L_0` are losses associated with two types of statist
 
 So when we treat :math:`f=f_0` as the null hypothesis
 
--  We can think of :math:`L_1` as the loss associated with a type I
-   error.
+- We can think of :math:`L_1` as the loss associated with a type I
+  error.
 
--  We can think of :math:`L_0` as the loss associated with a type II
-   error.
+- We can think of :math:`L_0` as the loss associated with a type II
+  error.
 
 
 
@@ -352,14 +352,14 @@ We can represent the  Bellman equation as
 
 where :math:`\pi \in [0,1]` and
 
--  :math:`(1-\pi) L_0` is the expected loss associated with accepting
-   :math:`f_0` (i.e., the cost of making a type II error).
+- :math:`(1-\pi) L_0` is the expected loss associated with accepting
+  :math:`f_0` (i.e., the cost of making a type II error).
 
--  :math:`\pi L_1` is the expected loss associated with accepting
-   :math:`f_1` (i.e., the cost of making a type I error).
+- :math:`\pi L_1` is the expected loss associated with accepting
+  :math:`f_1` (i.e., the cost of making a type I error).
 
--  :math:`h(\pi) :=  c + \mathbb E [J(\pi')]` the continuation value; i.e.,
-   the expected cost associated with drawing one more :math:`z`.
+- :math:`h(\pi) :=  c + \mathbb E [J(\pi')]` the continuation value; i.e.,
+  the expected cost associated with drawing one more :math:`z`.
 
 
 
@@ -789,9 +789,9 @@ We double the cost of drawing an additional observation.
 
 Before you look, think about what will happen:
 
--  Will the decision-maker be correct more or less often?
+- Will the decision-maker be correct more or less often?
 
--  Will he make decisions sooner or later?
+- Will he make decisions sooner or later?
 
 
 .. code-block:: python3
@@ -851,22 +851,22 @@ We'll rely on Abraham Wald's :cite:`Wald47` elegant summary of Neyman-Pearson th
 
 For our purposes, watch for there features of the setup:
 
--  the assumption of a *fixed* sample size :math:`n`
+- the assumption of a *fixed* sample size :math:`n`
 
--  the application of laws of large numbers, conditioned on alternative
-   probability models, to interpret the probabilities :math:`\alpha` and
-   :math:`\beta` defined in the Neyman-Pearson theory
+- the application of laws of large numbers, conditioned on alternative
+  probability models, to interpret the probabilities :math:`\alpha` and
+  :math:`\beta` defined in the Neyman-Pearson theory
 
 Recall that in the sequential analytic formulation above, that
 
--  The sample size :math:`n` is not fixed but rather an object to be
-   chosen; technically :math:`n` is a random variable.
+- The sample size :math:`n` is not fixed but rather an object to be
+  chosen; technically :math:`n` is a random variable.
 
--  The parameters :math:`\beta` and :math:`\alpha` characterize cut-off
-   rules used to determine :math:`n` as a random variable.
+- The parameters :math:`\beta` and :math:`\alpha` characterize cut-off
+  rules used to determine :math:`n` as a random variable.
 
--  Laws of large numbers make no appearances in the sequential
-   construction.
+- Laws of large numbers make no appearances in the sequential
+  construction.
 
 In chapter 1 of **Sequential Analysis** :cite:`Wald47` Abraham Wald summarizes the
 Neyman-Pearson approach to hypothesis testing.
@@ -880,80 +880,80 @@ problem -- usually, *something* means *a lot*)
 By limiting  what is unknown, Wald uses the following simple structure
 to illustrate the main ideas:
 
--  A decision-maker wants to decide which of two distributions
-   :math:`f_0`, :math:`f_1` govern an IID random variable :math:`z`.
+- A decision-maker wants to decide which of two distributions
+  :math:`f_0`, :math:`f_1` govern an IID random variable :math:`z`.
 
--  The null hypothesis :math:`H_0` is the statement that :math:`f_0`
-   governs the data.
+- The null hypothesis :math:`H_0` is the statement that :math:`f_0`
+  governs the data.
 
--  The alternative hypothesis :math:`H_1` is the statement that
-   :math:`f_1` governs the data.
+- The alternative hypothesis :math:`H_1` is the statement that
+  :math:`f_1` governs the data.
 
--  The problem is to devise and analyze a test of hypothesis
-   :math:`H_0` against the alternative hypothesis :math:`H_1` on the
-   basis of a sample of a fixed number :math:`n` independent
-   observations :math:`z_1, z_2, \ldots, z_n` of the random variable
-   :math:`z`.
+- The problem is to devise and analyze a test of hypothesis
+  :math:`H_0` against the alternative hypothesis :math:`H_1` on the
+  basis of a sample of a fixed number :math:`n` independent
+  observations :math:`z_1, z_2, \ldots, z_n` of the random variable
+  :math:`z`.
 
 To quote Abraham Wald,
 
-   A test procedure leading to the acceptance or rejection of the \[null\]
-   hypothesis in question is simply a rule specifying, for each possible
-   sample of size :math:`n`, whether the \[null\] hypothesis should be accepted
-   or rejected on the basis of the sample. This may also be expressed as
-   follows: A test procedure is simply a subdivision of the totality of
-   all possible samples of size :math:`n` into two mutually exclusive
-   parts, say part 1 and part 2, together with the application of the
-   rule that the \[null\] hypothesis be accepted if the observed sample is
-   contained in part 2. Part 1 is also called the critical region. Since
-   part 2 is the totality of all samples of size :math:`n` which are not
-   included in part 1, part 2 is uniquely determined by part 1. Thus,
-   choosing a test procedure is equivalent to determining a critical
-   region.
+    A test procedure leading to the acceptance or rejection of the \[null\]
+    hypothesis in question is simply a rule specifying, for each possible
+    sample of size :math:`n`, whether the \[null\] hypothesis should be accepted
+    or rejected on the basis of the sample. This may also be expressed as
+    follows: A test procedure is simply a subdivision of the totality of
+    all possible samples of size :math:`n` into two mutually exclusive
+    parts, say part 1 and part 2, together with the application of the
+    rule that the \[null\] hypothesis be accepted if the observed sample is
+    contained in part 2. Part 1 is also called the critical region. Since
+    part 2 is the totality of all samples of size :math:`n` which are not
+    included in part 1, part 2 is uniquely determined by part 1. Thus,
+    choosing a test procedure is equivalent to determining a critical
+    region.
 
 Let's listen to Wald longer:
 
-   As a basis for choosing among critical regions the following
-   considerations have been advanced by Neyman and Pearson: In accepting
-   or rejecting :math:`H_0` we may commit errors of two kinds. We commit
-   an error of the first kind if we reject :math:`H_0` when it is true;
-   we commit an error of the second kind if we accept :math:`H_0` when
-   :math:`H_1` is true. After a particular critical region :math:`W` has
-   been chosen, the probability of committing an error of the first
-   kind, as well as the probability of committing an error of the second
-   kind is uniquely determined. The probability of committing an error
-   of the first kind is equal to the probability, determined by the
-   assumption that :math:`H_0` is true, that the observed sample will be
-   included in the critical region :math:`W`. The probability of
-   committing an error of the second kind is equal to the probability,
-   determined on the assumption that :math:`H_1` is true, that the
-   probability will fall outside the critical region :math:`W`. For any
-   given critical region :math:`W` we shall denote the probability of an
-   error of the first kind by :math:`\alpha` and the probability of an
-   error of the second kind by :math:`\beta`.
+    As a basis for choosing among critical regions the following
+    considerations have been advanced by Neyman and Pearson: In accepting
+    or rejecting :math:`H_0` we may commit errors of two kinds. We commit
+    an error of the first kind if we reject :math:`H_0` when it is true;
+    we commit an error of the second kind if we accept :math:`H_0` when
+    :math:`H_1` is true. After a particular critical region :math:`W` has
+    been chosen, the probability of committing an error of the first
+    kind, as well as the probability of committing an error of the second
+    kind is uniquely determined. The probability of committing an error
+    of the first kind is equal to the probability, determined by the
+    assumption that :math:`H_0` is true, that the observed sample will be
+    included in the critical region :math:`W`. The probability of
+    committing an error of the second kind is equal to the probability,
+    determined on the assumption that :math:`H_1` is true, that the
+    probability will fall outside the critical region :math:`W`. For any
+    given critical region :math:`W` we shall denote the probability of an
+    error of the first kind by :math:`\alpha` and the probability of an
+    error of the second kind by :math:`\beta`.
 
 Let's listen carefully to how Wald applies law of large numbers to
 interpret :math:`\alpha` and :math:`\beta`:
 
-   The probabilities :math:`\alpha` and :math:`\beta` have the
-   following important practical interpretation: Suppose that we draw a
-   large number of samples of size :math:`n`. Let :math:`M` be the
-   number of such samples drawn. Suppose that for each of these
-   :math:`M` samples we reject :math:`H_0` if the sample is included in
-   :math:`W` and accept :math:`H_0` if the sample lies outside
-   :math:`W`. In this way we make :math:`M` statements of rejection or
-   acceptance. Some of these statements will in general be wrong. If
-   :math:`H_0` is true and if :math:`M` is large, the probability is
-   nearly :math:`1` (i.e., it is practically certain) that the
-   proportion of wrong statements (i.e., the number of wrong statements
-   divided by :math:`M`) will be approximately :math:`\alpha`. If
-   :math:`H_1` is true, the probability is nearly :math:`1` that the
-   proportion of wrong statements will be approximately :math:`\beta`.
-   Thus, we can say that in the long run [ here Wald applies law of
-   large numbers by driving :math:`M \rightarrow \infty` (our comment,
-   not Wald's) ] the proportion of wrong statements will be
-   :math:`\alpha` if :math:`H_0`\ is true and :math:`\beta` if
-   :math:`H_1` is true.
+    The probabilities :math:`\alpha` and :math:`\beta` have the
+    following important practical interpretation: Suppose that we draw a
+    large number of samples of size :math:`n`. Let :math:`M` be the
+    number of such samples drawn. Suppose that for each of these
+    :math:`M` samples we reject :math:`H_0` if the sample is included in
+    :math:`W` and accept :math:`H_0` if the sample lies outside
+    :math:`W`. In this way we make :math:`M` statements of rejection or
+    acceptance. Some of these statements will in general be wrong. If
+    :math:`H_0` is true and if :math:`M` is large, the probability is
+    nearly :math:`1` (i.e., it is practically certain) that the
+    proportion of wrong statements (i.e., the number of wrong statements
+    divided by :math:`M`) will be approximately :math:`\alpha`. If
+    :math:`H_1` is true, the probability is nearly :math:`1` that the
+    proportion of wrong statements will be approximately :math:`\beta`.
+    Thus, we can say that in the long run [ here Wald applies law of
+    large numbers by driving :math:`M \rightarrow \infty` (our comment,
+    not Wald's) ] the proportion of wrong statements will be
+    :math:`\alpha` if :math:`H_0`\ is true and :math:`\beta` if
+    :math:`H_1` is true.
 
 The quantity :math:`\alpha` is called the *size* of the critical region,
 and the quantity :math:`1-\beta` is called the *power* of the critical
@@ -961,26 +961,26 @@ region.
 
 Wald notes that
 
-   one critical region :math:`W` is more desirable than another if it
-   has smaller values of :math:`\alpha` and :math:`\beta`. Although
-   either :math:`\alpha` or :math:`\beta` can be made arbitrarily small
-   by a proper choice of the critical region :math:`W`, it is possible
-   to make both :math:`\alpha` and :math:`\beta` arbitrarily small for a
-   fixed value of :math:`n`, i.e., a fixed sample size.
+    one critical region :math:`W` is more desirable than another if it
+    has smaller values of :math:`\alpha` and :math:`\beta`. Although
+    either :math:`\alpha` or :math:`\beta` can be made arbitrarily small
+    by a proper choice of the critical region :math:`W`, it is possible
+    to make both :math:`\alpha` and :math:`\beta` arbitrarily small for a
+    fixed value of :math:`n`, i.e., a fixed sample size.
 
 Wald summarizes Neyman and Pearson's setup as follows:
 
-  Neyman and Pearson show that a region consisting of all samples
-  :math:`(z_1, z_2, \ldots, z_n)` which satisfy the inequality
+    Neyman and Pearson show that a region consisting of all samples
+    :math:`(z_1, z_2, \ldots, z_n)` which satisfy the inequality
 
-  .. math::
+    .. math::
 
-    \frac{ f_1(z_1) \cdots f_1(z_n)}{f_0(z_1) \cdots f_0(z_n)} \geq k
+        \frac{ f_1(z_1) \cdots f_1(z_n)}{f_0(z_1) \cdots f_0(z_n)} \geq k
 
-  is a most powerful critical region for testing the hypothesis
-  :math:`H_0` against the alternative hypothesis :math:`H_1`. The term
-  :math:`k` on the right side is a constant chosen so that the region
-  will have the required size :math:`\alpha`.
+    is a most powerful critical region for testing the hypothesis
+    :math:`H_0` against the alternative hypothesis :math:`H_1`. The term
+    :math:`k` on the right side is a constant chosen so that the region
+    will have the required size :math:`\alpha`.
 
 
 Wald goes on to discuss Neyman and Pearson's concept of *uniformly most
@@ -988,20 +988,20 @@ powerful* test.
 
 Here is how Wald introduces the notion of a sequential test
 
-   A rule is given for making one of the following three decisions at any stage of
-   the experiment (at the m th trial for each integral value of m ): (1) to
-   accept the hypothesis H , (2) to reject the hypothesis H , (3) to
-   continue the experiment by making an additional observation. Thus, such
-   a test procedure is carried out sequentially. On the basis of the first
-   observation, one of the aforementioned decision is made. If the first or
-   second decision is made, the process is terminated. If the third
-   decision is made, a second trial is performed. Again, on the basis of
-   the first two observations, one of the three decision is made. If the
-   third decision is made, a third trial is performed, and so on. The
-   process is continued until either the first or the second decisions is
-   made. The number n of observations required by such a test procedure is
-   a random variable, since the value of n depends on the outcome of the
-   observations.
+    A rule is given for making one of the following three decisions at any stage of
+    the experiment (at the m th trial for each integral value of m ): (1) to
+    accept the hypothesis H , (2) to reject the hypothesis H , (3) to
+    continue the experiment by making an additional observation. Thus, such
+    a test procedure is carried out sequentially. On the basis of the first
+    observation, one of the aforementioned decision is made. If the first or
+    second decision is made, the process is terminated. If the third
+    decision is made, a second trial is performed. Again, on the basis of
+    the first two observations, one of the three decision is made. If the
+    third decision is made, a third trial is performed, and so on. The
+    process is continued until either the first or the second decisions is
+    made. The number n of observations required by such a test procedure is
+    a random variable, since the value of n depends on the outcome of the
+    observations.
 
 .. rubric:: Footnotes
 

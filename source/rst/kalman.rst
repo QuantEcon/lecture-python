@@ -16,9 +16,9 @@ A First Look at the Kalman Filter
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
 .. code-block:: ipython
-  :class: hide-output
+    :class: hide-output
 
-  !conda install -y quantecon
+    !conda install -y quantecon
 
 Overview
 ========
@@ -71,8 +71,7 @@ One way to summarize our knowledge is a point prediction :math:`\hat x`
 
 * But what if the President wants to know the probability that the missile is currently over the Sea of Japan?
 * Then it is better to summarize our initial beliefs with a bivariate probability density :math:`p`
-
-    * :math:`\int_E p(x)dx` indicates the probability that we attach to the missile being in region :math:`E`.
+  * :math:`\int_E p(x)dx` indicates the probability that we attach to the missile being in region :math:`E`.
 
 The density :math:`p` is called our *prior* for the random variable :math:`x`.
 
@@ -111,11 +110,8 @@ where :math:`\hat x` is the mean of the distribution and :math:`\Sigma` is a
 
 This density :math:`p(x)` is shown below as a contour map, with the center of the red ellipse being equal to :math:`\hat x`.
 
-
-
 .. code-block:: python3
   :class: collapse
-
 
   # Set up the Gaussian prior density p
   Σ = [[0.4, 0.3], [0.3, 0.45]]
@@ -195,8 +191,6 @@ This density :math:`p(x)` is shown below as a contour map, with the center of th
   plt.show()
 
 
-
-
 The Filtering Step
 ------------------
 
@@ -206,8 +200,6 @@ The good news is that the missile has been located by our sensors, which report 
 
 The next figure shows the original prior :math:`p(x)` and the new reported
 location :math:`y`
-
-
 
 .. code-block:: python3
 
@@ -539,9 +531,9 @@ The class ``Kalman`` from the `QuantEcon.py <http://quantecon.org/quantecon-py>`
 
 * Instance data consists of:
 
-    * the moments :math:`(\hat x_t, \Sigma_t)` of the current prior.
+  * the moments :math:`(\hat x_t, \Sigma_t)` of the current prior.
 
-    * An instance of the `LinearStateSpace <https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py>`_ class from `QuantEcon.py <http://quantecon.org/quantecon-py>`_.
+  * An instance of the `LinearStateSpace <https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py>`_ class from `QuantEcon.py <http://quantecon.org/quantecon-py>`_.
 
 
 The latter represents a linear state space model of the form
@@ -570,13 +562,13 @@ To connect this with the notation of this lecture we set
 
 * Methods pertinent for this lecture  are:
 
-    * ``prior_to_filtered``, which updates :math:`(\hat x_t, \Sigma_t)` to :math:`(\hat x_t^F, \Sigma_t^F)`
+  * ``prior_to_filtered``, which updates :math:`(\hat x_t, \Sigma_t)` to :math:`(\hat x_t^F, \Sigma_t^F)`
 
-    * ``filtered_to_forecast``, which updates the filtering distribution to the predictive distribution -- which becomes the new prior :math:`(\hat x_{t+1}, \Sigma_{t+1})`
+  * ``filtered_to_forecast``, which updates the filtering distribution to the predictive distribution -- which becomes the new prior :math:`(\hat x_{t+1}, \Sigma_{t+1})`
 
-    * ``update``, which combines the last two methods
+  * ``update``, which combines the last two methods
 
-    * a ``stationary_values``, which computes the solution to :eq:`kalman_dare` and the corresponding (stationary) Kalman gain
+  * a ``stationary_values``, which computes the solution to :eq:`kalman_dare` and the corresponding (stationary) Kalman gain
 
 
 You can view the program `on GitHub <https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/kalman.py>`__.
