@@ -531,17 +531,17 @@ test scores :math:`\sigma_{y}`.
 
 .. code-block:: python3
 
-    def construct_moments_IQ(n, 𝜇𝜃, 𝜎𝜃, 𝜎y):
+    def construct_moments_IQ(n, μθ, σθ, σy):
     
-        𝜇_IQ = np.ones(n+1) * 𝜇𝜃
+        μ_IQ = np.ones(n+1) * μθ
     
         D_IQ = np.zeros((n+1, n+1))
-        D_IQ[range(n), range(n)] = 𝜎y
-        D_IQ[:, n] = 𝜎𝜃
+        D_IQ[range(n), range(n)] = σy
+        D_IQ[:, n] = σθ
     
         Σ_IQ = D_IQ @ D_IQ.T
     
-        return 𝜇_IQ, Σ_IQ, D_IQ
+        return μ_IQ, Σ_IQ, D_IQ
 
 Now let’s consider a specific instance of this model.
 
@@ -555,9 +555,9 @@ with our ``construct_moments_IQ`` function as follows.
 .. code-block:: python3
 
     n = 50
-    𝜇𝜃, 𝜎𝜃, 𝜎y = 100., 10., 10.
+    μθ, σθ, σy = 100., 10., 10.
     
-    𝜇_IQ, Σ_IQ, D_IQ = construct_moments_IQ(n, 𝜇𝜃, 𝜎𝜃, 𝜎y)
+    μ_IQ, Σ_IQ, D_IQ = construct_moments_IQ(n, μθ, σθ, σy)
     μ_IQ, Σ_IQ, D_IQ
 
 We can now use our ``MultivariateNormal`` class to construct an
@@ -583,12 +583,12 @@ Let’s do that and then print out some pertinent quantities.
 
     x = np.random.multivariate_normal(μ_IQ, Σ_IQ)
     y = x[:-1] # test scores
-    𝜃 = x[-1]  # IQ
+    θ = x[-1]  # IQ
 
 .. code-block:: python3
 
     # the true value
-    𝜃
+    θ
 
 The method ``cond_dist`` takes test scores as input and returns the
 conditional normal distribution of the IQ :math:`\theta`.
@@ -616,41 +616,41 @@ change as more test results come in.
 .. code-block:: python3
 
     # array for containing moments
-    μ𝜃_hat_arr = np.empty(n)
-    Σ𝜃_hat_arr = np.empty(n)
+    μθ_hat_arr = np.empty(n)
+    Σθ_hat_arr = np.empty(n)
     
     # loop over number of test scores
     for i in range(1, n+1):
         # construction of multivariate normal distribution instance
-        𝜇_IQ_i, Σ_IQ_i, D_IQ_i = construct_moments_IQ(i, 𝜇𝜃, 𝜎𝜃, 𝜎y)
+        μ_IQ_i, Σ_IQ_i, D_IQ_i = construct_moments_IQ(i, μθ, σθ, σy)
         multi_normal_IQ_i = MultivariateNormal(μ_IQ_i, Σ_IQ_i)
     
         # partition and compute conditional distribution
         multi_normal_IQ_i.partition(i)
         scores_i = y[:i]
-        μ𝜃_hat_i, Σ𝜃_hat_i = multi_normal_IQ_i.cond_dist(1, scores_i)
+        μθ_hat_i, Σθ_hat_i = multi_normal_IQ_i.cond_dist(1, scores_i)
     
         # store the results
-        μ𝜃_hat_arr[i-1] = μ𝜃_hat_i[0]
-        Σ𝜃_hat_arr[i-1] = Σ𝜃_hat_i[0, 0]
+        μθ_hat_arr[i-1] = μθ_hat_i[0]
+        Σθ_hat_arr[i-1] = Σθ_hat_i[0, 0]
     
     # transform variance to standard deviation
-    𝜎𝜃_hat_arr = np.sqrt(Σ𝜃_hat_arr)
+    σθ_hat_arr = np.sqrt(Σθ_hat_arr)
 
 .. code-block:: python3
 
-    μ𝜃_hat_lower = μ𝜃_hat_arr - 1.96 * 𝜎𝜃_hat_arr
-    μ𝜃_hat_higher = μ𝜃_hat_arr + 1.96 * 𝜎𝜃_hat_arr
+    μθ_hat_lower = μθ_hat_arr - 1.96 * σθ_hat_arr
+    μθ_hat_higher = μθ_hat_arr + 1.96 * σθ_hat_arr
     
-    plt.hlines(𝜃, 1, n+1, ls='--', label='true $𝜃$')
-    plt.plot(range(1, n+1), μ𝜃_hat_arr, color='b', label='$\hat{μ}_{𝜃}$')
-    plt.plot(range(1, n+1), μ𝜃_hat_lower, color='b', ls='--')
-    plt.plot(range(1, n+1), μ𝜃_hat_higher, color='b', ls='--')
-    plt.fill_between(range(1, n+1), μ𝜃_hat_lower, μ𝜃_hat_higher,
+    plt.hlines(θ, 1, n+1, ls='--', label='true $θ$')
+    plt.plot(range(1, n+1), μθ_hat_arr, color='b', label='$\hat{μ}_{θ}$')
+    plt.plot(range(1, n+1), μθ_hat_lower, color='b', ls='--')
+    plt.plot(range(1, n+1), μθ_hat_higher, color='b', ls='--')
+    plt.fill_between(range(1, n+1), μθ_hat_lower, μθ_hat_higher,
                      color='b', alpha=0.2, label='95%')
     
     plt.xlabel('number of test scores')
-    plt.ylabel('$\hat{𝜃}$')
+    plt.ylabel('$\hat{θ}$')
     plt.legend()
     
     plt.show()
@@ -768,15 +768,15 @@ and
     C = np.linalg.cholesky(Σ_IQ)
     G = np.linalg.inv(C)
     
-    𝜖 = G @ (x - 𝜇𝜃)
+    ε = G @ (x - μθ)
 
 .. code-block:: python3
 
-    c𝜖 = C[n, :] * 𝜖
+    cε = C[n, :] * ε
     
-    # compute the sequence of μ𝜃 and Σ𝜃 conditional on y1, y2, ..., yk
-    μ𝜃_hat_arr_C = np.array([np.sum(c𝜖[:k+1]) for k in range(n)]) + 𝜇𝜃
-    Σ𝜃_hat_arr_C = np.array([np.sum(C[n, i+1:n+1] ** 2) for i in range(n)])
+    # compute the sequence of μθ and Σθ conditional on y1, y2, ..., yk
+    μθ_hat_arr_C = np.array([np.sum(cε[:k+1]) for k in range(n)]) + μθ
+    Σθ_hat_arr_C = np.array([np.sum(C[n, i+1:n+1] ** 2) for i in range(n)])
 
 To confirm that these formulas give the same answers that we computed
 earlier, we can compare the means and variances of :math:`\theta`
@@ -788,12 +788,12 @@ multivariable normal distributions.
 .. code-block:: python3
 
     # conditional mean
-    np.max(np.abs(μ𝜃_hat_arr - μ𝜃_hat_arr_C)) < 1e-10
+    np.max(np.abs(μθ_hat_arr - μθ_hat_arr_C)) < 1e-10
 
 .. code-block:: python3
 
     # conditional variance
-    np.max(np.abs(Σ𝜃_hat_arr - Σ𝜃_hat_arr_C)) < 1e-10
+    np.max(np.abs(Σθ_hat_arr - Σθ_hat_arr_C)) < 1e-10
 
 Magic of the Cholesky factorization
 ===================================
@@ -878,36 +878,36 @@ the mean vector and covariance matrix of the joint normal distribution.
 
 .. code-block:: python3
 
-    def construct_moments_IQ2d(n, 𝜇𝜃, 𝜎𝜃, 𝜇𝜂, 𝜎𝜂, 𝜎y):
+    def construct_moments_IQ2d(n, μθ, σθ, μη, ση, σy):
     
-        𝜇_IQ2d = np.empty(2*(n+1))
-        𝜇_IQ2d[:n] = 𝜇𝜃
-        𝜇_IQ2d[2*n] = 𝜇𝜃
-        𝜇_IQ2d[n:2*n] = 𝜇𝜂
-        𝜇_IQ2d[2*n+1] = 𝜇𝜂
+        μ_IQ2d = np.empty(2*(n+1))
+        μ_IQ2d[:n] = μθ
+        μ_IQ2d[2*n] = μθ
+        μ_IQ2d[n:2*n] = μη
+        μ_IQ2d[2*n+1] = μη
         
     
         D_IQ2d = np.zeros((2*(n+1), 2*(n+1)))
-        D_IQ2d[range(2*n), range(2*n)] = 𝜎y
-        D_IQ2d[:n, 2*n] = 𝜎𝜃
-        D_IQ2d[2*n, 2*n] = 𝜎𝜃
-        D_IQ2d[n:2*n, 2*n+1] = 𝜎𝜂
-        D_IQ2d[2*n+1, 2*n+1] = 𝜎𝜂
+        D_IQ2d[range(2*n), range(2*n)] = σy
+        D_IQ2d[:n, 2*n] = σθ
+        D_IQ2d[2*n, 2*n] = σθ
+        D_IQ2d[n:2*n, 2*n+1] = ση
+        D_IQ2d[2*n+1, 2*n+1] = ση
     
         Σ_IQ2d = D_IQ2d @ D_IQ2d.T
     
-        return 𝜇_IQ2d, Σ_IQ2d, D_IQ2d
+        return μ_IQ2d, Σ_IQ2d, D_IQ2d
 
 Let’s put the function to work.
 
 .. code-block:: python3
 
     n = 2
-    # mean and variance of 𝜃, 𝜂, and y
-    𝜇𝜃, 𝜎𝜃, 𝜇𝜂, 𝜎𝜂, 𝜎y = 100., 10., 100., 10, 10
+    # mean and variance of θ, η, and y
+    μθ, σθ, μη, ση, σy = 100., 10., 100., 10, 10
     
-    𝜇_IQ2d, Σ_IQ2d, D_IQ2d = construct_moments_IQ2d(n, 𝜇𝜃, 𝜎𝜃, 𝜇𝜂, 𝜎𝜂, 𝜎y)
-    𝜇_IQ2d, Σ_IQ2d, D_IQ2d
+    μ_IQ2d, Σ_IQ2d, D_IQ2d = construct_moments_IQ2d(n, μθ, σθ, μη, ση, σy)
+    μ_IQ2d, Σ_IQ2d, D_IQ2d
 
 .. code-block:: python3
 
@@ -915,18 +915,18 @@ Let’s put the function to work.
     x = np.random.multivariate_normal(μ_IQ2d, Σ_IQ2d)
     y1 = x[:n]
     y2 = x[n:2*n]
-    𝜃 = x[2*n]
-    𝜂 = x[2*n+1]
+    θ = x[2*n]
+    η = x[2*n+1]
     
     # the true values
-    𝜃, 𝜂
+    θ, η
 
 We first compute the joint normal distribution of
 :math:`\left(\theta, \eta\right)`.
 
 .. code-block:: python3
 
-    multi_normal_IQ2d = MultivariateNormal(𝜇_IQ2d, Σ_IQ2d)
+    multi_normal_IQ2d = MultivariateNormal(μ_IQ2d, Σ_IQ2d)
     
     k = 2*n # the length of data vector
     multi_normal_IQ2d.partition(k)
@@ -941,30 +941,30 @@ It will be fun to compare outcomes ith the help of an auxiliary function
 
 .. code-block:: python3
 
-    def cond_dist_IQ2d(𝜇, Σ, data):
+    def cond_dist_IQ2d(μ, Σ, data):
     
-        n = len(𝜇)
+        n = len(μ)
     
-        multi_normal = MultivariateNormal(𝜇, Σ)
+        multi_normal = MultivariateNormal(μ, Σ)
         multi_normal.partition(n-1)
-        𝜇_hat, Σ_hat = multi_normal.cond_dist(1, data)
+        μ_hat, Σ_hat = multi_normal.cond_dist(1, data)
     
-        return 𝜇_hat, Σ_hat
+        return μ_hat, Σ_hat
 
 Let’s see how things work for an example.
 
 .. code-block:: python3
 
-    for indices, IQ, conditions in [([*range(2*n), 2*n], '𝜃', 'y1, y2, y3, y4'),
-                                    ([*range(n), 2*n], '𝜃', 'y1, y2'),
-                                    ([*range(n, 2*n), 2*n], '𝜃', 'y3, y4'),
-                                    ([*range(2*n), 2*n+1], '𝜂', 'y1, y2, y3, y4'),
-                                    ([*range(n), 2*n+1], '𝜂', 'y1, y2'),
-                                    ([*range(n, 2*n), 2*n+1], '𝜂', 'y3, y4')]:
+    for indices, IQ, conditions in [([*range(2*n), 2*n], 'θ', 'y1, y2, y3, y4'),
+                                    ([*range(n), 2*n], 'θ', 'y1, y2'),
+                                    ([*range(n, 2*n), 2*n], 'θ', 'y3, y4'),
+                                    ([*range(2*n), 2*n+1], 'η', 'y1, y2, y3, y4'),
+                                    ([*range(n), 2*n+1], 'η', 'y1, y2'),
+                                    ([*range(n, 2*n), 2*n+1], 'η', 'y3, y4')]:
     
-        𝜇_hat, Σ_hat = cond_dist_IQ2d(𝜇_IQ2d[indices], Σ_IQ2d[indices][:, indices], x[indices[:-1]])
+        μ_hat, Σ_hat = cond_dist_IQ2d(μ_IQ2d[indices], Σ_IQ2d[indices][:, indices], x[indices[:-1]])
         print(f'The mean and variance of {IQ} conditional on {conditions: <15} are ' + 
-              f'{𝜇_hat[0]:1.2f} and {Σ_hat[0, 0]:1.2f} respectively')
+              f'{μ_hat[0]:1.2f} and {Σ_hat[0, 0]:1.2f} respectively')
 
 Evidently, math tests provide no information about :math:`\mu` and
 language tests provide no information about :math:`\eta`.
@@ -982,7 +982,7 @@ Consider the following model:
 
 .. math::
 
-    \begin{aligned}
+   \begin{aligned}
    x_0 & \sim  N\left(0, \sigma_0^2\right) \\
    x_{t+1} & = a x_{t} + b w_{t+1}, \quad w_{t+1} \sim N\left(0, 1\right), t \geq 0  \\
    y_{t} & = c x_{t} + d v_{t}, \quad v_{t} \sim N\left(0, 1\right), t \geq 0
@@ -1077,7 +1077,7 @@ distribution :math:`N\left(0, \Sigma_{z}\right)`.
 .. code-block:: python3
 
     # variance of the initial distribution x_0
-    𝜎0 = 1.
+    σ0 = 1.
     
     # parameters of the equation system
     a = .9
@@ -1090,7 +1090,7 @@ distribution :math:`N\left(0, \Sigma_{z}\right)`.
     # construct the covariance matrix of X
     Σx = np.empty((T+1, T+1))
     
-    Σx[0, 0] = 𝜎0 ** 2
+    Σx[0, 0] = σ0 ** 2
     for i in range(T):
         Σx[i, i+1:] = Σx[i, i] * a ** np.arange(1, T+1-i)
         Σx[i+1:, i] = Σx[i, i+1:]
@@ -1126,7 +1126,7 @@ distribution :math:`N\left(0, \Sigma_{z}\right)`.
 .. code-block:: python3
 
     # construct the mean vector of Z
-    𝜇z = np.zeros(2*(T+1))
+    μz = np.zeros(2*(T+1))
 
 The following Python code lets us sample random vectors :math:`X` and
 :math:`Y`.
@@ -1136,7 +1136,7 @@ the fun exercises below.
 
 .. code-block:: python3
 
-    z = np.random.multivariate_normal(𝜇z, Σz)
+    z = np.random.multivariate_normal(μz, Σz)
     
     x = z[:T+1]
     y = z[T+1:]
@@ -1158,7 +1158,7 @@ An interpretation of this example is
 .. code-block:: python3
 
     # construct a MultivariateNormal instance
-    multi_normal_ex1 = MultivariateNormal(𝜇z, Σz)
+    multi_normal_ex1 = MultivariateNormal(μz, Σz)
     x = z[:T+1]
     y = z[T+1:]
 
@@ -1196,7 +1196,7 @@ For example, let’s say that we want the conditional distribution of
 .. code-block:: python3
 
     # mean of the subvector
-    sub_𝜇z = np.zeros(t+1)
+    sub_μz = np.zeros(t+1)
     
     # covariance matrix of the subvector
     sub_Σz = np.empty((t+1, t+1))
@@ -1212,7 +1212,7 @@ For example, let’s say that we want the conditional distribution of
 
 .. code-block:: python3
 
-    multi_normal_ex2 = MultivariateNormal(sub_𝜇z, sub_Σz)
+    multi_normal_ex2 = MultivariateNormal(sub_μz, sub_Σz)
     multi_normal_ex2.partition(1)
 
 .. code-block:: python3
@@ -1239,7 +1239,7 @@ For example, we take a case in which :math:`t=3` and :math:`j=2`.
 
 .. code-block:: python3
 
-    sub_𝜇z = np.zeros(t-j+2)
+    sub_μz = np.zeros(t-j+2)
     sub_Σz = np.empty((t-j+2, t-j+2))
     
     sub_Σz[0, 0] = Σz[T+t+1, T+t+1]
@@ -1253,7 +1253,7 @@ For example, we take a case in which :math:`t=3` and :math:`j=2`.
 
 .. code-block:: python3
 
-    multi_normal_ex3 = MultivariateNormal(sub_𝜇z, sub_Σz)
+    multi_normal_ex3 = MultivariateNormal(sub_μz, sub_Σz)
     multi_normal_ex3.partition(1)
 
 .. code-block:: python3
@@ -1288,9 +1288,9 @@ Then we can represent :math:`y_{t}` as
 
 .. code-block:: python3
 
-    𝜖 = np.linalg.inv(H) @ y
+    ε = np.linalg.inv(H) @ y
     
-    𝜖
+    ε
 
 .. code-block:: python3
 
@@ -1324,10 +1324,11 @@ This implies that
 
 .. math::
 
-
+   \begin{aligned}
    \Sigma_y = E Y Y^{\prime} = \Lambda \Lambda^{\prime} + D \\
    E Y f^{\prime} = \Lambda \\
    E f Y^{\prime} = \Lambda^{\prime}
+   \end{aligned}
 
 Thus, the covariance matrix :math:`\Sigma_Y` is the sum of a diagonal
 matrix :math:`D` and a positive semi-definite matrix
@@ -1397,8 +1398,8 @@ for the second column. :math:`D` is a diagonal matrix with parameter
     Λ[:N//2, 0] = 1
     Λ[N//2:, 1] = 1
     
-    𝜎u = .5
-    D = np.eye(N) * 𝜎u ** 2
+    σu = .5
+    D = np.eye(N) * σu ** 2
 
 .. code-block:: python3
 
@@ -1410,7 +1411,7 @@ We can now construct the mean vector and the covariance matrix for
 
 .. code-block:: python3
 
-    𝜇z = np.zeros(k+N)
+    μz = np.zeros(k+N)
     
     Σz = np.empty((k+N, k+N))
     
@@ -1421,14 +1422,14 @@ We can now construct the mean vector and the covariance matrix for
 
 .. code-block:: python3
 
-    z = np.random.multivariate_normal(𝜇z, Σz)
+    z = np.random.multivariate_normal(μz, Σz)
     
     f = z[:k]
     y = z[k:]
 
 .. code-block:: python3
 
-    multi_normal_factor = MultivariateNormal(𝜇z, Σz)
+    multi_normal_factor = MultivariateNormal(μz, Σz)
     multi_normal_factor.partition(k)
 
 Let’s compute the conditional distribution of the hidden factor
@@ -1526,9 +1527,9 @@ Note that we will arrange the eigenvectors in :math:`P` in the
 
 .. code-block:: python3
 
-    𝜖 = P.T @ y
+    ε = P.T @ y
     
-    print("𝜖 = ", 𝜖)
+    print("ε = ", ε)
 
 .. code-block:: python3
 
@@ -1553,7 +1554,7 @@ Below we’ll plot several things
 .. code-block:: python3
 
     plt.scatter(range(N), y, label='y')
-    plt.scatter(range(N), 𝜖, label='$\epsilon$')
+    plt.scatter(range(N), ε, label='$\epsilon$')
     plt.hlines(f[0], 0, N//2-1, ls='--', label='$f_{1}$')
     plt.hlines(f[1], N//2, N-1, ls='-.', label='$f_{2}$')
     plt.legend()
@@ -1567,7 +1568,7 @@ Let’s look at them, after which we’ll look at :math:`E f | y = B y`
 
 .. code-block:: python3
 
-    𝜖[:2]
+    ε[:2]
 
 .. code-block:: python3
 
@@ -1593,7 +1594,7 @@ eigenvalues.
 
 .. code-block:: python3
 
-    y_hat = P[:, :2] @ 𝜖[:2]
+    y_hat = P[:, :2] @ ε[:2]
 
 In this example, it turns out that the projection :math:`\hat{Y}` of
 :math:`Y` on the first two principal components does a good job of
@@ -1623,11 +1624,11 @@ upper left block for :math:`\epsilon_{1}` and :math:`\epsilon_{2}`.
 
 .. code-block:: python3
 
-    Σ𝜖jk = (P.T @ Σy @ P)[:2, :2]
+    Σεjk = (P.T @ Σy @ P)[:2, :2]
     
     Pjk = P[:, :2]
     
-    Σy_hat = Pjk @ Σ𝜖jk @ Pjk.T
+    Σy_hat = Pjk @ Σεjk @ Pjk.T
     print('Σy_hat = \n', Σy_hat)
 
 Stochastic Difference Equation
@@ -1689,9 +1690,8 @@ We have
 
 .. math::
 
-
-   \mu_{y} = A^{-1} \mu_{b} \\
    \begin{aligned}
+   \mu_{y} = A^{-1} \mu_{b} \\
    \Sigma_{y} &= A^{-1} E \left[\left(b - \mu_{b} + u \right) \left(b - \mu_{b} + u \right)^{\prime}\right] \left(A^{-1}\right)^{\prime} \\
               &= A^{-1} \left(\Sigma_{b} + \Sigma_{u} \right) \left(A^{-1}\right)^{\prime}
    \end{aligned}
@@ -1741,11 +1741,11 @@ where
     𝛼2 = -.9
     
     # variance of u
-    𝜎u = 1.
-    𝜎u = 10.
+    σu = 1.
+    σu = 10.
     
     # distribution of y_{-1} and y_{0}
-    𝜇y_tilde = np.array([1., 0.5])
+    μy_tilde = np.array([1., 0.5])
     Σy_tilde = np.array([[2., 1.], [1., 0.5]])
 
 .. code-block:: python3
@@ -1767,16 +1767,16 @@ where
 .. code-block:: python3
 
     # compute the mean vectors of b and y
-    𝜇b = np.ones(T) * 𝛼0
-    𝜇b[0] += 𝛼1 * 𝜇y_tilde[1] + 𝛼2 * 𝜇y_tilde[0]
-    𝜇b[1] += 𝛼2 * 𝜇y_tilde[1]
+    μb = np.ones(T) * 𝛼0
+    μb[0] += 𝛼1 * μy_tilde[1] + 𝛼2 * μy_tilde[0]
+    μb[1] += 𝛼2 * μy_tilde[1]
     
-    𝜇y = A_inv @ 𝜇b
+    μy = A_inv @ μb
 
 .. code-block:: python3
 
     # compute the covariance matrices of b and y
-    Σu = np.eye(T) * 𝜎u ** 2
+    Σu = np.eye(T) * σu ** 2
     
     Σb = np.zeros((T, T))
     
@@ -1824,13 +1824,14 @@ we have
 
 .. math::
 
-
+   \begin{aligned}
    \mu_{p} = B \mu_{y} \\
    \Sigma_{p} = B \Sigma_{y} B^{\prime}
+   \end{aligned}
 
 .. code-block:: python3
 
-    𝛽 = .96
+    β = .96
 
 .. code-block:: python3
 
@@ -1838,7 +1839,7 @@ we have
     B = np.zeros((T, T))
     
     for i in range(T):
-        B[i, i:] = 𝛽 ** np.arange(0, T-i)
+        B[i, i:] = β ** np.arange(0, T-i)
 
 Denote
 
@@ -1873,7 +1874,7 @@ follow the multivariate normal distribution
 
 .. code-block:: python3
 
-    𝜇z = D @ 𝜇y
+    μz = D @ μy
     Σz = D @ Σy @ D.T
 
 We can simulate paths of :math:`y_{t}` and :math:`p_{t}` and compute the
@@ -1882,20 +1883,20 @@ the ``MultivariateNormal`` class.
 
 .. code-block:: python3
 
-    z = np.random.multivariate_normal(𝜇z, Σz)
+    z = np.random.multivariate_normal(μz, Σz)
     y, p = z[:T], z[T:]
 
 .. code-block:: python3
 
     cond_Ep = np.empty(T-1)
     
-    sub_𝜇 = np.empty(3)
+    sub_μ = np.empty(3)
     sub_Σ = np.empty((3, 3))
     for t in range(2, T+1):
-        sub_𝜇[:] = 𝜇z[[t-2, t-1, T-1+t]]
+        sub_μ[:] = μz[[t-2, t-1, T-1+t]]
         sub_Σ[:, :] = Σz[[t-2, t-1, T-1+t], :][:, [t-2, t-1, T-1+t]]
     
-        multi_normal = MultivariateNormal(sub_𝜇, sub_Σ)
+        multi_normal = MultivariateNormal(sub_μ, sub_Σ)
         multi_normal.partition(2)
     
         cond_Ep[t-2] = multi_normal.cond_dist(1, y[t-2:t])[0][0]
