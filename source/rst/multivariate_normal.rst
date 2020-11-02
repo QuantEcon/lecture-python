@@ -1035,8 +1035,8 @@ and therefore
 
    Y = C X + D V
 
-where :math:`C` and :math:`D` are both diagonol matrices with constant
-:math:`c` and :math:`d` as diagonol respectively.
+where :math:`C` and :math:`D` are both diagonal matrices with constant
+:math:`c` and :math:`d` as diagonal respectively.
 
 Consequently, the covariance matrix of :math:`Y` is
 
