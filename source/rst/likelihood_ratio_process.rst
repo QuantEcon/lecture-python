@@ -352,23 +352,21 @@ To understand what this means, we have to define probabilities of two important 
 allow us to characterize a test associated with given
 threshold :math:`c`.
 
-The two probabities are:
+The two probabilities are:
 
 - Probability of detection (= power = 1 minus probability
-   of Type II error):
+  of Type II error):
 
-.. math::
+  .. math::
 
-
-   1-\beta \equiv \Pr\left\{ L\left(w^{t}\right)<c\mid q=g\right\}
+       1-\beta \equiv \Pr\left\{ L\left(w^{t}\right)<c\mid q=g\right\}
 
 - Probability of false alarm (= significance level = probability of
-   Type I error):
+  Type I error):
 
-.. math::
+  .. math::
 
-
-   \alpha \equiv  \Pr\left\{ L\left(w^{t}\right)<c\mid q=f\right\}
+      \alpha \equiv  \Pr\left\{ L\left(w^{t}\right)<c\mid q=f\right\}
 
 The `Neyman-Pearson
 Lemma <https://en.wikipedia.org/wiki/Neyman–Pearson_lemma>`__
