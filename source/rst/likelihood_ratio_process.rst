@@ -22,19 +22,20 @@ Likelihood Ratio Processes
 
 Overview
 =========
+
 This lecture describes likelihood ratio processes and some of their uses.
 
-We'll use the simple statistical setting also used in :doc:`this lecture <exchangeable>`.
+We'll use a setting described in :doc:`this lecture <exchangeable>`.
 
 Among the things that we'll learn about are
 
-   * A peculiar property of likelihood ratio processes
+* A peculiar property of likelihood ratio processes
 
-   * How a likelihood ratio process is the key ingredient in frequentist hypothesis testing
+* How a likelihood ratio process is the key ingredient in frequentist hypothesis testing
 
-   * How a **receiver operator characteristic curve** summarizes information about a false alarm probability and power in frequentist hypothesis testing
+* How a **receiver operator characteristic curve** summarizes information about a false alarm probability and power in frequentist hypothesis testing
 
-   * How during World War II the United States Navy devised a decision rule that Captain Garret L. Schyler challenged and asked Milton Friedman to justify to him, a topic to be studied in  :doc:`this lecture <wald_friedman>`
+* How during World War II the United States Navy devised a decision rule that Captain Garret L. Schyler challenged and asked Milton Friedman to justify to him, a topic to be studied in  :doc:`this lecture <wald_friedman>`
 
 Likelihood Ratio Process
 ========================
@@ -247,12 +248,20 @@ averaging across these many paths at each :math:`t`.
     l_arr_g = simulate(G_a, G_b, N=50000)
     l_seq_g = np.cumprod(l_arr_g, axis=1)
 
-The following Python code approximates  unconditional means
-:math:`E_{0}\left[L\left(w^{t}\right)\right]` by averaging across sample
+It would be useful to use simulations to verify that  unconditional means
+:math:`E_{0}\left[L\left(w^{t}\right)\right]` equal unity by averaging across sample
 paths.
 
-Please notice that while  sample averages  hover around their population means of :math:`1`, there is quite a bit
-of variability, a consequence of the *fat tail* of the distribution of  :math:`L\left(w^{t}\right)`.
+But it would be too challenging for us to that  here simply by applying a standard Monte Carlo simulation approach.
+
+The reason is that the distribution of :math:`L\left(w^{t}\right)` is extremely skewed for large values of  :math:`t`.
+
+Because the probabilty density in the right tail is close to :math:`0`,  it just takes too much computer time to sample enough points from the right tail.
+
+Instead, the following code just illustrates that the unconditional means of :math:`l(w_t)` are :math:`1`.  
+
+While   sample averages  hover around their population means of :math:`1`, there is evidently  quite a bit
+of variability.  
 
 .. code-block:: python3
 
@@ -343,23 +352,21 @@ To understand what this means, we have to define probabilities of two important 
 allow us to characterize a test associated with given
 threshold :math:`c`.
 
-The two probabities are:
+The two probabilities are:
 
 - Probability of detection (= power = 1 minus probability
-   of Type II error):
+  of Type II error):
 
-.. math::
+  .. math::
 
-
-   1-\beta \equiv \Pr\left\{ L\left(w^{t}\right)<c\mid q=g\right\}
+       1-\beta \equiv \Pr\left\{ L\left(w^{t}\right)<c\mid q=g\right\}
 
 - Probability of false alarm (= significance level = probability of
-   Type I error):
+  Type I error):
 
-.. math::
+  .. math::
 
-
-   \alpha \equiv  \Pr\left\{ L\left(w^{t}\right)<c\mid q=f\right\}
+      \alpha \equiv  \Pr\left\{ L\left(w^{t}\right)<c\mid q=f\right\}
 
 The `Neyman-Pearson
 Lemma <https://en.wikipedia.org/wiki/Neyman–Pearson_lemma>`__
@@ -469,9 +476,9 @@ If for a fixed :math:`t` we now free up and move :math:`c`, we will sweep out th
 of detection as a function of the probability of false alarm.
 
 This produces what is called a `receiver operating characteristic
-curve <https://en.wikipedia.org/wiki/Receiver_operating_characteristic>`__ for a given discrimination threshold :math:`c`.
+curve <https://en.wikipedia.org/wiki/Receiver_operating_characteristic>`__.
 
-Below, we plot receiver operating characteristic curves for a given discrimination threshold :math:`c` but different
+Below, we plot receiver operating characteristic curves for different
 sample sizes :math:`t`.
 
 .. code-block:: python3

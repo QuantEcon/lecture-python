@@ -603,25 +603,25 @@ are wrapped in a class  called ``LQ``, which includes
 
 * Instance data:
 
-    * The required parameters :math:`Q, R, A, B` and optional parameters `C, β, T, R_f, N` specifying a given LQ model
+  * The required parameters :math:`Q, R, A, B` and optional parameters `C, β, T, R_f, N` specifying a given LQ model
 
-        * set :math:`T` and :math:`R_f` to ``None`` in the infinite horizon case
+    * set :math:`T` and :math:`R_f` to ``None`` in the infinite horizon case
 
-        * set ``C = None`` (or zero) in the deterministic case
+    * set ``C = None`` (or zero) in the deterministic case
 
-    * the value function and policy data
+  * the value function and policy data
 
-        * :math:`d_t, P_t, F_t` in the finite horizon case
+    * :math:`d_t, P_t, F_t` in the finite horizon case
 
-        * :math:`d, P, F` in the infinite horizon case
+    * :math:`d, P, F` in the infinite horizon case
 
 * Methods:
 
-    * ``update_values`` --- shifts :math:`d_t, P_t, F_t` to their :math:`t-1` values via :eq:`lq_pr`, :eq:`lq_dd` and :eq:`lq_oc`
+  * ``update_values`` --- shifts :math:`d_t, P_t, F_t` to their :math:`t-1` values via :eq:`lq_pr`, :eq:`lq_dd` and :eq:`lq_oc`
 
-    * ``stationary_values`` --- computes :math:`P, d, F` in the infinite horizon case
+  * ``stationary_values`` --- computes :math:`P, d, F` in the infinite horizon case
 
-    * ``compute_sequence`` ---- simulates the dynamics of :math:`x_t, u_t, w_t` given :math:`x_0` and assuming standard normal shocks
+  * ``compute_sequence`` ---- simulates the dynamics of :math:`x_t, u_t, w_t` given :math:`x_0` and assuming standard normal shocks
 
 .. _lq_mfpa:
 

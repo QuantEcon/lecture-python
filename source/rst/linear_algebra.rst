@@ -204,7 +204,7 @@ Scalar multiplication is illustrated in the next figure
   plt.show()
 
 In Python, a vector can be represented as a list or tuple, such as ``x = (2, 4, 6)``, but is more commonly 
-represented as a `NumPy array <http://python-programming.quantecon.org/numpy.html#NumPy-Arrays>`__.
+represented as a `NumPy array <https://python-programming.quantecon.org/numpy.html#numpy-arrays>`__.
 
 One advantage of NumPy arrays is that scalar multiplication and addition have very natural syntax
 
@@ -652,7 +652,7 @@ You can create them manually from tuples of tuples (or lists of lists) as follow
 
 
 The ``shape`` attribute is a tuple giving the number of rows and columns ---
-see `here <https://python-programming.quantecon.org/numpy.html#Shape-and-Dimension>`__ 
+see `here <https://python-programming.quantecon.org/numpy.html#shape-and-dimension>`__ 
 for more discussion.
 
 To get the transpose of ``A``, use ``A.transpose()`` or, more simply, ``A.T``.
@@ -660,7 +660,7 @@ To get the transpose of ``A``, use ``A.transpose()`` or, more simply, ``A.T``.
 
 
 There are many convenient functions for creating common matrices (matrices of zeros, 
-ones, etc.) --- see `here <https://python-programming.quantecon.org/numpy.html#Creating-Arrays>`__.
+ones, etc.) --- see `here <https://python-programming.quantecon.org/numpy.html#creating-arrays>`__.
 
 
 
@@ -683,7 +683,7 @@ To multiply matrices we use the ``@`` symbol.
 
 In particular, ``A @ B`` is matrix multiplication, whereas ``A * B`` is element-by-element multiplication.
 
-See `here <https://python-programming.quantecon.org/numpy.html#Matrix-Multiplication>`__ for more discussion.
+See `here <https://python-programming.quantecon.org/numpy.html#matrix-multiplication>`__ for more discussion.
 
 
 
@@ -1414,8 +1414,7 @@ The associated Lagrangian is:
 
     L = -y'Py - u'Qu + \lambda' \lbrack Ax + Bu - y \rbrack
 
-1.
-^^.
+**Step 1.**
 
 Differentiating Lagrangian equation w.r.t y and setting its derivative
 equal to zero yields
@@ -1432,8 +1431,7 @@ Accordingly, the first-order condition for maximizing L w.r.t. y implies
 
     \lambda = -2 Py \:
 
-2.
-^^.
+**Step 2.**
 
 Differentiating Lagrangian equation w.r.t. u and setting its derivative
 equal to zero yields
@@ -1470,8 +1468,7 @@ Thus, the optimal choice of u must satisfy
 which follows from the definition of the first-order conditions for
 Lagrangian equation.
 
-3.
-^^.
+**Step 3.**
 
 Rewriting our problem by substituting the constraint into the objective
 function, we get
@@ -1546,7 +1543,7 @@ Therefore, the solution to the optimization problem
 
 
 .. [#fn_mdt] Although there is a specialized matrix data type defined in NumPy, it's more standard to work with ordinary NumPy arrays.  
-    See `this discussion <https://python-programming.quantecon.org/numpy.html#Matrix-Multiplication>`__.
+    See `this discussion <https://python-programming.quantecon.org/numpy.html#matrix-multiplication>`__.
 
 
 .. [#cfn] Suppose that :math:`\|S \| < 1`. Take any nonzero vector :math:`x`, and let :math:`r := \|x\|`. We have :math:`\| Sx \| = r \| S (x/r) \| \leq r \| S \| < r = \| x\|`. Hence every point is pulled towards the origin.

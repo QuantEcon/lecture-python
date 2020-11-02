@@ -30,7 +30,7 @@ Together, the two lectures  illustrate what is, in fact, a
 more general connection between a **planned economy** and a decentralized economy
 organized as a **competitive equilibrium**.
 
-This lecture is devoted to the planned economy version.  
+This lecture is devoted to the planned economy version.
 
 The lecture uses important ideas including
 
@@ -110,18 +110,18 @@ capital stock.
 There is an economy-wide production function
 
 .. math::
-  :label: production-function
+    :label: production-function
 
-  F(K_t,N_t) = A K_t^{\alpha}N_t^{1-\alpha}
+    F(K_t,N_t) = A K_t^{\alpha}N_t^{1-\alpha}
 
 with :math:`0 < \alpha<1`, :math:`A > 0`.
 
 A feasible allocation :math:`\vec{C}, \vec{K}` satisfies
 
 .. math::
-  :label: allocation
+    :label: allocation
 
-  C_t + K_{t+1} \leq F(K_t,N_t) + (1-\delta) K_t, \quad \text{for all } t \in [0, T]
+    C_t + K_{t+1} \leq F(K_t,N_t) + (1-\delta) K_t, \quad \text{for all } t \in [0, T]
 
 where :math:`\delta \in (0,1)` is a depreciation rate of capital.
 
@@ -138,29 +138,29 @@ To find an optimal allocation, form a Lagrangian
 
 .. math::
 
-  \mathcal{L}(\vec{C} ,\vec{K} ,\vec{\mu} ) =
-  \sum_{t=0}^T \beta^t\left\{ u(C_t)+ \mu_t
-  \left(F(K_t,1) + (1-\delta) K_t- C_t - K_{t+1} \right)\right\}
+    \mathcal{L}(\vec{C} ,\vec{K} ,\vec{\mu} ) =
+    \sum_{t=0}^T \beta^t\left\{ u(C_t)+ \mu_t
+    \left(F(K_t,1) + (1-\delta) K_t- C_t - K_{t+1} \right)\right\}
 
 and then pose the following min-max problem:
 
 .. math::
-  :label: min-max-prob
+    :label: min-max-prob
 
-  \min_{\vec{\mu}} \max_{\vec{C},\vec{K}} \mathcal{L}(\vec{C},\vec{K},\vec{\mu} )
+    \min_{\vec{\mu}} \max_{\vec{C},\vec{K}} \mathcal{L}(\vec{C},\vec{K},\vec{\mu} )
 
 
 -  **Extremization** means
    maximization with respect to :math:`\vec{C}, \vec{K}` and
-   minimization with respect to :math:`\vec{\mu}`. 
+   minimization with respect to :math:`\vec{\mu}`.
 
- 
+
 -  Our problem satisfies
    conditions that assure that required second-order
    conditions are satisfied at an allocation that satisfies the
-   first-order conditions that we are about to compute.  
+   first-order conditions that we are about to compute.
 
-Before computing first-order conditions, we present some handy formulas. 
+Before computing first-order conditions, we present some handy formulas.
 
 
 
@@ -173,13 +173,13 @@ Notice that
 
 .. math::
 
-  F(K_t,N_t) = A K_t^\alpha N_t^{1-\alpha} = N_t A\left(\frac{K_t}{N_t}\right)^\alpha
+    F(K_t,N_t) = A K_t^\alpha N_t^{1-\alpha} = N_t A\left(\frac{K_t}{N_t}\right)^\alpha
 
 Define the **output per-capita production function**
 
 .. math::
 
-  \frac{F(K_t,N_t)}{N_t} \equiv f\left(\frac{K_t}{N_t}\right) = A\left(\frac{K_t}{N_t}\right)^\alpha
+    \frac{F(K_t,N_t)}{N_t} \equiv f\left(\frac{K_t}{N_t}\right) = A\left(\frac{K_t}{N_t}\right)^\alpha
 
 whose argument is **capital per-capita**.
 
@@ -188,34 +188,34 @@ It is useful to recall the following calculations for the marginal product of ca
 
 
 .. math::
-  :label: useful-calc1
+    :label: useful-calc1
 
-  \begin{aligned}
-  \frac{\partial F(K_t,N_t)}{\partial K_t}
-  & =
-  \frac{\partial N_t f\left( \frac{K_t}{N_t}\right)}{\partial K_t}
-  \\ &=
-  N_t f'\left(\frac{K_t}{N_t}\right)\frac{1}{N_t} \quad \text{(Chain rule)}
-  \\ &=
-  f'\left.\left(\frac{K_t}{N_t}\right)\right|_{N_t=1}
-  \\ &= f'(K_t)
-  \end{aligned}
+    \begin{aligned}
+    \frac{\partial F(K_t,N_t)}{\partial K_t}
+    & =
+    \frac{\partial N_t f\left( \frac{K_t}{N_t}\right)}{\partial K_t}
+    \\ &=
+    N_t f'\left(\frac{K_t}{N_t}\right)\frac{1}{N_t} \quad \text{(Chain rule)}
+    \\ &=
+    f'\left.\left(\frac{K_t}{N_t}\right)\right|_{N_t=1}
+    \\ &= f'(K_t)
+    \end{aligned}
 
 and the marginal product of labor
 
 .. math::
 
-  \begin{aligned}
-  \frac{\partial F(K_t,N_t)}{\partial N_t}
-  &=
-  \frac{\partial N_t f\left( \frac{K_t}{N_t}\right)}{\partial N_t} \quad \text{(Product rule)}
-  \\ &=
-  f\left(\frac{K_t}{N_t}\right){+} N_t f'\left(\frac{K_t}{N_t}\right) \frac{-K_t}{N_t^2} \quad \text{(Chain rule)}
-  \\ &=
-  f\left(\frac{K_t}{N_t}\right){-}\frac{K_t}{N_t}f'\left.\left(\frac{K_t}{N_t}\right)\right|_{N_t=1}
-  \\ &=
-  f(K_t) - f'(K_t) K_t
-  \end{aligned}
+    \begin{aligned}
+    \frac{\partial F(K_t,N_t)}{\partial N_t}
+    &=
+    \frac{\partial N_t f\left( \frac{K_t}{N_t}\right)}{\partial N_t} \quad \text{(Product rule)}
+    \\ &=
+    f\left(\frac{K_t}{N_t}\right){+} N_t f'\left(\frac{K_t}{N_t}\right) \frac{-K_t}{N_t^2} \quad \text{(Chain rule)}
+    \\ &=
+    f\left(\frac{K_t}{N_t}\right){-}\frac{K_t}{N_t}f'\left.\left(\frac{K_t}{N_t}\right)\right|_{N_t=1}
+    \\ &=
+    f(K_t) - f'(K_t) K_t
+    \end{aligned}
 
 
 First-order necessary conditions
@@ -263,6 +263,7 @@ to :math:`K_{T+1}` and applying the following **Karush-Kuhn-Tucker condition** (
 Combining :eq:`constraint1` and :eq:`constraint2` gives
 
 .. math::
+
   u'\left(C_t\right)\left[(1-\delta)+f'\left(K_t\right)\right]-u'\left(C_{t-1}\right)=0
   \quad \text{ for all } t=1,2,\dots, T+1
 
@@ -278,16 +279,17 @@ Applying  the inverse of the utility function on both sides of the above
 equation gives
 
 .. math::
-  C_{t+1} =u'^{-1}\left(\left(\frac{\beta}{u'(C_t)}[f'(K_{t+1}) +(1-\delta)]\right)^{-1}\right)
+
+    C_{t+1} =u'^{-1}\left(\left(\frac{\beta}{u'(C_t)}[f'(K_{t+1}) +(1-\delta)]\right)^{-1}\right)
 
 which for our utility function :eq:`utility-oneperiod` becomes the consumption **Euler
 equation**
 
 .. math::
 
-  \begin{aligned} C_{t+1} =\left(\beta C_t^{\gamma}[f'(K_{t+1}) +
-  (1-\delta)]\right)^{1/\gamma} \notag\\= C_t\left(\beta [f'(K_{t+1}) +
-  (1-\delta)]\right)^{1/\gamma} \end{aligned}
+    \begin{aligned} C_{t+1} =\left(\beta C_t^{\gamma}[f'(K_{t+1}) +
+    (1-\delta)]\right)^{1/\gamma} \notag\\= C_t\left(\beta [f'(K_{t+1}) +
+    (1-\delta)]\right)^{1/\gamma} \end{aligned}
 
 Below we define a ``jitclass`` that stores parameters and functions
 that define our economy.
@@ -381,29 +383,29 @@ We use  **shooting** to compute an optimal allocation
 :math:`\vec{C}, \vec{K}` and an associated Lagrange multiplier sequence
 :math:`\vec{\mu}`.
 
-The first-order necessary conditions 
+The first-order necessary conditions
 :eq:`constraint1`, :eq:`constraint2`, and
 :eq:`constraint3`  for the planning problem form a system of **difference equations** with
 two boundary conditions:
 
--  :math:`K_0` is a given **initial condition** for capital
+- :math:`K_0` is a given **initial condition** for capital
 
--  :math:`K_{T+1} =0` is a **terminal condition** for capital that we
-   deduced from the first-order necessary condition for :math:`K_{T+1}`
-   the KKT condition :eq:`kkt`
+- :math:`K_{T+1} =0` is a **terminal condition** for capital that we
+  deduced from the first-order necessary condition for :math:`K_{T+1}`
+  the KKT condition :eq:`kkt`
 
 We have no initial condition for the Lagrange multiplier
 :math:`\mu_0`.
 
 If we did, our job would be easy:
 
--  Given :math:`\mu_0` and :math:`k_0`, we could compute :math:`c_0` from
-   equation :eq:`constraint1` and then :math:`k_1` from equation
-   :eq:`constraint3` and :math:`\mu_1` from equation
-   :eq:`constraint2`.
+- Given :math:`\mu_0` and :math:`k_0`, we could compute :math:`c_0` from
+  equation :eq:`constraint1` and then :math:`k_1` from equation
+  :eq:`constraint3` and :math:`\mu_1` from equation
+  :eq:`constraint2`.
 
--  We could continue in this way to compute the remaining elements of
-   :math:`\vec{C}, \vec{K}, \vec{\mu}`.
+- We could continue in this way to compute the remaining elements of
+  :math:`\vec{C}, \vec{K}, \vec{\mu}`.
 
 But we don't have an initial condition for :math:`\mu_0`, so this
 won't work.
@@ -417,24 +419,24 @@ It is  called the **shooting algorithm**.
 It is  an instance of a **guess and verify**
 algorithm that consists of the following steps:
 
--  Guess an initial Lagrange multiplier :math:`\mu_0`.
+- Guess an initial Lagrange multiplier :math:`\mu_0`.
 
--  Apply the **simple algorithm** described above.
+- Apply the **simple algorithm** described above.
 
--  Compute :math:`k_{T+1}` and check whether it
-   equals zero.
+- Compute :math:`k_{T+1}` and check whether it
+  equals zero.
 
--  If  :math:`K_{T+1} =0`, we have solved the problem.
+- If  :math:`K_{T+1} =0`, we have solved the problem.
 
--  If :math:`K_{T+1} > 0`, lower :math:`\mu_0` and try again.
+- If :math:`K_{T+1} > 0`, lower :math:`\mu_0` and try again.
 
--  If :math:`K_{T+1} < 0`, raise :math:`\mu_0` and try again.
+- If :math:`K_{T+1} < 0`, raise :math:`\mu_0` and try again.
 
 The following Python code implements the shooting algorithm for the
 planning problem.
 
-We actually modify the algorithm slightly by starting with a guess for 
-:math:`c_0` instead of :math:`\mu_0` in the following code. 
+We actually modify the algorithm slightly by starting with a guess for
+:math:`c_0` instead of :math:`\mu_0` in the following code.
 
 .. code-block:: python3
 
@@ -516,7 +518,7 @@ If :math:`K_{T+1}<0`, we take  it to be our new **upper** bound.
 Make a new guess for :math:`C_0` that is  halfway between our new
 upper and lower bounds.
 
-Shoot forward again, iterating on these steps until we converge.  
+Shoot forward again, iterating on these steps until we converge.
 
 When :math:`K_{T+1}` gets close enough to :math:`0` (i.e., within an error
 tolerance bounds), we stop.
@@ -616,29 +618,41 @@ Evalauating the feasibility constraint :eq:`allocation` at :math:`\bar K` gives
 Substituting :math:`K_t = \bar K` and :math:`C_t=\bar C` for
 all :math:`t` into :eq:`l12` gives
 
-.. math:: 1=\beta \frac{u'(\bar{C})}{u'(\bar{C})}[f'(\bar{K})+(1-\delta)]
+.. math::
+
+    1=\beta \frac{u'(\bar{C})}{u'(\bar{C})}[f'(\bar{K})+(1-\delta)]
 
 Defining :math:`\beta = \frac{1}{1+\rho}`, and cancelling gives
 
-.. math:: 1+\rho = 1[f'(\bar{K}) + (1-\delta)]
+.. math::
+
+    1+\rho = 1[f'(\bar{K}) + (1-\delta)]
 
 Simplifying gives
 
-.. math:: f'(\bar{K}) = \rho +\delta
+.. math::
+
+    f'(\bar{K}) = \rho +\delta
 
 and
 
-.. math:: \bar{K} = f'^{-1}(\rho+\delta)
+.. math::
+
+    \bar{K} = f'^{-1}(\rho+\delta)
 
 For the  production function :eq:`production-function` this becomes
 
-.. math:: \alpha \bar{K}^{\alpha-1} = \rho + \delta
+.. math::
+
+    \alpha \bar{K}^{\alpha-1} = \rho + \delta
 
 As an example, after setting :math:`\alpha= .33`,
 :math:`\rho = 1/\beta-1 =1/(19/20)-1 = 20/19-19/19 = 1/19`, :math:`\delta = 1/50`,
 we get
 
-.. math:: \bar{K} = \left(\frac{\frac{33}{100}}{\frac{1}{50}+\frac{1}{19}}\right)^{\frac{67}{100}} \approx 9.57583
+.. math::
+
+    \bar{K} = \left(\frac{\frac{33}{100}}{\frac{1}{50}+\frac{1}{19}}\right)^{\frac{67}{100}} \approx 9.57583
 
 Let's verify this with Python and then use this steady state
 :math:`\bar K` as our initial capital stock :math:`K_0`.
@@ -677,8 +691,8 @@ The following graphs compare optimal outcomes as we vary :math:`T`.
 
     plot_paths(pp, 0.3, k_ss/3, [150, 75, 50, 25], k_ss=k_ss);
 
-A Turnpike Property 
-======================
+A Turnpike Property
+===================
 
 The following calculation indicates that when  :math:`T` is very large,
 the optimal capital stock stays close to
@@ -698,8 +712,8 @@ This pattern reflects a **turnpike** property of the steady state.
 
 A rule of thumb for the planner is
 
--  from :math:`K_0`, push :math:`K_t` toward
-   the steady state and stay close to the steady state until time approaches :math:`T`.
+- from :math:`K_0`, push :math:`K_t` toward
+  the steady state and stay close to the steady state until time approaches :math:`T`.
 
 
 The planner accomplishes this by adjusting the saving rate :math:`\frac{f(K_t) - C_t}{f(K_t)}`
@@ -784,7 +798,7 @@ state.
 Since :math:`K_0<\bar K`, :math:`f'(K_0)>\rho +\delta`.
 
 The planner chooses a positive saving rate that is higher than  the steady state
-saving rate. 
+saving rate.
 
 Note, :math:`f''(K)<0`, so as :math:`K` rises, :math:`f'(K)` declines.
 
@@ -792,13 +806,13 @@ The planner slowly lowers the saving rate until reaching a steady
 state in which :math:`f'(K)=\rho +\delta`.
 
 Exercise
----------
+--------
 
--  Plot the optimal consumption, capital, and saving paths when the
-   initial capital level begins at 1.5 times the steady state level
-   as we shoot towards the steady state at :math:`T=130`.
+- Plot the optimal consumption, capital, and saving paths when the
+  initial capital level begins at 1.5 times the steady state level
+  as we shoot towards the steady state at :math:`T=130`.
 
--  Why does the saving rate respond as it does?
+- Why does the saving rate respond as it does?
 
 Solution
 ----------
@@ -816,7 +830,7 @@ technology and preference structure as deployed here.
 In that lecture, we replace the  planner of this lecture with Adam Smith's **invisible hand**
 
 In place of quantity choices made by the planner, there are market prices somewhat produced by 
-the invisible hand. 
+the invisible hand.
 
 Market prices must adjust to reconcile distinct decisions that are made independently
 by a representative household and a representative firm.
