@@ -358,17 +358,15 @@ The two probabilities are:
   of Type II error):
 
   .. math::
-  
-  
-     1-\beta \equiv \Pr\left\{ L\left(w^{t}\right)<c\mid q=g\right\}
+
+       1-\beta \equiv \Pr\left\{ L\left(w^{t}\right)<c\mid q=g\right\}
 
 - Probability of false alarm (= significance level = probability of
   Type I error):
 
   .. math::
-  
-  
-     \alpha \equiv  \Pr\left\{ L\left(w^{t}\right)<c\mid q=f\right\}
+
+      \alpha \equiv  \Pr\left\{ L\left(w^{t}\right)<c\mid q=f\right\}
 
 The `Neyman-Pearson
 Lemma <https://en.wikipedia.org/wiki/Neyman–Pearson_lemma>`__
