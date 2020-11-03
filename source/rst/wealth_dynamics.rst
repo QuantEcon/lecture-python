@@ -68,7 +68,8 @@ We will use the following imports.
     %matplotlib inline
     
     import quantecon as qe
-    from numba import njit, jitclass, float64, prange
+    from numba import njit, float64, prange
+    from numba.experimental import jitclass
 
 
 Lorenz Curves and the Gini Coefficient
