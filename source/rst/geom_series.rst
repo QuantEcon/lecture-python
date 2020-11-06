@@ -92,7 +92,7 @@ equation :math:`1 = 1`.
 Finite Geometric Series
 -----------------------
 
-The second series that interests us is the finite geomtric series
+The second series that interests us is the finite geometric series
 
 .. math:: 1 + c + c^2 + c^3 + \cdots + c^T
 
@@ -292,7 +292,7 @@ Static Version
 
 
 An elementary Keynesian model of national income determination consists
-of three equations that describe aggegate demand for :math:`y` and its
+of three equations that describe aggregate demand for :math:`y` and its
 components.
 
 The first equation is a national income identity asserting that
@@ -360,7 +360,7 @@ We modify our consumption function to assume the form
 so that :math:`b` is the marginal propensity to consume (now) out of
 last period's income.
 
-We begin wtih an initial condition stating that
+We begin with an initial condition stating that
 
 .. math:: y_{-1} = 0
 
