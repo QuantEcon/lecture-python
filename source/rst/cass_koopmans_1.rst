@@ -246,9 +246,8 @@ We now compute **first order necessary conditions** for extremization of the Lag
     K_{T+1}: \qquad -\mu_T \leq 0, \ \leq 0 \text{ if } K_{T+1}=0; \ =0 \text{ if } K_{T+1}>0
 
 
-In computing  :eq:`constraint3` we recognize that 
-of :math:`K_t` appears in both the time  :math:`t` and time :math:`t-1`
-feasibility constraints.
+In computing  :eq:`constraint3` we recognize that :math:`K_t` appears
+in both the time  :math:`t` and time :math:`t-1` feasibility constraints.
 
 :eq:`constraint4` comes from differentiating with respect
 to :math:`K_{T+1}` and applying the following **Karush-Kuhn-Tucker condition** (KKT)
