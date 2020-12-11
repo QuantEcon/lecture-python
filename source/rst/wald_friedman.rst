@@ -79,7 +79,7 @@ Milton Friedman described a problem presented to him and Allen Wallis
 during World War II, when they worked at the US Government's
 Statistical Research Group at Columbia University.
 
-Let's listen to Milton Friedman tell us what happened::
+Let's listen to Milton Friedman tell us what happened:
 
     In order to understand the story, it is necessary to have an idea of a
     simple statistical problem, and of the standard procedure for dealing
