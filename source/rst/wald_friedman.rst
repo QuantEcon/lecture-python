@@ -20,10 +20,10 @@
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
 .. code-block:: ipython
-  :class: hide-output
+    :class: hide-output
 
-  !conda install -y quantecon
-  !pip install interpolation
+    !conda install -y quantecon
+    !pip install interpolation
 
 
 Overview
@@ -91,16 +91,12 @@ Let's listen to Milton Friedman tell us what happened
     to that of B and conversely 0 or 1 to B. The Navy asks the statistician
     how to conduct the test and how to analyze the results.
 
-..
-
     The standard statistical answer was to specify a number of firings (say
     1,000) and a pair of percentages (e.g., 53% and 47%) and tell the client
     that if A receives a 1 in more than 53% of the firings, it can be
     regarded as superior; if it receives a 1 in fewer than 47%, B can be
     regarded as superior; if the percentage is between 47% and 53%, neither
     can be so regarded.
-
-..
 
     When Allen Wallis was discussing such a problem with (Navy) Captain
     Garret L. Schyler, the captain objected that such a test, to quote from
@@ -1006,8 +1002,8 @@ Here is how Wald introduces the notion of a sequential test
 .. rubric:: Footnotes
 
 .. [#f1] The decision maker acts as if he believes that the sequence of random variables
-    :math:`[z_{0}, z_{1}, \ldots]` is *exchangeable*.  See `Exchangeability and Bayesian Updating <https://python.quantecon.org/exchangeable.html>`__ and
-    :cite:`Kreps88` chapter 11, for  discussions of exchangeability.
+   :math:`[z_{0}, z_{1}, \ldots]` is *exchangeable*.  See `Exchangeability and Bayesian Updating <https://python.quantecon.org/exchangeable.html>`__ and
+   :cite:`Kreps88` chapter 11, for  discussions of exchangeability.
 
 Sequels
 ========
