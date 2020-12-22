@@ -10,5 +10,5 @@ dependencies:
     - quantecon
     - interpolation
     - sphinxcontrib-jupyter
-    - sphinxcontrib-bibtex
+    - sphinxcontrib-bibtex==1.0
     - joblib
