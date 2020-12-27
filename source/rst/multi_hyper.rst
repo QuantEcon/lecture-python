@@ -70,7 +70,7 @@ Under the hypothesis that the selection process judges proposals on their qualit
 To evaluate whether the selection procedure is **color blind** the administrator wants to  study whether the particular realization of :math:`X` drawn can plausibly
 be said to be a random draw from the probability distribution that is implied by the **color blind** hypothesis.  
 
-The appropriate probability distribution is the one described `here <https://en.wikipedia.org/wiki/Hypergeometric_distribution>`__
+The appropriate probability distribution is the one described `here <https://en.wikipedia.org/wiki/Hypergeometric_distribution>`__.
 
 Let's now instantiate the administrator's problem, while continuing to use the colored balls metaphor.
 
