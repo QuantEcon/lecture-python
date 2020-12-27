@@ -102,7 +102,7 @@ The key formula here is
 
 .. math:: 1 + c + c^2 + c^3 + \cdots + c^T  = \frac{1 - c^{T+1}}{1-c}
 
-**Remark:** The above formula works for any value of the scalar
+**Remark:** The above formulas work for any value of the scalar
 :math:`c`. We don't have to restrict :math:`c` to be in the
 set :math:`(-1,1)`.
 
