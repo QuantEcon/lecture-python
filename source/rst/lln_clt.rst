@@ -419,7 +419,7 @@ To this end, we now perform the following simulation
 Here's some code that does exactly this for the exponential distribution
 :math:`F(x) = 1 - e^{- \lambda x}`.
 
-(Please experiment with other choices of :math:`F`, but remember that, to conform with the conditions of the CLT, the distribution must have a finite second moment)
+(Please experiment with other choices of :math:`F`, but remember that, to conform with the conditions of the CLT, the distribution must have a finite second moment.)
 
 .. _sim_one:
 
@@ -482,7 +482,7 @@ random variable, the distribution of :math:`Y_n` will smooth out into a bell-sha
 The next figure shows this process for :math:`X_i \sim f`, where :math:`f` was
 specified as the convex combination of three different beta densities.
 
-(Taking a convex combination is an easy way to produce an irregular shape for :math:`f`)
+(Taking a convex combination is an easy way to produce an irregular shape for :math:`f`.)
 
 In the figure, the closest density is that of :math:`Y_1`, while the furthest is that of
 :math:`Y_5`
@@ -715,7 +715,7 @@ If :math:`g \colon \mathbb R \to \mathbb R` is differentiable at :math:`\mu` and
 
 This theorem is used frequently in statistics to obtain the asymptotic distribution of estimators --- many of which can be expressed as functions of sample means.
 
-(These kinds of results are often said to use the "delta method")
+(These kinds of results are often said to use the "delta method".)
 
 The proof is based on a Taylor expansion of :math:`g` around the point :math:`\mu`.
 
@@ -816,7 +816,7 @@ Given the distribution of :math:`\mathbf Z`, we conclude that
 where :math:`\chi^2(k)` is the chi-squared distribution with :math:`k` degrees
 of freedom.
 
-(Recall that :math:`k` is the dimension of :math:`\mathbf X_i`, the underlying random vectors)
+(Recall that :math:`k` is the dimension of :math:`\mathbf X_i`, the underlying random vectors.)
 
 Your second exercise is to illustrate the convergence in :eq:`lln_ctc` with a simulation.
 
