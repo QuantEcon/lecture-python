@@ -446,7 +446,7 @@ one-dimensional measure of intelligence called IQ from a list of test
 scores.
 
 The :math:`i`\ th test score :math:`y_i` equals the sum of an unknown
-scalar IQ :math:`\theta` and a random variables :math:`w_{i}`.
+scalar IQ :math:`\theta` and a random variable :math:`w_{i}`.
 
 .. math::
 
@@ -658,7 +658,7 @@ change as more test results come in.
     plt.show()
 
 The solid blue line in the plot above shows :math:`\hat{\mu}_{\theta}`
-as function of the number of test scores that we have recorded and
+as a function of the number of test scores that we have recorded and
 conditioned on.
 
 The blue area shows the span that comes from adding or deducing
@@ -738,7 +738,7 @@ Then we can write
 
 
 
-The mutual orthogonality of the :math:`\epsilon_i`\ ’s provides us an
+The mutual orthogonality of the :math:`\epsilon_i`\ ’s provides us with an
 informative way to interpret them in light of equation (1).
 
 Thus, relative to what is known from tests :math:`i=1, \ldots, n-1`,
@@ -1578,7 +1578,7 @@ Let’s look at them, after which we’ll look at :math:`E f | y = B y`
     B @ y
 
 The fraction of variance in :math:`y_{t}` explained by the first two
-principal component can be computed as below.
+principal components can be computed as below.
 
 .. code-block:: python3
 
