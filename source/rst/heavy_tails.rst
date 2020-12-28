@@ -194,7 +194,7 @@ where :math:`\mu := \mathbb E X_i = \int x F(x)` is the common mean of the sampl
 The condition :math:`\mathbb E | X_i | = \int |x| F(x) < \infty` holds
 in most cases but can fail if the distribution :math:`F` is very heavy tailed.
 
-For example, it fails for the Cauchy distribution 
+For example, it fails for the Cauchy distribution.
 
 Let's have a look at the behavior of the sample mean in this case, and see
 whether or not the LLN is still valid.
@@ -637,7 +637,7 @@ the equations
     \quad \text{and} \quad
     2^{1/\alpha} = \exp(\mu)
 
-which we solve for :math:`\mu` and :math:`\sigma` given :math:`\alpha = 1.05`
+which we solve for :math:`\mu` and :math:`\sigma` given :math:`\alpha = 1.05`.
     
 Here is code that generates the two samples, produces the violin plot and
 prints the mean and standard deviation of the two samples.
