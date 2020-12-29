@@ -75,7 +75,7 @@ represent a model of national output based on three components:
    constitute *aggregate demand,* which automatically calls forth an
    equal amount of *aggregate supply*.
 
-(To read about linear difference equations see `here <https://en.wikipedia.org/wiki/Linear\_difference\_equation>`__ or chapter IX of :cite:`Sargent1987`)
+(To read about linear difference equations see `here <https://en.wikipedia.org/wiki/Linear\_difference\_equation>`__ or chapter IX of :cite:`Sargent1987`.)
 
 
 
@@ -102,7 +102,7 @@ gives rise to recurrent irregular business cycles.
 
 
 (To read about stochastic linear difference equations see chapter XI of
-:cite:`Sargent1987`)
+:cite:`Sargent1987`.)
 
 
 Details
