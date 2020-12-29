@@ -683,7 +683,7 @@ Aperiodicity
 ----------------
 
 
-Loosely speaking, a Markov chain is called periodic if it cycles in a predictible way, and aperiodic otherwise.
+Loosely speaking, a Markov chain is called periodic if it cycles in a predictable way, and aperiodic otherwise.
 
 Here's a trivial example with three states
 
@@ -885,7 +885,7 @@ with the unit eigenvalue :math:`\lambda = 1`.
 
 A more stable and sophisticated algorithm is implemented in `QuantEcon.py <http://quantecon.org/quantecon-py>`__.
 
-This is the one we recommend you use:
+This is the one we recommend you to use:
 
 .. code-block:: python3
 
