@@ -399,7 +399,7 @@ With the deterministic seasonal, the transition matrix becomes
         \end{bmatrix}
 
 
-It is easy to check that :math:`A^4 = I`, which implies that :math:`x_t` is strictly periodic with period 4:[#foot1]_
+It is easy to check that :math:`A^4 = I`, which implies that :math:`x_t` is strictly periodic with period 4[#foot1]_:
 
 .. math::
 
