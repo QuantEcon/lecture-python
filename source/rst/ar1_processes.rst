@@ -101,7 +101,7 @@ series :math:`\{ X_t\}`.
 
 To see this, we first note that :math:`X_t` is normally distributed for each :math:`t`.
 
-This is immediate form :eq:`ar1_ma`, since linear combinations of independent
+This is immediate from :eq:`ar1_ma`, since linear combinations of independent
 normal random variables are normal.
 
 Given that :math:`X_t` is normally distributed, we will know the full distribution
@@ -209,7 +209,7 @@ In fact it's easy to show that such convergence will occur, regardless of the in
 To see this, we just have to look at the dynamics of the first two moments, as
 given in :eq:`dyn_tm`.
 
-When :math:`|a| < 1`, these sequence converge to the respective limits
+When :math:`|a| < 1`, these sequences converge to the respective limits
 
 .. math::
     :label: mu_sig_star
