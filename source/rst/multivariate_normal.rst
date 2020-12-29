@@ -804,7 +804,7 @@ Evidently, the Cholesky factorization is automatically computing the
 population  **regression coefficients** and associated statistics
 that are produced by our ``MultivariateNormal`` class.
 
-And they are doing it **recursively**.
+The Cholesky factorization is  computing things **recursively**.
 
 Indeed, in formula (1),
 
