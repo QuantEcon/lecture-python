@@ -171,7 +171,7 @@ fixed :math:`T`.
 We will do this by generating many draws of :math:`X_T` given initial
 condition :math:`X_0`.
 
-With these draws of :math:`X_T` we can build up a picture of its distribution :math:`\psi_T` 
+With these draws of :math:`X_T` we can build up a picture of its distribution :math:`\psi_T`. 
 
 Here's one visualization, with :math:`T=50`.
 
