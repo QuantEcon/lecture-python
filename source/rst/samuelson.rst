@@ -71,9 +71,9 @@ represent a model of national output based on three components:
    times the difference in output between period :math:`t-1` and
    :math:`t-2`.
 
--  the idea that consumption plus investment plus government purchases
-   constitute *aggregate demand,* which automatically calls forth an
-   equal amount of *aggregate supply*.
+Consumption plus investment plus government purchases
+constitute *aggregate demand,* which automatically calls forth an
+equal amount of *aggregate supply*.
 
 (To read about linear difference equations see `here <https://en.wikipedia.org/wiki/Linear\_difference\_equation>`__ or chapter IX of :cite:`Sargent1987`)
 
