@@ -425,8 +425,7 @@ Next we provide a function to compute the difference
 .. math::
     :label: euler_diff_eq
 
-    u'(c)
-    - \max \left\{
+    u'(c) - \max \left\{
                \beta R \, \mathbb E_z (u' \circ \sigma) \, 
                [R (a - c) + \hat Y, \, \hat Z]
                \, , \;
