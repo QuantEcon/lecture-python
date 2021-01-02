@@ -14,7 +14,7 @@ Cass-Koopmans Planning Problem
 Overview
 =========
 
-This lecture and in :doc:`Cass-Koopmans Competitive Equilibrium <cass_koopmans_2>` describe a model that Tjalling Koopmans :cite:`Koopmans`
+This lecture and lecture :doc:`Cass-Koopmans Competitive Equilibrium <cass_koopmans_2>` describe a model that Tjalling Koopmans :cite:`Koopmans`
 and David Cass :cite:`Cass` used to analyze optimal growth.
 
 The model can be viewed as an extension of the model of Robert Solow
@@ -702,7 +702,7 @@ its steady state value most of the time.
 
     plot_paths(pp, 0.3, k_ss/3, [250, 150, 50, 25], k_ss=k_ss);
 
-Different colors in the above graphs are associated
+Different colors in the above graphs are associated with
 different horizons :math:`T`.
 
 Notice that as the horizon increases, the planner puts :math:`K_t`
