@@ -341,7 +341,7 @@ Exercise 1
 Use the code above to explore what happens to the reservation wage when the wage parameter :math:`\mu`
 changes.
 
-Use the default parameters and :math:`\mu` in ``mu_vals = np.linspace(0.0, 2.0, 15)``
+Use the default parameters and :math:`\mu` in ``mu_vals = np.linspace(0.0, 2.0, 15)``.
 
 Is the impact on the reservation wage as you expected?
 
