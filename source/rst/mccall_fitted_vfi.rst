@@ -361,7 +361,7 @@ support.
 
 Use ``s_vals = np.linspace(1.0, 2.0, 15)`` and ``m = 2.0``.
 
-State how you expect the reservation wage vary with :math:`s`.
+State how you expect the reservation wage to vary with :math:`s`.
 
 Now compute it.  Is this as you expected?
 
