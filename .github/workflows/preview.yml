@@ -17,7 +17,7 @@ jobs:
           miniconda-version: 'latest'
           python-version: 3.8
           environment-file: environment.yml
-          activate-environment: python-lectures
+          activate-environment: lecture-python
       - name: Get Changed Files
         id: files
         uses: jitterbit/get-changed-files@v1

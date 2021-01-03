@@ -1,5 +1,5 @@
 
-name: python-lectures
+name: lecture-python
 channels:
   - default
 dependencies:

@@ -35,7 +35,7 @@ jobs:
           miniconda-version: 'latest'
           python-version: 3.8
           environment-file: environment.yml
-          activate-environment: python-lectures
+          activate-environment: lecture-python
       - name: Checkout QuantEcon theme
         uses: actions/checkout@v2
         with:
