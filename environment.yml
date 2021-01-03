@@ -4,7 +4,7 @@ channels:
   - default
 dependencies:
   - python=3.8
-  - anaconda=2020.11
+  - anaconda=2020.07
   - pip
   - pip:
     - quantecon
@@ -12,4 +12,3 @@ dependencies:
     - sphinxcontrib-jupyter
     - sphinxcontrib-bibtex==1.0
     - joblib
-    - jinja2==2.11.1
