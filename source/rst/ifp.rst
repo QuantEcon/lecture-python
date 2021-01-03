@@ -36,7 +36,7 @@ model <optgrowth>` and yet differs in important ways.
 
 For example, the choice problem for the agent includes an additive income term that leads to an occasionally binding constraint.
 
-Moreover, in this and the following lectures, we will inject more realisitic
+Moreover, in this and the following lectures, we will inject more realistic
 features such as correlated shocks.
 
 To solve the model we will use Euler equation based time iteration, which proved
@@ -663,7 +663,7 @@ shocks.
 Your task is to investigate how this measure of aggregate capital varies with
 the interest rate.
 
-Following tradition, put the price (i.e., interest rate) is on the vertical axis.
+Following tradition, put the price (i.e., interest rate) on the vertical axis.
 
 On the horizontal axis put aggregate capital, computed as the mean of the
 stationary distribution given the interest rate.
