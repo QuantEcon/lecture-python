@@ -334,7 +334,7 @@ itself via
 
 
 (A new vector :math:`Tv` is obtained from given vector :math:`v` by evaluating
-the r.h.s. at each :math:`i`)
+the r.h.s. at each :math:`i`.)
 
 The element :math:`v_k` in the sequence :math:`\{v_k\}` of successive
 approximations corresponds to :math:`T^k v`.
