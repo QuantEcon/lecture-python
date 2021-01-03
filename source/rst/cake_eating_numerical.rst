@@ -98,7 +98,7 @@ The Bellman Operator
 --------------------
 
 We introduce the **Bellman operator** :math:`T` that takes a function `v` as an
-argument and returns a new function :math:`Tv` defined by.
+argument and returns a new function :math:`Tv` defined by
 
 .. math::
 
