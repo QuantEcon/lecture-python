@@ -739,7 +739,7 @@ Then we can write
 
 
 The mutual orthogonality of the :math:`\epsilon_i`\ ’s provides us with an
-informative way to interpret them in light of equation (1).
+informative way to interpret them in light of equation :eq:`mnv_1`.
 
 Thus, relative to what is known from tests :math:`i=1, \ldots, n-1`,
 :math:`c_i \epsilon_i` is the amount of **new information** about
@@ -748,7 +748,7 @@ Thus, relative to what is known from tests :math:`i=1, \ldots, n-1`,
 Here **new information** means **surprise** or what could not be
 predicted from earlier information.
 
-Formula (1) also provides us with an enlightening way to express
+Formula :eq:`mnv_1` also provides us with an enlightening way to express
 conditional means and conditional variances that we computed earlier.
 
 In particular,
@@ -806,7 +806,7 @@ that are produced by our ``MultivariateNormal`` class.
 
 The Cholesky factorization is  computing things **recursively**.
 
-Indeed, in formula (1),
+Indeed, in formula :eq:`mnv_1`,
 
 -  the random variable :math:`c_i \epsilon_i` is information about
    :math:`\theta` that is not contained by the information in

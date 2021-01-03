@@ -256,7 +256,7 @@ But it would be too challenging for us to that  here simply by applying a standa
 
 The reason is that the distribution of :math:`L\left(w^{t}\right)` is extremely skewed for large values of  :math:`t`.
 
-Because the probabilty density in the right tail is close to :math:`0`,  it just takes too much computer time to sample enough points from the right tail.
+Because the probability density in the right tail is close to :math:`0`,  it just takes too much computer time to sample enough points from the right tail.
 
 Instead, the following code just illustrates that the unconditional means of :math:`l(w_t)` are :math:`1`.  
 
@@ -506,7 +506,7 @@ Notice that as :math:`t` increases, we are assured a larger probability
 of detection and a smaller probability of false alarm associated with
 a given discrimination threshold :math:`c`.
 
-As :math:`t \rightarrow + \infty`, we approach the the perfect detection
+As :math:`t \rightarrow + \infty`, we approach the perfect detection
 curve that is indicated by a right angle hinging on the green dot.
 
 For a given sample size :math:`t`, a value discrimination threshold :math:`c` determines a point on the receiver operating 

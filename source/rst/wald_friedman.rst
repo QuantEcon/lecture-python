@@ -799,7 +799,7 @@ Before you look, think about what will happen:
     wf = WaldFriedman(c=2.5)
     simulation_plot(wf)
 
-Increased cost per draw has induced the decision-maker to take less draws before deciding.
+Increased cost per draw has induced the decision-maker to take fewer draws before deciding.
 
 Because he decides with less, the percentage of time he is correct drops.
 

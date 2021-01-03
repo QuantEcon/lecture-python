@@ -98,7 +98,7 @@ The Bellman Operator
 --------------------
 
 We introduce the **Bellman operator** :math:`T` that takes a function `v` as an
-argument and returns a new function :math:`Tv` defined by.
+argument and returns a new function :math:`Tv` defined by
 
 .. math::
 
@@ -117,7 +117,7 @@ v` converges to the solution to the Bellman equation.
 Fitted Value Function Iteration
 -------------------------------
 
-Both consumption :math:`c` and the state variable :math:`x` are continous.
+Both consumption :math:`c` and the state variable :math:`x` are continuous.
 
 This causes complications when it comes to numerical work.
 
@@ -430,7 +430,7 @@ Let's plot this next to the true analytical solution
     plt.show()
 
 
-The fit is reasoable but not perfect.
+The fit is reasonable but not perfect.
 
 We can improve it by increasing the grid size or reducing the
 error tolerance in the value function iteration routine.
@@ -534,7 +534,7 @@ Solutions
 Exercise 1
 ----------
 
-We need to create a class to hold our primitives and return the right hand side of the bellman equation.
+We need to create a class to hold our primitives and return the right hand side of the Bellman equation.
 
 We will use `inheritance <https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)>`__ to maximize code reuse.
 

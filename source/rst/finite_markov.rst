@@ -683,7 +683,7 @@ Aperiodicity
 ----------------
 
 
-Loosely speaking, a Markov chain is called periodic if it cycles in a predictible way, and aperiodic otherwise.
+Loosely speaking, a Markov chain is called periodic if it cycles in a predictable way, and aperiodic otherwise.
 
 Here's a trivial example with three states
 
@@ -885,7 +885,7 @@ with the unit eigenvalue :math:`\lambda = 1`.
 
 A more stable and sophisticated algorithm is implemented in `QuantEcon.py <http://quantecon.org/quantecon-py>`__.
 
-This is the one we recommend you use:
+This is the one we recommend you to use:
 
 .. code-block:: python3
 
@@ -1194,7 +1194,7 @@ A topic of interest for economics and many other disciplines is *ranking*.
 Let's now consider one of the most practical and important ranking problems
 --- the rank assigned to web pages by search engines.
 
-(Although the problem is motivated from outside of economics, there is in fact a deep connection between search ranking systems and prices in certain competitive equilibria --- see :cite:`DLP2013`)
+(Although the problem is motivated from outside of economics, there is in fact a deep connection between search ranking systems and prices in certain competitive equilibria --- see :cite:`DLP2013`.)
 
 To understand the issue, consider the set of results returned by a query to a web search engine.
 

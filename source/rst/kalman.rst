@@ -509,7 +509,7 @@ Conditions under which a fixed point exists and the sequence :math:`\{\Sigma_t\}
 
 A sufficient (but not necessary) condition is that all the eigenvalues :math:`\lambda_i` of :math:`A` satisfy :math:`|\lambda_i| < 1` (cf. e.g., :cite:`AndersonMoore2005`, p. 77).
 
-(This strong condition assures that the unconditional  distribution of :math:`x_t`  converges as :math:`t \rightarrow + \infty`)
+(This strong condition assures that the unconditional  distribution of :math:`x_t`  converges as :math:`t \rightarrow + \infty`.)
 
 In this case, for any initial choice of :math:`\Sigma_0` that is both non-negative and symmetric, the sequence :math:`\{\Sigma_t\}` in :eq:`kalman_sdy` converges to a non-negative symmetric matrix :math:`\Sigma` that solves :eq:`kalman_dare`.
 

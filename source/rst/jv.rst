@@ -224,7 +224,7 @@ We will set up a class ``JVWorker`` that holds the parameters of the model descr
 
 
 The function ``operator_factory`` takes an instance of this class and returns a
-jitted version of the Bellman operator ``T``, ie.
+jitted version of the Bellman operator ``T``, i.e.
 
 .. math::
 
