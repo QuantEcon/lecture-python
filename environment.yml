@@ -1,5 +1,5 @@
 
-name: qe-lectures
+name: python-lectures
 channels:
   - default
 dependencies:
