@@ -38,7 +38,7 @@ We'll study how, at least  in our setting, a Bayesian eventually learns the prob
 rests on the asymptotic behavior of likelihood ratio processes studied in :doc:`this lecture <likelihood_ratio_process>`. 
 
 This lecture provides technical results that underly outcomes to be studied in :doc:`this lecture <odu>`
-and :doc:`this lecture <wald_friedman>` and :doc:`this lecture <navy_captain>`
+and :doc:`this lecture <wald_friedman>` and :doc:`this lecture <navy_captain>`.
 
 
 The Setting
@@ -380,4 +380,4 @@ Sequels
 This lecture has been devoted to building some useful infrastructure.
 
 We'll build on results highlighted in this lectures to understand inferences that are the foundations of
-results described  in :doc:`this lecture <odu>` and :doc:`this lecture <wald_friedman>` and :doc:`this lecture <navy_captain>`
+results described  in :doc:`this lecture <odu>` and :doc:`this lecture <wald_friedman>` and :doc:`this lecture <navy_captain>`.
