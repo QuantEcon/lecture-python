@@ -853,7 +853,7 @@ We can provide more insights by focusing soley the case in which
     π_star = 0.5
 
 Recall that when :math:`\pi^*=0.5`, the frequentist decision rule sets a
-sample size ``t_optimal`` **ex ante**
+sample size ``t_optimal`` **ex ante**.
 
 For our parameter settings, we can compute it’s value:
 
