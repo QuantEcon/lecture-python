@@ -249,7 +249,7 @@ It can be shown that
 
 We now have a clear path to successfully approximating the optimal policy:
 choose some :math:`\sigma \in \mathscr C` and then iterate with :math:`K` until
-convergence (as measured by the distance :math:`\rho`)
+convergence (as measured by the distance :math:`\rho`).
 
 
 
