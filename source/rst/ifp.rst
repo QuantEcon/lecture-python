@@ -200,7 +200,7 @@ strict inequality :math:`u' (c_t) > \beta R \,  \mathbb{E}_t  u'(c_{t+1})`
 can occur because :math:`c_t` cannot increase sufficiently to attain equality.
 
 (The lower boundary case :math:`c_t = 0` never arises at the optimum because
-:math:`u'(0) = \infty`)
+:math:`u'(0) = \infty`.)
 
 With some thought, one can show that :eq:`ee00` and :eq:`ee01` are
 equivalent to
