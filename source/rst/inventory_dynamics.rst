@@ -21,7 +21,7 @@ follow so-called s-S inventory dynamics.
 Such firms 
 
 1. wait until inventory falls below some level :math:`s` and then
-2. order sufficent quantities to bring their inventory back up to capacity :math:`S`.
+2. order sufficient quantities to bring their inventory back up to capacity :math:`S`.
 
 These kinds of policies are common in practice and also optimal in certain circumstances.
 
