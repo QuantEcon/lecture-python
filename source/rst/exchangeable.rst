@@ -43,7 +43,7 @@ that are
 Understanding the distinction between these concepts is essential for appreciating how Bayesian updating
 works in our example.
 
-You can read about exchangeability `here <https://en.wikipedia.org/wiki/Exchangeable_random_variables>`__
+You can read about exchangeability `here <https://en.wikipedia.org/wiki/Exchangeable_random_variables>`__.
 
 
 
@@ -299,7 +299,7 @@ Let :math:`q` represent the distribution that nature actually draws from
 
 .. math::   \pi = \mathbb{P}\{q = f \}
 
-where we regard :math:`\pi` as the decision maker's **subjective probability**  (also called a **personal probability**.
+where we regard :math:`\pi` as the decision maker's **subjective probability**  (also called a **personal probability**).
 
 Suppose that at :math:`t \geq 0`, the decision maker has  observed a history
 :math:`w^t \equiv [w_t, w_{t-1}, \ldots, w_0]`.
@@ -482,7 +482,7 @@ We'll begin with the default values of various objects, then change them in a su
     learning_example()
 
 Please look at the three graphs above created for an instance in which :math:`f` is a uniform distribution on :math:`[0,1]`
-(i.e., a Beta distribution with parameters :math:`F_a=1, F_b=1`, while  :math:`g` is a Beta distribution with the default parameter values :math:`G_a=3, G_b=1.2`.
+(i.e., a Beta distribution with parameters :math:`F_a=1, F_b=1`), while  :math:`g` is a Beta distribution with the default parameter values :math:`G_a=3, G_b=1.2`.
 
 The graph in the left  plots the likehood ratio :math:`l(w)` on the coordinate axis against :math:`w` on the coordinate axis.
 
@@ -535,7 +535,7 @@ assumptions about nature's choice of distribution:
 
 
 Outcomes depend on a peculiar property of likelihood ratio processes that are discussed in
-`this lecture <https://python-advanced.quantecon.org/additive_functionals.html>`__
+`this lecture <https://python-advanced.quantecon.org/additive_functionals.html>`__.
 
 To do this, we create some Python code.
 
