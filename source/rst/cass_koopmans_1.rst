@@ -21,7 +21,7 @@ The model can be viewed as an extension of the model of Robert Solow
 described in `an earlier lecture <https://lectures.quantecon.org/py/python_oop.html>`__
 but adapted to make the saving rate the outcome of an optimal choice.
 
-(Solow assumed a constant saving rate determined outside the model).
+(Solow assumed a constant saving rate determined outside the model.)
 
 
 We describe two versions of the model, one in this lecture and the other in :doc:`Cass-Koopmans Competitive Equilibrium <cass_koopmans_2>`.
