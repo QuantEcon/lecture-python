@@ -12,3 +12,4 @@ dependencies:
     - sphinxcontrib-jupyter
     - sphinxcontrib-bibtex==1.0
     - joblib
+    - jinja2==2.11.1
