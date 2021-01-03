@@ -1194,7 +1194,7 @@ A topic of interest for economics and many other disciplines is *ranking*.
 Let's now consider one of the most practical and important ranking problems
 --- the rank assigned to web pages by search engines.
 
-(Although the problem is motivated from outside of economics, there is in fact a deep connection between search ranking systems and prices in certain competitive equilibria --- see :cite:`DLP2013`)
+(Although the problem is motivated from outside of economics, there is in fact a deep connection between search ranking systems and prices in certain competitive equilibria --- see :cite:`DLP2013`.)
 
 To understand the issue, consider the set of results returned by a query to a web search engine.
 
