@@ -36,6 +36,12 @@ jobs:
           python-version: 3.8
           environment-file: environment.yml
           activate-environment: python-lectures
+      - name: Checkout QuantEcon theme
+        uses: actions/checkout@v2
+        with:
+          repository: QuantEcon/lecture-python.theme
+          token: ${{ secrets.ACTIONS_PAT }}
+          path: theme/lecture-python.theme
       - name: Build PDF
         shell: bash -l {0}
         run: |
@@ -43,6 +49,7 @@ jobs:
           echo 'export PATH=/tmp/texlive/bin/x86_64-linux:$PATH' >> ~/.bash_profile
           source ~/.bash_profile
           more ~/.bash_profile
+          ls theme/lecture-python.theme
           make pdf
       - uses: actions/upload-artifact@v2
         with:
