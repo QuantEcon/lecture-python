@@ -528,7 +528,7 @@ In this setting, firm dynamics can be expressed as
 
 Here
 
-* the state variable :math:`s_t` is represents productivity (which is a proxy
+* the state variable :math:`s_t` represents productivity (which is a proxy
   for output and hence firm size),
 * the IID sequence :math:`\{ e_t \}` is thought of as a productivity draw for a new
   entrant and

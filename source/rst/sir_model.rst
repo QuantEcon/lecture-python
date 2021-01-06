@@ -283,7 +283,7 @@ As expected, lower effective transmission rates defer the peak of infections.
 
 They also lead to a lower peak in current cases.
 
-Here is cumulative cases, as a fraction of population:
+Here are cumulative cases, as a fraction of population:
 
 .. code-block:: ipython3
 
@@ -344,7 +344,7 @@ Let's calculate the time path of infected people:
         c_paths.append(c_path)
 
 
-This is current cases under the different scenarios:
+These are current cases under the different scenarios:
 
 .. code-block:: ipython3
 

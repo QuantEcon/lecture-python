@@ -62,7 +62,7 @@ jobs:
           miniconda-version: 'latest'
           python-version: 3.8
           environment-file: environment.yml
-          activate-environment: qe-lectures
+          activate-environment: lecture-python
       - name: Checkout QuantEcon theme
         uses: actions/checkout@v2
         with:
@@ -78,5 +78,6 @@ jobs:
       - name: Build Website files
         shell: bash -l {0}
         run: |
+          ls theme/lecture-python.theme
           make website THEMEPATH=theme/lecture-python.theme
           ls _build/website/jupyter_html/*

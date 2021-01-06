@@ -17,7 +17,7 @@ jobs:
           miniconda-version: 'latest'
           python-version: 3.8
           environment-file: environment.yml
-          activate-environment: qe-lectures
+          activate-environment: lecture-python
       - name: Run Execution Tests
         shell: bash -l {0}
         run: make coverage
@@ -28,14 +28,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Anaconda
-        uses: goanpeca/setup-miniconda@v1
+        uses: conda-incubator/setup-miniconda@v2
         with:
           auto-update-conda: true
           auto-activate-base: true
           miniconda-version: 'latest'
           python-version: 3.8
           environment-file: environment.yml
-          activate-environment: qe-lectures
+          activate-environment: lecture-python
       - name: Run Linkchecker
         shell: bash -l {0}
         run: make linkcheck
