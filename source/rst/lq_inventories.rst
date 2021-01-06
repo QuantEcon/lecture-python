@@ -469,7 +469,7 @@ We introduce this :math:`I_t` **is hardwired to zero** specification in
 order to shed light on the role that inventories play by comparing outcomes
 with those under our two other versions of the problem.
 
-The bottom right panel displays an production path for the original
+The bottom right panel displays a production path for the original
 problem that we are interested in (the blue line) as well with an
 optimal production path for the model in which inventories are not
 useful (the green path) and also for the model in which, although
