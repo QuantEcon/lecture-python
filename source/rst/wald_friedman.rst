@@ -414,12 +414,12 @@ The equality
 can be understood as a functional equation, where :math:`h` is the unknown.
 
 Using the functional equation, :eq:`funceq`, for the continuation value, we can back out
-optimal choices using the RHS of :eq:`optdec`.
+optimal choices using the right side of :eq:`optdec`.
 
 This functional equation can be solved by taking an initial guess and iterating
-to find the fixed point.
+to find a fixed point.
 
-In other words, we iterate with an operator :math:`Q`, where
+Thus, we iterate with an operator :math:`Q`, where
 
 .. math::
 
@@ -574,7 +574,7 @@ To solve the model, we will iterate using ``Q`` to find the fixed point
 Analysis
 ========
 
-Let's inspect the model's solutions.
+Let's inspect outcomes.
 
 We will be using the default parameterization with distributions like so
 
@@ -801,7 +801,7 @@ Before you look, think about what will happen:
 
 Increased cost per draw has induced the decision-maker to take fewer draws before deciding.
 
-Because he decides with less, the percentage of time he is correct drops.
+Because he decides with fewer draws, the percentage of time he is correct drops.
 
 This leads to him having a higher expected loss when he puts equal weight on both models.
 
