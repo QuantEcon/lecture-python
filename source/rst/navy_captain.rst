@@ -97,8 +97,8 @@ impose on him.
 The decision maker pays  a cost :math:`c` for drawing 
 another  :math:`z`
 
-We mainly borrow parameters from the quantecon lecture “A Problem that
-Stumped Milton Friedman” except that we increase both :math:`\bar L_{0}`
+We mainly borrow parameters from the quantecon lecture 
+:doc:`A Problem that Stumped Milton Friedman <wald_friedman>` except that we increase both :math:`\bar L_{0}`
 and :math:`\bar L_{1}` from :math:`25` to :math:`100` to encourage the
 frequentist Navy Captain to take more draws before deciding.
 
@@ -263,7 +263,7 @@ Here
    not rejecting :math:`H_0` when :math:`H_1` is true
 
 For a given sample size :math:`t`, the pairs :math:`\left(PFA,PD\right)`
-lie on a “receiver operating characteristic curve” and can be uniquely
+lie on a **receiver operating characteristic curve** and can be uniquely
 pinned down by choosing :math:`d`.
 
 To see some receiver operating characteristic curves, please see this
@@ -290,7 +290,7 @@ generates data.
     plt.legend()
     plt.show()
 
-We can compute sequneces of likelihood ratios using simulated samples.
+We can compute sequences of likelihood ratios using simulated samples.
 
 .. code-block:: python3
 
@@ -305,7 +305,7 @@ We can compute sequneces of likelihood ratios using simulated samples.
     L1_arr = np.cumprod(l1_arr, 1)
 
 With an empirical distribution of likelihood ratios in hand, we can draw
-“receiver operating characteristic curves” by enumerating
+**receiver operating characteristic curves** by enumerating
 :math:`\left(PFA,PD\right)` pairs given each sample size :math:`t`.
 
 .. code-block:: python3
@@ -444,7 +444,7 @@ rule changes.
 
     plt.show()
 
-The following shows how do optimal sample size :math:`t` and targeted
+The following shows how optimal sample size :math:`t` and targeted
 :math:`\left(PFA,PD\right)` change as :math:`\pi^{*}` varies.
 
 .. code-block:: python3
@@ -466,7 +466,7 @@ The following shows how do optimal sample size :math:`t` and targeted
 Bayesian Decision Rule
 ========================
 
-In this lecture :doc:`A Problem that Stumped Milton Friedman <wald_friedman>`,
+In  :doc:`A Problem that Stumped Milton Friedman <wald_friedman>`,
 we learned how Abraham Wald confirmed the Navy
 Captain’s hunch that there is a better decision rule.
 
@@ -598,7 +598,7 @@ that computes :math:`\alpha` and :math:`\beta`.
     plt.legend(borderpad=1.1)
     plt.show()
 
-The above figure portrays the value function plotted against decision
+The above figure portrays the value function plotted against the decision
 maker’s Bayesian posterior.
 
 It also shows the probabilities :math:`\alpha` and :math:`\beta`.
@@ -640,6 +640,7 @@ in the first case, or :math:`f_{1}`, in the second case.
 
 where
 :math:`\pi^{\prime}=\frac{\pi f_{0}\left(z^{\prime}\right)}{\pi f_{0}\left(z^{\prime}\right)+\left(1-\pi\right)f_{1}\left(z^{\prime}\right)}`.
+
 Given a prior probability :math:`\pi_{0}`, the expected loss for the
 Bayesian is
 
@@ -845,7 +846,7 @@ It is always positive.
 More details
 ============
 
-We can provide more insights by focusing soley the case in which
+We can provide more insights by focusing on the case in which
 :math:`\pi^{*}=0.5=\pi_{0}`.
 
 .. code-block:: python3
@@ -855,7 +856,7 @@ We can provide more insights by focusing soley the case in which
 Recall that when :math:`\pi^*=0.5`, the frequentist decision rule sets a
 sample size ``t_optimal`` **ex ante**
 
-For our parameter settings, we can compute it’s value:
+For our parameter settings, we can compute its value:
 
 .. code-block:: python3
 
@@ -873,7 +874,7 @@ Distribution of Bayesian decision rule’s times to decide
 
 By using simulations, we compute the frequency distribution of time to
 deciding for the Bayesian decision rule and compare that time to the
-frequentist rule’sfixed :math:`t`.
+frequentist rule’s fixed :math:`t`.
 
 The following Python code creates a graph that shows the frequency
 distribution of Bayesian times to decide of Bayesian decision maker,
