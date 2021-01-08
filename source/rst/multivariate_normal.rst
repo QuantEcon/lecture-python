@@ -27,7 +27,7 @@ In this lecture, you will learn formulas for
 
 * marginal distributions for all subvectors of :math:`x`
 
-* conditional distributions for subvectors of 'math:`x` conditional on other subvectors of :math:`x`
+* conditional distributions for subvectors of :math:`x` conditional on other subvectors of :math:`x`
 
 We will use  the multivariate normal distribution to formulate some classic models:
 
