@@ -50,15 +50,14 @@ We begin by reviewing the setting in :doc:`this lecture <likelihood_ratio_proces
 A nonnegative random variable :math:`W` has one of two probability density functions, either
 :math:`f` or :math:`g`.
 
-Before the beginning of time, nature once and for all decides whether she will draw a sequence of IID draws from either
-:math:`f` or :math:`g`.
+Before the beginning of time, nature once and for all decides whether she will draw a sequence of IID draws from :math:`f` or from :math:`g`.
 
 We will sometimes let :math:`q` be the density that nature chose once and for all, so
 that :math:`q` is either :math:`f` or :math:`g`, permanently.
 
 Nature knows which density it permanently draws from, but we the observers do not.
 
-We do know both :math:`f` and :math:`g` but we don’t know which density nature
+We do know both :math:`f` and :math:`g`, but we don’t know which density nature
 chose.
 
 But we want to know.

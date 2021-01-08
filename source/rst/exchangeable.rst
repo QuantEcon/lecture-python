@@ -132,9 +132,9 @@ and partial history :math:`W_{t-1}, \ldots, W_0` contains no information about t
 
 So in the IID case, there is **nothing to learn** about the densities of future random variables from past data.
 
-In the general case, there is something go learn from past data.
+In the general case, there is something to learn from past data.
 
-We turn next to an instance of this general case in which there is something to learn from past data.
+We turn next to an instance of this general case.
 
 Please keep your eye out for **what** there is to learn from past data.
 
@@ -142,8 +142,6 @@ Please keep your eye out for **what** there is to learn from past data.
 
 A Setting in Which Past Observations Are Informative
 =====================================================
-
-We now turn to a setting in which there **is** something to learn.
 
 Let :math:`\{W_t\}_{t=0}^\infty` be a sequence of nonnegative
 scalar random variables with a joint probability distribution
@@ -169,7 +167,7 @@ of them once and for all and then drew an IID sequence of draws from that distri
 
 But our decision maker does not know which of the two distributions nature selected.
 
-The decision maker summarizes his ignorance about this by picking a **subjective probability**
+The decision maker summarizes his ignorance with a **subjective probability**
 :math:`\tilde \pi` and reasons as if  nature had selected :math:`F` with probability
 :math:`\tilde \pi \in (0,1)` and
 :math:`G` with probability :math:`1 - \tilde \pi`.
@@ -271,7 +269,7 @@ as a **prior probability** that nature selected probability distribution :math:`
 DeFinetti :cite:`definetti` established a related representation of an exchangeable process created by mixing
 sequences of IID Bernoulli random variables with parameters :math:`\theta` and mixing probability :math:`\pi(\theta)`
 for a density :math:`\pi(\theta)` that a Bayesian statistician would interpret as a prior over the unknown
-Bernoulli paramter :math:`\theta`.
+Bernoulli parameter :math:`\theta`.
 
 
 Bayes' Law
@@ -284,7 +282,7 @@ But how can we learn?
 
 And about what?
 
-The answer to the *about what* question is about :math:`\tilde pi`.
+The answer to the *about what* question is about :math:`\tilde \pi`.
 
 The answer to the *how* question is to use  Bayes' Law.
 
@@ -299,7 +297,7 @@ Let :math:`q` represent the distribution that nature actually draws from
 
 .. math::   \pi = \mathbb{P}\{q = f \}
 
-where we regard :math:`\pi` as the decision maker's **subjective probability**  (also called a **personal probability**.
+where we regard :math:`\pi` as the decision maker's **subjective probability**  (also called a **personal probability**).
 
 Suppose that at :math:`t \geq 0`, the decision maker has  observed a history
 :math:`w^t \equiv [w_t, w_{t-1}, \ldots, w_0]`.
@@ -484,12 +482,12 @@ We'll begin with the default values of various objects, then change them in a su
 Please look at the three graphs above created for an instance in which :math:`f` is a uniform distribution on :math:`[0,1]`
 (i.e., a Beta distribution with parameters :math:`F_a=1, F_b=1`, while  :math:`g` is a Beta distribution with the default parameter values :math:`G_a=3, G_b=1.2`.
 
-The graph in the left  plots the likehood ratio :math:`l(w)` on the coordinate axis against :math:`w` on the coordinate axis.
+The graph on the left  plots the likehood ratio :math:`l(w)` on the coordinate axis against :math:`w` on the ordinate axis.
 
 The middle graph plots both :math:`f(w)` and :math:`g(w)`  against :math:`w`, with the horizontal dotted lines showing values
 of :math:`w` at which the likelihood ratio equals :math:`1`.
 
-The graph on the right side plots arrows to the right that show when Bayes' Law  makes :math:`\pi` increase and arrows
+The graph on the right plots arrows to the right that show when Bayes' Law  makes :math:`\pi` increase and arrows
 to the left that show when Bayes' Law make :math:`\pi` decrease.
 
 Notice how the length of the arrows, which show the magnitude of the force from Bayes' Law impelling :math:`\pi` to change,
