@@ -176,7 +176,7 @@ Thus, we  assume that the decision maker
 
 - **knows** both :math:`F` and :math:`G`
 
-- **doesnt't know** which of these two distributions that nature has drawn
+- **doesn't know** which of these two distributions that nature has drawn
 
 - summarizing his ignorance by acting  as if or **thinking** that nature chose distribution :math:`F` with probability :math:`\tilde \pi \in (0,1)` and distribution
   :math:`G` with probability :math:`1 - \tilde \pi`
