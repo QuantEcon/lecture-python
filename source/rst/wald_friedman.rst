@@ -64,7 +64,8 @@ We'll begin with some imports:
 
     import numpy as np
     import matplotlib.pyplot as plt
-    from numba import jit, prange, jitclass, float64, int64
+    from numba import jit, prange, float64, int64
+    from numba.experimental import jitclass
     from interpolation import interp
     from math import gamma
 
