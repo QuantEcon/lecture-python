@@ -112,8 +112,8 @@ Using the laws of probability, we can always factor such a joint density into a 
 .. math::
 
    \begin{align}
-     p(W_T, W_{T-1}, \ldots, W_1, W_0)    = & p(W_T | W_{t-1}, \ldots, W_0) p(W_{T-1} | W_{T-2}, \ldots, W_0) \cdots  \cr
-     & p(W_1 | W_0) p(W_0)
+     p(W_T, W_{T-1}, \ldots, W_1, W_0)    = & p(W_T | W_{T-1}, \ldots, W_0) p(W_{T-1} | W_{T-2}, \ldots, W_0) \cdots  \cr
+     & \quad \quad \cdots p(W_1 | W_0) p(W_0)
    \end{align}
 
 
