@@ -311,7 +311,7 @@ obeys the system comprised of :eq:`equation_1`-:eq:`equation_3`.
 By stable or non-explosive, we mean that neither :math:`m_t` nor :math:`p_t`
 diverges as :math:`t \rightarrow + \infty`.
 
-This requirees  that we  shut down the term :math:`c \lambda^{-t}` in equation :eq:`equation_1a` above by setting :math:`c=0`
+This requires  that we  shut down the term :math:`c \lambda^{-t}` in equation :eq:`equation_1a` above by setting :math:`c=0`
 
 The solution we are after is
 
@@ -552,7 +552,7 @@ equation :eq:`equation_9` starting from an arbitrary initial vector
 in general absolute values of both components of :math:`y_t` diverge
 toward :math:`+\infty` as :math:`t \rightarrow + \infty`.
 
-To substantiate this claim, we can use the eigenector matrix
+To substantiate this claim, we can use the eigenvector matrix
 decomposition of :math:`H` that is available to us because the
 eigenvalues of :math:`H` are distinct
 
@@ -606,7 +606,7 @@ that
 
 But note that since
 :math:`y_0 = \begin{bmatrix} m_0 \cr p_0 \end{bmatrix}` and :math:`m_0`
-is given to us an an initial condition,  :math:`p_0` has to do all the adjusting to satisfy this equation.
+is given to us an initial condition,  :math:`p_0` has to do all the adjusting to satisfy this equation.
 
 Sometimes this situation is described by saying that while :math:`m_0`
 is truly a **state** variable, :math:`p_0` is a **jump** variable that
@@ -760,7 +760,7 @@ now becomes
 
 .. math::  H = \begin{bmatrix} \rho & \delta \\ - (1-\lambda)/\lambda & \lambda^{-1}  \end{bmatrix} .
 
-We take :math:`m_0` as a given intial condition and as before seek an
+We take :math:`m_0` as a given initial condition and as before seek an
 initial value :math:`p_0` that stabilizes the system in the sense that
 :math:`y_t` converges as :math:`t \rightarrow + \infty`.
 
