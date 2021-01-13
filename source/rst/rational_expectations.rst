@@ -91,7 +91,7 @@ A Simple Static Example of the Big Y, Little y Trick
 
 Consider a static model in which a collection of :math:`n` firms produce a homogeneous good that is sold in a competitive market.
 
-Each of these :math:`n` firms sell output :math:`y`.
+Each of these :math:`n` firms sells output :math:`y`.
 
 The price :math:`p` of the good lies on an inverse demand curve
 
