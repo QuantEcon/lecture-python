@@ -157,7 +157,7 @@ and the national income identity
 
 -  The parameter :math:`a` is peoples' *marginal propensity to consume*
    out of income - equation :eq:`consumption` asserts that people consume a fraction of
-   math:`a \in (0,1)` of each additional dollar of income.
+   :math:`a \in (0,1)` of each additional dollar of income.
 
 -  The parameter :math:`b > 0` is the investment accelerator coefficient - equation
    :eq:`accelerator` asserts that people invest in physical capital when
