@@ -52,7 +52,7 @@ In this lecture, we'll
 We'll then use these characterizations to construct a simple model of cross-section wealth and
 consumption dynamics in the spirit of Truman Bewley :cite:`Bewley86`.
 
-(Later we'll study other Bewley models---see :doc:`this lecture <aiyagari>`)
+(Later we'll study other Bewley models---see :doc:`this lecture <aiyagari>`.)
 
 The model will prove useful for illustrating concepts such as
 
