@@ -869,7 +869,7 @@ Across the group of people being analyzed, risk-free loans are in zero excess su
 
 We have arranged primitives so that :math:`R = \beta^{-1}` clears the market for risk-free loans at zero aggregate excess supply.
 
-So the risk-free loans are being made from one person to another within our closed set of agent.
+So the risk-free loans are being made from one person to another within our closed set of agents.
 
 There is no need for foreigners to lend to our group.
 
