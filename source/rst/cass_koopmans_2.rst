@@ -210,7 +210,7 @@ Prices
 There are  sequences of prices
 :math:`\{w_t,\eta_t\}_{t=0}^T= \{\vec{w}, \vec{\eta} \}`
 where :math:`w_t` is a wage or rental rate for labor at time :math:`t` and
-:math:`eta_t` is a rental rate for capital at time :math:`t`.
+:math:`\eta_t` is a rental rate for capital at time :math:`t`.
 
 In addition there is are intertemporal prices that work as follows.
 
@@ -425,7 +425,7 @@ Guess for Price System
 In this lecture :doc:`Cass-Koopmans Planning Model <cass_koopmans_1>`, we  computed an allocation :math:`\{\vec{C}, \vec{K}, \vec{N}\}`
 that solves the planning problem.
 
-(This allocation will constitute the **Big** :math:`K`  to be in the present instance of the *Big** :math:`K` **, little** :math:`k` trick
+(This allocation will constitute the **Big** :math:`K`  to be in the present instance of the **Big** :math:`K` **, little** :math:`k` trick
 that we'll apply to  a competitive equilibrium in the spirit of `this lecture <https://lectures.quantecon.org/py/rational_expectations.html#>`__
 and  `this lecture <https://lectures.quantecon.org/py/dyn_stack.html#>`__.)
 
@@ -921,7 +921,7 @@ Yield Curves and Hicks-Arrow Prices
 
 We return to  Hicks-Arrow prices and  calculate how they are related to  **yields**  on loans of alternative maturities.
 
-This will let us plot a **yield curve** that graphs   yields  on bonds of  maturities :math:`j=1, 2, \ldots` against :math:j=1,2, \ldots`. 
+This will let us plot a **yield curve** that graphs   yields  on bonds of  maturities :math:`j=1, 2, \ldots` against :math:`j=1,2, \ldots`. 
 
 The formulas we want are:
 
