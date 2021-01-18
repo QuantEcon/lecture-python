@@ -262,7 +262,7 @@ and the initial prior :math:`\pi_{0}`
 
    \pi_{t+1}=\frac{\pi_{0}L\left(w^{t+1}\right)}{\pi_{0}L\left(w^{t+1}\right)+1-\pi_{0}} .
 
-Formula :eq:`eq_Bayeslaw103` generalizes generalizes formula :eq:`eq_recur1`.
+Formula :eq:`eq_Bayeslaw103` generalizes formula :eq:`eq_recur1`.
 
 Formula :eq:`eq_Bayeslaw103`  can be regarded as a one step  revision of prior probability :math:`\pi_0` after seeing
 the batch of data :math:`\left\{ w_{i}\right\} _{i=1}^{t+1}`.
@@ -276,8 +276,7 @@ limiting behavior of :math:`\pi_t`.
 
 To illustrate this insight, below we will plot  graphs showing **one** simulated
 path of the  likelihood ratio process :math:`L_t` along with two paths of
-:math:`\pi_t` that are associated with the *same* realization of the likelihood ratio process but *different* initial prior probabilities
-probabilities :math:`\pi_{0}`.
+:math:`\pi_t` that are associated with the *same* realization of the likelihood ratio process but *different* initial prior probabilities :math:`\pi_{0}`.
 
 First, we tell Python two values of :math:`\pi_0`.
 
