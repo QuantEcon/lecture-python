@@ -315,7 +315,7 @@ its consequences.
 Notice that the above code sets parameters at the following default
 values
 
--  discount factor β=0.96,
+-  discount factor :math:`\beta=0.96`,
 
 -  inverse demand function: :math:`a0=10, a1=1`
 
