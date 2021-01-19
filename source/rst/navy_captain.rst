@@ -612,7 +612,7 @@ The Bayesian decision rule is:
 -  delay deciding and draw another :math:`z` if
    :math:`\beta \leq \pi \leq \alpha`
 
-We can calculate two ‘’objective’’ loss functions under this situation
+We can calculate two “objective” loss functions under this situation
 conditioning on knowing for sure that nature has selected :math:`f_{0}`,
 in the first case, or :math:`f_{1}`, in the second case.
 
