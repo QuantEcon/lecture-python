@@ -603,7 +603,7 @@ are wrapped in a class  called ``LQ``, which includes
 
 * Instance data:
 
-  * The required parameters :math:`Q, R, A, B` and optional parameters :math:`C, β, T, R_f, N` specifying a given LQ model
+  * The required parameters :math:`Q, R, A, B` and optional parameters :math:`C, \beta, T, R_f, N` specifying a given LQ model
 
     * set :math:`T` and :math:`R_f` to ``None`` in the infinite horizon case
 
