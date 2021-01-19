@@ -482,7 +482,7 @@ We'll begin with the default values of various objects, then change them in a su
 Please look at the three graphs above created for an instance in which :math:`f` is a uniform distribution on :math:`[0,1]`
 (i.e., a Beta distribution with parameters :math:`F_a=1, F_b=1`), while  :math:`g` is a Beta distribution with the default parameter values :math:`G_a=3, G_b=1.2`.
 
-The graph on the left  plots the likehood ratio :math:`l(w)` on the coordinate axis against :math:`w` on the ordinate axis.
+The graph on the left  plots the likelihood ratio :math:`l(w)` on the coordinate axis against :math:`w` on the ordinate axis.
 
 The middle graph plots both :math:`f(w)` and :math:`g(w)`  against :math:`w`, with the horizontal dotted lines showing values
 of :math:`w` at which the likelihood ratio equals :math:`1`.
@@ -491,7 +491,7 @@ The graph on the right plots arrows to the right that show when Bayes' Law  make
 to the left that show when Bayes' Law make :math:`\pi` decrease.
 
 Notice how the length of the arrows, which show the magnitude of the force from Bayes' Law impelling :math:`\pi` to change,
-depend on both the prior probability :math:`\pi` on the ordinate axis and the evidence in the form of the current draw of
+depends on both the prior probability :math:`\pi` on the ordinate axis and the evidence in the form of the current draw of
 :math:`w` on the coordinate axis.
 
 The fractions in the colored areas of the middle graphs are probabilities under :math:`F` and :math:`G`, respectively,
