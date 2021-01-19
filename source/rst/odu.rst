@@ -1080,10 +1080,10 @@ not, when the actual ruling distribution is :math:`g` instead of
 Two countervailing effects are at work.
 
 
--  if f generates successive wage offers, then :math:`w` is more likely to be low, but
+-  if :math:`f` generates successive wage offers, then :math:`w` is more likely to be low, but
    :math:`\pi` is moving up toward to 1, which lowers the reservation wage,
    i.e., the worker becomes  less selective the longer he or she remains unemployed.
--  if g generates wage offers, then :math:`w` is more likely to be high, but
+-  if :math:`g` generates wage offers, then :math:`w` is more likely to be high, but
    :math:`\pi` is moving downward toward 0, increasing the reservation wage, i.e., the worker becomes  more selective
    the longer he or she remains unemployed.
 
