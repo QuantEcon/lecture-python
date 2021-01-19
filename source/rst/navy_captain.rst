@@ -618,25 +618,25 @@ in the first case, or :math:`f_{1}`, in the second case.
 
 1. under :math:`f_{0}`,
 
-.. math::
+    .. math::
 
 
-   V^{0}\left(\pi\right)=\begin{cases}
-   0 & \text{if }\alpha\leq\pi,\\
-   c+EV^{0}\left(\pi^{\prime}\right) & \text{if }\beta\leq\pi<\alpha,\\
-   \bar L_{1} & \text{if }\pi<\beta.
-   \end{cases}
+        V^{0}\left(\pi\right)=\begin{cases}
+        0 & \text{if }\alpha\leq\pi,\\
+        c+EV^{0}\left(\pi^{\prime}\right) & \text{if }\beta\leq\pi<\alpha,\\
+        \bar L_{1} & \text{if }\pi<\beta.
+        \end{cases}
 
 2. under :math:`f_{1}`
 
-.. math::
+    .. math::
 
 
-   V^{1}\left(\pi\right)=\begin{cases}
-   \bar L_{0} & \text{if }\alpha\leq\pi,\\
-   c+EV^{1}\left(\pi^{\prime}\right) & \text{if }\beta\leq\pi<\alpha,\\
-   0 & \text{if }\pi<\beta.
-   \end{cases}
+        V^{1}\left(\pi\right)=\begin{cases}
+        \bar L_{0} & \text{if }\alpha\leq\pi,\\
+        c+EV^{1}\left(\pi^{\prime}\right) & \text{if }\beta\leq\pi<\alpha,\\
+        0 & \text{if }\pi<\beta.
+        \end{cases}
 
 where
 :math:`\pi^{\prime}=\frac{\pi f_{0}\left(z^{\prime}\right)}{\pi f_{0}\left(z^{\prime}\right)+\left(1-\pi\right)f_{1}\left(z^{\prime}\right)}`.
