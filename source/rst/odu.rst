@@ -72,7 +72,7 @@ want to consider.
 The Basic McCall Model
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Recall that, `in the baseline model <mccall_model>`, an
+Recall that, :doc:`in the baseline model <mccall_model>`, an
 unemployed worker is presented in each period with a permanent job offer
 at wage :math:`W_t`.
 
