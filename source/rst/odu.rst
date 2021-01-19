@@ -444,7 +444,7 @@ We will also plot the optimal policy
     plt.show()
 
 The results fit well with our intuition from section `looking
-forward <#looking-forward>`__.
+forward <#Looking-Forward>`__.
 
 -  The black line in the figure above corresponds to the function
    :math:`\bar w(\pi)` introduced there.
