@@ -810,7 +810,7 @@ Let’s write and execute some Python code that will let us explore how outcomes
 
     H_eigvals()
 
-Notice that a negative δ will not imperil the stability of the matrix
+Notice that a negative :math:`\delta` will not imperil the stability of the matrix
 :math:`H`, even if it has a big absolute value.
 
 .. code-block:: python3
@@ -823,14 +823,14 @@ Notice that a negative δ will not imperil the stability of the matrix
     # large negative δ
     H_eigvals(δ=-1.5)
 
-A sufficiently small positive δ also causes no problem.
+A sufficiently small positive :math:`\delta` also causes no problem.
 
 .. code-block:: python3
 
     # sufficiently small positive δ
     H_eigvals(δ=0.05)
 
-But a large enough positive δ makes both eigenvalues of :math:`H`
+But a large enough positive :math:`\delta` makes both eigenvalues of :math:`H`
 strictly greater than unity in modulus.
 
 For example,
