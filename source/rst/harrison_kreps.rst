@@ -189,7 +189,7 @@ Remember that state :math:`1` is the high dividend state.
 
 * In state :math:`1`, a type :math:`b` agent is more optimistic about next period's dividend.
 
-However, the stationary distributions :math:`\pi_A = \begin{bmatrix} .57 & .43 \end{bmatrix}` and :math:`\pi_B = \begin{bmatrix} .43 & .57 \end{bmatrix}` tell us that a type :math:`B` person is more optimistic about the dividend process in the long run than is a type A person.
+However, the stationary distributions :math:`\pi_A = \begin{bmatrix} .57 & .43 \end{bmatrix}` and :math:`\pi_B = \begin{bmatrix} .43 & .57 \end{bmatrix}` tell us that a type :math:`B` person is more optimistic about the dividend process in the long run than is a type :math:`A` person.
 
 Transition matrices for the temporarily optimistic and pessimistic investors are constructed as follows.
 
