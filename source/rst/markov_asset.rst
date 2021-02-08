@@ -306,10 +306,10 @@ where
 #. :math:`\{X_t\}` is a finite Markov chain with state space :math:`S` and
    transition probabilities
 
-.. math::
+    .. math::
 
-    P(x, y) := \mathbb P \{ X_{t+1} = y \,|\, X_t = x \}
-    \qquad (x, y \in S)
+        P(x, y) := \mathbb P \{ X_{t+1} = y \,|\, X_t = x \}
+        \qquad (x, y \in S)
 
 
 #. :math:`g` is a given function on :math:`S` taking positive values

@@ -612,31 +612,31 @@ The Bayesian decision rule is:
 -  delay deciding and draw another :math:`z` if
    :math:`\beta \leq \pi \leq \alpha`
 
-We can calculate two ‘’objective’’ loss functions under this situation
+We can calculate two “objective” loss functions under this situation
 conditioning on knowing for sure that nature has selected :math:`f_{0}`,
 in the first case, or :math:`f_{1}`, in the second case.
 
 1. under :math:`f_{0}`,
 
-.. math::
+    .. math::
 
 
-   V^{0}\left(\pi\right)=\begin{cases}
-   0 & \text{if }\alpha\leq\pi,\\
-   c+EV^{0}\left(\pi^{\prime}\right) & \text{if }\beta\leq\pi<\alpha,\\
-   \bar L_{1} & \text{if }\pi<\beta.
-   \end{cases}
+        V^{0}\left(\pi\right)=\begin{cases}
+        0 & \text{if }\alpha\leq\pi,\\
+        c+EV^{0}\left(\pi^{\prime}\right) & \text{if }\beta\leq\pi<\alpha,\\
+        \bar L_{1} & \text{if }\pi<\beta.
+        \end{cases}
 
 2. under :math:`f_{1}`
 
-.. math::
+    .. math::
 
 
-   V^{1}\left(\pi\right)=\begin{cases}
-   \bar L_{0} & \text{if }\alpha\leq\pi,\\
-   c+EV^{1}\left(\pi^{\prime}\right) & \text{if }\beta\leq\pi<\alpha,\\
-   0 & \text{if }\pi<\beta.
-   \end{cases}
+        V^{1}\left(\pi\right)=\begin{cases}
+        \bar L_{0} & \text{if }\alpha\leq\pi,\\
+        c+EV^{1}\left(\pi^{\prime}\right) & \text{if }\beta\leq\pi<\alpha,\\
+        0 & \text{if }\pi<\beta.
+        \end{cases}
 
 where
 :math:`\pi^{\prime}=\frac{\pi f_{0}\left(z^{\prime}\right)}{\pi f_{0}\left(z^{\prime}\right)+\left(1-\pi\right)f_{1}\left(z^{\prime}\right)}`.
@@ -854,7 +854,7 @@ We can provide more insights by focusing on the case in which
     π_star = 0.5
 
 Recall that when :math:`\pi^*=0.5`, the frequentist decision rule sets a
-sample size ``t_optimal`` **ex ante**
+sample size ``t_optimal`` **ex ante**.
 
 For our parameter settings, we can compute its value:
 

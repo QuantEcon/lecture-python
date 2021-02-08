@@ -415,7 +415,7 @@ there exists an :math:`\bar x`  such that
 
 This equation tells us that a steady state level :math:`\bar x` is an  eigenvector of :math:`\hat A` associated with a unit eigenvalue.
 
-We also have :math:`x_t \to \bar x` as :math:`t \to \infty` provided that the remaining eigenvalue of :math:`\hat A` has modulus less that 1.
+We also have :math:`x_t \to \bar x` as :math:`t \to \infty` provided that the remaining eigenvalue of :math:`\hat A` has modulus less than 1.
 
 This is the case for our default parameters:
 

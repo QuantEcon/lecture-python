@@ -145,7 +145,7 @@ Another alteration that's useful to introduce (we'll see why soon) is to
 change the control variable from consumption
 to the deviation of consumption from some "ideal" quantity :math:`\bar c`.
 
-(Most parameterizations will be such that :math:`\bar c` is large relative to the amount of consumption that is attainable in each period, and hence the household wants to increase consumption)
+(Most parameterizations will be such that :math:`\bar c` is large relative to the amount of consumption that is attainable in each period, and hence the household wants to increase consumption.)
 
 For this reason, we now take our control to be :math:`u_t := c_t - \bar c`.
 
@@ -288,7 +288,7 @@ and :math:`Q` to be identity matrices so that current loss is
 Thus, for both the state and the control, loss is measured as squared distance from the origin.
 
 (In fact, the general case :eq:`lq_pref_flow` can also be understood in this
-way, but with :math:`R` and :math:`Q` identifying other -- non-Euclidean -- notions of "distance" from the zero vector).
+way, but with :math:`R` and :math:`Q` identifying other -- non-Euclidean -- notions of "distance" from the zero vector.)
 
 Intuitively, we can often think of the state :math:`x_t` as representing deviation from a target, such
 as
@@ -542,7 +542,7 @@ and
     d_{T-1} := \beta \mathop{\mathrm{trace}}(C' P_T C)
 
 
-(The algebra is a good exercise --- we'll leave it up to you)
+(The algebra is a good exercise --- we'll leave it up to you.)
 
 If we continue working backwards in this manner, it soon becomes clear that :math:`J_t (x) = x' P_t x + d_t` as claimed, where :math:`\{P_t\}` and :math:`\{d_t\}` satisfy the recursions
 
@@ -636,7 +636,7 @@ Data contradicted the constancy of the marginal propensity to consume.
 In response, Milton Friedman, Franco Modigliani and others built models
 based on a consumer's preference for an intertemporally smooth consumption stream.
 
-(See, for example, :cite:`Friedman1956` or :cite:`ModiglianiBrumberg1954`)
+(See, for example, :cite:`Friedman1956` or :cite:`ModiglianiBrumberg1954`.)
 
 One property of those models is that households purchase and sell financial assets to make consumption streams smoother than income streams.
 
@@ -657,7 +657,7 @@ subject to the sequence of budget constraints :math:`a_{t+1} = (1 + r) a_t - c_t
 
 Here :math:`q` is a large positive constant, the role of which is to induce the consumer to target zero debt at the end of her life.
 
-(Without such a constraint, the optimal choice is to choose :math:`c_t = \bar c` in each period, letting assets adjust accordingly)
+(Without such a constraint, the optimal choice is to choose :math:`c_t = \bar c` in each period, letting assets adjust accordingly.)
 
 As before we set :math:`y_t = \sigma w_{t+1} + \mu` and :math:`u_t := c_t - \bar c`, after which the constraint can be written as in :eq:`lq_lomwc`.
 
@@ -765,7 +765,7 @@ As anticipated by the discussion on consumption smoothing, the time path of
 consumption is much smoother than that for income.
 
 (But note that  consumption becomes more irregular towards the end of life,
-when the zero final asset requirement impinges more on consumption choices).
+when the zero final asset requirement impinges more on consumption choices.)
 
 The second panel in the figure shows that the time path of assets :math:`a_t` is
 closely correlated with cumulative unanticipated income, where the latter is defined as
@@ -778,7 +778,7 @@ closely correlated with cumulative unanticipated income, where the latter is def
 A key message is that unanticipated windfall gains are saved rather
 than consumed, while unanticipated negative shocks are met by reducing assets.
 
-(Again, this relationship breaks down towards the end of life due to the zero final asset requirement)
+(Again, this relationship breaks down towards the end of life due to the zero final asset requirement.)
 
 These results are relatively robust to changes in parameters.
 
@@ -1028,7 +1028,7 @@ subject to :math:`a_{t+1} = (1 + r) a_t - c_t + y_t, \ t \geq 0`.
 
 For income we now take :math:`y_t = p(t) + \sigma w_{t+1}` where :math:`p(t) := m_0 + m_1 t + m_2 t^2`.
 
-(In :ref:`the next section <lq_nsi2>` we employ some tricks to implement a more sophisticated model)
+(In :ref:`the next section <lq_nsi2>` we employ some tricks to implement a more sophisticated model.)
 
 The coefficients :math:`m_0, m_1, m_2` are chosen such that :math:`p(0)=0, p(T/2) = \mu,` and :math:`p(T)=0`.
 
@@ -1189,7 +1189,7 @@ However, we can still use our LQ methods here by suitably linking two-component 
 These two LQ problems describe the consumer's behavior during her working life (``lq_working``) and retirement (``lq_retired``).
 
 (This is possible because, in the two separate periods of life, the respective income processes
-[polynomial trend and constant] each fit the LQ framework)
+[polynomial trend and constant] each fit the LQ framework.)
 
 The basic idea is that although the whole problem is not a single time-invariant LQ problem, it is
 still a dynamic programming problem, and hence we can use appropriate Bellman equations at
@@ -1313,7 +1313,7 @@ Let's now replace :math:`\pi_t` in :eq:`lq_object_mp` with :math:`\hat \pi_t := 
 
 This makes no difference to the solution, since :math:`a_1 \bar q_t^2` does not depend on the controls.
 
-(In fact, we are just adding a constant term to :eq:`\lq_object_mp`, and optimizers are not affected by constant terms)
+(In fact, we are just adding a constant term to :eq:`\lq_object_mp`, and optimizers are not affected by constant terms.)
 
 The reason for making this substitution is that, as you will be able to
 verify, :math:`\hat \pi_t` reduces to the simple quadratic

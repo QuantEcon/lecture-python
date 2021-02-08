@@ -188,7 +188,7 @@ Regarding preferences, we assume the quadratic utility function
     u(c_t) =  - (c_t - \gamma)^2
 
 
-where :math:`\gamma` is a bliss level of consumption
+where :math:`\gamma` is a bliss level of consumption.
 
 .. note::
     Along with this quadratic utility specification, we allow consumption to be negative.  However, by choosing parameters appropriately, we can make the probability that the model generates negative consumption paths over finite time horizons as low as desired.
@@ -229,7 +229,7 @@ With our quadratic preference specification, :eq:`sprob4` has the striking impli
     \mathbb{E}_t [c_{t+1}] = c_t
 
 
-(In fact, quadratic preferences are *necessary* for this conclusion [#f2]_)
+(In fact, quadratic preferences are *necessary* for this conclusion [#f2]_.)
 
 One way to interpret :eq:`sprob5` is that consumption will change only when
 "new information" about permanent income is revealed.
@@ -243,7 +243,7 @@ The Optimal Decision Rule
 -------------------------
 
 
-Now let's deduce the optimal decision rule [#fod]_
+Now let's deduce the optimal decision rule [#fod]_.
 
 .. note::
 
@@ -475,7 +475,7 @@ A Simple Example with IID Income
 
 To gain some preliminary intuition on the implications of :eq:`pi_ssr`, let's look at a highly stylized example where income is just IID.
 
-(Later examples will investigate more realistic income streams)
+(Later examples will investigate more realistic income streams.)
 
 In particular, let :math:`\{w_t\}_{t = 1}^{\infty}` be IID and scalar standard normal, and let
 
@@ -1102,7 +1102,7 @@ You will be able to verify that the first-order condition is
 
 Using :math:`\beta R = 1` gives :eq:`sprob4` in the two-period case.
 
-The proof for the general case is similar
+The proof for the general case is similar.
 
 
 
