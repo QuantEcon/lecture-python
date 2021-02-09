@@ -861,9 +861,9 @@ Now we calculate and plot for each :math:`T`
         for i, ax in enumerate(axs.flatten()):
             ax.plot(paths[i])
             ax.set(title=titles[i], ylabel=ylabels[i], xlabel='t')
-            if titles[i] is 'Capital':
+            if titles[i] == 'Capital':
                 ax.axhline(k_ss, lw=1, ls='--', c='k')
-            if titles[i] is 'Consumption':
+            if titles[i] == 'Consumption':
                 ax.axhline(c_ss, lw=1, ls='--', c='k')
 
     plt.tight_layout()
@@ -898,9 +898,9 @@ We plot the results for :math:`T=150`
         for i, ax in enumerate(axs.flatten()):
             ax.plot(paths[i], label=f'$\gamma = {γ}$')
             ax.set(title=titles[i], ylabel=ylabels[i], xlabel='t')
-            if titles[i] is 'Capital':
+            if titles[i] == 'Capital':
                 ax.axhline(k_ss, lw=1, ls='--', c='k')
-            if titles[i] is 'Consumption':
+            if titles[i] == 'Consumption':
                 ax.axhline(c_ss, lw=1, ls='--', c='k')
 
     axs[0, 0].legend()
