@@ -419,8 +419,6 @@ all  ways this can happen and sum their probabilities.
 
 Rewriting this statement in terms of  marginal and conditional probabilities gives
 
-.. _mc_fdd:
-
 .. math::
 
     \psi_{t+1}(y) = \sum_{x \in S} P(x,y) \psi_t(x)
@@ -429,8 +427,6 @@ Rewriting this statement in terms of  marginal and conditional probabilities giv
 There are :math:`n` such equations, one for each :math:`y \in S`.
 
 If we think of :math:`\psi_{t+1}` and :math:`\psi_t` as *row vectors* (as is traditional in this literature), these :math:`n` equations are summarized by the matrix expression
-
-.. _mc_fddv:
 
 .. math::
     :label: fin_mc_fr
@@ -443,8 +439,6 @@ In other words, to move the distribution forward one unit of time, we postmultip
 By repeating this :math:`m` times we move forward :math:`m` steps into the future.
 
 Hence, iterating on :eq:`fin_mc_fr`, the expression :math:`\psi_{t+m} = \psi_t P^m` is also valid --- here :math:`P^m` is the :math:`m`-th power of :math:`P`.
-
-.. _mc_exfmar:
 
 As a special case, we see that if :math:`\psi_0` is the initial distribution from
 which :math:`X_0` is drawn, then :math:`\psi_0 P^m` is the distribution of
