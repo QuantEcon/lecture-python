@@ -1,4 +1,3 @@
-
 def v_star(y, α, β, μ):
     """
     True value function
@@ -14,4 +13,3 @@ def σ_star(y, α, β):
     True optimal policy
     """
     return (1 - α * β) * y
-

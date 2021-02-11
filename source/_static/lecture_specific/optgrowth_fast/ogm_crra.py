@@ -1,5 +1,3 @@
-
-
 opt_growth_data = [
     ('α', float64),          # Production parameter
     ('β', float64),          # Discount factor
@@ -52,4 +50,3 @@ class OptimalGrowthModel_CRRA:
 
     def u_prime_inv(c):
         return c**(-1 / self.γ)
-
