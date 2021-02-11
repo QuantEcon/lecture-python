@@ -211,8 +211,8 @@ Temporarily pessimistic believe the transition matrix
 
     P_p =
         \begin{bmatrix}
-            \frac{1}{2} & \frac{1}{2} \\
-            \frac{1}{4} & \frac{3}{4}
+            \frac{2}{3} & \frac{1}{3} \\
+            \frac{2}{3} & \frac{1}{3}
         \end{bmatrix}
 
 We'll return to these matrices and their significance in the exercise.
