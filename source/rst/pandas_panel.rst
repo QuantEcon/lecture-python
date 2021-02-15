@@ -510,6 +510,7 @@ object
 
     plt.title('Real minimum wages in 2015')
     plt.xlabel('US dollars')
+    plt.legend()
     plt.show()
 
 
