@@ -68,8 +68,8 @@ Let's start with some imports:
 Prerequisites
 -------------
 
-Before working through what follows, we recommend you read the :doc:`lecture
-on finite Markov chains <finite_markov>`.
+Before working through what follows, we recommend you read the
+:doc:`lecture on finite Markov chains <finite_markov>`.
 
 You will also need some basic :doc:`linear algebra <linear_algebra>` and probability.
 
