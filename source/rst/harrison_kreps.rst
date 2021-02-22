@@ -205,7 +205,7 @@ beliefs in each state) believe the transition matrix
         \end{bmatrix}
 
 
-Temporarily pessimistic believe the transition matrix
+Temporarily pessimistic investors believe the transition matrix
 
 .. math::
 
