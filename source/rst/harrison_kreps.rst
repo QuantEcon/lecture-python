@@ -5,7 +5,7 @@
 .. highlight:: python3
 
 *************************************
-Asset Pricing with Incomplete Markets
+Heterogeneous Beliefs and Bubbles
 *************************************
 
 .. index::
@@ -13,7 +13,7 @@ Asset Pricing with Incomplete Markets
 
 .. contents:: :depth: 2
 
-In addition to what's in Anaconda, this lecture will need the following libraries:
+In addition to what's in Anaconda, this lecture uses following libraries:
 
 .. code-block:: ipython
   :class: hide-output
@@ -71,13 +71,15 @@ Structure of the Model
 ======================
 
 
-The model simplifies by ignoring alterations in the distribution of wealth
-among investors having different beliefs about the fundamentals that determine
+The model simplifies things  by ignoring alterations in the distribution of wealth
+among investors who have hard-wired different beliefs about the fundamentals that determine
 asset payouts.
 
 There is a fixed number :math:`A` of shares of an asset.
 
 Each share entitles its owner to a stream of dividends :math:`\{d_t\}` governed by a Markov chain defined on a state space :math:`S \in \{0, 1\}`.
+
+Thus, the stock is traded **ex dividend**. 
 
 The dividend obeys
 
@@ -122,6 +124,9 @@ Investors of  type :math:`b` think the transition matrix is
             \frac{1}{4} & \frac{3}{4}
         \end{bmatrix}
 
+Thus,  in state :math:`0`,  a type :math:`a` investor is more optimistic  about next period's dividend than is investor :math:`b`.
+
+But in state :math:`1`,  a type :math:`a` investor is more pessimistic  about next period's dividend than is investor :math:`b`.
 
 The stationary (i.e., invariant) distributions of these two matrices can be calculated as follows:
 
@@ -141,10 +146,11 @@ The stationary (i.e., invariant) distributions of these two matrices can be calc
 
 
 
-The stationary distribution of :math:`P_a` is approximately :math:`\pi_A = \begin{bmatrix} .57 & .43 \end{bmatrix}`.
+The stationary distribution of :math:`P_a` is approximately :math:`\pi_a = \begin{bmatrix} .57 & .43 \end{bmatrix}`.
 
-The stationary distribution of :math:`P_b` is approximately :math:`\pi_B = \begin{bmatrix} .43 & .57 \end{bmatrix}`.
+The stationary distribution of :math:`P_b` is approximately :math:`\pi_b = \begin{bmatrix} .43 & .57 \end{bmatrix}`.
 
+Thus, a type :math:`a` investor is more pessimistic on average.  
 
 Ownership Rights
 ----------------
@@ -155,7 +161,7 @@ Both types of investors are risk-neutral and both have the same fixed discount f
 
 In our numerical example, we’ll set :math:`\beta = .75`, just as Harrison and Kreps did.
 
-We’ll eventually study the consequences of two different assumptions about the number of shares :math:`A` relative to the resources that our two types of investors can invest in the stock.
+We’ll eventually study the consequences of two alternative assumptions about the number of shares :math:`A` relative to the resources that our two types of investors can invest in the stock.
 
 #. Both types of investors have enough resources (either wealth or the capacity to borrow) so that they can purchase the entire available stock of the asset [#f1]_.
 
@@ -171,11 +177,11 @@ Short Sales Prohibited
 
 No short sales are allowed.
 
-This matters because it limits pessimists from expressing their opinions.
+This matters because it limits how  pessimists can express their opinion.
 
-* They can express their views by selling their shares.
+* They **can** express themselves by selling their shares.
 
-* They cannot express their pessimism more loudly by artificially "manufacturing shares" -- that is, they cannot borrow shares from more optimistic investors and sell them immediately.
+* They **cannot** express themsevles  more loudly by artificially "manufacturing shares" -- that is, they cannot borrow shares from more optimistic investors and then immediately sell them.
 
 
 Optimism and Pessimism
@@ -189,33 +195,7 @@ Remember that state :math:`1` is the high dividend state.
 
 * In state :math:`1`, a type :math:`b` agent is more optimistic about next period's dividend.
 
-However, the stationary distributions :math:`\pi_A = \begin{bmatrix} .57 & .43 \end{bmatrix}` and :math:`\pi_B = \begin{bmatrix} .43 & .57 \end{bmatrix}` tell us that a type :math:`B` person is more optimistic about the dividend process in the long run than is a type :math:`A` person.
-
-Transition matrices for the temporarily optimistic and pessimistic investors are constructed as follows.
-
-Temporarily optimistic investors (i.e., the investor with the most optimistic
-beliefs in each state) believe the transition matrix
-
-.. math::
-
-    P_o =
-        \begin{bmatrix}
-            \frac{1}{2} & \frac{1}{2} \\
-            \frac{1}{4} & \frac{3}{4}
-        \end{bmatrix}
-
-
-Temporarily pessimistic investors believe the transition matrix
-
-.. math::
-
-    P_p =
-        \begin{bmatrix}
-            \frac{2}{3} & \frac{1}{3} \\
-            \frac{2}{3} & \frac{1}{3}
-        \end{bmatrix}
-
-We'll return to these matrices and their significance in the exercise.
+However, the stationary distributions :math:`\pi_a = \begin{bmatrix} .57 & .43 \end{bmatrix}` and :math:`\pi_b = \begin{bmatrix} .43 & .57 \end{bmatrix}` tell us that a type :math:`B` person is more optimistic about the dividend process in the long run than is a type :math:`A` person.
 
 Information
 --------------
@@ -233,9 +213,9 @@ Solving the Model
 
 Now let's turn to solving the model.
 
-This amounts to determining equilibrium prices under the different possible specifications of beliefs and constraints listed above.
+We'll  determine equilibrium prices under a particular specification of beliefs and constraints on trading selected from one of the specifications described above.
 
-In particular, we compare equilibrium price functions under the following alternative
+We shall compare equilibrium price functions under the following alternative
 assumptions about beliefs:
 
 #. There is only one type of agent, either :math:`a` or :math:`b`.
@@ -250,9 +230,9 @@ Summary Table
 ---------------
 
 The following table gives a summary of the findings obtained in the remainder of the lecture
-(you will be asked to recreate the table in an exercise).
+(in an exercise you will be asked to recreate  the  table and also reinterpret parts of it).
 
-It records implications of Harrison and Kreps's specifications of :math:`P_a, P_b, \beta`.
+The table reports  implications of Harrison and Kreps's specifications of :math:`P_a, P_b, \beta`.
 
 .. raw:: html
 
@@ -289,6 +269,12 @@ Here
 * :math:`\hat{p}_b` is the amount type :math:`b` investors are willing to pay for the asset
 
 We'll explain these values and how they are calculated one row at a time.
+
+The row corresponding to :math:`p_o` applies when both types of investor have enough resources to purchse the entire stock of the asset and strict short sales constraints prevail so that  temporarily optimistic investors always price the asset.
+
+The row corresponding to :math:`p_p` would apply if neither type of investor has enough resources to purchase the entire stock of the asset and both types much hold the asset. 
+
+The row corresponding to :math:`p_p` would also  apply if both types have enough resources to buy the entire stock of the asset but  short sales are also  possible so that   temporarily pessimistic   investors price the asset.
 
 
 Single Belief Prices
@@ -373,6 +359,9 @@ In this case, the marginal investor who prices the asset is the more optimistic 
 
 for :math:`s=0,1`.
 
+In the above equation, the :math:`max` on the right side is evidently over two prospective values of next period's payout
+from owning the asset. 
+
 The marginal investor who prices the asset in state :math:`s` is of type :math:`a` if
 
 .. math::
@@ -412,19 +401,19 @@ Equation :eq:`hakr2` is a functional equation that, like a Bellman equation, can
 
 for :math:`s=0,1`.
 
-The third row of the table reports equilibrium prices that solve the functional equation when :math:`\beta = .75`.
+The third row of the table labeled :math:`p_o` reports equilibrium prices that solve the functional equation when :math:`\beta = .75`.
 
 Here the type that is optimistic about :math:`s_{t+1}` prices the asset in state :math:`s_t`.
 
-It is instructive to compare these prices with the equilibrium prices for the homogeneous belief economies that solve under beliefs :math:`P_a` and :math:`P_b`.
+It is instructive to compare these prices with the equilibrium prices for the homogeneous belief economies that solve under beliefs :math:`P_a` and :math:`P_b` reported in the rows labeled :math:`p_a` and :math:`p_b`, respectively.
 
-Equilibrium prices :math:`\bar p` in the heterogeneous beliefs economy exceed what any prospective investor regards as the fundamental value of the asset in each possible state.
+Equilibrium prices :math:`p_o` in the heterogeneous beliefs economy evidently exceed what any prospective investor regards as the fundamental value of the asset in each possible state.
 
 Nevertheless, the economy recurrently visits a state that makes each investor want to
 purchase the asset for more than he believes its future dividends are
 worth.
 
-The reason is that he expects to have the option to sell the asset later to another investor who will value the asset more highly than he will.
+The reason that an investor is willing to pay more than what he believes is warranted by fundamental value of the prospective divident stream is he expects to have the option to sell the asset later to another investor who will value the asset more highly than he will.
 
 * Investors of type :math:`a` are willing to pay the following price for the asset
 
@@ -516,11 +505,11 @@ and the marginal investor who prices the asset is always the one that values it 
 
 Now the marginal investor is always the (temporarily) pessimistic type.
 
-Notice from the sixth row of that the pessimistic price :math:`\underline p` is lower than the homogeneous belief prices :math:`p_a` and :math:`p_b` in both states.
+Notice from the sixth row of that the pessimistic price :math:`p_o` is lower than the homogeneous belief prices :math:`p_a` and :math:`p_b` in both states.
 
 When pessimistic investors price the asset according to :eq:`HarrKrep4`, optimistic investors think that the asset is underpriced.
 
-If they could, optimistic investors would willingly borrow at the one-period gross interest rate :math:`\beta^{-1}` to purchase more of the asset.
+If they could, optimistic investors would willingly borrow at a  one-period risk-free gross interest rate :math:`\beta^{-1}` to purchase more of the asset.
 
 Implicit constraints on leverage prohibit them from doing so.
 
@@ -559,7 +548,7 @@ Here's code to solve for :math:`\check p` using iteration
 Further Interpretation
 -------------------------
 
-:cite:`Scheinkman2014` interprets the Harrison-Kreps model as a model of a bubble --- a situation in which an asset price exceeds what every investor thinks is merited by the asset's underlying dividend stream.
+:cite:`Scheinkman2014` interprets the Harrison-Kreps model as a model of a bubble --- a situation in which an asset price exceeds what every investor thinks is merited by his or her beliefs about the value of the asset's underlying dividend stream.
 
 Scheinkman stresses these features of the Harrison-Kreps model:
 
@@ -573,7 +562,7 @@ Scheinkman takes this as a strength of the model because he observes high volume
 
 * If the *supply* of the asset is increased sufficiently either physically (more "houses" are built) or artificially (ways are invented to short sell "houses"), bubbles end when the supply has grown enough to outstrip optimistic investors’ resources for purchasing the asset.
 
-* If optimistic investors finance purchases by borrowing, tightening leverage constraints can extinguish a bubble.
+* If optimistic investors finance their purchases by borrowing, tightening leverage constraints can extinguish a bubble.
 
 Scheinkman extracts insights about the effects of financial regulations on bubbles.
 
@@ -585,7 +574,7 @@ Exercises
 Exercise 1
 -----------
 
-Recreate the summary table using the functions we have built above.
+This exercise invites you to recreate the summary table using the functions we have built above.
 
 +-----------------------+------+------+
 |      :math:`s_t`      |  0   |  1   |
@@ -604,7 +593,38 @@ Recreate the summary table using the functions we have built above.
 +-----------------------+------+------+
 
 
-You will first need to define the transition matrices and dividend payoff vector.
+You will want first  to define the transition matrices and dividend payoff vector.
+
+In addition, below we'll add an interpretation of the row corresponding to :math:`p_o` by 
+inventing two additional types of agents, one of whom is **permanently optimistic**, the other who
+is **permanently pessimistic**.
+
+
+We construct subjective transition probability matrices for our permanently  optimistic and permanently pessimistic investors as follows.
+
+The permanently optimistic investors(i.e., the investor with the most optimistic
+beliefs in each state) believes the transition matrix
+
+.. math::
+
+    P_o =
+        \begin{bmatrix}
+            \frac{1}{2} & \frac{1}{2} \\
+            \frac{1}{4} & \frac{3}{4}
+        \end{bmatrix}
+
+
+The permanently pessimistic investor believes the transition matrix
+
+.. math::
+
+    P_p =
+        \begin{bmatrix}
+            \frac{2}{3} & \frac{1}{3} \\
+            \frac{2}{3} & \frac{1}{3}
+        \end{bmatrix}
+
+We'll use these transition matrices when we present our solution of exercise 1 below.
 
 
 Solutions
@@ -664,7 +684,7 @@ heterogeneous beliefs.
 
 
 Notice that the equilibrium price with heterogeneous beliefs is equal to the price under single beliefs
-with optimistic investors - this is due to the marginal investor being the temporarily optimistic type.
+with **permanently optimistic** investors - this is due to the marginal investor in the heterogeneous beliefs equilibrium always being the type who is  temporarily optimistic.
 
 .. rubric:: Footnotes
 
