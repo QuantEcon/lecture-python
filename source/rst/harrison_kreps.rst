@@ -272,7 +272,7 @@ We'll explain these values and how they are calculated one row at a time.
 
 The row corresponding to :math:`p_o` applies when both types of investor have enough resources to purchse the entire stock of the asset and strict short sales constraints prevail so that  temporarily optimistic investors always price the asset.
 
-The row corresponding to :math:`p_p` would apply if neither type of investor has enough resources to purchase the entire stock of the asset and both types much hold the asset. 
+The row corresponding to :math:`p_p` would apply if neither type of investor has enough resources to purchase the entire stock of the asset and both types must hold the asset. 
 
 The row corresponding to :math:`p_p` would also  apply if both types have enough resources to buy the entire stock of the asset but  short sales are also  possible so that   temporarily pessimistic   investors price the asset.
 
