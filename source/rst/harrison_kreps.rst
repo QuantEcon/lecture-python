@@ -413,7 +413,7 @@ Nevertheless, the economy recurrently visits a state that makes each investor wa
 purchase the asset for more than he believes its future dividends are
 worth.
 
-The reason that an investor is willing to pay more than what he believes is warranted by fundamental value of the prospective divident stream is he expects to have the option to sell the asset later to another investor who will value the asset more highly than he will.
+The reason that an investor is willing to pay more than what he believes is warranted by fundamental value of the prospective dividend stream is he expects to have the option to sell the asset later to another investor who will value the asset more highly than he will.
 
 * Investors of type :math:`a` are willing to pay the following price for the asset
 
