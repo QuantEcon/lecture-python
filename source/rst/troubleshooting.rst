@@ -37,7 +37,7 @@ For this task you can either
 
 * use `conda install -y quantecon` on the command line, or
 
-* execute `!conda install -y quantecon` within a Jupyter notebook.
+* execute `!pip install quantecon` within a Jupyter notebook.
 
 If your local environment is still not working you can do two things.
 
