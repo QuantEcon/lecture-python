@@ -877,7 +877,7 @@ One option is to regard this as an eigenvector problem: a vector
 :math:`\psi` such that :math:`\psi = \psi P` is a left eigenvector associated
 with the unit eigenvalue :math:`\lambda = 1`.
 
-A more stable and sophisticated algorithm is implemented in `QuantEcon.py <http://quantecon.org/quantecon-py>`__.
+A stable and sophisticated algorithm specialized for stochastic matrices is implemented in `QuantEcon.py <http://quantecon.org/quantecon-py>`__.
 
 This is the one we recommend you to use:
 
