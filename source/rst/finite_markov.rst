@@ -1442,7 +1442,6 @@ As :math:`m` gets large, both series converge to zero.
 
     P = ((1 - α,       α),               # Careful: P and p are distinct
          (    β,   1 - β))
-    P = np.array(P)
     mc = MarkovChain(P)
 
     fig, ax = plt.subplots(figsize=(9, 6))
