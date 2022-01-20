@@ -507,8 +507,8 @@ We'll be using JIT compilation via Numba to turbocharge our loops.
         error = tol + 1
         while i < max_iter and error > tol:
 
-            for i in range(n):
-                v_next[i] = np.max(mcm.state_action_values(i, v))
+            for k in range(n):
+                v_next[k] = np.max(mcm.state_action_values(k, v))
 
             error = np.max(np.abs(v_next - v))
             i += 1
