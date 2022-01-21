@@ -461,8 +461,8 @@ Here's a function to implement this:
         for i in range(num_plots):
             ax.plot(mcm.w, v, '-', alpha=0.4, label=f"iterate {i}")
             # Update guess
-            for i in range(n):
-                v_next[i] = np.max(mcm.state_action_values(i, v))
+            for j in range(n):
+                v_next[j] = np.max(mcm.state_action_values(j, v))
             v[:] = v_next  # copy contents into v
 
         ax.legend(loc='lower right')
