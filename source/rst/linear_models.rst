@@ -799,7 +799,7 @@ Let's now try with 500,000 observations, showing only the histogram (without rot
     ar = LinearStateSpace(A_2, C_2, G_2, mu_0=np.ones(4))
     fig, ax = plt.subplots()
     x, y = ar.simulate(sample_size)
-    mu_x, mu_y, Sigma_x, Sigma_y = ar.stationary_distributions()
+    mu_x, mu_y, Sigma_x, Sigma_y, Sigma_yx = ar.stationary_distributions()
     f_y = norm(loc=float(mu_y), scale=float(np.sqrt(Sigma_y)))
     y = y.flatten()
     ygrid = np.linspace(ymin, ymax, 150)
@@ -1006,7 +1006,7 @@ This picture shows cross-sectional distributions for :math:`y` at times
         ar = LinearStateSpace(A, C, G, mu_0=np.ones(4))
     
         if steady_state == 'True':
-            μ_x, μ_y, Σ_x, Σ_y = ar.stationary_distributions()
+            μ_x, μ_y, Σ_x, Σ_y, Σ_yx = ar.stationary_distributions()
             ar_state = LinearStateSpace(A, C, G, mu_0=μ_x, Sigma_0=Σ_x)
         
         ymin, ymax = -0.6, 0.6

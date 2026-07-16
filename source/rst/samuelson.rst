@@ -1348,7 +1348,7 @@ methods and attributes) to add more functions to use
             # values for simulation
             if stationary == True:
                 try:
-                    self.μ_x, self.μ_y, self.σ_x, self.σ_y = \
+                    self.μ_x, self.μ_y, self.σ_x, self.σ_y, self.σ_yx = \
                         self.stationary_distributions()
                     self.μ_0 = self.μ_y
                     self.Σ_0 = self.σ_y
